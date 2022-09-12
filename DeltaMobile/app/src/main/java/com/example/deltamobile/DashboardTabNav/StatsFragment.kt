@@ -16,7 +16,16 @@ import org.jsoup.select.Elements
 import java.io.IOException
 import kotlin.system.exitProcess
 
+/*
+ * Stats Fragment
+ * A part of the Dashboard.
+ * Holds the stats of the user.
+ */
 class StatsFragment : Fragment() {
+    /*
+     * The following code is just a test of async jobs in Android Studio. You may wish to remove much of it, or
+     * reference it for when you make queries to the database.
+     */
     private val baseUrl = "https://www.merriam-webster.com/dictionary/"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

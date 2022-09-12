@@ -7,8 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.deltamobile.R
 
+/*
+ * Favorites Fragment
+ * A part of the Dashboard.
+ * Represents a user's favorite activities.
+ * NOTE: may be extraneous.
+ */
 class FavoritesFragment : Fragment() {
 
+    // Function called when view created
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

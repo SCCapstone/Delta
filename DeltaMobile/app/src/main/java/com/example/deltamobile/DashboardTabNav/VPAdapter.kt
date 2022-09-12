@@ -4,8 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-// Adapter for view pager
-//
+/*
+ * ViewPager Adapter.
+ * This class contains all the fragments (Favorites, Home, Settings, Stats)
+ * and allows them to be displayed.
+ */
 class VPAdapter(fm: FragmentManager, behavior:Int):FragmentPagerAdapter(fm,behavior){
     // list of fragments
     private val arrlistFrags = ArrayList<Fragment>()

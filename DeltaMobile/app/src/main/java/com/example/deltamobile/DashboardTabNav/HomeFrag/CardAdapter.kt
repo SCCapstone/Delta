@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.deltamobile.R
 import kotlinx.android.synthetic.main.dashboard__frag_home__card_cell.view.*
@@ -34,9 +33,16 @@ class CardAdapter(private val context: Context, private val cardList:List<MyCard
             val imgCover = myCardView.imgCover;
             val tvDescription = myCardView.tvDescription;
             val tvDate = myCardView.tvDate;
-            var svGraph = myCardView.svGraph;
+            val lineChart = myCardView.lcLineChart;
 
             init{
+                /*
+                IMPORTANT:
+                Must initialize any data structure here, or you will get
+                `Expecting member declaration`
+                 */
+
+
                 // set on click to detail card
                 myCardView.btnClicker.setOnClickListener{
                     this.onClick(this.itemView, action__DETAIL_CARD)
@@ -72,7 +78,14 @@ class CardAdapter(private val context: Context, private val cardList:List<MyCard
         holder.tvDate.text = card.cardDate
         holder.tvDescription.text = card.cardDescription
         holder.imgCover.setImageResource(card.imgResource)
-        holder.svGraph = card.svGraph
+        // need to set the data = card data
+        holder.lineChart.data = card.lineChart.data
+        holder.lineChart.invalidate()
 
+        // customize chart
+        // see: https://stackoverflow.com/questions/30164862/mpandroidchart-remove-top-border-axis-since-v2
+        //
+        holder.lineChart.getDescription().setEnabled(false);
+        holder.lineChart.setDrawGridBackground(false);
     }
 }

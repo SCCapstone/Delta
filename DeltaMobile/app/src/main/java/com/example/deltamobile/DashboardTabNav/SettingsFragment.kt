@@ -7,6 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.deltamobile.R
 
+/*
+ * Settings Fragment
+ * A part of the Dashboard.
+ * Holds the settings for a user.
+ */
 class SettingsFragment : Fragment() {
 
     override fun onCreateView(

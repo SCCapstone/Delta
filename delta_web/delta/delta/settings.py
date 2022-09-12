@@ -43,6 +43,9 @@ INSTALLED_APPS = [
 
     # data
     'data.apps.DataConfig',
+
+    # frontend
+    'frontend.apps.FrontendConfig',
 ]
 
 MIDDLEWARE = [

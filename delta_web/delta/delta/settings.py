@@ -43,6 +43,9 @@ INSTALLED_APPS = [
 
     # data
     'data.apps.DataConfig',
+    
+    # users
+    'users.apps.UsersConfig',
 
     # frontend
     'frontend.apps.FrontendConfig',

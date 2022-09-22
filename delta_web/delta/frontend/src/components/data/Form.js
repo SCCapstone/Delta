@@ -19,6 +19,9 @@ export class Form extends Component {
     const { file_path } = this.state;
     const data = { file_path };
     this.props.addDataAccel(data);
+    this.setState({
+      file_path: "",
+    });
   };
 
   render() {

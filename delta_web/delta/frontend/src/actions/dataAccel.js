@@ -3,9 +3,9 @@
 // use axios 
 import axios from 'axios';
 
-import { createMessage } from "./messages";
+import { createMessage,returnErrors } from "./messages";
 
-import { GET_ERRORS,GET_DATA_ACCEL, DELETE_DATA_ACCEL, ADD_DATA_ACCEL } from './types';
+import {GET_DATA_ACCEL, DELETE_DATA_ACCEL, ADD_DATA_ACCEL } from './types';
 
 // GET DATA ACCEL
 export const getDataAccel = () => dispatch => {
@@ -16,8 +16,10 @@ export const getDataAccel = () => dispatch => {
                 payload: res.data
             });
         })
-        .catch(err => console.log(err));
-};
+        .catch(err => dispatch(
+            returnErrors(err.response.data,err.response.status)
+        ));
+}
 
 // DELETE DATA ACCEL
 // NOTE: if doesnt work may need to clear cookies
@@ -43,14 +45,8 @@ export const addDataAccel = (data) => dispatch => {
                 payload: res.data
             });
         })
-        .catch(err =>{
-            const errors = {
-                msg: err.response.data,
-                status: err.response.status
-            };
-            dispatch({
-                type: GET_ERRORS,
-                payload:errors
-            });
-        });
+        .catch(err => dispatch(
+            returnErrors(err.response.data,err.response.status)
+            )
+        );
 };

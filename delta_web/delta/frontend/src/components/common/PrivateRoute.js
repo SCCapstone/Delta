@@ -6,21 +6,10 @@ import {Route, Navigate} from 'react-router-dom';
 import {connect, Connect} from 'react-redux';
 import PropTypes from "prop-types";
 
-// takes in component to render, the auth state, and if anything else just lump in "rest"
-const PrivateRoute = ({component:Component,auth,...rest}) => (
-    <Route
-        {...rest}
-        render={props=>{
-            if(auth.isLoading){
-                return <h2>Loading...</h2>
-            }else if(!auth.isAuthenticated){
-                return <Navigate to="/login" />;
-            }else{
-                return <Component {...props}/>;
-            }
-        }}
-    />
-);
+// see: https://stackoverflow.com/questions/69923420/how-to-use-private-route-in-react-router-domv6
+const PrivateRoute = ({auth:{isAuthenticated}}) => {
+    return isAuthenticated ? children : <Navigate to = "/login"/>;
+}
 
 const mapStateToProps = state =>({
     auth:state.auth

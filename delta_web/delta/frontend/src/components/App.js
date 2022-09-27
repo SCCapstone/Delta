@@ -12,8 +12,10 @@ import Login from './accounts/Login';
 import Register from './accounts/Register';
 import PrivateRoute from './common/PrivateRoute';
 
-import { Provider } from 'react-redux';
+import { createDispatchHook, Provider } from 'react-redux';
 import store from "../store";
+
+import {loadUser} from '../actions/auth';
 
 // Alert options
 const alertOptions = {
@@ -22,6 +24,11 @@ const alertOptions = {
 };
 
 class App extends Component{
+    // fire when main app is loaded
+    componentDidMount(){
+        store.dispatch(loadUser());
+    };
+
     render(){
         return(
             <Provider store={store}>
@@ -32,7 +39,11 @@ class App extends Component{
                             <Alerts/>
                             <div className="container">
                                 <Routes>
-                                    <PrivateRoute exact path ="/" element= {<Dashboard/>} />
+                                    <Route exact path ="/" element= {
+                                    <PrivateRoute>
+                                        <Dashboard/>
+                                    </PrivateRoute>
+                                    }/>
                                     <Route exact path ="/register"element={<Register/>}/>
                                     <Route exact path ="/login" element={<Login/>}/>
                                 </Routes>

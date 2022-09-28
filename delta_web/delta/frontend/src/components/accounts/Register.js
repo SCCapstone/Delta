@@ -1,23 +1,48 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Navigate} from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import {register} from '../../actions/auth';
+import {createMessage} from "../../actions/messages"
 
 export class Register extends Component {
-    state = {
-        username: '',
-        email: '',
-        password: '',
-        password2:'',
-    };
-    onSubmit = e => {
-        e.preventDefault();
-        console.log('submit');
+  state = {
+      username: '',
+      email: '',
+      password: '',
+      password2:'',
+  };
+
+  static propTypes = {
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+  }
+
+  onSubmit = e => {
+    e.preventDefault();
+    // pull the password and password2 from the state
+    const {username,email,password, password2} = this.state;
+    if(password != password2) {
+      this.props.createMessage({passwordsDoNotMatch:'Passwords do not match'})
+    }else{
+      // format a new user
+      const newUser = {
+        username,
+        password,
+        email 
+      }
+      // call register action
+      this.props.register(newUser);
     }
+  }
 
-    onChange = e => this.setState({ [e.target.name]:e.target.value });
-
-
+  onChange = e => this.setState({ [e.target.name]:e.target.value });
 
   render() {
+    // redirect if you are already logged in
+    if(this.props.isAuthenticated){
+      return <Navigate to="/"/>;
+    }
     const {username, email, password, password2} = this.state;
     // form
     return (
@@ -81,4 +106,11 @@ export class Register extends Component {
   }
 }
 
-export default Register
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(
+  mapStateToProps,
+  {register,createMessage}
+) (Register);

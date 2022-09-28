@@ -4,12 +4,15 @@
 import axios from 'axios';
 
 import { createMessage,returnErrors } from "./messages";
+import { tokenConfig } from './auth';
 
 import {GET_DATA_ACCEL, DELETE_DATA_ACCEL, ADD_DATA_ACCEL } from './types';
 
+
 // GET DATA ACCEL
-export const getDataAccel = () => dispatch => {
-    axios.get('data/api/accel/')
+export const getDataAccel = () => (dispatch,getState) => {
+    // need to pass in the token to get to protected route
+    axios.get('/api/accel/',tokenConfig(getState))
         .then(res => {
             dispatch({
                 type:GET_DATA_ACCEL,
@@ -23,8 +26,9 @@ export const getDataAccel = () => dispatch => {
 
 // DELETE DATA ACCEL
 // NOTE: if doesnt work may need to clear cookies
-export const deleteDataAccel = (id) => dispatch => {
-    axios.delete(`data/api/accel/${id}/`)
+export const deleteDataAccel = (id) => (dispatch,getState) => {
+    // pass in the token as well
+    axios.delete(`/api/accel/${id}/`,tokenConfig(getState))
         .then(res => {
             dispatch(createMessage({deleteDataAccel: "Data Accel Deleted"}));
             dispatch({
@@ -36,8 +40,9 @@ export const deleteDataAccel = (id) => dispatch => {
 };
 
 // ADD DATA ACCEL
-export const addDataAccel = (data) => dispatch => {
-    axios.post('data/api/accel/',data)
+export const addDataAccel = (data) => (dispatch,getState) => {
+    // pass in the token
+    axios.post('/api/accel/',data,tokenConfig(getState))
         .then(res => {
             dispatch(createMessage({addDataAccel: "Data Accel Added"}));
             dispatch({
@@ -45,8 +50,10 @@ export const addDataAccel = (data) => dispatch => {
                 payload: res.data
             });
         })
-        .catch(err => dispatch(
-            returnErrors(err.response.data,err.response.status)
+        .catch(err => {
+            dispatch(
+                returnErrors(err.response.data,err.response.status)
             )
-        );
+        }
+    );
 };

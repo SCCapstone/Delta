@@ -16,8 +16,13 @@ export class Alerts extends Component {
             if(error.msg.file_path){
                 alert.error(`File Path: ${error.msg.file_path.join()}`);
             }
+            if(error.msg.non_field_errors){
+                alert.error(error.msg.non_field_errors.join());
+            }
+            if(error.msg.username){
+                alert.error(error.msg.username.join());
+            }
         }
-
         // check for changed message
         if(message !== prevProps.message){
             if(message.deleteDataAccel){
@@ -25,6 +30,9 @@ export class Alerts extends Component {
             }
             if(message.addDataAccel){
                 alert.success(message.addDataAccel);
+            }
+            if(message.passwordsDoNotMatch){
+                alert.error(message.passwordsDoNotMatch);
             }
         }
     }

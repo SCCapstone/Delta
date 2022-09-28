@@ -14,7 +14,7 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     serializer_class = SerializerDataAccel
 
     def get_queryset(self):
-        return self.request.user.leads.all()
+        return self.request.user.data_accels.all()
     
     def perform_create(self,serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(author=self.request.user)

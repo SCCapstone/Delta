@@ -9,6 +9,8 @@ export class Register extends Component {
   state = {
       username: '',
       email: '',
+      first_name:'',
+      last_name:'',
       password: '',
       password2:'',
   };
@@ -21,12 +23,14 @@ export class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     // pull the password and password2 from the state
-    const {username,email,password, password2} = this.state;
+    const {username,first_name,last_name,email,password, password2} = this.state;
     if(password != password2) {
       this.props.createMessage({passwordsDoNotMatch:'Passwords do not match'})
     }else{
       // format a new user
       const newUser = {
+        first_name,
+        last_name,
         username,
         password,
         email 
@@ -43,13 +47,33 @@ export class Register extends Component {
     if(this.props.isAuthenticated){
       return <Navigate to="/"/>;
     }
-    const {username, email, password, password2} = this.state;
+    const {username, first_name,last_name,email, password, password2} = this.state;
     // form
     return (
       <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">
           <h2 className="text-center">Register</h2>
           <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label>First Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="first_name"
+                onChange={this.onChange}
+                value={first_name}
+              />
+            </div>
+            <div className="form-group">
+              <label>Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="last_name"
+                onChange={this.onChange}
+                value={last_name}
+              />
+            </div>
             <div className="form-group">
               <label>Username</label>
               <input

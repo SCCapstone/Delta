@@ -1,5 +1,8 @@
 from .models import DataAccel
 from rest_framework import viewsets, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser
 from .serializers import SerializerDataAccel
 
 # data accel viewset
@@ -18,3 +21,20 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     
     def perform_create(self,serializer):
         serializer.save(author=self.request.user)
+
+class UploadView(APIView):
+    parser_classes = (FileUploadParser,)
+
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def post(self,request):
+        # get the file, or return None if nothing there
+        file = request.data.get('file',None)
+        print(file)
+
+        if file:
+            return Response({"message":"File uploaded successfully"},status=200)
+        else:
+            return Response({"message":"Error upon uploading file"},status=400)

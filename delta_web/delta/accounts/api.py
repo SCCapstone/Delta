@@ -11,7 +11,9 @@ class RegisterAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         # send back any errors that are needed
         serializer.is_valid(raise_exception=True)
+
         user = serializer.save()
+
         return Response({
             # give the serialized user
             "user":UserSerializer(user,context=self.get_serializer_context()).data,

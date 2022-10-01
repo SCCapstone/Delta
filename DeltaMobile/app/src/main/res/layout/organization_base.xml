@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    android:padding= "20dp">
+
+    <TextView
+        android:id="@+id/part_Of_Org"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Part of an Organization?"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/Org_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/part_Of_Org"
+        android:text="If you are part of an organization that uploads data, please enter the organization's code below."
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:layout_margin="20dp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/Org_Code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@color/white"
+        android:hint="Enter Code Here"
+        android:autofillHints="organizationCode"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/Org_description"
+        />
+
+
+    <Button
+        android:id="@+id/submit_Org_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:backgroundTint="@color/darker_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Org_Code"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

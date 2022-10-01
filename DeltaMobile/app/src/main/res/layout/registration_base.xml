@@ -1,6 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    android:padding= "20dp">
+
+    <TextView
+        android:id="@+id/delta_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/welcome_to_delta"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/delta_Title"
+        android:text="@string/sign_up_to_join_an_ecosystem_to_improve_yourself"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:layout_margin="10dp"
+        />
+
+    <View
+        android:id="@+id/title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/email_textbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        android:hint="@string/email"
+        android:autofillHints="emailAddress"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/title_divider"
+        />
+
+    <EditText
+        android:id="@+id/fullname_textbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        android:hint="@string/full_name"
+        android:autofillHints="name"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/email_textbox"
+        />
+
+    <EditText
+        android:id="@+id/sex_textbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        android:hint="@string/sex"
+        android:autofillHints="Sex"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/fullname_textbox"
+        app:layout_constraintEnd_toEndOf="@id/age_textbox"
+        app:layout_constraintEnd_toStartOf="@id/sex_textbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias=".5"
+        />
+
+    <EditText
+        android:id="@+id/age_textbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        android:hint="@string/age"
+        android:autofillHints="Age"
+        android:inputType="number"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/fullname_textbox"
+        app:layout_constraintStart_toEndOf="@id/sex_textbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/username_textbox_registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        android:hint="@string/username"
+        android:autofillHints="username"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/sex_textbox"
+        />
+
+    <EditText
+        android:id="@+id/password_textbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        android:hint="@string/password"
+        android:autofillHints="password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/username_textbox_registration"
+        />
+
+    <EditText
+        android:id="@+id/Cpassword_textbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        android:hint="@string/confirm_password"
+        android:autofillHints="password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/password_textbox"
+        />
+
+    <Button
+        android:id="@+id/create_account"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:backgroundTint="@color/darker_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Cpassword_textbox"
+        />
+
+    <TextView
+        android:id="@+id/terms_Cond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/create_account"
+        android:text="@string/by_signing_up_you_agree_to_our_terms_and_conditions"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:textColor="@color/grey"
+        />
+
+    <TextView
+        android:id="@+id/textView_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_an_account_click_here"
+        android:padding="10dp"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/terms_Cond"
+        android:gravity="center"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

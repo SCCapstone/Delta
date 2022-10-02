@@ -12,5 +12,4 @@ urlpatterns  = [
     path('api/upload/',UploadView.as_view(),name='FileUpload')
 ]
 
-
 urlpatterns += router.urls

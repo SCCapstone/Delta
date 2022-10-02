@@ -1,4 +1,5 @@
 # import necessary models
+from stat import FILE_ATTRIBUTE_INTEGRITY_STREAM
 from .models import DataAccel
 from .models import CSVFile
 
@@ -13,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 
 # import necessary serializers
-from .serializers import SerializerDataAccel
+from .serializers import CSVFileSerializer, SerializerDataAccel
 
 # data accel viewset
 # create a full CRUD api w/o having to specify explict methods
@@ -32,6 +33,7 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     def perform_create(self,serializer):
         serializer.save(author=self.request.user)
 
+# upload a csv
 class UploadView(APIView):
     parser_classes = (FileUploadParser,)
 
@@ -40,20 +42,16 @@ class UploadView(APIView):
     ]
 
     # handle post requests
-    def post(self,request):
+    def post(self,request,format='csv'):
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
         
-        # TODO: BASED ON FILE EXTENSION SAVE AS DIFFERENT FORMATS
-        print(str(dataFile).split('.'))
+        if(dataFile):
 
-        strFilePath = os.path.join(django_settings.STATIC_ROOT,'users','csvs','{}.csv'.format(dataFile))
+            csvFile = CSVFile(author=request.user,file_name=dataFile,url=dataFile)
+            csvFile.save()
 
-        print(strFilePath)
+            return Response({"message":"CSV successfully saved."})
 
-        # modelCSV = CSVFile(author = request.user,file_path=)
-
-        if dataFile:
-            return Response({"message":"File uploaded successfully"},status=200)
         else:
             return Response({"message":"Error upon uploading file"},status=400)

@@ -1,8 +1,0 @@
-----------------------------930046878461106470724772
-Content-Disposition: form-data; name="file"; filename="test.csv"
-Content-Type: text/csv
-
-col1,col2
-data1,data2
-
-----------------------------930046878461106470724772--

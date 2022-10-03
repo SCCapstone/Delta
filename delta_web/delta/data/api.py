@@ -38,6 +38,8 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
 # TO DO [10/03/22]
 # WHEN DELETE A USER, DELETE ALL OF THEIR FOLDERS!
 # OR COULD WRITE A CLEAN UP SCRIPT.
+# THIS IS CURRENTLY HANDLED IN MODELS.PY AS A SIGNAL.
+# see https://stackoverflow.com/questions/71278989/how-to-call-a-function-when-you-delete-a-model-object-in-django-admin-page-or
 # 
 ###################
 class UploadCsvApiView(APIView):

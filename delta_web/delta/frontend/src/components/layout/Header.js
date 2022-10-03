@@ -20,13 +20,37 @@ export class Header extends Component {
     const authLinks = (
         <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
+                <span className = "nav-link">
+                    <Link to="/">
+                        Home
+                    </Link>
+                </span>
+            </li>
+            <li className="nav-item">
+                <span className = "nav-link">
+                    <Link to='/profile/glance'>
+                        Profile
+                    </Link>
+                </span>
+            </li>
+            <li className="nav-item">
+                <li>
+                    <a className = "nav-link" href="#">Data</a>
+                </li>
+            </li>
+            <li className="nav-item">
+                <li>
+                    <a className = "nav-link" href="#">Community</a>
+                </li>
+            </li>
+            <li className="nav-item">
                 <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
                     Logout
                 </button>
             </li>
-            <span className="navbar-text mr-3">
-                <strong>{user ? `Welcome ${user.username}` : ""}</strong>
-            </span>
+                {/* <span className="navbar-text mr-3">
+                    <strong>{user ? `Welcome ${user.username}` : ""}</strong>
+                </span> */}
         </ul>
     );
     const guestLinks = (
@@ -49,16 +73,9 @@ export class Header extends Component {
     return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
         <div className="container">
-            <a className="navbar-brand" href="#">Delta Web</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className ="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <a className = "nav-link" href="#">Home</a>
-                    </li>
                     {isAuthenticated ? authLinks : guestLinks}
                 </ul>
             </div>

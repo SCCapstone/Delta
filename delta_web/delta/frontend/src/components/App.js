@@ -10,6 +10,11 @@ import Dashboard from './data/Dashboard';
 import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
+
+// profile
+import AtAGlance from "./profile/AtAGlance";
+import DetailedView from "./profile/DetailedView";
+
 import PrivateRoute from './common/PrivateRoute';
 
 import { createDispatchHook, Provider } from 'react-redux';
@@ -46,6 +51,8 @@ class App extends Component{
                                     }/>
                                     <Route exact path ="/register"element={<Register/>}/>
                                     <Route exact path ="/login" element={<Login/>}/>
+                                    <Route exact path ="/profile/glance" element={<AtAGlance/>}/>
+                                    <Route exact path ="/profile/detailed" element={<DetailedView/>}/>
                                 </Routes>
                             </div>
                         </Fragment>

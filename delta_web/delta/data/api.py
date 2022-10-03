@@ -34,7 +34,7 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 # upload a csv
-class UploadView(APIView):
+class UploadCsvApiView(APIView):
     parser_classes = (FileUploadParser,)
 
     permission_classes = [
@@ -48,10 +48,35 @@ class UploadView(APIView):
         
         if(dataFile):
 
-            csvFile = CSVFile(author=request.user,file_name=dataFile,url=dataFile)
-            csvFile.save()
+            # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
+            strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
+            print(strUserCsvFolder)
 
-            return Response({"message":"CSV successfully saved."})
+            # create dir if doesnt exist
+            if not os.path.exists(strUserCsvFolder):
+                os.makedirs(strUserCsvFolder)
+
+            strFilePath = os.path.join(strUserCsvFolder,str(dataFile))
+            
+            # first try is just to see if this is a unique user+filepath combo
+            csvFile = None
+            try:
+                csvFile = CSVFile(author=request.user,file_path = strFilePath)
+                csvFile.save()
+            except Exception as e:
+                return Response({"message":e})
+            # if get thru the first try, know that the file is unique.
+            # next try is to actually write the file
+            try:
+                with open(strFilePath,'wb+') as file:
+                    for chunk in dataFile.chunks():
+                        file.write(chunk)
+                # file is now saved.
+                return Response({"message":"CSV successfully saved."})
+            except Exception as e:
+                # delete the csvFile, something went wrong with writing
+                csvFile.delete()
+                return Response({"message":e})
 
         else:
             return Response({"message":"Error upon uploading file"},status=400)

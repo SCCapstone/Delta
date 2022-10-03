@@ -33,7 +33,13 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     def perform_create(self,serializer):
         serializer.save(author=self.request.user)
 
-# upload a csv
+###################
+#
+# TO DO [10/03/22]
+# WHEN DELETE A USER, DELETE ALL OF THEIR FOLDERS!
+# OR COULD WRITE A CLEAN UP SCRIPT.
+# 
+###################
 class UploadCsvApiView(APIView):
     parser_classes = (FileUploadParser,)
 

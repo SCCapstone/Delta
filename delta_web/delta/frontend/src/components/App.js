@@ -12,8 +12,12 @@ import Login from './accounts/Login';
 import Register from './accounts/Register';
 
 // profile
-import AtAGlance from "./profile/AtAGlance";
-import DetailedView from "./profile/DetailedView";
+import {AtAGlance as ProfileGlance} from "./profile/AtAGlance";
+import {DetailedView as ProfileDetailed} from "./profile/DetailedView";
+
+// community
+import {Personal as CommunityPersonal} from "./community/Personal"
+import {Organizations as CommunityOrganizations} from "./community/Organizations"
 
 import PrivateRoute from './common/PrivateRoute';
 
@@ -49,10 +53,37 @@ class App extends Component{
                                         <Dashboard/>
                                     </PrivateRoute>
                                     }/>
-                                    <Route exact path ="/register"element={<Register/>}/>
-                                    <Route exact path ="/login" element={<Login/>}/>
-                                    <Route exact path ="/profile/glance" element={<AtAGlance/>}/>
-                                    <Route exact path ="/profile/detailed" element={<DetailedView/>}/>
+                                    {/* Need to use private routes here */}
+                                    <Route exact path ="/profile/glance" element={
+                                        <PrivateRoute>
+                                            <ProfileGlance/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ="/profile/detailed" element={
+                                        <PrivateRoute>
+                                            <ProfileDetailed/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ="/community/personal" element={
+                                        <PrivateRoute>
+                                            <CommunityPersonal/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ="/community/organizations" element={
+                                        <PrivateRoute>
+                                            <CommunityOrganizations/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ="/register"element={
+                                        <PrivateRoute>
+                                            <Register/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ="/login" element={
+                                        <PrivateRoute>
+                                            <Login/>
+                                        </PrivateRoute>
+                                    }/>
                                 </Routes>
                             </div>
                         </Fragment>

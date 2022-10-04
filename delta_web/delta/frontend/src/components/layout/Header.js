@@ -39,9 +39,11 @@ export class Header extends Component {
                 </li>
             </li>
             <li className="nav-item">
-                <li>
-                    <a className = "nav-link" href="#">Community</a>
-                </li>
+                <span className = "nav-link">
+                    <Link to ="/community/personal">
+                        Community
+                    </Link>
+                </span>
             </li>
             <li className="nav-item">
                 <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">

@@ -21,7 +21,7 @@ class DataAccel(models.Model):
         null=True
     )
     file_path = models.CharField(max_length=300)
-    created_at = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 
 

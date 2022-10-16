@@ -1,7 +1,7 @@
 Delta project.
 
 Roles:
-- Vince: Django FrontEn
+- Vince: Django FrontEnd
 - Lex: Django BackEnd / Database
 - Carter: Android Studio
 - Naveen: Android Studio

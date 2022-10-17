@@ -1,24 +1,52 @@
-Delta project.
+README as described by [here](https://capstone.cse.sc.edu/milestone/source-control/#september)
 
-Roles:
-- Vince: Django FrontEnd
-- Lex: Django BackEnd / Database
-- Carter: Android Studio
-- Naveen: Android Studio
-- Blake: Django BackEnd / FrontEnd
+# Delta
+Delta is a web file system designed for use by researchers and data scientists. It is essentially a file transfer system with a social media and market aspect. Researchers or data scientists can perform CRUD operations on data, and can also assess the validity of data by creating posts on data sets or ML models or by rating data sets or ML models. 
 
-[EDIT 09/08/22] Valafar stated to not worry about use of Firebase for now. Just use SQL.
-[EDIT 09/08/22] Valafar would like us to focus on Android Phone development rather than watch.
+Note the following instructions are designed for *nix machines.
 
-***
-# Web Required Installs (Pip)
-- pip install Django
-- pip install djangorestframework
-- pip install markdown
-- pip install django-filter
-# Web Required Installs (NPM)
-- npm init -y
-- npm i -D webpack webpack-cli
-- npm i -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel-plugin-transform-class-properties
-- npm i redux react-redux redux-thunk redux-devtools-extension
-- npm i axios
+To run, first clone the repository by running:
+`git clone https://github.com/SCCapstone/Delta`
+Then cd into the correct directory.
+[TO DO: write about the correct directory]
+
+Within this directory, open up two terminals.
+
+On terminal one, type
+`python3 manage.py runserver`
+If there are dependency requirements, install them using pip [TO DO: FIND A BETTER WAY]
+This terminal shall be running the backend REST API.
+
+On terminal two, type:
+`npm install` to install all required packages.
+If running in development mode, write
+`npm run --dev` to begin the front end server.
+
+## External Requirements:
+In order to build this project, you will first have to install:
+[TO DO: List the necessary installs]
+
+## Setup:
+[list any one-time things the dev needs to do after loading]
+
+## Running
+[list commands to run app from cloned repo]
+
+## Deployment
+[How to get it deployed on the internet]
+
+# Testing
+[Necessary now?]
+
+## Testing Technology
+[Necessary now?]
+
+## Running Tests
+[Necessary now?]
+
+## Authors:
+Vince Kolb-Lugo: kolblugo@email.sc.edu
+Blake Seekings: seekingj@email.sc.edu
+Naveen Chithan: nchithan@email.sc.edu
+Carter Marlowe: marlowc@email.sc.edu
+Lexington Whalen: lawhalen@email.sc.edu

@@ -46,7 +46,11 @@ In order to build this project, you will first have to install:
 
 ## Authors:
 Vince Kolb-Lugo: kolblugo@email.sc.edu
+
 Blake Seekings: seekingj@email.sc.edu
+
 Naveen Chithan: nchithan@email.sc.edu
+
 Carter Marlowe: marlowc@email.sc.edu
+
 Lexington Whalen: lawhalen@email.sc.edu

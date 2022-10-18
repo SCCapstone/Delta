@@ -75,14 +75,10 @@ class App extends Component{
                                         </PrivateRoute>
                                     }/>
                                     <Route exact path ="/register"element={
-                                        <PrivateRoute>
-                                            <Register/>
-                                        </PrivateRoute>
+                                        <Register/>
                                     }/>
                                     <Route exact path ="/login" element={
-                                        <PrivateRoute>
-                                            <Login/>
-                                        </PrivateRoute>
+                                        <Login/>
                                     }/>
                                 </Routes>
                             </div>

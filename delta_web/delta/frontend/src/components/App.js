@@ -47,11 +47,10 @@ class App extends Component{
                             <Header/>
                             <Alerts/>
                             <div className="container">
+                                
                                 <Routes>
                                     <Route exact path ="/" element= {
-                                    <PrivateRoute>
                                         <Dashboard/>
-                                    </PrivateRoute>
                                     }/>
                                     {/* Need to use private routes here */}
                                     <Route exact path ="/profile/glance" element={
@@ -74,6 +73,7 @@ class App extends Component{
                                             <CommunityOrganizations/>
                                         </PrivateRoute>
                                     }/>
+                                    
                                     <Route exact path ="/register"element={
                                         <Register/>
                                     }/>

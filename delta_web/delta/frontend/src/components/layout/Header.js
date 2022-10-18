@@ -35,7 +35,11 @@ export class Header extends Component {
             </li>
             <li className="nav-item">
                 <li>
-                    <a className = "nav-link" href="#">Data</a>
+                    <span className = "nav-link">
+                        <Link to="#">
+                            Data
+                        </Link>
+                    </span>
                 </li>
             </li>
             <li className="nav-item">
@@ -57,7 +61,7 @@ export class Header extends Component {
     );
     const guestLinks = (
         <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
+            <li className="nav-item">
                 <Link to="/register"
                 className ="nav-link">
                 Register

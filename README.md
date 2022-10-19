@@ -61,3 +61,4 @@ Naveen Chithan: nchithan@email.sc.edu
 Carter Marlowe: marlowc@email.sc.edu
 
 Lexington Whalen: lawhalen@email.sc.edu
+

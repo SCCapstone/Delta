@@ -19,6 +19,11 @@ import {DetailedView as ProfileDetailed} from "./profile/DetailedView";
 import {Personal as CommunityPersonal} from "./community/Personal"
 import {Organizations as CommunityOrganizations} from "./community/Organizations"
 
+// data page
+import {DataDownload} from "./data_transfer/DataDownload";
+import {DataUpload} from "./data_transfer/DataUpload";
+
+// private routes
 import PrivateRoute from './common/PrivateRoute';
 
 import { createDispatchHook, Provider } from 'react-redux';
@@ -50,7 +55,9 @@ class App extends Component{
                                 
                                 <Routes>
                                     <Route exact path ="/" element= {
-                                        <Dashboard/>
+                                        <PrivateRoute>
+                                            <Dashboard/>
+                                        </PrivateRoute>
                                     }/>
                                     {/* Need to use private routes here */}
                                     <Route exact path ="/profile/glance" element={
@@ -73,6 +80,18 @@ class App extends Component{
                                             <CommunityOrganizations/>
                                         </PrivateRoute>
                                     }/>
+
+                                    <Route exact path ="/data/download" element={
+                                        <PrivateRoute>
+                                            <DataDownload></DataDownload>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ="/data/upload" element={
+                                        <PrivateRoute>
+                                            <DataUpload></DataUpload>
+                                        </PrivateRoute>
+                                    }/>
+
                                     
                                     <Route exact path ="/register"element={
                                         <Register/>

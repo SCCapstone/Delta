@@ -36,7 +36,7 @@ export class Header extends Component {
             <li className="nav-item">
                 <li>
                     <span className = "nav-link">
-                        <Link to="#">
+                        <Link to="/data/download">
                             Data
                         </Link>
                     </span>
@@ -50,9 +50,9 @@ export class Header extends Component {
                 </span>
             </li>
             <li className="nav-item">
-                <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
+                <span className="nav-link" onClick={this.props.logout}>
                     Logout
-                </button>
+                </span>
             </li>
                 {/* <span className="navbar-text mr-3">
                     <strong>{user ? `Welcome ${user.username}` : ""}</strong>

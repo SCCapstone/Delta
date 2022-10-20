@@ -31,7 +31,19 @@ To view the website,
 
 ## External Requirements:
 In order to build this project, you will first have to install:
-[TO DO: List the necessary installs]
+
+- The latest version of Node.js: https://nodejs.org/en/download/
+
+[TO DO: List the necessary installs DEVDEPENDENCES]
+Babel and packages, webpack and packages
+
+[TO DO: List the necessary installs DJANGO]
+
+[TO DO: List the necessary installs REACT]
+To install the frontend frameworks and redux devtool extension, simply type:
+`npm i react react-dom react-alert react-alert-template-basic react-router-dom react-transition-group redux react-redux redux-devtools-extension redux-thunk`
+
+ 
 
 ## Setup:
 [list any one-time things the dev needs to do after loading]

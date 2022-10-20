@@ -33,17 +33,33 @@ To view the website,
 In order to build this project, you will first have to install:
 
 - The latest version of Node.js: https://nodejs.org/en/download/
+- The latest version of Python: https://www.python.org/downloads/
+
+Then move into the project directory `cd proj-dir` and install python's virtual environment setup: // is this ncessary?
+`pip3 install pipenv`
+
+Now, we can download the Django, the REST framework, and KNOX for token authentication: // is this ncessary?
+`pipenv install django djangorestframework django-rest-knox`
+
+Here we create the 'project' not to be confused with an 'app' and then we navigate into the project folder: // is this ncessary?
+`django-admin startproject delta-web`
+`cd delta-web`
 
 [TO DO: List the necessary installs DEVDEPENDENCES]
-Babel and packages, webpack and packages
+- Babel and its adjacent packages for backwards compatible JS and webpack for the bundler:
+`npm install -D @babel/core @babel/preset-env @babel/preset-react babel-loader babel-plugin babel-plugin-transform-class-properties`
+`npm install -D webpack webpack-cli`
 
 [TO DO: List the necessary installs DJANGO]
+`pipenv install django djangorestframework django-rest-knox`
+`pip3 install pipenv`
 
 [TO DO: List the necessary installs REACT]
 To install the frontend frameworks and redux devtool extension, simply type:
 `npm i react react-dom react-alert react-alert-template-basic react-router-dom react-transition-group redux react-redux redux-devtools-extension redux-thunk`
 
- 
+Don't forget to download Axios so we can communicate with our backend:
+`npm i axios` 
 
 ## Setup:
 [list any one-time things the dev needs to do after loading]

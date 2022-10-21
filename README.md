@@ -83,7 +83,8 @@ Don't forget to download Axios so we can communicate with our backend:
 Vince Kolb-Lugo: kolblugo@email.sc.edu
 
 Blake Seekings: seekingj@email.sc.edu
-another merge commit change
+merge commit change
+
 Naveen Chithan: nchithan@email.sc.edu
 
 Carter Marlowe: marlowc@email.sc.edu

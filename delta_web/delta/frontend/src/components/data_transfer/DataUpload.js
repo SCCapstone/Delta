@@ -81,7 +81,7 @@ const baseStyle = {
       acceptedFiles,
       open
     } = useDropzone({
-      accept: "image/*",
+      accept: "text/csv",
       noClick: true,
       noKeyboard: true,
       onDrop: acceptedFiles => {
@@ -105,14 +105,6 @@ const baseStyle = {
       [isDragActive, isDragReject]
     );
   
-    const thumbs = files.map(file => (
-      <div style={thumb} key={file.name}>
-        <div style={thumbInner}>
-          <img src={file.preview} style={img} />
-        </div>
-      </div>
-    ));
-  
     useEffect(
       () => () => {
         // Make sure to revoke the data uris to avoid memory leaks
@@ -120,12 +112,6 @@ const baseStyle = {
       },
       [files]
     );
-  
-    const filepath = acceptedFiles.map(file => (
-      <li key={file.path}>
-        {file.path} - {file.size} bytes
-      </li>
-    ));
   
     return (
       <div className="container">
@@ -140,29 +126,34 @@ const baseStyle = {
           <h4>Files</h4>
           <ul>{filepath}</ul>
         </aside>
-        <aside style={thumbsContainer}>{thumbs}</aside>
       </div>
     );
   }
 
 export class DataUpload extends Component {
-    render(){
-        return(
-            <div>
-                <h1>
-                    Data Upload        
-                </h1>
+  onSubmit = e =>{
+    e.preventDefault();
+  }
+  render(){
+      return(
+          <div>
+              <h1>
+                  Data Upload        
+              </h1>
 
-                <StyledDropzone></StyledDropzone>
+              <form onSubmit={this.onSubmit}>
+                <StyledDropzone/>
+                <button>Submit</button>
+              </form>
 
-                <span>
-                    <Link to="/data/download">
-                        Click to see data download
-                    </Link>
-                </span>
-            </div>
-        )
-    }
+              <span>
+                  <Link to="/data/download">
+                      Click to see data download
+                  </Link>
+              </span>
+          </div>
+      )
+  }
 }
 
 export default DataUpload;

@@ -15,6 +15,7 @@ Running `ls` you should see `README.md`, `delta_web`, and `env`. Enter the virtu
 Running `ls` you should see `delta`, `package-lock.json`, `package.json`, and `webpack.config.js`. Change directory into `delta` with `cd delta`.
 
 Install the necessary JavaScript requirements with `npm i`. 
+##### It may be the case you need to install certain packages on your own. If so, please check the error logs and this document to see what it is you need to install.
 
 Now open up two terminals from your current directory.
 
@@ -80,6 +81,9 @@ To install the frontend frameworks and redux devtool extension, simply type (rea
 Don't forget to download Axios! Axios facilitates communication between the frontend and backend:
 
 `npm i axios` 
+
+Need to install `react-dropzone` for drag and drop files [see here](https://www.npmjs.com/package/react-dropzone).
+`npm i react-dropzone`
 
 ## Setup:
 [list any one-time things the dev needs to do after loading]

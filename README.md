@@ -104,7 +104,6 @@ Don't forget to download Axios! Axios facilitates communication between the fron
 Vince Kolb-Lugo: kolblugo@email.sc.edu
 
 Blake Seekings: seekingj@email.sc.edu
-merge commit change
 
 Naveen Chithan: nchithan@email.sc.edu
 

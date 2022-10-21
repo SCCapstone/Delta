@@ -52,20 +52,6 @@ or
 
 `py pipenv install django djangorestframework django-rest-knox`
 
-Here we create the 'project' not to be confused with an 'app' and then we navigate into the project folder: // is this ncessary?
-
-`django-admin startproject delta-web`
-
-or
-
-`py django-admin startproject delta-web`
-
-then
-
-`cd delta-web`
-
-// OK do we want to move the frontend installation steps here, or do we like the current layout with instructions on how to install babel and webpack?
-
 [TO DO: List the necessary installs DEVDEPENDENCES] // should this go in the Setup section?
 We're almost done. There are just a couple of important things to include. First Babel and its adjacent packages for backwards compatible JS; second, webpack for the bundler:
 

@@ -35,34 +35,54 @@ In order to build this project, you will first have to install:
 - The latest version of Node.js: https://nodejs.org/en/download/
 - The latest version of Python: https://www.python.org/downloads/
 
-Then move into the project directory `cd proj-dir` and install python's virtual environment setup: // is this ncessary?
-`pip3 install pipenv`
+Then move into the project directory `cd proj-dir-name` and install python's virtual environment setup: // is this ncessary?
 
-Now, we can download the Django, the REST framework, and KNOX for token authentication: // is this ncessary?
+`pip3 install pipenv` 
+
+or try this if using Windows:
+
+`py pip3 install pipenv` 
+
+Now, let's build the backend! Start by downloading Django, the REST framework, and KNOX for token authentication:
+
 `pipenv install django djangorestframework django-rest-knox`
+
+or
+
+`py pipenv install django djangorestframework django-rest-knox`
 
 Here we create the 'project' not to be confused with an 'app' and then we navigate into the project folder: // is this ncessary?
 `django-admin startproject delta-web`
+
+or
+
+`py django-admin startproject delta-web`
+
+then
+
 `cd delta-web`
 
-[TO DO: List the necessary installs DEVDEPENDENCES]
+// OK do we want to move the frontend installation steps here, or do we like the current layout with instructions on how to install babel and webpack?
+
+[TO DO: List the necessary installs DEVDEPENDENCES] // should this go in the Setup section?
 - Babel and its adjacent packages for backwards compatible JS and webpack for the bundler:
+
 `npm install -D @babel/core @babel/preset-env @babel/preset-react babel-loader babel-plugin babel-plugin-transform-class-properties`
+
 `npm install -D webpack webpack-cli`
 
-[TO DO: List the necessary installs DJANGO]
-`pipenv install django djangorestframework django-rest-knox`
-`pip3 install pipenv`
-
 [TO DO: List the necessary installs REACT]
-To install the frontend frameworks and redux devtool extension, simply type:
+To install the frontend frameworks and redux devtool extension, simply type (copy pasta):
+
 `npm i react react-dom react-alert react-alert-template-basic react-router-dom react-transition-group redux react-redux redux-devtools-extension redux-thunk`
 
-Don't forget to download Axios so we can communicate with our backend:
+Don't forget to download Axios! Axios facilitates communication between the frontend and backend:
+
 `npm i axios` 
 
 ## Setup:
 [list any one-time things the dev needs to do after loading]
+// perhaps this is where babel and webpack stuff should go?
 
 ## Running
 [list commands to run app from cloned repo]

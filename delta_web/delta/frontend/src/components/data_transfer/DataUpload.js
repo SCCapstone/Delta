@@ -1,168 +1,83 @@
 /*
 
 Upload files via drag and drop.
-
+https://upmostly.com/tutorials/react-dropzone-file-uploads-react
 */
 
-import React, {Component,useState,useEffect,useMemo} from 'react';
+import React, {Component,useState,useEffect,useMemo, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import {useDropzone} from "react-dropzone";
+import {addDataAccel} from '../../actions/dataAccel';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-/*
-Following: https://www.youtube.com/watch?v=frud5acrGLQ
-*/
-const baseStyle = {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: "20px",
-    borderWidth: 2,
-    borderRadius: 2,
-    borderColor: "#eeeeee",
-    borderStyle: "dashed",
-    backgroundColor: "#fafafa",
-    color: "#bdbdbd",
-    outline: "none",
-    transition: "border .24s ease-in-out"
+const DataUpload = (props) => {
+
+  const propTypes = {
+    addDataAccel:PropTypes.func.isRequired
   };
-  
-  const activeStyle = {
-    borderColor: "#2196f3"
-  };
-  
-  const acceptStyle = {
-    borderColor: "#00e676"
-  };
-  
-  const rejectStyle = {
-    borderColor: "#ff1744"
-  };
-  
-  const thumbsContainer = {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: 16
-  };
-  
-  const thumb = {
-    display: "inline-flex",
-    borderRadius: 2,
-    border: "1px solid #eaeaea",
-    marginBottom: 8,
-    marginRight: 8,
-    width: "auto",
-    height: 200,
-    padding: 4,
-    boxSizing: "border-box"
-  };
-  
-  const thumbInner = {
-    display: "flex",
-    minWidth: 0,
-    overflow: "hidden"
-  };
-  
-  const img = {
-    display: "block",
-    width: "auto",
-    height: "100%"
-  };
-  
-  function StyledDropzone(props) {
-    const [files, setFiles] = useState([]);
-    const {
-      getRootProps,
-      getInputProps,
-      isDragActive,
-      isDragAccept,
-      isDragReject,
-      acceptedFiles,
-      open
-    } = useDropzone({
-      accept: "image/*",
-      noClick: true,
-      noKeyboard: true,
-      onDrop: acceptedFiles => {
-        setFiles(
-          acceptedFiles.map(file =>
-            Object.assign(file, {
-              preview: URL.createObjectURL(file)
-            })
-          )
-        );
-      }
-    });
-  
-    const style = useMemo(
-      () => ({
-        ...baseStyle,
-        ...(isDragActive ? activeStyle : {}),
-        ...(isDragAccept ? acceptStyle : {}),
-        ...(isDragReject ? rejectStyle : {})
-      }),
-      [isDragActive, isDragReject]
-    );
-  
-    const thumbs = files.map(file => (
-      <div style={thumb} key={file.name}>
-        <div style={thumbInner}>
-          <img src={file.preview} style={img} />
-        </div>
-      </div>
-    ));
-  
-    useEffect(
-      () => () => {
-        // Make sure to revoke the data uris to avoid memory leaks
-        files.forEach(file => URL.revokeObjectURL(file.preview));
-      },
-      [files]
-    );
-  
-    const filepath = acceptedFiles.map(file => (
-      <li key={file.path}>
-        {file.path} - {file.size} bytes
-      </li>
-    ));
-  
-    return (
-      <div className="container">
-        <div {...getRootProps({ style })}>
-          <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here</p>
-          <button type="button" onClick={open}>
-            Open File Dialog
-          </button>
-        </div>
-        <aside>
-          <h4>Files</h4>
-          <ul>{filepath}</ul>
-        </aside>
-        <aside style={thumbsContainer}>{thumbs}</aside>
-      </div>
-    );
+
+  // max size of file
+  const maxSize = 1048576;
+
+  const onDrop = useCallback(acceptedFiles =>{
+    console.log(acceptedFiles);
+  },[]);
+
+  const { isDragActive, getRootProps, getInputProps, isDragReject, acceptedFiles, rejectedFiles } = useDropzone({
+    onDrop,
+    accept: 'text/csv',
+    minSize: 0,
+    maxSize,
+  });
+
+  // to do: check if file too large
+  const isFileTooLarge = false;
+  // const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+
+  const onSubmit = (e) =>{
+    e.preventDefault();
+      acceptedFiles.forEach(file=> {
+        var data = {"file_path":file.path}
+        props.addDataAccel(data);
+      });
   }
 
-export class DataUpload extends Component {
-    render(){
-        return(
-            <div>
-                <h1>
-                    Data Upload        
-                </h1>
+  return(
+    <div>
+        <h1>
+            Data Upload        
+        </h1>
 
-                <StyledDropzone></StyledDropzone>
+        <form onSubmit = {onSubmit}>
+          <div {...getRootProps()}>
+            <input {...getInputProps()}/>
+            {!isDragActive && 'Click here or drop a file to upload.'}
+            {isDragActive && !isDragReject && "Drop File"}
+            {isDragReject && "File type not accepted."}
+            {isFileTooLarge && (
+              <div className = "text-danger mt-2">
+                  File is too large.
+              </div>
+            )}
+            <ul className = "list-group mt-2">
+              {acceptedFiles.length>0 && acceptedFiles.map(acceptedFile=>(
+                <li className="list-group-item list-group-item-success">
+                  {acceptedFile.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button>Submit</button>
+        </form>
 
-                <span>
-                    <Link to="/data/download">
-                        Click to see data download
-                    </Link>
-                </span>
-            </div>
-        )
-    }
+        <span>
+            <Link to="/data/download">
+                Click to see data download
+            </Link>
+        </span>
+    </div>
+  )
 }
 
-export default DataUpload;
+export default connect(null,{addDataAccel})(DataUpload);

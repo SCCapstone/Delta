@@ -7,8 +7,16 @@ https://upmostly.com/tutorials/react-dropzone-file-uploads-react
 import React, {Component,useState,useEffect,useMemo, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import {useDropzone} from "react-dropzone";
+import {addDataAccel} from '../../actions/dataAccel';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-const DataUpload = () => {
+const DataUpload = (props) => {
+
+  const propTypes = {
+    addDataAccel:PropTypes.func.isRequired
+  };
+
   // max size of file
   const maxSize = 1048576;
 
@@ -30,7 +38,8 @@ const DataUpload = () => {
   const onSubmit = (e) =>{
     e.preventDefault();
       acceptedFiles.forEach(file=> {
-        console.log(file.path) ;
+        var data = {"file_path":file.path}
+        props.addDataAccel(data);
       });
   }
 
@@ -71,4 +80,4 @@ const DataUpload = () => {
   )
 }
 
-export default DataUpload;
+export default connect(null,{addDataAccel})(DataUpload);

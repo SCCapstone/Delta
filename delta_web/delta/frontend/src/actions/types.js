@@ -28,3 +28,6 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 // register
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
+
+// files
+export const POST_FILE = "POST_FILE";

@@ -82,7 +82,7 @@ Don't forget to download Axios so we can communicate with our backend:
 ## Authors:
 Vince Kolb-Lugo: kolblugo@email.sc.edu
 
-Blake Seekings: seekingj@email.sc.edu
+James Blake Seekings: seekingj@email.sc.edu
 
 Naveen Chithan: nchithan@email.sc.edu
 

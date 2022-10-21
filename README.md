@@ -52,6 +52,7 @@ or
 `py pipenv install django djangorestframework django-rest-knox`
 
 Here we create the 'project' not to be confused with an 'app' and then we navigate into the project folder: // is this ncessary?
+
 `django-admin startproject delta-web`
 
 or

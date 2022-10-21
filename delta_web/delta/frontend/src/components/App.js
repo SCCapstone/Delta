@@ -21,7 +21,7 @@ import {Organizations as CommunityOrganizations} from "./community/Organizations
 
 // data page
 import {DataDownload} from "./data_transfer/DataDownload";
-import {DataUpload} from "./data_transfer/DataUpload";
+import DataUpload from "./data_transfer/DataUpload";
 
 // private routes
 import PrivateRoute from './common/PrivateRoute';
@@ -88,7 +88,7 @@ class App extends Component{
                                     }/>
                                     <Route exact path ="/data/upload" element={
                                         <PrivateRoute>
-                                            <DataUpload></DataUpload>
+                                            <DataUpload/>
                                         </PrivateRoute>
                                     }/>
 

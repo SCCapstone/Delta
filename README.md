@@ -66,14 +66,14 @@ then
 // OK do we want to move the frontend installation steps here, or do we like the current layout with instructions on how to install babel and webpack?
 
 [TO DO: List the necessary installs DEVDEPENDENCES] // should this go in the Setup section?
-- Babel and its adjacent packages for backwards compatible JS and webpack for the bundler:
+We're almost done. There are just a couple of important things to include. First Babel and its adjacent packages for backwards compatible JS; second, webpack for the bundler:
 
 `npm install -D @babel/core @babel/preset-env @babel/preset-react babel-loader babel-plugin babel-plugin-transform-class-properties`
 
 `npm install -D webpack webpack-cli`
 
 [TO DO: List the necessary installs REACT]
-To install the frontend frameworks and redux devtool extension, simply type (copy pasta):
+To install the frontend frameworks and redux devtool extension, simply type (read copy pasta):
 
 `npm i react react-dom react-alert react-alert-template-basic react-router-dom react-transition-group redux react-redux redux-devtools-extension redux-thunk`
 

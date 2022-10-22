@@ -1,6 +1,11 @@
-import React, {Component,Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
+<<<<<<< HEAD
 import {HashRouter as Router, Route,Routes, Redirect} from 'react-router-dom';
+=======
+import { HashRouter as Router, Route, Routes, Redirect, Switch } from 'react-router-dom';
+import PrivateRoute from './common/PrivateRoute';
+>>>>>>> vince-web-login-reg-pages
 
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -10,10 +15,13 @@ import Dashboard from './data/Dashboard';
 import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
+<<<<<<< HEAD
 
 // profile
 import {AtAGlance as ProfileGlance} from "./profile/AtAGlance";
 import {DetailedView as ProfileDetailed} from "./profile/DetailedView";
+=======
+>>>>>>> vince-web-login-reg-pages
 
 // community
 import {Personal as CommunityPersonal} from "./community/Personal"
@@ -28,6 +36,7 @@ import PrivateRoute from './common/PrivateRoute';
 
 import { createDispatchHook, Provider } from 'react-redux';
 import store from "../store";
+import { loadUser } from '../actions/auth';
 
 import {loadUser} from '../actions/auth';
 
@@ -37,6 +46,7 @@ const alertOptions = {
     position: 'top center'
 };
 
+<<<<<<< HEAD
 class App extends Component{
     // fire when main app is loaded
     componentDidMount(){
@@ -99,14 +109,46 @@ class App extends Component{
                                     <Route exact path ="/login" element={
                                         <Login/>
                                     }/>
+=======
+class App extends Component {
+    componentDidMount() {
+        store.dispatch(loadUser())
+    }
+
+    render() {
+        return (
+            <Provider store={store}>
+                <AlertProvider template={AlertTemplate}{...alertOptions}>
+                    <Router>
+                        <Fragment>
+                            <Header />
+                            <Alerts />
+                            <div className="container">
+                                <Routes>
+                                    <Route
+                                        exact path='/'
+                                        element={
+                                            <PrivateRoute>
+                                                <Dashboard />
+                                            </PrivateRoute>}
+                                    />
+                                    <Route
+                                        exact path='/register'
+                                        element={<Register />}
+                                    />
+                                    <Route
+                                        exact path='/login'
+                                        element={<Login />}
+                                    />
+>>>>>>> vince-web-login-reg-pages
                                 </Routes>
                             </div>
                         </Fragment>
                     </Router>
                 </AlertProvider>
             </Provider>
-        )     
+        )
     }
 }
 
-ReactDOM.render(<App/>,document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById("app"));

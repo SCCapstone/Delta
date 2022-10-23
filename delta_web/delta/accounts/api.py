@@ -42,15 +42,27 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 # deletion api
-class DeleteAPI(generics.GenericAPIView):
-    serializer_class = LoginSerializer
+class DeleteAPI(generics.DestroyAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = UserSerializer
 
     def post(self,request,*args,**kwargs):
-        # send back any errors as needed
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        user.delete()
+        #
+        # NOTE:
+        # DO NOT ACTUALLY DELETE THE USER.
+        # ONLY MARK THEM AS INACTIVE
+        # see: https://stackoverflow.com/questions/44735385/how-can-i-delete-a-user-account-in-django-rest-framework
+        
+        request.user.is_active = False
+        request.user.save()
+
+        return Response({
+            "response":"here"
+        })
+
+
 
 # Get User API
 class UserAPI(generics.RetrieveAPIView):

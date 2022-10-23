@@ -4,7 +4,7 @@ import {deleteUser} from "../../actions/auth";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-export class DetailedView extends Component {
+export class ProfileDetailed extends Component {
     static propTypes = {
         deleteUser: PropTypes.func.isRequired,
     }
@@ -17,7 +17,7 @@ export class DetailedView extends Component {
                 <h1>
                     Profile in detail
                 </h1>
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={this.onDelete}>
                     Remove account?
                 </button>
                 <div>
@@ -30,4 +30,4 @@ export class DetailedView extends Component {
     }
 }
 
-export default connect({deleteUser})(DetailedView);
+export default connect(null,{deleteUser})(ProfileDetailed);

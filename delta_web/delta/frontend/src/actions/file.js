@@ -6,9 +6,9 @@ import { fileTokenConfig} from './auth';
 import {ADD_CSV_FILE} from "./types";
 
 // POST FILE 
-export const addCsvFile= (data) => (dispatch,getState) =>{
+export const addCsvFile= (file) => (dispatch,getState) =>{
     // pass in token
-    axios.post('/api/upload/csv/',data,fileTokenConfig(getState,data))
+    axios.post('/api/upload/csv/',file,fileTokenConfig(getState,file))
         .then(res=>{
             dispatch(createMessage({postFile:"File posted"}));
             dispatch({

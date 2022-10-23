@@ -44,15 +44,9 @@ INSTALLED_APPS = [
 
     # data
     'data.apps.DataConfig',
-<<<<<<< HEAD
-    
+
     # accounts
     'accounts.apps.AccountsConfig',
-=======
-
-    # users
-    'users.apps.UsersConfig',
->>>>>>> vince-web-login-reg-pages
 
     # frontend
     'frontend.apps.FrontendConfig',

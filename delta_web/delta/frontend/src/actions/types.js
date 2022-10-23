@@ -19,7 +19,6 @@ export const CREATE_MESSAGE = "CREATE_MESSAGE";
 export const GET_MESSAGE = "GET_MESSAGE";
 
 // user
-<<<<<<< HEAD
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
@@ -34,14 +33,3 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 // register
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
-<<<<<<< HEAD
-=======
-
-// files
-export const POST_FILE = "POST_FILE";
-=======
-export const USER_LOADING = 'USER_LOADING'
-export const USER_LOADED = 'USER_LOADED'
-export const AUTH_ERROR = 'AUTH_ERROR'
->>>>>>> vince-web-login-reg-pages
->>>>>>> main

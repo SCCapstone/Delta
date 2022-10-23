@@ -18,7 +18,7 @@ export class ProfileGlance extends Component {
                 </h1>
                 <div>
                     <h4>First Name: {user.first_name}</h4>
-                    <h4>Last Name: </h4>
+                    <h4>Last Name: {user.last_name}</h4>
                     <h4>Email: {user.email}</h4>
                     <h4>Username: {user.username}</h4>
                 </div>

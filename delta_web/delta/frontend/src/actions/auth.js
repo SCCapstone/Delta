@@ -125,11 +125,10 @@ export const register= ({username,first_name,last_name,password,email}) => dispa
 
 export const deleteUser = () => (dispatch,getState) =>{
     // delete a user    
-    axios.post('/api/users/delete',tokenConfig(getState))
+    axios.post('/api/auth/delete',null,tokenConfig(getState))
         .then(res=>{
             dispatch({
                 type:USER_DELETE,
-                payload:res.data
             });
         })
         .catch(err=>{

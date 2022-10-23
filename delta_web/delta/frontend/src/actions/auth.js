@@ -173,8 +173,9 @@ export const fileTokenConfig = (getState,file) =>{
     // if token, add to headers config
     if(token){
         config.headers['Authorization'] = `Token ${token}`;
-        config.headers["Content-Disposition"] = `attachment; filename = ${file.name}`;
+        config.headers["Content-Disposition"] = `attachment; filename= ${file.name}`;
     }
+    console.log(config)
     // return config with token
     return config
 }

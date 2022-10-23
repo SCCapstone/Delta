@@ -15,7 +15,6 @@ export class CsvFileTable extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Fragment>
         <h2>Csv Files</h2>

@@ -10,7 +10,7 @@ export const addCsvFile= (file) => (dispatch,getState) =>{
     // pass in token
     axios.post('/api/upload/csv/',file,fileTokenConfig(getState,file))
         .then(res=>{
-            dispatch(createMessage({postFile:"File posted"}));
+            dispatch(createMessage({addCsvFile:"File posted"}));
             dispatch({
                 type:ADD_CSV_FILE,
                 payload: res.data

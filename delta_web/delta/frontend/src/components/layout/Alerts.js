@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export class Alerts extends Component {
     static propTypes = {
-        errors: PropTypes.object.isRequired,
+        error: PropTypes.object.isRequired,
         message: PropTypes.object.isRequired
     }
     componentDidUpdate(prevProps){
@@ -30,6 +30,12 @@ export class Alerts extends Component {
             }
             if(message.addDataAccel){
                 alert.success(message.addDataAccel);
+            }
+            if(message.addCsvFile){
+                alert.success(message.addDataAccel);
+            }
+            if(message.deleteCsvFile){
+                alert.success(message.deleteCsvFile);
             }
             if(message.passwordsDoNotMatch){
                 alert.error(message.passwordsDoNotMatch);

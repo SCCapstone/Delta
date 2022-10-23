@@ -7,7 +7,7 @@ https://upmostly.com/tutorials/react-dropzone-file-uploads-react
 import React, {Component,useState,useEffect,useMemo, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import {useDropzone} from "react-dropzone";
-import {addDataAccel} from '../../actions/dataAccel';
+import {addCsvFile} from '../../actions/file';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -38,8 +38,7 @@ const DataUpload = (props) => {
   const onSubmit = (e) =>{
     e.preventDefault();
       acceptedFiles.forEach(file=> {
-        var data = {"file_path":file.path}
-        props.addDataAccel(data);
+        props.addCsvFile(file);
       });
   }
 
@@ -80,4 +79,4 @@ const DataUpload = (props) => {
   )
 }
 
-export default connect(null,{addDataAccel})(DataUpload);
+export default connect(null,{addCsvFile})(DataUpload);

@@ -12,7 +12,12 @@ import Login from './accounts/Login';
 import Register from './accounts/Register';
 
 // profile
-import {AtAGlance as ProfileGlance} from "./profile/AtAGlance";
+/*
+NOTE: 
+ANYTHING THAT NEEDS MAP STATE DOES NOT USE SQUARE BRACKETS
+https://stackoverflow.com/questions/70140588/const-authenticated-this-props-is-undefined-though-i-can-clearly-see-it-in
+*/
+import ProfileGlance from "./profile/ProfileGlance";
 import {DetailedView as ProfileDetailed} from "./profile/DetailedView";
 
 // community

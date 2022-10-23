@@ -1,24 +1,32 @@
 import axios from 'axios';
 
 import {createMessage,returnErrors} from "./messages";
-import { tokenConfig } from './auth';
+import { fileTokenConfig} from './auth';
 
-import {POST_FILE} from "./types";
+import {ADD_CSV_FILE} from "./types";
 
 // POST FILE 
-export const postFile = (data) => (dispatch,getState) =>{
+export const addCsvFile= (data) => (dispatch,getState) =>{
     // pass in token
-    axios.post('/api/upload/csv/',data,tokenConfig(getState))
+    axios.post('/api/upload/csv/',data,fileTokenConfig(getState,data))
         .then(res=>{
             dispatch(createMessage({postFile:"File posted"}));
             dispatch({
-                type:POST_FILE,
+                type:ADD_CSV_FILE,
                 payload: res.data
             });
         })
         .catch(err=>{
-            dispatch(
-                returnErrors(err.response.data,err.response.status)
-            )
+            if(err.response){
+                dispatch(
+                    returnErrors(err.response.data,err.response.status)
+                )
+            }else if(err.request){
+                dispatch(
+                    returnErrors(err.request.data,err.request.status)
+                )
+            }else{
+                console.log(err);
+            }
         })
 }

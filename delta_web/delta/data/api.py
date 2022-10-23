@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 
 # import necessary serializers
-from .serializers import CSVFileSerializer, SerializerDataAccel
+from .serializers import SerializerCSVFile, SerializerDataAccel
 
 # data accel viewset
 # create a full CRUD api w/o having to specify explict methods
@@ -32,6 +32,18 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     
     def perform_create(self,serializer):
         serializer.save(author=self.request.user)
+
+class ViewsetCSVFile(viewsets.ModelViewSet):
+    queryset = CSVFile.objects.all()
+
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = SerializerCSVFile
+
+    def get_queryset(self):
+        return self.request.user.csv_files.all
 
 ###################
 #
@@ -51,6 +63,7 @@ class UploadCsvApiView(APIView):
 
     # handle post requests
     def post(self,request,format='csv'):
+        
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
         

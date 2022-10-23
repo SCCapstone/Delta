@@ -145,3 +145,24 @@ export const tokenConfig = getState => {
     // return config with token
     return config;
 }
+
+export const fileTokenConfig = (getState,file) =>{
+    // get token from state
+    // looking at auth reducer and getting that token 
+    const token = getState().auth.token;
+
+    // headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    // if token, add to headers config
+    if(token){
+        config.headers['Authorization'] = `Token ${token}`;
+        config.headers["Content-Disposition"] = `attachment; filename=${file.name}`;
+    }
+    // return config with token
+    return config;
+}

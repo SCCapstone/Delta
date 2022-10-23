@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,9 +56,6 @@ INSTALLED_APPS = [
 
     # frontend
     'frontend.apps.FrontendConfig',
-
-    # organizations
-    'organizations.apps.OrganizationsConfig',
 
     # for token authenitcation
     'knox',

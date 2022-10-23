@@ -7,7 +7,7 @@ class SerializerDataAccel(serializers.ModelSerializer):
         model = DataAccel
         fields = '__all__'
 
-class CSVFileSerializer(serializers.ModelSerializer):
+class SerializerCSVFile(serializers.ModelSerializer):
     class Meta:
         model = CSVFile
         fields = '__all__'

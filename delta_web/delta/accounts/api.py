@@ -41,6 +41,17 @@ class LoginAPI(generics.GenericAPIView):
             "token":AuthToken.objects.create(user)[1]
         })
 
+# deletion api
+class DeleteAPI(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+
+    def post(self,request,*args,**kwargs):
+        # send back any errors as needed
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        user.delete()
+
 # Get User API
 class UserAPI(generics.RetrieveAPIView):
     # this route needs protection

@@ -21,6 +21,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('frontend.urls')),
     path('admin/', admin.site.urls),
-    path('', include('data.urls')),
+    path('',include('data.urls')),
     path('',include('accounts.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # add media folder to path
+]

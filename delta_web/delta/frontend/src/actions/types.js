@@ -23,6 +23,9 @@ export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 
+// delete user
+export const USER_DELETE = "USER_DELETE";
+
 // login
 export const LOGIN_SUCCESS = "LOGIN_SUCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";

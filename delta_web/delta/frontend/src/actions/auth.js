@@ -8,6 +8,7 @@ import {returnErrors} from './messages';
 import {
     USER_LOADED,
     USER_LOADING,
+    USER_DELETE,
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -120,8 +121,20 @@ export const register= ({username,first_name,last_name,password,email}) => dispa
             type:REGISTER_FAIL,
         })
     });
+}
 
-    
+export const deleteUser = () => (dispatch,getState) =>{
+    // delete a user    
+    axios.post('/api/users/delete',tokenConfig(getState))
+        .then(res=>{
+            dispatch({
+                type:USER_DELETE,
+                payload:res.data
+            });
+        })
+        .catch(err=>{
+            dispatch(returnErrors(err.response.data,err.response.status))
+        })
 }
 
 // Setup config with token - helper function

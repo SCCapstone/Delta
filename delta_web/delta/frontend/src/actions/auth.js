@@ -164,5 +164,5 @@ export const fileTokenConfig = (getState,file) =>{
         config.headers["Content-Disposition"] = `attachment; filename=${file.name}`;
     }
     // return config with token
-    return config;
+    return config
 }

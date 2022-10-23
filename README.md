@@ -1,6 +1,6 @@
 README as described by [here](https://capstone.cse.sc.edu/milestone/source-control/#september)
 
-# Delta
+## Delta
 Delta is a web file system designed for use by researchers and data scientists. It is essentially a file transfer system with a social media and market aspect. Researchers or data scientists can perform CRUD operations on data, and can also assess the validity of data by creating posts on data sets or ML models or by rating data sets or ML models. 
 
 Note the following instructions are designed for *nix machines.

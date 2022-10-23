@@ -43,7 +43,10 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     serializer_class = SerializerCSVFile
 
     def get_queryset(self):
-        return self.request.user.csv_files.all
+        return self.request.user.csv_files.all()
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 ###################
 #

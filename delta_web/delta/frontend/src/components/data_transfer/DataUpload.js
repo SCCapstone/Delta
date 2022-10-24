@@ -18,7 +18,8 @@ const DataUpload = (props) => {
   };
 
   // max size of file
-  const maxSize = 1048576;
+  // 5 MB
+  const maxSize = 5*1048576;
 
   const onDrop = useCallback(acceptedFiles =>{
     console.log(acceptedFiles);
@@ -38,6 +39,7 @@ const DataUpload = (props) => {
   const onSubmit = (e) =>{
     e.preventDefault();
       acceptedFiles.forEach(file=> {
+        console.log(file)
         props.addCsvFile(file);
       });
   }

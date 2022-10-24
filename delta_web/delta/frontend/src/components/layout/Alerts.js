@@ -32,7 +32,7 @@ export class Alerts extends Component {
                 alert.success(message.addDataAccel);
             }
             if(message.addCsvFile){
-                alert.success(message.addDataAccel);
+                alert.success(message.addCsvFile);
             }
             if(message.deleteCsvFile){
                 alert.success(message.deleteCsvFile);

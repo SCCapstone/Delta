@@ -3,12 +3,14 @@ import {Link} from 'react-router-dom';
 import {deleteUser} from "../../actions/auth";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import ProfileForm from './ProfileForm';
 
 export class ProfileDetailed extends Component {
     static propTypes = {
         deleteUser: PropTypes.func.isRequired,
         auth:PropTypes.object.isRequired
     }
+
     onDelete =() =>{
         this.props.deleteUser();
     }
@@ -21,10 +23,7 @@ export class ProfileDetailed extends Component {
                 </h1>
                 <div>
                     <h4>Change your information</h4>
-                    <h4>First Name: {user.first_name}</h4>
-                    <h4>Last Name: {user.last_name}</h4>
-                    <h4>Email: {user.email}</h4>
-                    <h4>Username: {user.username}</h4>
+                    <ProfileForm/>
                 </div>
                 <button className="btn btn-danger" onClick={this.onDelete}>
                     Remove account?

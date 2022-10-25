@@ -16,7 +16,8 @@ export class Dashboard extends Component {
 
     return (
       <div>
-        <h1>Welcome back <strong>{user.username}</strong></h1>
+        <h1>Welcome back <strong>{user.username}</strong>.</h1>
+        <h3>Today is a great day.</h3>
       </div>
     )
   }

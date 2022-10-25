@@ -7,16 +7,25 @@ import {connect} from "react-redux";
 export class ProfileDetailed extends Component {
     static propTypes = {
         deleteUser: PropTypes.func.isRequired,
+        auth:PropTypes.object.isRequired
     }
     onDelete =() =>{
         this.props.deleteUser();
     }
     render(){
+        const {isAuthenticated, user} = this.props.auth;
         return(
             <div>
                 <h1>
                     Profile in detail
                 </h1>
+                <div>
+                    <h4>Change your information</h4>
+                    <h4>First Name: {user.first_name}</h4>
+                    <h4>Last Name: {user.last_name}</h4>
+                    <h4>Email: {user.email}</h4>
+                    <h4>Username: {user.username}</h4>
+                </div>
                 <button className="btn btn-danger" onClick={this.onDelete}>
                     Remove account?
                 </button>
@@ -30,4 +39,8 @@ export class ProfileDetailed extends Component {
     }
 }
 
-export default connect(null,{deleteUser})(ProfileDetailed);
+const mapStateToProps = state =>({
+    auth:state.auth
+})
+
+export default connect(mapStateToProps,{deleteUser})(ProfileDetailed);

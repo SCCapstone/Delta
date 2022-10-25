@@ -29,7 +29,7 @@ const DataUpload = (props) => {
     onDrop,
     accept: 'text/csv',
     minSize: 0,
-    maxSize,
+    maxSize:maxSize,
   });
 
   // to do: check if file too large

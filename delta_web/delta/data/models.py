@@ -37,11 +37,12 @@ class CSVFile(models.Model):
     )
     # SEE: https://stackoverflow.com/questions/53058631/foreignkey-object-has-no-attribute
     file_path= models.TextField(db_column='file_path',blank=False,null=False)
+    file_name = models.TextField(db_column="file_name",blank=False,null=False)
     # timestamp of creation
     timestamp= models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('author','file_path')
+        unique_together = ('author','file_path','file_name')
 
     def __str__(self):
         return self.file_path

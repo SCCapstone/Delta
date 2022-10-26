@@ -1,17 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getCsvFile,deleteCsvFile} from '../../actions/file'; 
+import {getCsvFiles,deleteCsvFile} from '../../actions/file'; 
 
 export class CsvFileTable extends Component {
   static propTypes = {
-    csvFile:PropTypes.array.isRequired,
-    getCsvFile:PropTypes.func.isRequired,
+    csvFiles:PropTypes.array.isRequired,
     deleteCsvFile:PropTypes.func.isRequired,
   };
 
   componentDidMount(){
-    this.props.getCsvFile();
+    this.props.getCsvFiles();
   }
 
   render() {
@@ -22,15 +21,24 @@ export class CsvFileTable extends Component {
           <thead>
             <tr>
               <th>File Id</th>
-              <th>Filepath</th>
-              <th/>
+              <th>File Name</th>
+              <th>Upload Date</th>
+              <th>View</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            { this.props.csvFile.map(data => (
+            { this.props.csvFiles.map(data => (
               <tr key={data.id}>
                 <td>{data.id}</td>
-                <td>{data.file_path}</td>
+                <td>{data.file_name}</td>
+                <td>{data.timestamp}</td>
+                <td>
+                  <button className = "btn btn-success btn-sm"
+                  >
+                    View
+                  </button>
+                </td>
                 <td>
                   <button className="btn btn-danger btn-sm"
                     onClick={this.props.deleteCsvFile.bind(this,data.id)}
@@ -48,10 +56,10 @@ export class CsvFileTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  csvFile: state.csvFile.csvFile
+  csvFiles: state.csvFile.csvFile
 });
 
 export default connect(
   mapStateToProps,
-    {getCsvFile,deleteCsvFile}
+    {getCsvFiles,deleteCsvFile}
     )(CsvFileTable);

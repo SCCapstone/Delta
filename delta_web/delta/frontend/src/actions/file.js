@@ -31,8 +31,8 @@ export const addCsvFile= (file) => (dispatch,getState) =>{
         })
 }
 
-// GET FILE
-export const getCsvFile = () => (dispatch,getState) =>{
+// GET FILES
+export const getCsvFiles = () => (dispatch,getState) =>{
     axios.get('/api/csv/',tokenConfig(getState))
         .then(res => {
             dispatch({
@@ -44,6 +44,19 @@ export const getCsvFile = () => (dispatch,getState) =>{
             returnErrors(err.response.data,err.response.status)
         ))
 }
+// // GET FILE by ID
+// export const getCsvFile = (id) => (dispatch,getState) =>{
+//     axios.get('/api/csv/${',tokenConfig(getState))
+//         .then(res => {
+//             dispatch({
+//                 type:GET_CSV_FILE,
+//                 payload:res.data
+//             })
+//         })
+//         .catch(err=>dispatch(
+//             returnErrors(err.response.data,err.response.status)
+//         ))
+// }
 
 // DELETE FILE
 export const deleteCsvFile = (id) => (dispatch,getState) =>{

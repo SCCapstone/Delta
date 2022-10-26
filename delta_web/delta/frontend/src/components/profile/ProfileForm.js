@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
+import {updateUser} from "../../actions/auth"
 
 export class ProfileForm extends Component{
     static propTypes = {
-        auth:PropTypes.object.isRequired
+        auth:PropTypes.object.isRequired,
+        updateUser:PropTypes.func.isRequired
     }
 
     state = {
-        username: this.props.auth.user.user_name,
+        username: this.props.auth.user.username,
         first_name: this.props.auth.user.first_name,
         last_name: this.props.auth.user.last_name,
         email: this.props.auth.user.email,
@@ -21,7 +23,7 @@ export class ProfileForm extends Component{
         e.preventDefault();
         const data = this.state;
         // call function
-        console.log(data);
+        this.props.updateUser(data);
     }
 
     render(){
@@ -40,7 +42,7 @@ export class ProfileForm extends Component{
                     First Name: 
                     <input
                     name = "first_name"
-                    value = ""
+                    value = {this.state.first_name}
                     onChange={this.onChange}
                     placeholder={user.first_name}
                     >
@@ -50,7 +52,7 @@ export class ProfileForm extends Component{
                     Last Name:
                     <input
                     name = "last_name"
-                    value = ""
+                    value = {this.state.last_name}
                     onChange = {this.onChange}
                     placeholder={user.last_name}
                     >
@@ -60,7 +62,7 @@ export class ProfileForm extends Component{
                     Email:
                     <input
                     name = "email"
-                    value = ""
+                    value = {this.state.email}
                     onChange={this.onChange}
                     placeholder={user.email}
                     >
@@ -70,9 +72,18 @@ export class ProfileForm extends Component{
                     Username
                     <input 
                     name = "username"
-                    value = ""
+                    value = {this.state.username}
                     onChange={this.onChange}
                     placeholder={user.username}
+                    >
+                    </input>
+                </div>
+                <div>
+                    Password
+                    <input
+                    name = "password"
+                    value = {this.state.password}
+                    onChange = {this.onChange}
                     >
                     </input>
                 </div>
@@ -88,4 +99,4 @@ const mapStateToProps = state =>({
     auth:state.auth
 })
 
-export default connect(mapStateToProps)(ProfileForm);
+export default connect(mapStateToProps,{updateUser})(ProfileForm);

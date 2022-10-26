@@ -86,14 +86,14 @@ class UpdateAPI(generics.UpdateAPIView):
                 request.user.save()
             except Exception as e:
                 print(e)
-                return Response(data = {"Fail":"A user with that username already exists."},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(data = {"message":"A user with that username already exists."},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         if(strNewEmail):
             try:
                 request.user.email = strNewEmail
                 request.user.save()
             except Exception as e:
                 print(e)
-                return Response({"message":"Error saving email"})
+                return Response(data={"message":"Error with email."},status = status.HTTP_500_INTERNAL_SERVER_ERROR)
         if(strNewFirstName) :
             request.user.first_name = strNewFirstName
         if(strNewLastName):

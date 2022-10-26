@@ -153,13 +153,12 @@ export const updateUser = ({username, first_name, last_name, password, email}) =
             });
         })
         .catch((err)=>{
-            console.log(err);
             // dispatch error
             // TO DO: 
             // MODIFY ERROR RETURN IN API
-            // dispatch(returnErrors(err.response.data,err.response.status));
+            dispatch(returnErrors(err.response.data,err.response.status));
             // type of error
-            dispatch(createMessage({updateUserFail:"User update has failed."}))
+            dispatch(createMessage({updateUserFail:err.response.data["message"]}))
             dispatch({
                 type:USER_UPDATE_FAIL
             })

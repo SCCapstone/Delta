@@ -9,6 +9,7 @@ export const ADD_DATA_ACCEL = "ADD_DATA_ACCEL";
 // files
 export const ADD_CSV_FILE = "ADD_FILE";
 export const GET_CSV_FILE = "GET_FILE";
+export const GET_CSV_FILES = "GET_FILES";
 export const DELETE_CSV_FILE = "DELETE_FILE";
 
 // errors

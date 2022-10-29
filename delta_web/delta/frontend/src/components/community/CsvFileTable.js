@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getCsvFiles,deleteCsvFile} from '../../actions/file'; 
+import {Link} from 'react-router-dom'
+
+// https://ui.dev/react-router-url-parameters
 
 export class CsvFileTable extends Component {
   static propTypes = {
@@ -34,10 +37,9 @@ export class CsvFileTable extends Component {
                 <td>{data.file_name}</td>
                 <td>{data.timestamp}</td>
                 <td>
-                  <button className = "btn btn-success btn-sm"
-                  >
-                    View
-                  </button>
+                    <Link to ={`csvs/${data.id}`}>
+                      View
+                    </Link>
                 </td>
                 <td>
                   <button className="btn btn-danger btn-sm"

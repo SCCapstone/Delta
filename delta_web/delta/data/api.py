@@ -50,11 +50,12 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
     
-    def retrieve(self,request,*args,**kwargs):
+    def retrieve(self,*args,**kwargs):
         obj_id = kwargs['pk']
         obj = CSVFile.objects.get(id=obj_id)
-        print(obj)
-        return obj
+        serialized = self.get_serializer(obj)
+        print(serialized.data)
+        return Response(serialized.data)
 
 ###################
 #

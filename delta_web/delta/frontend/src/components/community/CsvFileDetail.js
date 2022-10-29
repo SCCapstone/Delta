@@ -1,16 +1,29 @@
-import React, {Component, Fragment} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import {getCsvFile,deleteCsvFile} from "../../actions/file";
 
-export class CsvFileView extends Component {
-    static propTypes = {
-        csvFile:PropTypes.object.isRequired
-    }
-    render(){
-        <Fragment>
-            <h2>CSV File</h2>
+// https://ui.dev/react-router-url-parameters
 
-        </Fragment>
-    }
+import {
+    useParams
+} from "react-router-dom"
+
+const CsvFileDetail = (props) =>{
+    const [value,setValue]= useState(1);
+    console.log()
+
+    const {id} = useParams();
+    console.log("over here " + props.getCsvFile(id))
+
+    return (
+        <div>
+            <h1>
+                {id}
+            </h1>
+            <h1>
+            </h1>
+        </div>
+    )
 }
+
+export default connect(null,{getCsvFile,deleteCsvFile})(CsvFileDetail);

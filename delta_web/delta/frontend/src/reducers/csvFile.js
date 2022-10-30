@@ -17,7 +17,7 @@ export default function(state = initialState,action){
         case GET_CSV_FILE:
             return {
                 ...state,
-                csvFile: state.csvFile.filter(data=>data.id == action.payload)
+                csvFile: action.payload
             }
 
         case DELETE_CSV_FILE:

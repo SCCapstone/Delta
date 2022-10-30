@@ -48,14 +48,14 @@ export const getCsvFiles = () => (dispatch,getState) =>{
 export const getCsvFile = (id) => (dispatch,getState) =>{
     axios.get(`/api/csv/${id}/`,tokenConfig(getState))
         .then(res => {
-            console.log(res.data)
+            console.log(res)
             dispatch({
                 type:GET_CSV_FILE,
                 payload:res.data
             })
         })
         .catch(err=>dispatch(
-            console.log(err)
+            returnErrors(err.response.data,err.response.status)
         ))
 }
 

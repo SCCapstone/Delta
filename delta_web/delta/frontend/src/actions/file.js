@@ -48,15 +48,19 @@ export const getCsvFiles = () => (dispatch,getState) =>{
 export const getCsvFile = (id) => (dispatch,getState) =>{
     axios.get(`/api/csv/${id}/`,tokenConfig(getState))
         .then(res => {
-            console.log(res)
+            console.log(res);
             dispatch({
                 type:GET_CSV_FILE,
                 payload:res.data
             })
         })
-        .catch(err=>dispatch(
-            returnErrors(err.response.data,err.response.status)
-        ))
+        .catch(err=>
+            {
+                dispatch(
+                    returnErrors(err.response.data,err.response.status))
+                console.log(err);
+                }
+        )
 }
 
 // DELETE FILE

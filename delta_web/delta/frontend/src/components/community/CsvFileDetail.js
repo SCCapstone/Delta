@@ -19,7 +19,7 @@ const CsvFileDetail = (props) => {
     const [csvFiles] = useState(0);
 
     useEffect(()=>{
-        this.getCsvFile(id);
+        props.getCsvFile(id);
     },[])
 
     return (
@@ -27,6 +27,7 @@ const CsvFileDetail = (props) => {
             <h1>
                 File id: {id}
             </h1>
+            {csvFiles}
             <h1>
             </h1>
         </div>

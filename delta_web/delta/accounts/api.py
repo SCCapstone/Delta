@@ -104,7 +104,8 @@ class UpdateAPI(generics.UpdateAPIView):
 
 
         return Response({
-            "message":"Your account" + request.user.username + " has successfully been updated."
+            # give the serialized user
+            "user":UserSerializer(request.user,context=self.get_serializer_context()).data,
         })
 
 # Get User API

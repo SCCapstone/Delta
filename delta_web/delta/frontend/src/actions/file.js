@@ -3,7 +3,7 @@ import axios from 'axios';
 import {createMessage,returnErrors} from "./messages";
 import {fileTokenConfig,tokenConfig} from './auth';
 
-import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILE} from "./types";
+import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE} from "./types";
 
 // POST FILE 
 export const addCsvFile= (file) => (dispatch,getState) =>{
@@ -31,18 +31,36 @@ export const addCsvFile= (file) => (dispatch,getState) =>{
         })
 }
 
-// GET FILE
-export const getCsvFile = () => (dispatch,getState) =>{
+// GET FILES
+export const getCsvFiles = () => (dispatch,getState) =>{
     axios.get('/api/csv/',tokenConfig(getState))
         .then(res => {
             dispatch({
-                type:GET_CSV_FILE,
+                type:GET_CSV_FILES,
                 payload:res.data
             })
         })
         .catch(err=>dispatch(
             returnErrors(err.response.data,err.response.status)
         ))
+}
+// GET FILE by ID
+export const getCsvFile = (id) => (dispatch,getState) =>{
+    axios.get(`/api/csv/${id}/`,tokenConfig(getState))
+        .then(res => {
+            console.log(res);
+            dispatch({
+                type:GET_CSV_FILE,
+                payload:res.data
+            })
+        })
+        .catch(err=>
+            {
+                dispatch(
+                    returnErrors(err.response.data,err.response.status))
+                console.log(err);
+                }
+        )
 }
 
 // DELETE FILE

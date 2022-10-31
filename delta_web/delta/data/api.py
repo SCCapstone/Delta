@@ -1,7 +1,9 @@
 # import necessary models
-from stat import FILE_ATTRIBUTE_INTEGRITY_STREAM
 from .models import DataAccel
 from .models import CSVFile
+from rest_framework import status
+
+from pathlib import Path
 
 # files
 from django.conf import settings as django_settings
@@ -47,6 +49,12 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+    
+    def retrieve(self,request,*args,**kwargs):
+        obj_id = kwargs['pk']
+        obj = CSVFile.objects.get(id=obj_id)
+        serialized = self.get_serializer(obj)
+        return Response(serialized.data)
 
 ###################
 #
@@ -66,7 +74,7 @@ class UploadCsvApiView(APIView):
 
     # handle post requests
     def post(self,request,format='csv'):
-        
+
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
         
@@ -74,7 +82,6 @@ class UploadCsvApiView(APIView):
 
             # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
             strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
-            print(strUserCsvFolder)
 
             # create dir if doesnt exist
             if not os.path.exists(strUserCsvFolder):
@@ -85,10 +92,10 @@ class UploadCsvApiView(APIView):
             # first try is just to see if this is a unique user+filepath combo
             csvFile = None
             try:
-                csvFile = CSVFile(author=request.user,file_path = strFilePath)
+                csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=Path(str(dataFile)).stem)
                 csvFile.save()
             except Exception as e:
-                return Response({"message":e})
+                return Response(data={"message":e},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             # if get thru the first try, know that the file is unique.
             # next try is to actually write the file
             try:
@@ -96,11 +103,11 @@ class UploadCsvApiView(APIView):
                     for chunk in dataFile.chunks():
                         file.write(chunk)
                 # file is now saved.
-                return Response({"message":"CSV successfully saved."})
+                return Response(data ={"message":"CSV successfully saved."})
             except Exception as e:
                 # delete the csvFile, something went wrong with writing
                 csvFile.delete()
-                return Response({"message":e})
+                return Response(data={"message":e},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         else:
-            return Response({"message":"Error upon uploading file"},status=400)
+            return Response(data={"message":"Error upon uploading file"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)

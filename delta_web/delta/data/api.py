@@ -1,7 +1,9 @@
 # import necessary models
+from django.http import FileResponse
 from .models import DataAccel
 from .models import CSVFile
-from rest_framework import status
+from rest_framework import status,renderers
+from rest_framework.decorators import action
 
 from pathlib import Path
 
@@ -34,6 +36,12 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     
     def perform_create(self,serializer):
         serializer.save(author=self.request.user)
+#https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
+class PassthroughRenderer(renderers.BaseRenderer):
+    media_type = 'text/csv'
+    format = None
+    def render(self,data,accepted_media_type=None,renderer_context=None):
+        return data
 
 # For dealing with public viewing of csv files
 class ViewsetPublicCsvFile(viewsets.ModelViewSet):
@@ -47,6 +55,17 @@ class ViewsetPublicCsvFile(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.queryset
+    
+    @action(methods=['get'],detail=True,renderer_classes=(PassthroughRenderer,))
+    def download(self,*args,**kwargs):
+        instance = self.get_object()
+        with open(instance.file_path,'rb') as file:
+            return Response(
+                file.read(),
+                headers = {"Content-Disposition":'attachment; filename={}'.format(instance.file_name)},
+                content_type="text/csv",
+            )
+
 
 class ViewsetCSVFile(viewsets.ModelViewSet):
     queryset = CSVFile.objects.all()

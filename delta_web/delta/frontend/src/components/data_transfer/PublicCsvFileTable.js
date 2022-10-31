@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getCsvFilesPublic,deleteCsvFile} from '../../actions/file'; 
+import {getCsvFilesPublic,downloadCsvFile} from '../../actions/file'; 
 import {Link} from 'react-router-dom'
 
 // https://ui.dev/react-router-url-parameters
@@ -21,7 +21,10 @@ export class PublicCsvFileTable extends Component {
   }
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state.checkedFileIds)
+    // console.log(this.state.checkedFileIds)
+    this.state.checkedFileIds.forEach(id=>{
+        this.props.downloadCsvFile(id)
+    })
   }
   onCheckChange = (id) =>{
     if(!this.state.checkedFileIds.includes(id)){
@@ -83,5 +86,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-    {getCsvFilesPublic,deleteCsvFile}
+    {getCsvFilesPublic,downloadCsvFile}
     )(PublicCsvFileTable);

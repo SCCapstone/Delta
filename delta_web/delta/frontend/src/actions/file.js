@@ -97,11 +97,32 @@ export const deleteCsvFile = (id) => (dispatch,getState) =>{
 export const getCsvFilesPublic = () => (dispatch,getState) =>{
     axios.get('/api/public_csvs/',tokenConfig(getState))
     .then(res=>{
-        console.log(res);
         dispatch({
             type:GET_CSV_FILES_PUBLIC,
             payload:res.data
         })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+// DOWNLOAD A FILE
+//  id is of file object
+export const downloadCsvFile = (id) => (dispatch, getState) =>{
+    axios.get(`/api/public_csvs/${id}/download`,tokenConfig(getState))
+    .then(res=>{
+        var fileContent = res.data;
+        // temporary solution to get file name, naive
+        var fileName = res.headers['content-disposition'].split('filename=')[1].split(';')[0];
+        var downloadLink = document.createElement('a');
+        var blob = new Blob(["\ufeff",String(fileContent)]);
+        var url = URL.createObjectURL(blob);
+        downloadLink.href=url;
+        downloadLink.download = fileName + ".csv";
+        document.body.appendChild(downloadLink);
+        downloadLink.click()
+        document.body.appendChild(downloadLink);
     })
     .catch(err=>{
         console.log(err);

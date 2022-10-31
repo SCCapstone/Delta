@@ -50,6 +50,18 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
     
+    def partial_update(self, request, *args, **kwargs):
+        # can only update file name
+        obj = CSVFile.objects.get(id=kwargs['pk'])
+        obj.file_name = request.data['file_name']
+        try:
+            obj.save()
+        except Exception as e:
+            print(e)
+            return Response(data={"message":"Error with file name"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return super().partial_update(request, *args, **kwargs)
+    
     def retrieve(self,request,*args,**kwargs):
         obj_id = kwargs['pk']
         obj = CSVFile.objects.get(id=obj_id)

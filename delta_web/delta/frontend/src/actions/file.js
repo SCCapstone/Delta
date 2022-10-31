@@ -3,7 +3,7 @@ import axios from 'axios';
 import {createMessage,returnErrors} from "./messages";
 import {fileTokenConfig,tokenConfig} from './auth';
 
-import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE} from "./types";
+import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE, CSV_FILE_UPDATE_SUCCESS} from "./types";
 
 // POST FILE 
 export const addCsvFile= (file) => (dispatch,getState) =>{
@@ -48,7 +48,6 @@ export const getCsvFiles = () => (dispatch,getState) =>{
 export const getCsvFile = (id) => (dispatch,getState) =>{
     axios.get(`/api/csv/${id}/`,tokenConfig(getState))
         .then(res => {
-            console.log(res);
             dispatch({
                 type:GET_CSV_FILE,
                 payload:res.data
@@ -61,6 +60,23 @@ export const getCsvFile = (id) => (dispatch,getState) =>{
                 console.log(err);
                 }
         )
+}
+// UPDATE FILE
+// only allow update name
+export const updateCsvFile = ({id,file_name}) => (dispatch,getState)=>{
+    const data = JSON.stringify({id,file_name})
+    axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
+        .then(res=>{
+            console.log(res)
+            dispatch(createMessage({updateCsvFileSuccess:"File successfully updated."}))
+            dispatch({
+                type:CSV_FILE_UPDATE_SUCCESS,
+                payload:res.data
+            })
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 }
 
 // DELETE FILE

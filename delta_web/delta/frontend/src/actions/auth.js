@@ -145,7 +145,6 @@ export const updateUser = ({username, first_name, last_name, password, email}) =
 
     axios.patch('/api/auth/update',data,tokenConfig(getState))
         .then(res =>{
-            console.log(res)
             // dispatch message
             dispatch(createMessage({updateUser:"User successfully updated."}))
             dispatch({

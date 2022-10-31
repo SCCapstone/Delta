@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {getCsvFile,deleteCsvFile} from "../../actions/file";
 import {useEffect} from 'react'
 import PropTypes from 'prop-types'
+import CsvFileForm from './CsvFileForm';
 
 // https://ui.dev/react-router-url-parameters
 
@@ -24,10 +25,14 @@ const CsvFileDetail = (props) => {
 
     return (
         <div>
-            <h1>
-                File id: {id}
-            </h1>
-            {csvFiles}
+            {props.csvFiles.map(data=>(
+                <div>
+                    <p>id: {data.id}</p>
+                    <p>file name: {data.file_name}</p>
+                    <p>timestamp: {data.timestamp}</p>
+                    <CsvFileForm id={id} original_file_name={data.file_name}/>                   
+                </div>
+            ))}
             <h1>
             </h1>
         </div>

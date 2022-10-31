@@ -11,6 +11,8 @@ export const ADD_CSV_FILE = "ADD_FILE";
 export const GET_CSV_FILE = "GET_FILE";
 export const GET_CSV_FILES = "GET_FILES";
 export const DELETE_CSV_FILE = "DELETE_FILE";
+export const CSV_FILE_UPDATE_SUCCESS = "CSV_FILE_UPDATE_SUCCESS"
+export const CSV_FILE_UPDATE_FAIL = "CSV_FILE_UPDATE_FAIL"
 
 // errors
 export const GET_ERRORS = "GET_ERRORS";

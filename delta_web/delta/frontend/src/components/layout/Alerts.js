@@ -34,6 +34,9 @@ export class Alerts extends Component {
             if(message.addCsvFile){
                 alert.success(message.addCsvFile);
             }
+            if(message.updateCsvFileSuccess){
+                alert.success(message.updateCsvFileSuccess);
+            }
             if(message.deleteCsvFile){
                 alert.success(message.deleteCsvFile);
             }

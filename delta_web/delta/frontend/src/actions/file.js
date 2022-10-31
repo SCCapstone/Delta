@@ -3,7 +3,8 @@ import axios from 'axios';
 import {createMessage,returnErrors} from "./messages";
 import {fileTokenConfig,tokenConfig} from './auth';
 
-import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE, CSV_FILE_UPDATE_SUCCESS} from "./types";
+import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE, 
+    CSV_FILE_UPDATE_SUCCESS,GET_CSV_FILES_PUBLIC} from "./types";
 
 // POST FILE 
 export const addCsvFile= (file) => (dispatch,getState) =>{
@@ -90,4 +91,19 @@ export const deleteCsvFile = (id) => (dispatch,getState) =>{
         });
     })
     .catch(err=>console.log(err));
+}
+
+// GET PUBLIC FILES
+export const getCsvFilesPublic = () => (dispatch,getState) =>{
+    axios.get('/api/public_csvs/',tokenConfig(getState))
+    .then(res=>{
+        console.log(res);
+        dispatch({
+            type:GET_CSV_FILES_PUBLIC,
+            payload:res.data
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
 }

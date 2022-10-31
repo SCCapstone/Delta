@@ -1,4 +1,6 @@
-import { GET_CSV_FILE,GET_CSV_FILES, DELETE_CSV_FILE, ADD_CSV_FILE } from '../actions/types.js';
+import { GET_CSV_FILE,GET_CSV_FILES, 
+    GET_CSV_FILES_PUBLIC,
+    DELETE_CSV_FILE, ADD_CSV_FILE } from '../actions/types.js';
 
 const initialState = {
     csvFile: []
@@ -8,6 +10,7 @@ export default function(state = initialState,action){
     // check the actions
     // return some state
     switch(action.type){
+        case GET_CSV_FILES_PUBLIC:
         case GET_CSV_FILES:
             return {
                 // include whatever is in the state

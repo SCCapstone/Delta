@@ -14,6 +14,9 @@ export const DELETE_CSV_FILE = "DELETE_FILE";
 export const CSV_FILE_UPDATE_SUCCESS = "CSV_FILE_UPDATE_SUCCESS"
 export const CSV_FILE_UPDATE_FAIL = "CSV_FILE_UPDATE_FAIL"
 
+// public csv files
+export const GET_CSV_FILES_PUBLIC = "GET_CSV_FILES_PUBLIC"
+
 // errors
 export const GET_ERRORS = "GET_ERRORS";
 

@@ -35,8 +35,33 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     def perform_create(self,serializer):
         serializer.save(author=self.request.user)
 
+# For dealing with public viewing of csv files
+class ViewsetPublicCsvFile(viewsets.ModelViewSet):
+    queryset = CSVFile.objects.all()
+
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = SerializerCSVFile
+
+    def get_queryset(self):
+        return self.queryset
+
 class ViewsetCSVFile(viewsets.ModelViewSet):
     queryset = CSVFile.objects.all()
+
+    # TO DO: 
+    # UPDATE THE PERMISSION CLASSES
+    # Right now anyone can view CSV files. 
+    # We should make viewable only if csv files are marked as public.
+    # Could mark for public for all or for organization.
+
+
+    # TO DO: 
+    # UNSURE ABOUT SECURITY HERE.
+    # It may be possible to call api methods at an index other than yours to update
+    # other users data. Please note this possiblity!
 
     permission_classes = [
         permissions.IsAuthenticated

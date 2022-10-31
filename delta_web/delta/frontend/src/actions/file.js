@@ -112,9 +112,9 @@ export const getCsvFilesPublic = () => (dispatch,getState) =>{
 export const downloadCsvFile = (id) => (dispatch, getState) =>{
     axios.get(`/api/public_csvs/${id}/download`,tokenConfig(getState))
     .then(res=>{
-        var fileContent = res.data.file;
+        var fileContent = res.data;
         // temporary solution to get file name, naive
-        var fileName = res.headers['content-disposition'].split('filename=')[1].split(';.split(';').split(';').split(';')'[0];
+        var fileName = res.headers['content-disposition'].split('filename=')[1].split(';')[0];
         var downloadLink = document.createElement('a');
         var blob = new Blob(["\ufeff",String(fileContent)]);
         var url = URL.createObjectURL(blob);

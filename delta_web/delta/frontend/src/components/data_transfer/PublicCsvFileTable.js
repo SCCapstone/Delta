@@ -3,8 +3,13 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getCsvFilesPublic,downloadCsvFile} from '../../actions/file'; 
 import {Link} from 'react-router-dom'
+import {Table,
+  Header,HeaderRow,HeaderCell,
+  Body,Row,Cell
+} from '@table-library/react-table-library/table'
 
-// https://ui.dev/react-router-url-parameters
+// https://www.robinwieruch.de/react-table-component/
+// https://www.robinwieruch.de/react-table-search/
 
 export class PublicCsvFileTable extends Component {
   static propTypes = {
@@ -41,8 +46,29 @@ export class PublicCsvFileTable extends Component {
   }
 
   render() {
+    const data = {nodes:this.props.csvFiles}
     return (
       <Fragment>
+        {/* <Table data={data}>{(tableList)=>(
+          <>
+          <Header>
+            <HeaderRow>
+              <HeaderCell>File Id</HeaderCell>
+              <HeaderCell>File Name</HeaderCell>
+              <HeaderCell>Upload Date</HeaderCell>
+              <HeaderCell>Download</HeaderCell>
+            </HeaderRow>
+          </Header>
+          <Body>
+            {tableList.map((item)=>(
+              <Row key = {item.id} item = {item}>
+                <Cell>{item.file_name}</Cell>
+              </Row>
+            ))}
+          </Body>
+          </>
+        )}
+        </Table> */}
         <h2>Publically Released Csv Files</h2>
 
         <input

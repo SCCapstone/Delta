@@ -50,6 +50,8 @@ INSTALLED_APPS = [
 
     # frontend
     'frontend.apps.FrontendConfig',
+    # organization
+    'organizations.apps.OrganizationsConfig',
 
     # for token authenitcation
     'knox',

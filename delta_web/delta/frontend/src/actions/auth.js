@@ -3,7 +3,7 @@
 // for requests
 import axios from 'axios';
 
-import {returnErrors} from './messages';
+import { returnErrors } from './messages';
 
 import {
     USER_LOADED,
@@ -18,31 +18,31 @@ import {
 } from './types';
 
 // CHECK TOKEN & LOAD USER
-export const loadUser = () => (dispatch, getState) =>{
+export const loadUser = () => (dispatch, getState) => {
     // user loading
-    dispatch({type: USER_LOADING});
+    dispatch({ type: USER_LOADING });
 
     // create request to load the user
-    axios.get('/api/auth/user',tokenConfig(getState))
-    .then(res=>{
-        dispatch({
-            type: USER_LOADED,
-            payload: res.data
-        });
-    })
-    // if we are not authenticated, no token that matches, need to catch
-    .catch(err=>{
-        // dispatch the error
-        dispatch(returnErrors(err.response.data,err.response.status));
-        // dispatch the type of error
-        dispatch({
-            type:AUTH_ERROR
+    axios.get('/api/auth/user', tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: USER_LOADED,
+                payload: res.data
+            });
         })
-    });
+        // if we are not authenticated, no token that matches, need to catch
+        .catch(err => {
+            // dispatch the error
+            dispatch(returnErrors(err.response.data, err.response.status));
+            // dispatch the type of error
+            dispatch({
+                type: AUTH_ERROR
+            })
+        });
 }
 
 // LOGIN USER
-export const login = (username,password) => dispatch =>{
+export const login = (username, password) => dispatch => {
 
     // headers
     const config = {
@@ -52,48 +52,48 @@ export const login = (username,password) => dispatch =>{
     }
 
     // request body
-    const body = JSON.stringify({username,password});
+    const body = JSON.stringify({ username, password });
 
-    axios.post('/api/auth/login',body, config)
-    .then((res)=>{
-        dispatch({
-            type:LOGIN_SUCCESS,
-            payload: res.data
-        });
-    })
-    // if we are not authenticated, no token that matches, need to catch
-    .catch((err)=>{
-        console.log(err);
-        // dispatch the error
-        dispatch(returnErrors(err.response.data,err.response.status));
-        // dispatch the type of error
-        dispatch({
-            type:LOGIN_FAIL,
+    axios.post('/api/auth/login', body, config)
+        .then((res) => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: res.data
+            });
         })
-    });
+        // if we are not authenticated, no token that matches, need to catch
+        .catch((err) => {
+            console.log(err);
+            // dispatch the error
+            dispatch(returnErrors(err.response.data, err.response.status));
+            // dispatch the type of error
+            dispatch({
+                type: LOGIN_FAIL,
+            })
+        });
 
-    
+
 }
 // LOGOUT USER
-export const logout= () => (dispatch, getState) =>{
+export const logout = () => (dispatch, getState) => {
 
     // create request to load the user
     // need to pass in null as the body here
-    axios.post('/api/auth/logout',null,tokenConfig(getState))
-    .then((res)=>{
-        dispatch({
-            type:LOGOUT_SUCCESS,
+    axios.post('/api/auth/logout', null, tokenConfig(getState))
+        .then((res) => {
+            dispatch({
+                type: LOGOUT_SUCCESS,
+            });
+        })
+        // if we are not authenticated, no token that matches, need to catch
+        .catch(err => {
+            // dispatch the error
+            dispatch(returnErrors(err.response.data, err.response.status));
         });
-    })
-    // if we are not authenticated, no token that matches, need to catch
-    .catch(err=>{
-        // dispatch the error
-        dispatch(returnErrors(err.response.data,err.response.status));
-    });
 }
 
-// REGISTER USER
-export const register= ({username,first_name,last_name,password,email}) => dispatch =>{
+// REGISTER USER // CAHNGED
+export const register = ({ username, first_name, last_name, password, email, organization_key }) => dispatch => {
     // headers
     const config = {
         headers: {
@@ -102,37 +102,37 @@ export const register= ({username,first_name,last_name,password,email}) => dispa
     }
 
     // request body
-    const body = JSON.stringify({username,first_name,last_name,email,password});
+    const body = JSON.stringify({ username, first_name, last_name, email, password, organization_key });
 
-    axios.post('/api/auth/register',body, config)
-    .then((res)=>{
-        dispatch({
-            type:REGISTER_SUCCESS,
-            payload: res.data
-        });
-    })
-    // if we are not authenticated, no token that matches, need to catch
-    .catch((err)=>{
-        console.log(err);
-        // dispatch the error
-        dispatch(returnErrors(err.response.data,err.response.status));
-        // dispatch the type of error
-        dispatch({
-            type:REGISTER_FAIL,
-        })
-    });
-}
-
-export const deleteUser = () => (dispatch,getState) =>{
-    // delete a user    
-    axios.post('/api/auth/delete',null,tokenConfig(getState))
-        .then(res=>{
+    axios.post('/api/auth/register', body, config)
+        .then((res) => {
             dispatch({
-                type:USER_DELETE,
+                type: REGISTER_SUCCESS,
+                payload: res.data
             });
         })
-        .catch(err=>{
-            dispatch(returnErrors(err.response.data,err.response.status))
+        // if we are not authenticated, no token that matches, need to catch
+        .catch((err) => {
+            console.log(err);
+            // dispatch the error
+            dispatch(returnErrors(err.response.data, err.response.status));
+            // dispatch the type of error
+            dispatch({
+                type: REGISTER_FAIL,
+            })
+        });
+}
+
+export const deleteUser = () => (dispatch, getState) => {
+    // delete a user    
+    axios.post('/api/auth/delete', null, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: USER_DELETE,
+            });
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status))
         })
 }
 
@@ -151,14 +151,14 @@ export const tokenConfig = getState => {
     }
 
     // if token, add to headers config
-    if(token){
+    if (token) {
         config.headers['Authorization'] = `Token ${token}`;
     }
     // return config with token
     return config;
 }
 
-export const fileTokenConfig = (getState,file) =>{
+export const fileTokenConfig = (getState, file) => {
     // get token from state
     // looking at auth reducer and getting that token 
     const token = getState().auth.token;
@@ -171,7 +171,7 @@ export const fileTokenConfig = (getState,file) =>{
     }
 
     // if token, add to headers config
-    if(token){
+    if (token) {
         config.headers['Authorization'] = `Token ${token}`;
         config.headers["Content-Disposition"] = `attachment; filename= ${file.name}`;
     }

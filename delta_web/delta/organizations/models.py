@@ -18,6 +18,10 @@ class Organization(models.Model):
 
     name = models.CharField(max_length = 300)
 
+    key = models.CharField(max_length=100)
+
+    following_users = models.ManyToManyField(User,related_name="followed_organizations",blank=True, null=True)
+
     # TODO: 
     # add a way for users to be apart of the organization
 

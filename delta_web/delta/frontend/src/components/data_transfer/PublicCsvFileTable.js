@@ -13,7 +13,8 @@ export class PublicCsvFileTable extends Component {
   };
   state = {
     // the file ids of the data you wish to download
-    checkedFileIds: []
+    checkedFileIds: [],
+    searchText:""
   }
 
   componentDidMount(){
@@ -35,11 +36,22 @@ export class PublicCsvFileTable extends Component {
         this.state.checkedFileIds = this.state.checkedFileIds.filter(item => item !== id)
     }
   }
+  handleSearchChange(){
+    console.log('here')
+  }
 
   render() {
     return (
       <Fragment>
         <h2>Publically Released Csv Files</h2>
+
+        <input
+        type="search"
+        placeholder="Search for a Name"
+        onChange = {this.handleSearchChange}
+        >
+        </input>
+
         <form onSubmit={this.onSubmit}>
             <table className="table table-striped">
             <thead>

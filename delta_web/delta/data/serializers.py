@@ -17,6 +17,10 @@ class SerializerCSVFile(serializers.ModelSerializer):
         validators = [
             UniqueTogetherValidator(
                 queryset=CSVFile.objects.all(),
-                fields = ['author','file_path']
+                # dont allow change of file path by user
+                # server does that on its own
+                # NOTE: 
+                # CHANGING OF FILE NAMES EACH TIME COULD BE A VERY SLOW OPERATION!
+                fields = ['author','file_name','file_path']
             )
         ]

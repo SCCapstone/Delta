@@ -5,10 +5,10 @@ from .models import CSVFile, DataAccel
 # Register your models here.
 
 class DataAccelAdmin(admin.ModelAdmin):
-    list_display: ["id","file_path"] 
+    fields = ["id","file_path"] 
 
 class CSVFileAdmin(admin.ModelAdmin):
-    list_display: ['id','filepath','created_at']
+    fields = ['file_path','file_name']
 
 admin.site.register(DataAccel,DataAccelAdmin)
 admin.site.register(CSVFile,CSVFileAdmin)

@@ -2,9 +2,10 @@ from unicodedata import name
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from organizations.models import Organization
+from rest_framework import status
 from knox.models import AuthToken
 from .serializers import UserSerializer,RegisterSerializer,LoginSerializer
-#from Organization  import organizations.models # CHANGED HERE
+from django.db.utils import IntegrityError
 
 # Register API
 class RegisterAPI(generics.GenericAPIView):
@@ -82,10 +83,52 @@ class DeleteAPI(generics.DestroyAPIView):
         request.user.save()
 
         return Response({
-            "response":"here"
+            "message":"Account " + request.user.username + " has successfully been deleted."
         })
+# deletion api
+class UpdateAPI(generics.UpdateAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = UserSerializer
+
+    def patch(self,request,*args,**kwargs):
+        # TODO: check email
+        # PERFORM CHECKS
+        # update user
+        strNewUserName = request.data.get("username",None)
+        strNewEmail = request.data.get("email",None)
+        strNewFirstName = request.data.get("first_name",None)
+        strNewLastName = request.data.get("last_name",None)
+        strNewPassword = request.data.get("password",None)
+
+        if(strNewUserName):
+            try:
+                request.user.username = strNewUserName
+                request.user.save()
+            except Exception as e:
+                print(e)
+                return Response(data = {"message":"A user with that username already exists."},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        if(strNewEmail):
+            try:
+                request.user.email = strNewEmail
+                request.user.save()
+            except Exception as e:
+                print(e)
+                return Response(data={"message":"Error with email."},status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+        if(strNewFirstName) :
+            request.user.first_name = strNewFirstName
+        if(strNewLastName):
+            request.user.last_name = strNewLastName
+        if(strNewPassword):
+            request.user.set_password(strNewPassword)
+        request.user.save()
 
 
+        return Response({
+            # give the serialized user
+            "user":UserSerializer(request.user,context=self.get_serializer_context()).data,
+        })
 
 # Get User API
 class UserAPI(generics.RetrieveAPIView):

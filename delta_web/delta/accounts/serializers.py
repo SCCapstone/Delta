@@ -8,7 +8,11 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','username','email','first_name','last_name',) # add organization field here?
+        fields = ('id','username','email','first_name','last_name')
+        # cant change id
+        read_only_fields = ['id']
+
+    
 
 # Register serializer
 class RegisterSerializer(serializers.ModelSerializer):

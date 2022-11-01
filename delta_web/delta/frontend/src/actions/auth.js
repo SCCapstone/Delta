@@ -3,7 +3,7 @@
 // for requests
 import axios from 'axios';
 
-import { returnErrors } from './messages';
+import { createMessage, returnErrors } from "./messages";
 
 import {
     USER_LOADED,
@@ -14,7 +14,9 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    USER_UPDATE_SUCCESS,
+    USER_UPDATE_FAIL,
 } from './types';
 
 // CHECK TOKEN & LOAD USER
@@ -135,6 +137,33 @@ export const deleteUser = () => (dispatch, getState) => {
             dispatch(returnErrors(err.response.data, err.response.status))
         })
 }
+// PATCH USER (update fields of user)
+//
+export const updateUser = ({ username, first_name, last_name, password, email }) => (dispatch, getState) => {
+    // data
+    const data = JSON.stringify({ username, first_name, last_name, email, password });
+
+    axios.patch('/api/auth/update', data, tokenConfig(getState))
+        .then(res => {
+            // dispatch message
+            dispatch(createMessage({ updateUser: "User successfully updated." }))
+            dispatch({
+                type: USER_UPDATE_SUCCESS,
+                payload: res.data
+            });
+        })
+        .catch((err) => {
+            // dispatch error
+            // TO DO: 
+            // MODIFY ERROR RETURN IN API
+            dispatch(returnErrors(err.response.data, err.response.status));
+            // type of error
+            dispatch(createMessage({ updateUserFail: err.response.data["message"] }))
+            dispatch({
+                type: USER_UPDATE_FAIL
+            })
+        });
+};
 
 // Setup config with token - helper function
 // arrow func that takes in getState

@@ -34,8 +34,17 @@ export class Alerts extends Component {
             if(message.addCsvFile){
                 alert.success(message.addCsvFile);
             }
+            if(message.updateCsvFileSuccess){
+                alert.success(message.updateCsvFileSuccess);
+            }
             if(message.deleteCsvFile){
                 alert.success(message.deleteCsvFile);
+            }
+            if(message.updateUser){
+                alert.success(message.updateUser);
+            }
+            if(message.updateUserFail){
+                alert.error(message.updateUserFail);
             }
             if(message.passwordsDoNotMatch){
                 alert.error(message.passwordsDoNotMatch);

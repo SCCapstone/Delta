@@ -9,7 +9,13 @@ export const ADD_DATA_ACCEL = "ADD_DATA_ACCEL";
 // files
 export const ADD_CSV_FILE = "ADD_FILE";
 export const GET_CSV_FILE = "GET_FILE";
+export const GET_CSV_FILES = "GET_FILES";
 export const DELETE_CSV_FILE = "DELETE_FILE";
+export const CSV_FILE_UPDATE_SUCCESS = "CSV_FILE_UPDATE_SUCCESS"
+export const CSV_FILE_UPDATE_FAIL = "CSV_FILE_UPDATE_FAIL"
+
+// public csv files
+export const GET_CSV_FILES_PUBLIC = "GET_CSV_FILES_PUBLIC"
 
 // errors
 export const GET_ERRORS = "GET_ERRORS";
@@ -36,3 +42,7 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 // register
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
+
+// update user
+export const USER_UPDATE_SUCCESS = "USER_UPDATE_SUCCESS";
+export const USER_UPDATE_FAIL = "USER_UPDATE_FAIL";

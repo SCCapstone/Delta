@@ -10,7 +10,6 @@ export class ProfileGlance extends Component {
 
     render(){
         const {isAuthenticated, user} = this.props.auth;
-        console.log(user);
         return(
             <div>
                 <h1>

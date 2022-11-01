@@ -1,7 +1,11 @@
 # import necessary models
-from stat import FILE_ATTRIBUTE_INTEGRITY_STREAM
+from django.http import FileResponse
 from .models import DataAccel
 from .models import CSVFile
+from rest_framework import status,renderers
+from rest_framework.decorators import action
+
+from pathlib import Path
 
 # files
 from django.conf import settings as django_settings
@@ -32,9 +36,51 @@ class ViewsetDataAccel(viewsets.ModelViewSet):
     
     def perform_create(self,serializer):
         serializer.save(author=self.request.user)
+#https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
+class PassthroughRenderer(renderers.BaseRenderer):
+    media_type = 'text/csv'
+    format = None
+    def render(self,data,accepted_media_type=None,renderer_context=None):
+        return data
+
+# For dealing with public viewing of csv files
+class ViewsetPublicCsvFile(viewsets.ModelViewSet):
+    queryset = CSVFile.objects.all()
+
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = SerializerCSVFile
+
+    def get_queryset(self):
+        return self.queryset
+    
+    @action(methods=['get'],detail=True,renderer_classes=(PassthroughRenderer,))
+    def download(self,*args,**kwargs):
+        instance = self.get_object()
+        with open(instance.file_path,'rb') as file:
+            return Response(
+                file.read(),
+                headers = {"Content-Disposition":'attachment; filename={}'.format(instance.file_name)},
+                content_type="text/csv",
+            )
+
 
 class ViewsetCSVFile(viewsets.ModelViewSet):
     queryset = CSVFile.objects.all()
+
+    # TO DO: 
+    # UPDATE THE PERMISSION CLASSES
+    # Right now anyone can view CSV files. 
+    # We should make viewable only if csv files are marked as public.
+    # Could mark for public for all or for organization.
+
+
+    # TO DO: 
+    # UNSURE ABOUT SECURITY HERE.
+    # It may be possible to call api methods at an index other than yours to update
+    # other users data. Please note this possiblity!
 
     permission_classes = [
         permissions.IsAuthenticated
@@ -47,6 +93,24 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+    
+    def partial_update(self, request, *args, **kwargs):
+        # can only update file name
+        obj = CSVFile.objects.get(id=kwargs['pk'])
+        obj.file_name = request.data['file_name']
+        try:
+            obj.save()
+        except Exception as e:
+            print(e)
+            return Response(data={"message":"Error with file name"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return super().partial_update(request, *args, **kwargs)
+    
+    def retrieve(self,request,*args,**kwargs):
+        obj_id = kwargs['pk']
+        obj = CSVFile.objects.get(id=obj_id)
+        serialized = self.get_serializer(obj)
+        return Response(serialized.data)
 
 ###################
 #
@@ -66,7 +130,7 @@ class UploadCsvApiView(APIView):
 
     # handle post requests
     def post(self,request,format='csv'):
-        
+
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
         
@@ -74,7 +138,6 @@ class UploadCsvApiView(APIView):
 
             # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
             strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
-            print(strUserCsvFolder)
 
             # create dir if doesnt exist
             if not os.path.exists(strUserCsvFolder):
@@ -85,10 +148,10 @@ class UploadCsvApiView(APIView):
             # first try is just to see if this is a unique user+filepath combo
             csvFile = None
             try:
-                csvFile = CSVFile(author=request.user,file_path = strFilePath)
+                csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=Path(str(dataFile)).stem)
                 csvFile.save()
             except Exception as e:
-                return Response({"message":e})
+                return Response(data={"message":e},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             # if get thru the first try, know that the file is unique.
             # next try is to actually write the file
             try:
@@ -96,11 +159,11 @@ class UploadCsvApiView(APIView):
                     for chunk in dataFile.chunks():
                         file.write(chunk)
                 # file is now saved.
-                return Response({"message":"CSV successfully saved."})
+                return Response(data ={"message":"CSV successfully saved."})
             except Exception as e:
                 # delete the csvFile, something went wrong with writing
                 csvFile.delete()
-                return Response({"message":e})
+                return Response(data={"message":e},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         else:
-            return Response({"message":"Error upon uploading file"},status=400)
+            return Response(data={"message":"Error upon uploading file"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)

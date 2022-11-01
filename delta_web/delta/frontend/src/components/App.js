@@ -7,7 +7,7 @@ import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
 import Header from './layout/Header';
-import Dashboard from './data/Dashboard';
+import Dashboard from './home/Dashboard';
 import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
@@ -24,6 +24,7 @@ import ProfileDetailed from "./profile/ProfileDetailed";
 // community
 import {Personal as CommunityPersonal} from "./community/Personal"
 import {Organizations as CommunityOrganizations} from "./community/Organizations"
+import CsvFileDetail from "./community/CsvFileDetail";
 
 // data page
 import {DataDownload} from "./data_transfer/DataDownload";
@@ -77,6 +78,11 @@ class App extends Component{
                                     <Route exact path ="/community/personal" element={
                                         <PrivateRoute>
                                             <CommunityPersonal/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ={"/community/personal/csvs/:id"} element={
+                                        <PrivateRoute>
+                                            <CsvFileDetail/>
                                         </PrivateRoute>
                                     }/>
                                     <Route exact path ="/community/organizations" element={

@@ -1,4 +1,4 @@
 
 
 
-web: cd delta_web;cd delta;gunicorn delta.wsgi
+web: python delta_web/delta/manage.py runserver

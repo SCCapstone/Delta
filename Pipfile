@@ -11,6 +11,7 @@ markdown = "*"
 django-filter = "*"
 django-rest-knox = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 

@@ -8,6 +8,8 @@ import {Table,
   Body,Row,Cell
 } from '@table-library/react-table-library/table'
 
+// to do: convert to functional component
+
 // https://www.robinwieruch.de/react-table-component/
 // https://www.robinwieruch.de/react-table-search/
 
@@ -19,7 +21,7 @@ export class PublicCsvFileTable extends Component {
   state = {
     // the file ids of the data you wish to download
     checkedFileIds: [],
-    searchText:""
+    searchText:"",
   }
 
   componentDidMount(){
@@ -46,29 +48,35 @@ export class PublicCsvFileTable extends Component {
   }
 
   render() {
-    const data = {nodes:this.props.csvFiles}
+    var data = this.props.csvFiles;
+
+    if(!data.length){
+      return null;
+    };
+
+
     return (
       <Fragment>
-        {/* <Table data={data}>{(tableList)=>(
+        <Table data={data}>{(tableList) =>(
           <>
           <Header>
-            <HeaderRow>
-              <HeaderCell>File Id</HeaderCell>
-              <HeaderCell>File Name</HeaderCell>
-              <HeaderCell>Upload Date</HeaderCell>
-              <HeaderCell>Download</HeaderCell>
-            </HeaderRow>
+            <HeaderCell>File Id</HeaderCell>
+            <HeaderCell>File Name</HeaderCell>
+            <HeaderCell>Upload Date</HeaderCell>
+            <HeaderCell>View TO DO</HeaderCell>
+            <HeaderCell>Download</HeaderCell>
           </Header>
           <Body>
             {tableList.map((item)=>(
-              <Row key = {item.id} item = {item}>
+              <Row key={item.id} item={item}>
                 <Cell>{item.file_name}</Cell>
               </Row>
             ))}
+
           </Body>
           </>
         )}
-        </Table> */}
+        </Table>
         <h2>Publically Released Csv Files</h2>
 
         <input

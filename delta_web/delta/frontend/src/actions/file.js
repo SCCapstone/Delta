@@ -97,6 +97,7 @@ export const deleteCsvFile = (id) => (dispatch,getState) =>{
 export const getCsvFilesPublic = () => (dispatch,getState) =>{
     axios.get('/api/public_csvs/',tokenConfig(getState))
     .then(res=>{
+        console.log(res);
         dispatch({
             type:GET_CSV_FILES_PUBLIC,
             payload:res.data

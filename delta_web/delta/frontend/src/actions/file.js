@@ -9,6 +9,7 @@ import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE,
 // POST FILE 
 export const addCsvFile= (file) => (dispatch,getState) =>{
     // pass in token
+    console.log(file)
     axios.post('/api/upload/csv/',file,fileTokenConfig(getState,file))
         .then(res=>{
             dispatch(createMessage({addCsvFile:"File posted"}));

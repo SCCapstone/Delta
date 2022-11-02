@@ -3,17 +3,29 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getCsvFilesPublic,downloadCsvFile} from '../../actions/file'; 
 import {Link} from 'react-router-dom'
+// note you can style react tables
+import {useTheme} from '@table-library/react-table-library/theme'
+import {Table,
+  Header,HeaderRow,HeaderCell,
+  Body,Row,Cell
+} from '@table-library/react-table-library/table'
 
-// https://ui.dev/react-router-url-parameters
+// to do: convert to functional component
+
+// https://www.robinwieruch.de/react-table-component/
+// https://www.robinwieruch.de/react-table-search/
 
 export class PublicCsvFileTable extends Component {
   static propTypes = {
     csvFiles:PropTypes.array.isRequired,
-    deleteCsvFile:PropTypes.func.isRequired,
+    getCsvFilesPublic:PropTypes.func.isRequired,
+    downloadCsvFile:PropTypes.func.isRequired
   };
   state = {
     // the file ids of the data you wish to download
-    checkedFileIds: []
+    checkedFileIds: [],
+    searchText:"",
+    data : []
   }
 
   componentDidMount(){
@@ -35,45 +47,58 @@ export class PublicCsvFileTable extends Component {
         this.state.checkedFileIds = this.state.checkedFileIds.filter(item => item !== id)
     }
   }
+  onSearchChange = e => {
+    this.setState({searchText:e.target.value})
+  }
 
   render() {
+    this.state.data = {nodes:this.props.csvFiles};
+
+    if(!this.state.data['nodes'].length){
+      return null;
+    };
+    this.state.data = {nodes: this.state.data['nodes'].filter((item)=>item.file_name.toLowerCase().includes(this.state.searchText.toLowerCase()))}
+
     return (
       <Fragment>
-        <h2>Publically Released Csv Files</h2>
         <form onSubmit={this.onSubmit}>
-            <table className="table table-striped">
-            <thead>
-                <tr>
-                <th>File Id</th>
-                <th>File Name</th>
-                <th>Upload Date</th>
-                <th>View</th>
-                <th>Download</th>
-                </tr>
-            </thead>
-            <tbody>
-                { this.props.csvFiles.map(data => (
-                <tr key={data.id}>
-                    <td>{data.id}</td>
-                    <td>{data.file_name}</td>
-                    <td>{data.timestamp}</td>
-                    <td>
-                        <Link to ="">
-                        View TO DO
-                        </Link>
-                    </td>
-                    <td>
-                        <input type = "checkbox" 
-                        onChange={()=>{this.onCheckChange(data.id)}}
-                        />
-                    </td>
-                </tr>
-                )) }
-            </tbody>
-            <button className="btn btn-sm btn-success">
-                Download
-            </button>
-            </table>
+          <label htmlFor="search">
+            Search by Name:
+            <input id = "search" type="text" onChange={this.onSearchChange}/>
+          </label>
+          <Table data={this.state.data}>{(tableList) =>(
+            <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>File Id</HeaderCell>
+                <HeaderCell>File Name</HeaderCell>
+                <HeaderCell>Upload Date</HeaderCell>
+                <HeaderCell>View TO DO</HeaderCell>
+                <HeaderCell>Download</HeaderCell>
+              </HeaderRow>
+            </Header>
+            <Body>
+              {tableList.map((item)=>(
+                <Row key={item.id} item={item}>
+                  <Cell>{item.id}</Cell>
+                  <Cell>{item.file_name}</Cell>
+                  <Cell>{item.timestamp}</Cell>
+                  <Cell>Click to View (TODO)</Cell>
+                  <Cell>
+                    <input type="checkbox"
+                    onChange={()=>{this.onCheckChange(item.id)}}
+                    />
+                  </Cell>
+                </Row>
+              ))}
+
+            </Body>
+            </>
+          )}
+          </Table>
+          <button className='btn btn-sm btn-success'>
+            Submit
+          </button>
         </form>
       </Fragment>
     )

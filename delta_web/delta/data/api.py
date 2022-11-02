@@ -133,6 +133,7 @@ class UploadCsvApiView(APIView):
 
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
+        print(request)
         
         if(dataFile):
 

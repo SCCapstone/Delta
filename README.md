@@ -85,7 +85,8 @@ To install the frontend frameworks and redux devtool extension, simply type:
 There is no setup required as of now. In the future, we may include commands for setting up the database / other things.
 
 ## Deployment
-Link to website: https://guarded-journey-12008.herokuapp.com/#/
+Link to website: https://guarded-journey-12008.herokuapp.com/#/ 
+
 This is where we will put deployment steps.
 
 # Testing

@@ -4,10 +4,12 @@ README as described by [here](https://capstone.cse.sc.edu/milestone/source-contr
 Delta is a web file system designed for use by researchers and data scientists. It is essentially a file transfer system with a social media and market aspect. Researchers or data scientists can perform CRUD operations on data, and can also assess the validity of data by creating posts on data sets or ML models or by rating data sets or ML models. 
 
 Some useful links:
+- Delta URL: https://guarded-journey-12008.herokuapp.com/#/ 
 - See our [Architecture](https://github.com/SCCapstone/Delta/wiki/Architecture)
 - See the general [Design](https://github.com/SCCapstone/Delta/wiki/Architecture)
 - See a more in depth [Description](https://github.com/SCCapstone/Delta/wiki/Project-Description)
 - See some general [Requirements](https://github.com/SCCapstone/Delta/wiki/Requirements)
+
 
 # Style Guide:
 Please adhere to the guidelines for JavaScript and Python found [here](https://google.github.io/styleguide/)
@@ -85,8 +87,6 @@ To install the frontend frameworks and redux devtool extension, simply type:
 There is no setup required as of now. In the future, we may include commands for setting up the database / other things.
 
 ## Deployment
-Link to website: https://guarded-journey-12008.herokuapp.com/#/ 
-
 This is where we will put deployment steps.
 
 # Testing

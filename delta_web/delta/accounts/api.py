@@ -1,5 +1,7 @@
+from unicodedata import name
 from rest_framework import generics, permissions
 from rest_framework.response import Response
+from organizations.models import Organization
 from rest_framework import status
 from knox.models import AuthToken
 from .serializers import UserSerializer,RegisterSerializer,LoginSerializer
@@ -9,12 +11,32 @@ from django.db.utils import IntegrityError
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
+    # CHANGE HERE: added organization_key variable and assignment
+    
     def post(self,request,*args, **kwargs):
+
         serializer = self.get_serializer(data=request.data)
         # send back any errors that are needed
         serializer.is_valid(raise_exception=True)
-
+        
+        # MAKE SURE TO UNCOMMENT THE NEXT LINE TO ACTUALLY SAVE THE USER
         user = serializer.save()
+
+        # FOR TESTING
+        # print(request.data)
+
+        # retrieve object from model: entry = ModelName.objects.get()
+
+        # grab the organization key 
+        organization_key = request.data.get("organization_key")
+
+        # check organization key against list/dict of organizations
+        # PSEUDO CODE
+        # organization = Organization.objects.get("key") # maybe chang to Organization.objects.all() to get list/dict
+        # print(organization)
+        
+        # if organization_key == organization: #NEWLY COMMENTED OUT
+        #     Organization.objects.create(name=user.id)
 
         return Response({
             # give the serialized user

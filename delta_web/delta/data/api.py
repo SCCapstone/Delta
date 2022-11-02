@@ -54,8 +54,8 @@ class ViewsetPublicCsvFile(viewsets.ModelViewSet):
     serializer_class = SerializerCSVFile
 
     def get_queryset(self):
-        return self.queryset
-    
+        return CSVFile.objects.all()
+
     @action(methods=['get'],detail=True,renderer_classes=(PassthroughRenderer,))
     def download(self,*args,**kwargs):
         instance = self.get_object()

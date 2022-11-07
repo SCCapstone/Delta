@@ -24,6 +24,7 @@ import ProfileDetailed from "./profile/ProfileDetailed";
 // community
 import {Personal as CommunityPersonal} from "./community/Personal"
 import {Organizations as CommunityOrganizations} from "./community/Organizations"
+import OrganizationDetail from "./community/OrganizationDetail"
 import CsvFileDetail from "./community/CsvFileDetail";
 
 // data page
@@ -88,6 +89,11 @@ class App extends Component{
                                     <Route exact path ="/community/organizations" element={
                                         <PrivateRoute>
                                             <CommunityOrganizations/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ={"/community/organizations/:id"} element={
+                                        <PrivateRoute>
+                                            <OrganizationDetail/>
                                         </PrivateRoute>
                                     }/>
 

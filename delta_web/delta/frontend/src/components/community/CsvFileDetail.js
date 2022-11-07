@@ -17,7 +17,7 @@ const CsvFileDetail = (props) => {
     }
     const {id} = useParams();
 
-    const [csvFiles] = useState(0);
+    const [csvFiles] = useState([]);
 
     useEffect(()=>{
         props.getCsvFile(id);

@@ -22,7 +22,7 @@ const DataUpload = (props) => {
   const maxSize = 5*1048576;
 
   const onDrop = useCallback(acceptedFiles =>{
-    console.log(acceptedFiles);
+    // do something if you want here
   },[]);
 
   const { isDragActive, getRootProps, getInputProps, isDragReject, acceptedFiles, rejectedFiles } = useDropzone({
@@ -39,7 +39,6 @@ const DataUpload = (props) => {
   const onSubmit = (e) =>{
     e.preventDefault();
       acceptedFiles.forEach(file=> {
-        console.log(file)
         props.addCsvFile(file);
       });
   }

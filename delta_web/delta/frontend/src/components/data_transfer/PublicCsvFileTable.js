@@ -54,11 +54,6 @@ export class PublicCsvFileTable extends Component {
   render() {
     this.state.data = {nodes:this.props.csvFiles};
 
-    if(!this.state.data['nodes'].length){
-      return null;
-    };
-    this.state.data = {nodes: this.state.data['nodes'].filter((item)=>item.file_name.toLowerCase().includes(this.state.searchText.toLowerCase()))}
-
     return (
       <Fragment>
         <form onSubmit={this.onSubmit}>

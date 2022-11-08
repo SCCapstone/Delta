@@ -20,16 +20,11 @@ export class Dashboard extends Component {
           Welcome back <strong>{user.username}</strong>.
         </h1>
         <h3>Today is a great day.</h3>
-        <div class="left side">
-          <div class="centered">
-            <h2>Graph 1</h2>
-            <p>Lorem ipsum</p>
-          </div>
-        </div>
-        <div class="right side">
-          <div class="centered">
-            <h2>Graph 2</h2>
-            <p>Lorem ipsum</p>
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col">Graph 1</div>
+            <div class="col">Graph 2</div>
+            <div class="col">Graph 3</div>
           </div>
         </div>
       </div>

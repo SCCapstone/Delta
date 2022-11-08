@@ -22,9 +22,12 @@ export class Dashboard extends Component {
         <h3>Today is a great day.</h3>
         <div class="container">
           <div class="row align-items-start">
-            <div class="col">Graph 1</div>
-            <div class="col">Graph 2</div>
-            <div class="col">Graph 3</div>
+            <div class="col">
+              <div>Today</div>
+              <div classname="graph">Hello</div>
+            </div>
+            <div class="col">This Week</div>
+            <div class="col">This Month</div>
           </div>
         </div>
       </div>

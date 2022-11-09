@@ -10,11 +10,9 @@ export class DataDownload extends Component {
                     Download Page  
                 </h1>
                 <PublicCsvFileTable/>
-                <span>
-                    <Link to="/data/upload">
-                        Click to see upload
-                    </Link>
-                </span>
+                <a role="button" href="http://127.0.0.1:8000/#/data/upload" className="btn btn-secondary btn-sm">
+                  Upload
+                </a> 
             </div>
         )
     }

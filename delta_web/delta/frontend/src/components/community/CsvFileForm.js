@@ -75,7 +75,7 @@ export class CsvFileForm extends Component{
               <br />
 
               {/* Update Information Button */}
-              <button className="btn btn-success">
+              <button className="btn btn-success mb-2">
                   Update Information
               </button>
 

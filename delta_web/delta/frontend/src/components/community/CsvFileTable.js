@@ -37,9 +37,9 @@ export class CsvFileTable extends Component {
                 <td>{data.file_name}</td>
                 <td>{data.timestamp}</td>
                 <td>
-                    <Link to ={`csvs/${data.id}`}>
-                      View
-                    </Link>
+                  <a role="button" href={`http://127.0.0.1:8000/#/community/personal/csvs/${data.id}`} className="btn btn-sm btn-success">
+                    Edit
+                  </a> 
                 </td>
                 <td>
                   <button className="btn btn-danger btn-sm"

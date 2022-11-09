@@ -7,6 +7,8 @@ from knox.models import AuthToken
 from .serializers import UserSerializer,RegisterSerializer,LoginSerializer
 from django.db.utils import IntegrityError
 
+from django.shortcuts import get_object_or_404
+
 # Register API
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -22,22 +24,21 @@ class RegisterAPI(generics.GenericAPIView):
         # MAKE SURE TO UNCOMMENT THE NEXT LINE TO ACTUALLY SAVE THE USER
         user = serializer.save()
 
-        # FOR TESTING
-        # print(request.data)
-
-        # retrieve object from model: entry = ModelName.objects.get()
-
         # grab the organization key 
         organization_key = request.data.get("organization_key")
-
-        # check organization key against list/dict of organizations
-        # PSEUDO CODE
-        # organization = Organization.objects.get("key") # maybe chang to Organization.objects.all() to get list/dict
-        # print(organization)
         
-        # if organization_key == organization: #NEWLY COMMENTED OUT
-        #     Organization.objects.create(name=user.id)
-
+        # get organization or null if key invalid
+        try: 
+            modelOrg = Organization.objects.get(key=organization_key)
+            modelOrg.following_users.add(user)
+            modelOrg.save()
+        except Organization.DoesNotExist():
+            # TODO
+            # Indicate that the entered organization key is invalid to the user, 
+            # and offer them to register again or not
+            pass
+        
+        
         return Response({
             # give the serialized user
             "user":UserSerializer(user,context=self.get_serializer_context()).data,

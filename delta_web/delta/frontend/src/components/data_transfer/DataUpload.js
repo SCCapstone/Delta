@@ -10,6 +10,34 @@ import {useDropzone} from "react-dropzone";
 import {addCsvFile} from '../../actions/file';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
+
+const getColor = (props) => {
+  if (props.isDragActive) {
+      return '#00e676';
+  }
+  if (props.isDragReject) {
+      return '#ff1744';
+  }
+
+  return '#000000';
+}
+
+const Container = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: ${props => getColor(props)};
+    border-style: dashed;
+    background-color: #d2d2d2;
+    color: #000000;
+    outline: none;
+    transition: border .24s ease-in-out;
+`;
 
 const DataUpload = (props) => {
 
@@ -32,6 +60,10 @@ const DataUpload = (props) => {
     maxSize:maxSize,
   });
 
+  
+
+ 
+
   // to do: check if file too large
   const isFileTooLarge = false;
   // const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
@@ -50,16 +82,18 @@ const DataUpload = (props) => {
         </h1>
 
         <form onSubmit = {onSubmit}>
-          <div {...getRootProps()}>
-            <input {...getInputProps()}/>
-            {!isDragActive && 'Click here or drop a file to upload.'}
-            {isDragActive && !isDragReject && "Drop File"}
-            {isDragReject && "File type not accepted."}
-            {isFileTooLarge && (
-              <div className = "text-danger mt-2">
-                  File is too large.
-              </div>
-            )}
+          <div className="container"> 
+            <Container {...getRootProps(isDragActive, isDragReject)}>
+              <input {...getInputProps()}/>
+              {!isDragActive && 'Click here or drop a file to upload.'}
+              {isDragActive && !isDragReject && "Drop File"}
+              {isDragReject && "File type not accepted."}
+              {isFileTooLarge && (
+                <div className = "text-danger mt-2">
+                    File is too large.
+                </div>
+              )}
+            </Container>
             <ul className = "list-group mt-2">
               {acceptedFiles.length>0 && acceptedFiles.map(acceptedFile=>(
                 <li className="list-group-item list-group-item-success">
@@ -68,14 +102,15 @@ const DataUpload = (props) => {
               ))}
             </ul>
           </div>
-          <button>Submit</button>
+          <br />
+          <button className="btn btn-success mb-2">Submit</button>
         </form>
+        <a role="button" href="http://127.0.0.1:8000/#/data/download" className="btn btn-danger">
+            Cancel
+        </a> 
 
-        <span>
-            <Link to="/data/download">
-                Click to see data download
-            </Link>
-        </span>
+
+        
     </div>
   )
 }

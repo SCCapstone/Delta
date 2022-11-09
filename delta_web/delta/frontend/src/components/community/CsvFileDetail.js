@@ -27,10 +27,48 @@ const CsvFileDetail = (props) => {
         <div>
             {props.csvFiles.map(data=>(
                 <div>
-                    <p>id: {data.id}</p>
-                    <p>file name: {data.file_name}</p>
-                    <p>timestamp: {data.timestamp}</p>
-                    <CsvFileForm id={id} original_file_name={data.file_name}/>                   
+
+                  {/* File ID input group */}
+                  <div className="input-group mb-3">
+
+                    {/* Pre-fix label */}
+                    <div className="input-group-prepend">
+                      <span className="input-group-text bg-secondary text-white" id="basic-addon1">
+                        File ID
+                      </span>
+                    </div>
+
+                                 {/* Input Box */}
+                    <input className="form-control" value={data.id} readOnly={true} 
+                    type="text" 
+                    ></input>
+                  </div>
+
+
+                  {/* Timestamp input group */}
+                  <div className="input-group mb-3">
+
+                    {/* Pre-fix label */}
+                    <div className="input-group-prepend">
+                      <span className="input-group-text bg-secondary text-white" id="basic-addon1">
+                        Time-stamp
+                      </span>
+                    </div>
+
+                    <input className="form-control" value={data.timestamp} readOnly={true} 
+                    type="text" 
+                    ></input>
+                  </div>
+                  
+                  
+                  <CsvFileForm id={id} original_file_name={data.file_name}/>   
+
+                  <br />
+
+                  <a role="button" href="http://127.0.0.1:8000/#/community/personal" className="btn btn-danger">
+                    Cancel
+                  </a>           
+
                 </div>
             ))}
             <h1>

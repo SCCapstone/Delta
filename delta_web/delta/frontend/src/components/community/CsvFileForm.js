@@ -27,19 +27,58 @@ export class CsvFileForm extends Component{
 
         return (
             <form onSubmit = {this.onSubmit}>
-                <div>
-                    File Name: 
-                    <input
-                    name ="file_name"
-                    value = {this.state.file_name}
-                    onChange={this.onChange}
-                    placeholder={this.state.file_name}
-                    >
-                    </input>
+              <div>
+
+                {/* File name input group */}
+                <div className="input-group mb-3">
+
+                  {/* Pre-fix label */}
+                  <div className="input-group-prepend">
+                    <span className="input-group-text bg-secondary text-white" id="basic-addon1">
+                      Filename
+                    </span>
+                  </div>
+                  
+                  {/* Input Box */}
+                  <input className="form-control" value={this.state.file_name} placeholder={this.state.file_name} 
+                  name="file_name"
+                  type="text" 
+                  onChange={this.onChange}
+                  aria-label={this.state.file_name} 
+                  aria-describedby="basic-addon1"></input>
+
                 </div>
-                <button className="btn btn-success">
-                    Update Information
-                </button>
+
+                
+                {/* Description input group */}
+                <div className="input-group mb-3">
+
+                  {/* Pre-fix label */}
+                  <div className="input-group-prepend">
+                    <span className="input-group-text bg-secondary text-white">
+                      Description
+                    </span>
+                  </div>
+
+                  {/* Input Box */}
+                  <textarea className="form-control" placeholder="Describe your data file" 
+                  name="description"
+                  // onChange={this.onChange}
+                  // aria-label={this.state.file_name} 
+                  ></textarea>
+
+                </div>
+
+              </div>
+
+              <br />
+              <br />
+
+              {/* Update Information Button */}
+              <button className="btn btn-success">
+                  Update Information
+              </button>
+
             </form>
         )
     }

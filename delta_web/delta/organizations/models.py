@@ -23,7 +23,8 @@ class Organization(models.Model):
     following_users = models.ManyToManyField(User,related_name="followed_organizations",blank=True, null=True)
 
     # TODO: 
-    # add a way for users to be apart of the organization
+    # add a way for users to be a part of the organization
+    
 
     # TODO:
     # add a code so that you can only join if know the code

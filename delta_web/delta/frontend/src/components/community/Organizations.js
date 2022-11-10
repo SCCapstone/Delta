@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import { getOrganizations } from '../../actions/organization';
 
 export class Organizations extends Component {
 
@@ -14,6 +15,9 @@ export class Organizations extends Component {
             'user_count':5
             },
         ]
+    }
+    componentDidMount() {
+        getOrganizations()
     }
 
     render(){

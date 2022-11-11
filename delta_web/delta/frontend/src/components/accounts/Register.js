@@ -133,6 +133,7 @@ export class Register extends Component {
                     name="organization_key" // needs to change to organization
                     onChange={this.onChange}
                     value={organization_key} // needs to change to organization
+                    placeholder="Or leave blank if not a part of an organization."
                   />
                 </div>
                 <br />

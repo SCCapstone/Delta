@@ -63,21 +63,21 @@ export class Dashboard extends Component {
           label: user.username,
           backgroundColor: "rgb(6, 132, 164)",
           borderColor: "rgb(6, 132, 164)",
-          data: [0, 5, 13, 16, 20, 25, 15],
+          data: [0, 5, 10, 9, 17, 28, 20],
           lineTension: 0.5,
         },
         {
           label: "Average",
           backgroundColor: "rgb(51, 204, 242)",
           borderColor: "rgb(51, 204, 242)",
-          data: [0, 4, 6, 7, 3, 16, 10],
+          data: [0, 4, 3, 9, 4, 15, 13],
           lineTension: 0.5,
         },
       ],
     };
 
     return (
-      <div>
+      <div class="pt-3">
         <h1>
           Welcome back <strong>{user.username}</strong>.
         </h1>
@@ -85,13 +85,21 @@ export class Dashboard extends Component {
 
         <div class="container">
           <div class="pt-5">
-            <div class="row align-items-center">
+            <div class="row align-self-start">
               <div class="col centered">
                 <center>
                   <h2>Today</h2>
                 </center>
                 <div classname="graph1">
                   <Line data={daily_graph}></Line>
+                </div>
+                <div class="px-4 py-2">
+                  <h6>
+                    This data is not actual calculated data that comes from any
+                    actual usage of the app. This is all just to show off how
+                    the app will look once the full functionality of the graph
+                    has been added. This graph is full of dummy data.
+                  </h6>
                 </div>
               </div>
               <div class="col centered">
@@ -101,6 +109,14 @@ export class Dashboard extends Component {
                 <div classname="graph2">
                   <Line data={weekly_graph}></Line>
                 </div>
+                <div class="px-4 py-2">
+                  <h6>
+                    This graph will show off your activity over the course of
+                    the last week. In each of these graphs, your own personal
+                    data will be compared with data provided by our models to
+                    show where you stack up against the average person.
+                  </h6>
+                </div>
               </div>
               <div class="col centered">
                 <center>
@@ -108,6 +124,14 @@ export class Dashboard extends Component {
                 </center>
                 <div classname="graph3">
                   <Line data={monthly_graph}></Line>
+                </div>
+                <div class="px-4 py-2">
+                  <h6>
+                    Lastly comes the graph showing off your monthly activity.
+                    Again, this graph displays the same comparison between the
+                    user and the average person who's data has been uploaded to
+                    the website, however this graph summarizes monthly data.
+                  </h6>
                 </div>
               </div>
             </div>

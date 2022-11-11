@@ -1,24 +1,42 @@
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status,viewsets,renderers
 from knox.models import AuthToken
 from organizations.models import Organization
 from unicodedata import name
+from rest_framework.decorators import action
 
-# Add a follower to an organization
-class AddFollowerAPI(generics.GenericAPIView):
+from data.serializers import SerializerCSVFile
 
-    # using as guide: https://stackoverflow.com/questions/58794639/how-to-make-follower-following-system-with-django-model
-    # Do I need to write a serializer for the intermediate Followertable?
+from .serializers import OrganizationSerializer
+
+
+## TO DO!!!
+# CHECK ALL PERMISSIONS.
+# ONLY ALLOW USERS THEMSELVES TO SEE THEIR ORGANIZATIONS.
+class ViewsetOrganizations(viewsets.ModelViewSet):
+    queryset = Organization.objects.all()
+
+    serializer_class = OrganizationSerializer
+
+    permission_classes = []
+
+    def get_queryset(self):
+        return Organization.objects.all()
+
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
     
-    def post(self, request, *args, **kwargs):
+    @action(methods=['get'],detail=True)
+    def data_posts(self,request,*args,**kwargs):
+        instance = self.get_object()
 
-        # User, not an organization
-        user_id = models.ForeignKey('User', related_name='following')
+        csvFiles = []
 
-        # 
-        following_user_id = models.ForeignKey('User', related_name='followers')
+        for modelUser in instance.following_users.all():
+            csvFiles += modelUser.csv_files.all()
+        
+        serializer = SerializerCSVFile(csvFiles,many=True)
 
-        created = models.DateTimeField(auto_now_add=True)
-
-        AddFollowerAPI.objects.create(user_id=user.id, following_user_id=follow.id)
+        return Response(serializer.data)
+    

@@ -20,6 +20,9 @@ class Organization(models.Model):
 
     key = models.CharField(max_length=100)
 
+    # TO DO: 
+    # ADD REGISTERED AND FOLLOWING
+    # JUST BECAUSE FOLLOWING DOESNT MEAN REGISTERED
     following_users = models.ManyToManyField(User,related_name="followed_organizations",blank=True, null=True)
 
     # TODO: 

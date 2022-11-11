@@ -1,11 +1,4 @@
 import axios from 'axios';
-
-export const getOrganizations = () =>{
-    axios.get('/api/organization/')
-    .then(res=>{
-        console.log(res);
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-}
+import {createMessage,returnErrors} from "./messages";
+import {tokenConfig} from "./auth";
+import {GET_ORGANIZATIONS} from "./types";

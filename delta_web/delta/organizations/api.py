@@ -13,7 +13,7 @@ class ViewsetOrganizations(viewsets.ModelViewSet):
 
     serializer_class = OrganizationSerializer
 
-    permission_classes = [permissions.IsAccountAdminOrReadOnly]
+    permission_classes = []
 
     def get_queryset(self):
         return Organization.objects.all()

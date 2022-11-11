@@ -92,7 +92,7 @@ export class PublicCsvFileTable extends Component {
           )}
           </Table>
           <button className='btn btn-sm btn-success mb-2'>
-            Submit
+            Download
           </button>
         </form>
       </Fragment>

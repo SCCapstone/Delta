@@ -10,5 +10,4 @@ class OrganizationSerializer(serializers.ModelSerializer):
         ]
 
     def get_following_user_count(self, obj):
-        print("HERE")
         return obj.following_users.count()

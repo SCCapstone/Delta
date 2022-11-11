@@ -3,11 +3,13 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from organizations.models import Organization
 from rest_framework import status
+from rest_framework.decorators import action
 from knox.models import AuthToken
 from .serializers import UserSerializer,RegisterSerializer,LoginSerializer
 from django.db.utils import IntegrityError
 
-from django.shortcuts import get_object_or_404
+from organizations.serializers import OrganizationSerializer
+
 
 # Register API
 class RegisterAPI(generics.GenericAPIView):
@@ -142,3 +144,13 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+    @action(methods=['get'],detail=True)
+    def registered_orgs(self,request,*args,**kwargs):
+        instance = self.get_object()
+
+        orgs = instance.followed_organizations.all()
+
+        serializer = OrganizationSerializer(orgs,many=True)
+
+        return Response(serializer.data)

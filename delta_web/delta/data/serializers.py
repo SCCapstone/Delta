@@ -11,9 +11,12 @@ class SerializerDataAccel(serializers.ModelSerializer):
 
 # this is a csv file serializer
 class SerializerCSVFile(serializers.ModelSerializer):
+    author_username = serializers.SerializerMethodField()
     class Meta:
         model = CSVFile
-        fields = '__all__'
+        fields = [
+            'file_name','timestamp','author','author_username',
+        ]
         validators = [
             UniqueTogetherValidator(
                 queryset=CSVFile.objects.all(),
@@ -24,3 +27,5 @@ class SerializerCSVFile(serializers.ModelSerializer):
                 fields = ['author','file_name','file_path']
             )
         ]
+    def get_author_username(self,obj):
+        return obj.author.username

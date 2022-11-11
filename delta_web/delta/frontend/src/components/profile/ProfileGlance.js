@@ -2,10 +2,20 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
+import axios from 'axios';
 
 export class ProfileGlance extends Component {
     static propTypes = {
         auth:PropTypes.object.isRequired
+    }
+
+    // need to get them
+    getRegisteredOrgs(){
+    }
+
+    componentDidMount(){
+        // get your registered orgs
+
     }
 
     render(){

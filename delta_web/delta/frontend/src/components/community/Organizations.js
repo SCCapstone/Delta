@@ -1,19 +1,23 @@
+import axios from 'axios';
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {getOrganizations} from '../../actions/organization';
 
 export class Organizations extends Component {
 
     state = {
         data: [
-            {'id':1,
-            'name' :'valafar lab',
-            'user_count':5
-            },
-            {'id':2,
-            'name' :'org 2',
-            'user_count':5
-            },
         ]
+    }
+    componentDidMount() {
+        axios.get('/api/organization/').then((res)=>{
+            this.setState({
+                data:res.data
+            })
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
     render(){
@@ -23,10 +27,11 @@ export class Organizations extends Component {
                     Organization community
                 </h1>
                 {this.state.data.map((item)=>(
-                <div class = "border mb-3 container">
+                <div className = "border mb-3 container">
                     <h3>Organization: {item.name}</h3>
                     <p>Id: {item.id}</p>
-                    <p>user count: {item.user_count}</p>
+                    <p>Creation time: {item.timestamp}</p>
+                    <p>Following users: {item.following_user_count}</p>
                     <Link to= {`${item.id}`}>
                         View
                     </Link>

@@ -40,6 +40,18 @@ export class Dashboard extends Component {
       ],
     };
 
+    const monthly_graph = {
+      labels: [1, 5, 10, 15, 20, 25, 30],
+      datasets: [
+        {
+          label: user.username,
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: [0, 5, 13, 16, 20, 25, 15],
+        }
+      ]
+    }
+
     return (
       <div>
         <h1>
@@ -60,7 +72,12 @@ export class Dashboard extends Component {
                 <Line data={weekly_graph}></Line>
               </div>
             </div>
-            <div class="col">This Month</div>
+            <div class="col">
+              <h2>This Month</h2>
+              <div classname="graph3">
+              <Line data={monthly_graph}></Line>
+              </div>
+              </div>
           </div>
         </div>
       </div>

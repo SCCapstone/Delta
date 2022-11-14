@@ -25,7 +25,7 @@ const CsvFileDetail = (props) => {
 
     return (
         <div>
-            {props.csvFiles.map(data=>(
+            {props.csvFiles.filter(data=>data.id==id).map(data=>(
                 <div>
 
                   {/* File ID input group */}
@@ -38,7 +38,7 @@ const CsvFileDetail = (props) => {
                       </span>
                     </div>
 
-                                 {/* Input Box */}
+                    {/* Input Box */}
                     <input className="form-control" value={data.id} readOnly={true} 
                     type="text" 
                     ></input>

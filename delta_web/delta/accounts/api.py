@@ -34,7 +34,10 @@ class RegisterAPI(generics.GenericAPIView):
             modelOrg = Organization.objects.get(key=organization_key)
             modelOrg.following_users.add(user)
             modelOrg.save()
-        except Organization.DoesNotExist():
+        # TO DO: 
+        # MAKE THIS BETTER
+        except Exception as e:
+            print(e)
             # TODO
             # Indicate that the entered organization key is invalid to the user, 
             # and offer them to register again or not

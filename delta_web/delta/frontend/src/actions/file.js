@@ -36,6 +36,7 @@ export const addCsvFile= (file) => (dispatch,getState) =>{
 export const getCsvFiles = () => (dispatch,getState) =>{
     axios.get('/api/csv/',tokenConfig(getState))
         .then(res => {
+            console.log(res)
             dispatch({
                 type:GET_CSV_FILES,
                 payload:res.data

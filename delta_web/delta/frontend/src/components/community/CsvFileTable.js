@@ -26,7 +26,7 @@ export class CsvFileTable extends Component {
               <th>File Id</th>
               <th>File Name</th>
               <th>Upload Date</th>
-              <th>View</th>
+              <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>

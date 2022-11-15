@@ -85,7 +85,6 @@ export class PublicCsvFileTable extends Component {
                 <HeaderCell>File Id</HeaderCell>
                 <HeaderCell>File Name</HeaderCell>
                 <HeaderCell>Upload Date</HeaderCell>
-                <HeaderCell>View TO DO</HeaderCell>
                 <HeaderCell>Download</HeaderCell>
               </HeaderRow>
             </Header>
@@ -95,7 +94,6 @@ export class PublicCsvFileTable extends Component {
                   <Cell>{item.id}</Cell>
                   <Cell>{item.file_name}</Cell>
                   <Cell>{item.timestamp}</Cell>
-                  <Cell>Click to View (TODO)</Cell>
                   <Cell>
                     <input type="checkbox"
                     onChange={()=>{this.onCheckChange(item.id)}}

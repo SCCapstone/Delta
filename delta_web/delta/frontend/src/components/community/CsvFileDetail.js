@@ -64,7 +64,7 @@ const CsvFileDetail = (props) => {
                   <CsvFileForm id={id} original_file_name={data.file_name}/>   
 
 
-                  <a role="button" href="http://127.0.0.1:8000/#/community/personal" className="btn btn-danger">
+                  <a role="button" href="/#/community/personal" className="btn btn-danger">
                     Cancel
                   </a>           
 

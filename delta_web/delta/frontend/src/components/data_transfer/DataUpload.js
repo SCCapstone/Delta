@@ -105,7 +105,7 @@ const DataUpload = (props) => {
           <br />
           <button className="btn btn-success mb-2">Submit</button>
         </form>
-        <a role="button" href="http://127.0.0.1:8000/#/data/download" className="btn btn-danger">
+        <a role="button" href="/#/data/download" className="btn btn-danger">
             Cancel
         </a> 
 

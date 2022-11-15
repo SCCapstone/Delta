@@ -49,17 +49,27 @@ export class PublicCsvFileTable extends Component {
   }
   onSearchChange = e => {
     this.setState({searchText:e.target.value})
+    if(this.state.searchText.length < 3){
+      return;
+    }
+    var newData = []
+    for(const file of this.props.csvFiles){
+      if(file.file_name.includes(this.state.searchText)){
+        newData.push(file);
+      }
+    }
+    this.setState({data:{nodes:newData}});
   }
 
   render() {
-    this.state.data = {nodes:this.props.csvFiles};
+    this.state.data = {nodes:this.props.csvFiles}
 
     return (
       <Fragment>
         <form onSubmit={this.onSubmit}>
           <label htmlFor="search">
             Search by Name:
-            <input id = "search" type="text" onChange={this.onSearchChange}/>
+            <input id = "search" type="text" placeholder="Please enter at least three characters" onChange={this.onSearchChange}/>
           </label>
           <Table data={this.state.data}>{(tableList) =>(
             <>

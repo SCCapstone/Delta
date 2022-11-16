@@ -26,7 +26,7 @@ const CsvFileDetail = (props) => {
     return (
         <div>
             {props.csvFiles.filter(data=>data.id==id).map(data=>(
-                <div>
+                <div key={data.id}>
 
                   {/* File ID input group */}
                   <div className="input-group mb-3">
@@ -61,7 +61,12 @@ const CsvFileDetail = (props) => {
                   </div>
                   
                   
-                  <CsvFileForm id={id} original_file_name={data.file_name} original_description={data.description}/>   
+                  <CsvFileForm  id={id} 
+                                original_file_name={data.file_name} 
+                                original_description={data.description}
+                                // original_is_public={false}
+                                original_is_public={data.is_public} />   
+
 
 
                   <a role="button" href="/#/community/personal" className="btn btn-danger">

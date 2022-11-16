@@ -6,11 +6,15 @@ from django.contrib.auth import authenticate
 
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
+    followed_organization_count = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ('id','username','email','first_name','last_name')
+        fields = ('id','username','email','first_name','last_name','followed_organization_count')
         # cant change id
         read_only_fields = ['id']
+    
+    def get_followed_organization_count(self,obj):
+        return len(obj.followed_organizations.all())
 
     
 

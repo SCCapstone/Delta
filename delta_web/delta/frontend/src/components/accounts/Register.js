@@ -38,7 +38,6 @@ export class Register extends Component {
         email,
         organization_key
       }
-      console.log(newUser)
       // call register action
       this.props.register(newUser);
     }
@@ -53,7 +52,6 @@ export class Register extends Component {
     }
     const { username, first_name, last_name, email, password, password2, organization_key } = this.state;
     // form
-    console.log(this.state)
     return (
       <div className="container">
         <div className="row">

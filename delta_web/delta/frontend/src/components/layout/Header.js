@@ -34,13 +34,11 @@ export class Header extends Component {
                 </span>
             </li>
             <li className="nav-item">
-                <li>
                     <span className = "nav-link">
                         <Link to="/data/download">
                             Data
                         </Link>
                     </span>
-                </li>
             </li>
             <li className="nav-item">
                 <span className = "nav-link">

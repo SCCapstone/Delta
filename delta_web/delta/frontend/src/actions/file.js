@@ -66,8 +66,8 @@ export const getCsvFile = (id) => (dispatch,getState) =>{
 }
 // UPDATE FILE
 // only allow update name
-export const updateCsvFile = ({id,file_name,description}) => (dispatch,getState)=>{
-    const data = JSON.stringify({id,file_name,description})
+export const updateCsvFile = ({id,file_name,description,is_public}) => (dispatch,getState)=>{
+    const data = JSON.stringify({id,file_name,description,is_public})
     axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
         .then(res=>{
             dispatch(createMessage({updateCsvFileSuccess:"File successfully updated."}))

@@ -6,11 +6,11 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('data', '0021_csvfile_is_public'),
+        ('data', '0020_csvfile_description'),
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.AddField(
             model_name='csvfile',
             name='is_public',
             field=models.BooleanField(default=False),

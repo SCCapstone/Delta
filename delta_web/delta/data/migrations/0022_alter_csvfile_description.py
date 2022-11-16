@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('data', '0023_alter_csvfile_is_public'),
+        ('data', '0021_csvfile_is_public'),
     ]
 
     operations = [

@@ -11,13 +11,23 @@ export class CsvFileForm extends Component{
     state = {
         "file_name":this.props.original_file_name,
         "id":this.props.id,
-        "description":this.props.original_description
+        "description":this.props.original_description,
+        "is_public":this.props.original_is_public
     }
     onChange = e => {
       this.setState(
         {[e.target.name]:e.target.value}
     )
     }    
+
+    onRadioChange = e => {    
+      // Right now only 2 radio buttons (public/private) are supported
+      this.setState(
+        {[e.target.name]:e.target.value == "public"}
+      )
+    }
+
+
     onSubmit = e =>{
         e.preventDefault();
         const data = this.state;
@@ -25,10 +35,11 @@ export class CsvFileForm extends Component{
         this.props.updateCsvFile(data)
     }
 
+
     render(){
 
         return (
-            <form onSubmit = {this.onSubmit}>
+            <form onSubmit = {this.onSubmit}  >
               <div>
 
                 {/* File name input group */}
@@ -63,7 +74,7 @@ export class CsvFileForm extends Component{
                   </div>
 
                   {/* Input Box */}
-                  <textarea className="form-control" placeholder={this.state.description} 
+                  <textarea className="form-control" value={this.state.description} placeholder={this.state.description} 
                   name="description"
                   onChange={this.onChange}
                   aria-label={this.state.description} 
@@ -71,11 +82,30 @@ export class CsvFileForm extends Component{
 
                 </div>
 
+              
+
+
+                <div className="form-check">
+                  <input  className="form-check-input" type="radio" name="is_public" 
+                          id="publicRadio" value="public" checked={this.state.is_public} onChange={this.onRadioChange} />
+                  <label className="form-check-label">
+                    Public
+                  </label>
+                </div>
+
+                <div className="form-check">
+                  <input  className="form-check-input" type="radio" name="is_public" 
+                          id="privateRadio" value="private" checked={!this.state.is_public} onChange={this.onRadioChange} />
+                  <label className="form-check-label">
+                    Private
+                  </label>
+                </div>
+
+
+                <br />
+                <br />
+
               </div>
-
-              <br />
-              <br />
-
               {/* Update Information Button */}
               <button className="btn btn-success mb-2">
                   Update Information

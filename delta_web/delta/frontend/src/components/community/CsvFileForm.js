@@ -10,15 +10,17 @@ export class CsvFileForm extends Component{
 
     state = {
         "file_name":this.props.original_file_name,
-        "id":this.props.id
+        "id":this.props.id,
+        "description":this.props.original_description
     }
-    onChange = e => this.setState(
+    onChange = e => {
+      this.setState(
         {[e.target.name]:e.target.value}
     )
+    }    
     onSubmit = e =>{
         e.preventDefault();
         const data = this.state;
-        console.log(data)
         // call function
         this.props.updateCsvFile(data)
     }
@@ -54,18 +56,18 @@ export class CsvFileForm extends Component{
                 <div className="input-group mb-3">
 
                   {/* Pre-fix label */}
-                  {/* <div className="input-group-prepend">
+                  <div className="input-group-prepend">
                     <span className="input-group-text bg-secondary text-white">
                       Description
                     </span>
-                  </div> */}
+                  </div>
 
-                  {/* Input Box
-                  <textarea className="form-control" placeholder="Describe your data file" 
+                  {/* Input Box */}
+                  <textarea className="form-control" placeholder={this.state.description} 
                   name="description"
-                  // onChange={this.onChange}
-                  // aria-label={this.state.file_name} 
-                  ></textarea> */}
+                  onChange={this.onChange}
+                  aria-label={this.state.description} 
+                  ></textarea>
 
                 </div>
 

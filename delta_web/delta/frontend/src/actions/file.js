@@ -50,6 +50,7 @@ export const getCsvFiles = () => (dispatch,getState) =>{
 export const getCsvFile = (id) => (dispatch,getState) =>{
     axios.get(`/api/csv/${id}/`,tokenConfig(getState))
         .then(res => {
+            console.log(res)
             dispatch({
                 type:GET_CSV_FILE,
                 payload:res.data
@@ -65,8 +66,8 @@ export const getCsvFile = (id) => (dispatch,getState) =>{
 }
 // UPDATE FILE
 // only allow update name
-export const updateCsvFile = ({id,file_name}) => (dispatch,getState)=>{
-    const data = JSON.stringify({id,file_name})
+export const updateCsvFile = ({id,file_name,description}) => (dispatch,getState)=>{
+    const data = JSON.stringify({id,file_name,description})
     axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
         .then(res=>{
             dispatch(createMessage({updateCsvFileSuccess:"File successfully updated."}))

@@ -23,7 +23,7 @@ class Organization(models.Model):
     # TO DO: 
     # ADD REGISTERED AND FOLLOWING
     # JUST BECAUSE FOLLOWING DOESNT MEAN REGISTERED
-    following_users = models.ManyToManyField(User,related_name="followed_organizations",blank=True, null=True)
+    following_users = models.ManyToManyField(User,related_name="followed_organizations",blank=True)
 
     # TODO: 
     # add a way for users to be a part of the organization

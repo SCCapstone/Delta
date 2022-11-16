@@ -8,7 +8,7 @@ class DataAccelAdmin(admin.ModelAdmin):
     fields = ["id","file_path"] 
 
 class CSVFileAdmin(admin.ModelAdmin):
-    fields = ['file_path','file_name']
+    fields = ['file_path','file_name',"description"]
 
 admin.site.register(DataAccel,DataAccelAdmin)
 admin.site.register(CSVFile,CSVFileAdmin)

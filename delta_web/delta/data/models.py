@@ -41,6 +41,8 @@ class CSVFile(models.Model):
     # timestamp of creation
     timestamp= models.DateTimeField(auto_now_add=True)
 
+    description = models.TextField(blank=True,null=True)
+
     class Meta:
         unique_together = ('author','file_path','file_name')
 

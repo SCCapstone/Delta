@@ -1,2 +1,0 @@
-cat My\ Clippings.txt | awk -F"==========" '{print $1}' | awk 'BEGIN{ RS = "" ; FS = "\n"} {print $4}' | awk '{ gsub (" ","",$0); print}' > out.txt
-

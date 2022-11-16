@@ -61,7 +61,7 @@ const CsvFileDetail = (props) => {
                   </div>
                   
                   
-                  <CsvFileForm id={id} original_file_name={data.file_name}/>   
+                  <CsvFileForm id={id} original_file_name={data.file_name} original_description={data.description}/>   
 
 
                   <a role="button" href="/#/community/personal" className="btn btn-danger">

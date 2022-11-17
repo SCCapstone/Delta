@@ -6,6 +6,11 @@ import {connect} from "react-redux";
 import ProfileForm from './ProfileForm';
 import styled from 'styled-components';
 
+const StyledLink = styled(Link)`
+  color: palevioletred;
+  font-weight: bold;
+`;
+
 export class ProfileDetailed extends Component {
     static propTypes = {
         deleteUser: PropTypes.func.isRequired,
@@ -61,9 +66,9 @@ export class ProfileDetailed extends Component {
                 </div>
                 
                 <div>
-                    <Link to="/profile/glance">
-                        click to see at a glance
-                    </Link>
+                    <StyledLink to="/profile/glance">
+                        Click to see at a glance
+                    </StyledLink>
                 </div>
             </div>
         )

@@ -23,27 +23,30 @@ export class Organizations extends Component {
     render() {
         return (
             <div className='container'>
-                <div>
-                    <h1>
-                        Organization community
-                    </h1>
-                    {this.state.data.map((item) => (
-                        <div className="border mb-3 container">
-                            <h3>Organization: {item.name}</h3>
-                            <p>Id: {item.id}</p>
-                            <p>Creation time: {item.timestamp}</p>
-                            <p>Following users: {item.following_user_count}</p>
-                            <Link to={`${item.id}`}>
-                                View
+                <div className='card'>
+                    <div>
+                        <h1>
+                            Organization community
+                        </h1>
+                        {this.state.data.map((item) => (
+                            <div className="border mb-3 container">
+                                <h3>Organization: {item.name}</h3>
+                                <p>Id: {item.id}</p>
+                                <p>Creation time: {item.timestamp}</p>
+                                <p>Following users: {item.following_user_count}</p>
+                                <Link to={`${item.id}`}>
+                                    View
+                                </Link>
+                            </div>
+                        ))}
+                        <span>
+                            <Link to="/community/personal">
+                                click to see personal
                             </Link>
-                        </div>
-                    ))}
-                    <span>
-                        <Link to="/community/personal">
-                            click to see personal
-                        </Link>
-                    </span>
+                        </span>
+                    </div>
                 </div>
+
             </div>
 
         )

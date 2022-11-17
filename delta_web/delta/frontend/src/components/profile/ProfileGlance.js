@@ -80,7 +80,7 @@ export class ProfileGlance extends Component {
                 <h4>Username: {user.username}</h4>
                 <span>
                     <StyledLink to="/profile/detailed">
-                        click to see detailed
+                        Click Update Profile
                     </StyledLink>
                 </span>
             </div>

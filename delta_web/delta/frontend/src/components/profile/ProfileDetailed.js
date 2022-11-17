@@ -49,22 +49,16 @@ export class ProfileDetailed extends Component {
                 </div>
                 <div class="col-xl-8">
                     <div class="card mb-4">
-                        <div class="card-header">Account Details</div>
+                        <div class="card-header">Change your information</div>
                         <div class="card-body">
                             <ProfileForm/>
+                            <button className="btn btn-danger" onClick={this.onDelete}>
+                            Remove account?
+                            </button>
                         </div>
                     </div>
                 </div>
-                <h1>
-                    Profile in detail
-                </h1>
-                <div>
-                    <h4>Change your information</h4>
-                    
-                </div>
-                <button className="btn btn-danger" onClick={this.onDelete}>
-                    Remove account?
-                </button>
+                
                 <div>
                     <Link to="/profile/glance">
                         click to see at a glance

@@ -213,7 +213,6 @@ export const fileTokenConfig = (getState, file) => {
         config.headers['Authorization'] = `Token ${token}`;
         config.headers["Content-Disposition"] = `attachment; filename= ${file.name}`;
     }
-    console.log(config)
     // return config with token
     return config
 }

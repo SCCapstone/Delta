@@ -39,23 +39,23 @@ export class ProfileDetailed extends Component {
             borderBottom: "1px solid rgba(33, 40, 50, 0.125)",
         };
         return(
-            <div class="container-xl px-4 mt-4">
-                <div class="row">
-                    <div class="col-xl-4">
-                        <div class="card mb-4 mb-xl-0">
-                            <div class="card-header">Profile Picture</div>
-                            <div class="card-body text-center">
-                                <img class="img-account-profile rounded-circle mb-2" src="/media/closeup_african_american_woman.jpg" alt="" width='300' height='300'/>
-                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                                <button class="btn btn-primary" type="button">Upload new image</button>
+            <div className="container-xl px-4 mt-4">
+                <div className="row">
+                    <div className="col-xl-4">
+                        <div className="card mb-4 mb-xl-0">
+                            <div className="card-header">Profile Picture</div>
+                            <div className="card-body text-center">
+                                <img className="img-account-profile rounded-circle mb-2" src="/media/closeup_african_american_woman.jpg" alt="" width='300' height='300'/>
+                                <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                <button className="btn btn-primary" type="button">Upload new image</button>
                             </div>
                         </div>
                     </div>
                 
-                    <div class="col-xl-8">
-                        <div class="card mb-4">
-                            <div class="card-header">Change your information</div>
-                            <div class="card-body">
+                    <div className="col-xl-8">
+                        <div className="card mb-4">
+                            <div className="card-header">Change your information</div>
+                            <div className="card-body">
                                 <ProfileForm/>
                                 <button className="btn btn-danger" onClick={this.onDelete}>
                                 Remove account?

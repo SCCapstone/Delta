@@ -20,38 +20,45 @@ export class Organizations extends Component {
             })
     }
 
+    // referencing card styles horizontal: https://getbootstrap.com/docs/5.2/components/card/
     render() {
         return (
             <div className='container'>
-                <div className='card'>
-                    <div className='card-body'>
-                        <div>
-                            <h1 className='card-title'>
-                                Organization community
-                            </h1>
-                            {this.state.data.map((item) => (
-                                <div className="border mb-3 container">
-                                    <h3 className='card-subtitle'>Organization: {item.name}</h3>
-                                    <p>Id: {item.id}</p>
-                                    <p>Creation time: {item.timestamp}</p>
-                                    <p>Following users: {item.following_user_count}</p>
-                                    <Link to={`${item.id}`}>
-                                        View
+                <h1 className='card-title'>
+                    Organization community
+                </h1>
+                <div className='card mb-3'>
+
+                    <div className='row g-0'>
+                        <div className='col-md-4'>
+                            <img src='/delta/media/closeup_african_american_woman.jpg' className='card-img-fluid rounded-start' alt='place holder text right now' />
+                            <p>Here is were the other stuff should go</p>
+                        </div>
+
+                        <div className='col-md-8'>
+                            <div>
+                                {this.state.data.map((item) => (
+                                    <div className="border mb-3 container">
+                                        <h3 className='card-title'>Organization: {item.name}</h3>
+                                        <p className='card-text'>Id: {item.id}</p>
+                                        <p className='card-text'>Creation time: {item.timestamp}</p>
+                                        <p className='card-text'>Following users: {item.following_user_count}</p>
+                                        <Link to={`${item.id}`}>
+                                            View
+                                        </Link>
+                                    </div>
+                                ))}
+                                <span>
+                                    <Link to="/community/personal">
+                                        click to see personal
                                     </Link>
-                                </div>
-                            ))}
-                            <span>
-                                <Link to="/community/personal">
-                                    click to see personal
-                                </Link>
-                            </span>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
                 </div>
-
             </div>
-
         )
     }
 }

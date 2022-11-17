@@ -46,15 +46,16 @@ export class ProfileDetailed extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-8">
-                    <div class="card mb-4">
-                        <div class="card-header">Change your information</div>
-                        <div class="card-body">
-                            <ProfileForm/>
-                            <button className="btn btn-danger" onClick={this.onDelete}>
-                            Remove account?
-                            </button>
+                
+                    <div class="col-xl-8">
+                        <div class="card mb-4">
+                            <div class="card-header">Change your information</div>
+                            <div class="card-body">
+                                <ProfileForm/>
+                                <button className="btn btn-danger" onClick={this.onDelete}>
+                                Remove account?
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

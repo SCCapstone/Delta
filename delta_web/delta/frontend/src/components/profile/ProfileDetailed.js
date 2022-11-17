@@ -17,6 +17,22 @@ export class ProfileDetailed extends Component {
     }
     render(){
         const {isAuthenticated, user} = this.props.auth;
+        const accountprofile = {
+            height: "10rem",
+        };
+        const roundedcircle = {
+            borderRadius: "50%" ,
+        };
+        const card = {
+            boxShadow: "0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%)",
+        };
+
+        const cardheader = {
+            padding: "1rem 1.35rem",
+            marginBottom: "0",
+            backgroundColor: "rgba(33, 40, 50, 0.03)",
+            borderBottom: "1px solid rgba(33, 40, 50, 0.125)",
+        };
         return(
             <div class="container-xl px-4 mt-4">
                 <div class="row">

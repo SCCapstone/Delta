@@ -20,6 +20,10 @@ const RightSide = styled.div`
     padding-left:10px;
 `;
 
+const Name = styled.h4`
+    padding: 5px;
+`;
+
 // const tink = ({ className, children }) => (
 //     <a className={className}>
 //       {children}
@@ -65,14 +69,15 @@ export class ProfileGlance extends Component {
                 </LeftSide>
                 <div>
                     <RightSide>
-                        <h4>First Name: {user.first_name}</h4>
-                        <h4>Last Name: {user.last_name}</h4>
-                        <h4>Email: {user.email}</h4>
-                        <h4>Username: {user.username}</h4>
+                        <Name>First Name: {user.first_name}</Name>
+                        <Name>Last Name: {user.last_name}</Name>
+                        
                     </RightSide>
                 </div>
                 
                 </Container>
+                <h4>Email: {user.email}</h4>
+                <h4>Username: {user.username}</h4>
                 <span>
                     <StyledLink to="/profile/detailed">
                         click to see detailed

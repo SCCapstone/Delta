@@ -39,33 +39,35 @@ const OrganizationDetail = () =>{
     if(data == null || dataPosts == null) return;
 
     return(
-        <div>
-            <h1>Organization Name: {data.name}</h1>
-            <p>User count: {data.following_user_count}</p>
-
-            <h4>
-                All files under this organization
-            </h4>
-            <small>
-                Note that when you register under an organization, at the moment all of the data you upload is a part of the organization.
-            </small>
-
+        <div className="container">
             <div>
-                {dataPosts.map((item)=>(
-                    <div className = "border mb-3 container">
-                        <h5>File name: {item.file_name}</h5>
-                        <h5>File id: {item.id}</h5>
-                        <h5>Timestamp: {item.timestamp}</h5>
-                        <h5>Author: {item.author_username}</h5>
-                    </div>
-                ))}
-            </div>
+                <h1>Organization Name: {data.name}</h1>
+                <p>User count: {data.following_user_count}</p>
 
-            <span>
-                <Link to ="/community/organizations">
-                    back to organizations
-                </Link>
-            </span>
+                <h4>
+                    All files under this organization
+                </h4>
+                <small>
+                    Note that when you register under an organization, at the moment all of the data you upload is a part of the organization.
+                </small>
+
+                <div>
+                    {dataPosts.map((item)=>(
+                        <div className = "border mb-3 container">
+                            <h5>File name: {item.file_name}</h5>
+                            <h5>File id: {item.id}</h5>
+                            <h5>Timestamp: {item.timestamp}</h5>
+                            <h5>Author: {item.author_username}</h5>
+                        </div>
+                    ))}
+                </div>
+
+                <span>
+                    <Link to ="/community/organizations">
+                        back to organizations
+                    </Link>
+                </span>
+            </div>
         </div>
     );
 }

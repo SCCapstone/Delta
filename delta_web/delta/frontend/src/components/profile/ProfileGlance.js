@@ -7,16 +7,17 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex;
-    flexDirection: row;
 `;
 
 const LeftSide = styled.div`
-    width: 25%;
+    max-width:100px
+    
+    flex: 1;
 `;
 
 const RightSide = styled.div`
-    width: 75%;
-    
+    flex: 1;
+    padding-left:10px;
 `;
 
 // const tink = ({ className, children }) => (
@@ -58,16 +59,16 @@ export class ProfileGlance extends Component {
                     src="/media/closeup_african_american_woman.jpg"
                     className="d-block w-100"
                     alt="Close up of smiling African American woman"
-                    width='400px'
+                    width='100px'
                     height='100px'
                 />
                 </LeftSide>
                 <div>
                     <RightSide>
-                    <h4>First Name: {user.first_name}</h4>
-                    <h4>Last Name: {user.last_name}</h4>
-                    <h4>Email: {user.email}</h4>
-                    <h4>Username: {user.username}</h4>
+                        <h4>First Name: {user.first_name}</h4>
+                        <h4>Last Name: {user.last_name}</h4>
+                        <h4>Email: {user.email}</h4>
+                        <h4>Username: {user.username}</h4>
                     </RightSide>
                 </div>
                 

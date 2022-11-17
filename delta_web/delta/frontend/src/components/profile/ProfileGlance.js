@@ -19,6 +19,17 @@ const RightSide = styled.div`
     
 `;
 
+// const tink = ({ className, children }) => (
+//     <a className={className}>
+//       {children}
+//     </a>
+//   );
+
+const StyledLink = styled(Link)`
+  color: palevioletred;
+  font-weight: bold;
+`;
+
 export class ProfileGlance extends Component {
     static propTypes = {
         auth:PropTypes.object.isRequired
@@ -62,9 +73,9 @@ export class ProfileGlance extends Component {
                 
                 </Container>
                 <span>
-                    <Link to="/profile/detailed">
+                    <StyledLink to="/profile/detailed">
                         click to see detailed
-                    </Link>
+                    </StyledLink>
                 </span>
             </div>
         )

@@ -31,8 +31,11 @@ export class Alerts extends Component {
             if(message.addDataAccel){
                 alert.success(message.addDataAccel);
             }
-            if(message.addCsvFile){
-                alert.success(message.addCsvFile);
+            if(message.addCsvFileSuccess){
+                alert.success(message.addCsvFileSuccess);
+            }
+            if(message.addCsvFileError){
+                alert.error(message.addCsvFileError);
             }
             if(message.updateCsvFileSuccess){
                 alert.success(message.updateCsvFileSuccess);

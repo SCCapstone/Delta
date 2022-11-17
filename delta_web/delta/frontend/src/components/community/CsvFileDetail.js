@@ -64,7 +64,6 @@ const CsvFileDetail = (props) => {
                   <CsvFileForm  id={id} 
                                 original_file_name={data.file_name} 
                                 original_description={data.description}
-                                // original_is_public={false}
                                 original_is_public={data.is_public} />   
 
 

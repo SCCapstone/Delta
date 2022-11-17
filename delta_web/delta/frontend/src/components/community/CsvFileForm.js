@@ -15,6 +15,7 @@ export class CsvFileForm extends Component{
         "is_public":this.props.original_is_public
     }
     onChange = e => {
+      console.log(this.state)
       this.setState(
         {[e.target.name]:e.target.value}
     )

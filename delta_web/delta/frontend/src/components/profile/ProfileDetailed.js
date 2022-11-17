@@ -31,12 +31,20 @@ export class ProfileDetailed extends Component {
                         </div>
                     </div>
                 </div>
+                <div class="col-xl-8">
+                    <div class="card mb-4">
+                        <div class="card-header">Account Details</div>
+                        <div class="card-body">
+                            <ProfileForm/>
+                        </div>
+                    </div>
+                </div>
                 <h1>
                     Profile in detail
                 </h1>
                 <div>
                     <h4>Change your information</h4>
-                    <ProfileForm/>
+                    
                 </div>
                 <button className="btn btn-danger" onClick={this.onDelete}>
                     Remove account?

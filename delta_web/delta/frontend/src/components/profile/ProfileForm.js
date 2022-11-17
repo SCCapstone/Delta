@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import {updateUser} from "../../actions/auth"
+import styled from 'styled-components';
 
 export class ProfileForm extends Component{
     static propTypes = {

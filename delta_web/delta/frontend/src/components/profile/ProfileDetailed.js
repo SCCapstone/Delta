@@ -4,6 +4,7 @@ import {deleteUser} from "../../actions/auth";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import ProfileForm from './ProfileForm';
+import styled from 'styled-components';
 
 export class ProfileDetailed extends Component {
     static propTypes = {
@@ -17,7 +18,19 @@ export class ProfileDetailed extends Component {
     render(){
         const {isAuthenticated, user} = this.props.auth;
         return(
-            <div>
+            <div class="container-xl px-4 mt-4">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card mb-4 mb-xl-0">
+                            <div class="card-header">Profile Picture</div>
+                            <div class="card-body text-center">
+                                <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt=""/>
+                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                <button class="btn btn-primary" type="button">Upload new image</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <h1>
                     Profile in detail
                 </h1>

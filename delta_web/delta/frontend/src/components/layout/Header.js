@@ -18,39 +18,41 @@ export class Header extends Component {
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
-      <ul className="navbar-nav mr-auto">
-        <li className="nav-item active">
-          <span className="nav-link">
-            <Link to="/">Home</Link>
-          </span>
-        </li>
-        <li className="nav-item">
-          <span className="nav-link">
-            <Link to="/profile/glance">Profile</Link>
-          </span>
-        </li>
-        <li className="nav-item">
-          <span className="nav-link">
-            <Link to="/data/download">Data</Link>
-          </span>
-        </li>
-        <li className="nav-item">
-          <span className="nav-link">
-            <Link to="/community/personal">Community</Link>
-          </span>
-        </li>
-        <li className="nav-item">
-          <span className="nav-link" onClick={this.props.logout}>
-            Logout
-          </span>
-        </li>
-        {/* <span className="navbar-text mr-3">
+      <nav className="navbar navbar-expand-lg bg-light mr-auto">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+            <span className="nav-link">
+              <Link to="/">Home</Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">
+              <Link to="/profile/glance">Profile</Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">
+              <Link to="/data/download">Data</Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">
+              <Link to="/community/personal">Community</Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link" onClick={this.props.logout}>
+              Logout
+            </span>
+          </li>
+          {/* <span className="navbar-text mr-3">
                     <strong>{user ? `Welcome ${user.username}` : ""}</strong>
                 </span> */}
-      </ul>
+        </ul>
+      </nav>
     );
     const guestLinks = (
-      <ul className="navbar-nav mr-auto">
+      <ul className="navbar-nav  mr-auto">
         <li className="nav-item">
           <Link to="/register" className="nav-link">
             Register

@@ -77,23 +77,23 @@ export class Dashboard extends Component {
     };
 
     return (
-      <div class="pt-3">
+      <div className="pt-3">
         <h1>
           Welcome back <strong>{user.username}</strong>.
         </h1>
         <h3>Let's get you caught up</h3>
 
-        <div class="container">
-          <div class="pt-5">
-            <div class="row align-self-start">
-              <div class="col centered">
+        <div className="container">
+          <div className="pt-5">
+            <div className="row align-self-start">
+              <div className="col centered">
                 <center>
                   <h2>Today</h2>
                 </center>
-                <div classname="graph1">
+                <div className="graph1">
                   <Line data={daily_graph}></Line>
                 </div>
-                <div class="px-4 py-2">
+                <div className="px-4 py-2">
                   <h6>
                     This data is not actual calculated data that comes from any
                     actual usage of the app. This is all just to show off how
@@ -102,14 +102,14 @@ export class Dashboard extends Component {
                   </h6>
                 </div>
               </div>
-              <div class="col centered">
+              <div className="col centered">
                 <center>
                   <h2>This Week</h2>
                 </center>
-                <div classname="graph2">
+                <div className="graph2">
                   <Line data={weekly_graph}></Line>
                 </div>
-                <div class="px-4 py-2">
+                <div className="px-4 py-2">
                   <h6>
                     This graph will show off your activity over the course of
                     the last week. In each of these graphs, your own personal
@@ -118,14 +118,14 @@ export class Dashboard extends Component {
                   </h6>
                 </div>
               </div>
-              <div class="col centered">
+              <div className="col centered">
                 <center>
                   <h2>This Month</h2>
                 </center>
-                <div classname="graph3">
+                <div className="graph3">
                   <Line data={monthly_graph}></Line>
                 </div>
-                <div class="px-4 py-2">
+                <div className="px-4 py-2">
                   <h6>
                     Lastly comes the graph showing off your monthly activity.
                     Again, this graph displays the same comparison between the

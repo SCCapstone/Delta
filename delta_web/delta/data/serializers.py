@@ -15,7 +15,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
     class Meta:
         model = CSVFile
         fields = [
-            'file_name','timestamp','author','author_username','id'
+            'file_name','timestamp','author','author_username','id','file_path',"description","is_public"
         ]
         validators = [
             UniqueTogetherValidator(

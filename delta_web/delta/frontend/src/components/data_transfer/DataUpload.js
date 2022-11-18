@@ -51,6 +51,9 @@ const DataUpload = (props) => {
 
   const onDrop = useCallback(acceptedFiles =>{
     // do something if you want here
+    acceptedFiles.forEach(file=>{
+      $("#fileName").val(file.name)
+    })
   },[]);
 
   const { isDragActive, getRootProps, getInputProps, isDragReject, acceptedFiles, rejectedFiles } = useDropzone({
@@ -60,10 +63,6 @@ const DataUpload = (props) => {
     maxSize:maxSize,
   });
 
-  
-
- 
-
   // to do: check if file too large
   const isFileTooLarge = false;
   // const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
@@ -71,7 +70,16 @@ const DataUpload = (props) => {
   const onSubmit = (e) =>{
     e.preventDefault();
       acceptedFiles.forEach(file=> {
-        props.addCsvFile(file);
+        var isPublic= $("#flexCheck").is(":checked")
+        var description = $("#fileDescription").val();
+        var fileName = $("#fileName").val();
+        const data = {
+          'file':file,
+          'isPublic':isPublic,
+          'description':description,
+          'fileName':fileName
+        }
+        props.addCsvFile(data);
       });
   }
 
@@ -103,9 +111,22 @@ const DataUpload = (props) => {
             </ul>
           </div>
           <br />
+          <div className="input-group">
+                <input type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
+          </div>
+          <div className= "form-check">
+            <input className ="form-check-input" type="checkbox" value="isPublic" id="flexCheck"/>
+            <label className="form-check-label" for = "flexCheck">
+                Publically Visible
+            </label>
+          </div>
+          <div className="input-group">
+              <input type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
+          </div>
+          <br />
           <button className="btn btn-success mb-2">Submit</button>
         </form>
-        <a role="button" href="http://127.0.0.1:8000/#/data/download" className="btn btn-danger">
+        <a role="button" href="/#/data/download" className="btn btn-danger">
             Cancel
         </a> 
 

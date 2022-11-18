@@ -3,6 +3,37 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    display: flex;
+`;
+
+const LeftSide = styled.div`
+    max-width:100px
+    
+    flex: 1;
+`;
+
+const RightSide = styled.div`
+    flex: 1;
+    padding-left:10px;
+`;
+
+const Name = styled.h4`
+    padding: 5px;
+`;
+
+// const tink = ({ className, children }) => (
+//     <a className={className}>
+//       {children}
+//     </a>
+//   );
+
+const StyledLink = styled(Link)`
+  color: palevioletred;
+  font-weight: bold;
+`;
 
 export class ProfileGlance extends Component {
     static propTypes = {
@@ -21,20 +52,36 @@ export class ProfileGlance extends Component {
     render(){
         const {isAuthenticated, user} = this.props.auth;
         return(
-            <div>
+            <div className='container'>
                 <h1>
-                    Your Information
+                    <center>Your Information</center>
                 </h1>
+                <Container>
+                
+                <LeftSide>
+                <img
+                    src="/media/closeup_african_american_woman.jpg"
+                    className="d-block w-100"
+                    alt="Close up of smiling African American woman"
+                    width='100px'
+                    height='100px'
+                />
+                </LeftSide>
                 <div>
-                    <h4>First Name: {user.first_name}</h4>
-                    <h4>Last Name: {user.last_name}</h4>
-                    <h4>Email: {user.email}</h4>
-                    <h4>Username: {user.username}</h4>
+                    <RightSide>
+                        <Name>First Name: {user.first_name}</Name>
+                        <Name>Last Name: {user.last_name}</Name>
+                        
+                    </RightSide>
                 </div>
+                
+                </Container>
+                <h4>Email: {user.email}</h4>
+                <h4>Username: {user.username}</h4>
                 <span>
-                    <Link to="/profile/detailed">
-                        click to see detailed
-                    </Link>
+                    <StyledLink to="/profile/detailed">
+                        Click Update Profile
+                    </StyledLink>
                 </span>
             </div>
         )

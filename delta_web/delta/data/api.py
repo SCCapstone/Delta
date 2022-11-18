@@ -7,6 +7,9 @@ from rest_framework.decorators import action
 
 from pathlib import Path
 
+import random
+import string
+
 # files
 from django.conf import settings as django_settings
 import os
@@ -54,7 +57,7 @@ class ViewsetPublicCsvFile(viewsets.ModelViewSet):
     serializer_class = SerializerCSVFile
 
     def get_queryset(self):
-        return CSVFile.objects.all()
+        return CSVFile.objects.filter(is_public=True)
 
     @action(methods=['get'],detail=True,renderer_classes=(PassthroughRenderer,))
     def download(self,*args,**kwargs):
@@ -96,13 +99,16 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     
     def partial_update(self, request, *args, **kwargs):
         # can only update file name
-        obj = CSVFile.objects.get(id=kwargs['pk'])
-        obj.file_name = request.data['file_name']
-        try:
-            obj.save()
-        except Exception as e:
-            print(e)
-            return Response(data={"message":"Error with file name"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # obj = CSVFile.objects.get(id=kwargs['pk'])
+        # print(obj.file_path.split('/')[-1])
+        # print(request.data['file_name'])
+        # try:
+        #     obj.save()
+        # except Exception as e:
+        #     print(e)
+        #     return Response(data={"message":"Error with file name"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        # print("PARTIAL UPDATE")
 
         return super().partial_update(request, *args, **kwargs)
     
@@ -111,6 +117,7 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
         obj = CSVFile.objects.get(id=obj_id)
         serialized = self.get_serializer(obj)
         return Response(serialized.data)
+
 
 ###################
 #
@@ -129,12 +136,16 @@ class UploadCsvApiView(APIView):
     ]
 
     # handle post requests
-    def post(self,request,format='csv'):
+    def post(self,request):
 
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
-        print(request)
-        
+
+        fileName = Path(str(dataFile)).stem
+
+        if len(CSVFile.objects.filter(file_name=fileName)) > 0:
+            return Response(data={"message":"File names need to be unique"},status=status.HTTP_400_BAD_REQUEST)
+
         if(dataFile):
 
             # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
@@ -145,14 +156,21 @@ class UploadCsvApiView(APIView):
                 os.makedirs(strUserCsvFolder)
 
             strFilePath = os.path.join(strUserCsvFolder,str(dataFile))
+
+            # if a file already present, do not overwrite
+
+            while(os.path.exists(strFilePath)):
+                strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
+                strFilePath += "_"+ strRandom + ".csv"
+
             
             # first try is just to see if this is a unique user+filepath combo
             csvFile = None
             try:
-                csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=Path(str(dataFile)).stem)
+                csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=fileName)
                 csvFile.save()
             except Exception as e:
-                return Response(data={"message":e},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(data={"message":e})
             # if get thru the first try, know that the file is unique.
             # next try is to actually write the file
             try:
@@ -160,11 +178,13 @@ class UploadCsvApiView(APIView):
                     for chunk in dataFile.chunks():
                         file.write(chunk)
                 # file is now saved.
-                return Response(data ={"message":"CSV successfully saved."})
+                return Response({
+                    "csvFile":SerializerCSVFile(csvFile).data
+                })
             except Exception as e:
                 # delete the csvFile, something went wrong with writing
                 csvFile.delete()
-                return Response(data={"message":e},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(data={"message":e})
 
         else:
-            return Response(data={"message":"Error upon uploading file"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(data={"message":"Error upon uploading file"})

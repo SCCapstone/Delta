@@ -108,10 +108,19 @@ export const register = ({ username, first_name, last_name, password, email, org
 
     axios.post('/api/auth/register', body, config)
         .then((res) => {
+            // what str to show for message
+            var msg = ""
+            if(res.data.user.followed_organization_count != 0){
+                // has an organization
+                msg = "Successfully registered with organization."
+            }else{
+                msg = "Successfully registered, but not registered with an organization."
+            }
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
             });
+            dispatch(createMessage({registerUser: msg}))
         })
         // if we are not authenticated, no token that matches, need to catch
         .catch((err) => {
@@ -204,7 +213,6 @@ export const fileTokenConfig = (getState, file) => {
         config.headers['Authorization'] = `Token ${token}`;
         config.headers["Content-Disposition"] = `attachment; filename= ${file.name}`;
     }
-    console.log(config)
     // return config with token
     return config
 }

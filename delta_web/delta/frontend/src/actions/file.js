@@ -7,28 +7,30 @@ import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE,
     CSV_FILE_UPDATE_SUCCESS,GET_CSV_FILES_PUBLIC} from "./types";
 
 // POST FILE 
-export const addCsvFile= (file) => (dispatch,getState) =>{
+export const addCsvFile= ({file,fileName,isPublic,description}) => (dispatch,getState) =>{
     // pass in token
     axios.post('/api/upload/csv/',file,fileTokenConfig(getState,file))
         .then(res=>{
-            dispatch(createMessage({addCsvFile:"File posted"}));
+            dispatch(createMessage({addCsvFileSuccess:"File posted"}));
             dispatch({
                 type:ADD_CSV_FILE,
                 payload: res.data
             });
+            const id = res.data.csvFile.id;
+            const file_name = fileName;
+            const is_public = isPublic;
+            const data = JSON.stringify({id,file_name,description,is_public})
+            axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
+            .then(res=>{
+                console.log(res);
+            })
+            .catch(err=>{
+                console.log(err);
+            })
         })
         .catch(err=>{
-            if(err.response){
-                dispatch(
-                    returnErrors(err.response.data,err.response.status)
-                )
-            }else if(err.request){
-                dispatch(
-                    returnErrors(err.request.data,err.request.status)
-                )
-            }else{
-                console.log(err);
-            }
+            console.log(err);
+            dispatch(createMessage({addCsvFileError:err.response.data.message}))
         })
 }
 
@@ -59,14 +61,14 @@ export const getCsvFile = (id) => (dispatch,getState) =>{
             {
                 dispatch(
                     returnErrors(err.response.data,err.response.status))
-                console.log(err);
+                    console.log(err);
                 }
         )
 }
 // UPDATE FILE
 // only allow update name
-export const updateCsvFile = ({id,file_name}) => (dispatch,getState)=>{
-    const data = JSON.stringify({id,file_name})
+export const updateCsvFile = ({id,file_name,description,is_public}) => (dispatch,getState)=>{
+    const data = JSON.stringify({id,file_name,description,is_public})
     axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
         .then(res=>{
             dispatch(createMessage({updateCsvFileSuccess:"File successfully updated."}))

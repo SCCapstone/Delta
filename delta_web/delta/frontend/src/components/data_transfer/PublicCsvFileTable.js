@@ -48,27 +48,43 @@ export class PublicCsvFileTable extends Component {
     }
   }
   onSearchChange = e => {
-    this.setState({searchText:e.target.value})
+    var strInput = e.target.value;
+    this.setState({searchText:strInput})
+    if(strInput.length < 3){
+      this.setState({data:this.props.csvFiles});
+      return;
+    }
+    var newData = []
+    for(const file of this.props.csvFiles){
+      if(file.file_name.includes(this.state.searchText)){
+        newData.push(file);
+      }
+    }
+    this.setState({data:{nodes:newData}});
   }
 
   render() {
-    this.state.data = {nodes:this.props.csvFiles};
+    var fileData = {nodes:this.props.csvFiles}
+    if(this.state.data.nodes != null){
+      fileData = this.state.data;
+    }
 
     return (
       <Fragment>
         <form onSubmit={this.onSubmit}>
-          <label htmlFor="search">
-            Search by Name:
-            <input id = "search" type="text" onChange={this.onSearchChange}/>
-          </label>
-          <Table data={this.state.data}>{(tableList) =>(
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className= "input-group-text">File Name</span>
+            </div>
+            <input id = "search" type="text" className="form-control" placeholder="Enter at least three characters" onChange={this.onSearchChange}/>
+          </div>
+          <Table data={fileData}>{(tableList) =>(
             <>
             <Header>
               <HeaderRow>
                 <HeaderCell>File Id</HeaderCell>
                 <HeaderCell>File Name</HeaderCell>
                 <HeaderCell>Upload Date</HeaderCell>
-                <HeaderCell>View TO DO</HeaderCell>
                 <HeaderCell>Download</HeaderCell>
               </HeaderRow>
             </Header>
@@ -78,7 +94,6 @@ export class PublicCsvFileTable extends Component {
                   <Cell>{item.id}</Cell>
                   <Cell>{item.file_name}</Cell>
                   <Cell>{item.timestamp}</Cell>
-                  <Cell>Click to View (TODO)</Cell>
                   <Cell>
                     <input type="checkbox"
                     onChange={()=>{this.onCheckChange(item.id)}}

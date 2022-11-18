@@ -31,8 +31,13 @@ export class Organizations extends Component {
 
                     <div className='row g-0'>
                         <div className='col-md-4'>
-                            <img src='/delta/media/closeup_african_american_woman.jpg' className='card-img-fluid rounded-start' alt='place holder text right now' />
-                            <p>Here is were the other stuff should go</p>
+                            <img
+                                src='/media/Generic_Laboratory_Logo.png'
+                                className='card-img-fluid rounded-start'
+                                alt='place holder text right now'
+                                width='200'
+                                height='200'
+                            />
                         </div>
 
                         <div className='col-md-8'>

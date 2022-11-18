@@ -61,7 +61,6 @@ export class Organizations extends Component {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         )

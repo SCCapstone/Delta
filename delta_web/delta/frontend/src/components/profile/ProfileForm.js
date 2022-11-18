@@ -73,7 +73,7 @@ export class ProfileForm extends Component{
                     </input>
                 </div>
                 <div>
-                    Username
+                    Username:
                     <input 
                     className="form-control"
                     name = "username"
@@ -84,7 +84,7 @@ export class ProfileForm extends Component{
                     </input>
                 </div>
                 <div>
-                    Password
+                    Password:
                     <input
                     className="form-control"
                     name = "password"

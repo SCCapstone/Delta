@@ -29,15 +29,21 @@ export class Header extends Component {
       <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <StyledLink to="/">
-              <button type="button" className="btn btn-outline-secondary">
-                Home
-              </button>
-            </StyledLink>
+            <span className="nav-link">
+              <StyledLink to="/">
+                <button type="button" className="btn btn-outline-secondary">
+                  Home
+                </button>
+              </StyledLink>
+            </span>
           </li>
           <li className="nav-item">
             <span className="nav-link">
-              <Link to="/profile/glance">Profile</Link>
+              <StyledLink to="/profile/glance">
+                <button type="button" className="btn btn-outline-secondary">
+                  Profile
+                </button>
+              </StyledLink>
             </span>
           </li>
           <li className="nav-item">

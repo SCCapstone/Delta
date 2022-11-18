@@ -28,7 +28,7 @@ export class Header extends Component {
     const authLinks = (
       <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
         <ul className="navbar-nav">
-          <li className="nav-item active">
+          <li className="nav-item">
             <span className="nav-link">
               <StyledLink to="/">
                 <button type="button" className="btn btn-outline-secondary">
@@ -57,7 +57,11 @@ export class Header extends Component {
           </li>
           <li className="nav-item">
             <span className="nav-link">
-              <Link to="/community/personal">Community</Link>
+              <StyledLink to="/community/personal">
+                <button type="button" className="btn btn-outline-secondary">
+                  Community
+                </button>
+              </StyledLink>
             </span>
           </li>
           <li className="nav-item">

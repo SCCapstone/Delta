@@ -6,7 +6,15 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
+import styled from "styled-components";
 
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+  &:hover {
+    color: gray;
+  }
+`;
 export class Header extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
@@ -18,12 +26,14 @@ export class Header extends Component {
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
-      <nav className="navbar navbar-expand-lg bg-light mr-auto">
-        <ul className="navbar-nav mr-auto">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
+        <ul className="navbar-nav">
           <li className="nav-item active">
-            <span className="nav-link">
-              <Link to="/">Home</Link>
-            </span>
+            <StyledLink to="/">
+              <button type="button" className="btn btn-outline-secondary">
+                Home
+              </button>
+            </StyledLink>
           </li>
           <li className="nav-item">
             <span className="nav-link">
@@ -41,9 +51,12 @@ export class Header extends Component {
             </span>
           </li>
           <li className="nav-item">
-            <span className="nav-link" onClick={this.props.logout}>
+            <button
+              className="btn btn-sm btn-outline-secondary"
+              onClick={this.props.logout}
+            >
               Logout
-            </span>
+            </button>
           </li>
           {/* <span className="navbar-text mr-3">
                     <strong>{user ? `Welcome ${user.username}` : ""}</strong>
@@ -67,7 +80,7 @@ export class Header extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg bg-light navbar-dark">
         <div className="container">
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">

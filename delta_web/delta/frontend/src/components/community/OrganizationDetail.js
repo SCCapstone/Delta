@@ -2,8 +2,10 @@ import axios from "axios";
 import React,{useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
+import { downloadCsvFile } from "../../actions/file";
 
-const OrganizationDetail = () =>{
+const OrganizationDetail = (props) =>{
 
     // in reality you would use a function to grab organization data 
     // based on the passed id
@@ -19,6 +21,10 @@ const OrganizationDetail = () =>{
         } catch (err) {
             console.log(err)
         }
+    }
+
+    const downloadCsv = (fileId) => {
+        props.downloadCsvFile(fileId);
     }
 
     const getPosts = async () => {
@@ -40,12 +46,6 @@ const OrganizationDetail = () =>{
 
     return (
         <div className="card">
-            <img
-                src="/media/Generic_Laboratory_Logo.png"
-                alt="placeholder logo"
-                width='400'
-                height='400'
-            />
             <div className="card-body">
                 <h1 className="card-title">Organization Name: {data.name}</h1>
                 <p className="card-text">User count: {data.following_user_count}</p>

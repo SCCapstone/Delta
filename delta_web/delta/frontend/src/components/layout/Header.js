@@ -28,7 +28,7 @@ export class Header extends Component {
     const authLinks = (
       <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
         <ul className="navbar-nav">
-          <li className="nav-item active">
+          <li className="nav-item">
             <span className="nav-link">
               <StyledLink to="/">
                 <button type="button" className="btn btn-outline-secondary">
@@ -83,14 +83,18 @@ export class Header extends Component {
     const guestLinks = (
       <ul className="navbar-nav  mr-auto">
         <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Register
-          </Link>
+          <StyledLink to="/register" className="nav-link">
+            <button type="button" className="btn btn-outline-secondary">
+              Register
+            </button>
+          </StyledLink>
         </li>
         <li className="nav-item">
-          <Link to="/Login" className="nav-link">
-            Login
-          </Link>
+          <StyledLink to="/Login" className="nav-link">
+            <button type="button" className="btn btn-outline-secondary">
+              Login
+            </button>
+          </StyledLink>
         </li>
       </ul>
     );

@@ -28,7 +28,6 @@ export class Organizations extends Component {
                     Organization community
                 </h1>
                 <div className='card mb-3'>
-
                     <div className='row g-0'>
                         <div className='col-md-4'>
                             <img

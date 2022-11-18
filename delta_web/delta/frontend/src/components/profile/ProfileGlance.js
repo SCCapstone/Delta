@@ -49,7 +49,7 @@ export class ProfileGlance extends Component {
                 </div>
                 <br/>
                 <span>
-                    <Link to="/profile/detailed">
+                    <Link className= "btn btn-info" to="/profile/detailed">
                         Click Update Profile
                     </Link>
                 </span>

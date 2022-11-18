@@ -50,7 +50,7 @@ export class ProfileDetailed extends Component {
                 </div>
                 
                 <div>
-                    <Link to="/profile/glance">
+                    <Link className= "btn btn-info" to="/profile/glance">
                         Click to see at a glance
                     </Link>
                 </div>

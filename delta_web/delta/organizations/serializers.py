@@ -6,7 +6,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = [
-            'timestamp','name','id','following_user_count'
+            'timestamp','name','id','following_user_count',"description"
         ]
 
     def get_following_user_count(self, obj):

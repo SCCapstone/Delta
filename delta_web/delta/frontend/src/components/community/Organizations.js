@@ -23,7 +23,7 @@ export class Organizations extends Component {
     // referencing card styles horizontal: https://getbootstrap.com/docs/5.2/components/card/
     render() {
         return (
-            <div className='container'>
+            <div className='card'>
                 <h1 className='card-title'>
                     Organization community
                 </h1>

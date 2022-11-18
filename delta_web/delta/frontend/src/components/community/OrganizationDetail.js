@@ -40,7 +40,13 @@ const OrganizationDetail = () => {
 
     return (
         <div className="card">
-            <div>
+            <img
+                src="/media/Generic_Laboratory_Logo.png"
+                alt="placeholder logo"
+                width='400'
+                height='400'
+            />
+            <div className="card-body">
                 <h1 className="card-title">Organization Name: {data.name}</h1>
                 <p className="card-text">User count: {data.following_user_count}</p>
 

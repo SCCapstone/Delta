@@ -27,7 +27,7 @@ export class Organizations extends Component {
                     Organization community
                 </h1>
                 {this.state.data.map((item)=>(
-                <div className = "border mb-3 container">
+                <div className = "border mb-3 container p-3">
                     <h3>Organization: {item.name}</h3>
                     <p>Id: {item.id}</p>
                     <p>Creation time: {item.timestamp}</p>

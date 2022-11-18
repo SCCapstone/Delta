@@ -1,9 +1,12 @@
 import axios from "axios";
 import React,{useEffect, useState} from "react";
+import { connect } from "react-redux";
 import {useParams} from "react-router-dom"
 import {Link} from 'react-router-dom'
+import PropTypes from "prop-types";
+import { downloadCsvFile } from "../../actions/file";
 
-const OrganizationDetail = () =>{
+const OrganizationDetail = (props) =>{
 
     // in reality you would use a function to grab organization data 
     // based on the passed id
@@ -11,6 +14,10 @@ const OrganizationDetail = () =>{
     const [dataPosts,setDataPosts] = useState(null);
 
     const {id}= useParams();
+
+    const downloadCsv = (fileId) =>{
+        props.downloadCsvFile(fileId);
+    }
 
     const getData = async ()=>{
         try {
@@ -42,21 +49,24 @@ const OrganizationDetail = () =>{
         <div>
             <h1>Organization Name: {data.name}</h1>
             <p>User count: {data.following_user_count}</p>
-
             <h4>
                 All files under this organization
             </h4>
             <small>
-                Note that when you register under an organization, at the moment all of the data you upload is a part of the organization.
+                Note that when you register under an organization, all of your public files are now under the organization as well.
             </small>
+            <hr/>
 
             <div>
                 {dataPosts.map((item)=>(
-                    <div className = "border mb-3 container">
+                    <div className = "border mb-3 container p-3">
                         <h5>File name: {item.file_name}</h5>
                         <h5>File id: {item.id}</h5>
                         <h5>Timestamp: {item.timestamp}</h5>
                         <h5>Author: {item.author_username}</h5>
+                        <button className="btn btn-success btn-sm" onClick={()=>downloadCsv(item.id)}>
+                            Download
+                        </button>
                     </div>
                 ))}
             </div>
@@ -70,4 +80,8 @@ const OrganizationDetail = () =>{
     );
 }
 
-export default OrganizationDetail;
+const mapStateToProps = state =>({
+    auth:state.auth,
+})
+
+export default connect(mapStateToProps,{downloadCsvFile})(OrganizationDetail);

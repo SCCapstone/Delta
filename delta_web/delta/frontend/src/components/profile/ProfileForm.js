@@ -45,6 +45,7 @@ export class ProfileForm extends Component{
                     name = "first_name"
                     value = {this.state.first_name}
                     onChange={this.onChange}
+                    className = "form-control"
                     placeholder={user.first_name}
                     >
                     </input>
@@ -52,6 +53,7 @@ export class ProfileForm extends Component{
                 <div>
                     Last Name:
                     <input
+                    className="form-control"
                     name = "last_name"
                     value = {this.state.last_name}
                     onChange = {this.onChange}
@@ -62,6 +64,7 @@ export class ProfileForm extends Component{
                 <div>
                     Email:
                     <input
+                    className="form-control"
                     name = "email"
                     value = {this.state.email}
                     onChange={this.onChange}
@@ -72,6 +75,7 @@ export class ProfileForm extends Component{
                 <div>
                     Username
                     <input 
+                    className="form-control"
                     name = "username"
                     value = {this.state.username}
                     onChange={this.onChange}
@@ -82,12 +86,15 @@ export class ProfileForm extends Component{
                 <div>
                     Password
                     <input
+                    className="form-control"
                     name = "password"
+                    placeholder="Or enter nothing if no change"
                     value = {this.state.password}
                     onChange = {this.onChange}
                     >
                     </input>
                 </div>
+                <br/>
                 <button className="btn btn-success">
                     Update Information
                 </button>

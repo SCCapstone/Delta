@@ -4,17 +4,25 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate
 
+from organizations.serializers import OrganizationSerializer
+
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
     followed_organization_count = serializers.SerializerMethodField()
+    followed_organizations = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ('id','username','email','first_name','last_name','followed_organization_count')
+        fields = ('id','username','email','first_name','last_name','followed_organization_count','followed_organizations')
         # cant change id
         read_only_fields = ['id']
     
     def get_followed_organization_count(self,obj):
         return len(obj.followed_organizations.all())
+    
+    def get_followed_organizations(self,obj):
+        listOrgs = obj.followed_organizations.all()
+        serializer = OrganizationSerializer(listOrgs,many=True)
+        return serializer.data
 
     
 

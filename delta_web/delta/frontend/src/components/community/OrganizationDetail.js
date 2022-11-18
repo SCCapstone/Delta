@@ -1,60 +1,60 @@
 import axios from "axios";
 import React,{useEffect, useState} from "react";
-import { connect } from "react-redux";
 import {useParams} from "react-router-dom"
 import {Link} from 'react-router-dom'
-import PropTypes from "prop-types";
-import { downloadCsvFile } from "../../actions/file";
 
-const OrganizationDetail = (props) =>{
+const OrganizationDetail = () =>{
 
     // in reality you would use a function to grab organization data 
     // based on the passed id
-    const [data,setData] = useState(null);
-    const [dataPosts,setDataPosts] = useState(null);
+    const [data, setData] = useState(null);
+    const [dataPosts, setDataPosts] = useState(null);
 
-    const {id}= useParams();
-
-    const downloadCsv = (fileId) =>{
-        props.downloadCsvFile(fileId);
-    }
+    const { id } = useParams();
 
     const getData = async ()=>{
         try {
             const response = await axios.get('/api/organization/' + id + '/');
             setData(response.data);
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
 
-    const getPosts = async ()=>{
+    const getPosts = async () => {
         try {
-            const response = await axios.get('/api/organization/' + id +'/data_posts/');
+            const response = await axios.get('/api/organization/' + id + '/data_posts/');
             console.log(response.data);
             setDataPosts(response.data)
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getData();
         getPosts();
-    },[]);
+    }, []);
 
-    if(data == null || dataPosts == null) return;
+    if (data == null || dataPosts == null) return;
 
-    return(
-        <div>
-            <h1>Organization Name: {data.name}</h1>
-            <p>User count: {data.following_user_count}</p>
-            <h4>
-                All files under this organization
-            </h4>
-            <small>
-                Note that when you register under an organization, all of your public files are now under the organization as well.
-            </small>
+    return (
+        <div className="card">
+            <img
+                src="/media/Generic_Laboratory_Logo.png"
+                alt="placeholder logo"
+                width='400'
+                height='400'
+            />
+            <div className="card-body">
+                <h1 className="card-title">Organization Name: {data.name}</h1>
+                <p className="card-text">User count: {data.following_user_count}</p>
+                <h4 className="card-title">
+                    All files under this organization
+                </h4>
+                <small>
+                    Note that when you register under an organization, all of your public files are now under the organization as well.
+                </small>
             <hr/>
 
             <div>
@@ -71,11 +71,12 @@ const OrganizationDetail = (props) =>{
                 ))}
             </div>
 
-            <span>
-                <Link to ="/community/organizations">
-                    back to organizations
-                </Link>
-            </span>
+                <span>
+                    <Link to="/community/organizations">
+                        back to organizations
+                    </Link>
+                </span>
+            </div>
         </div>
     );
 }

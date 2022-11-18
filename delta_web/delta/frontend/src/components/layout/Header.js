@@ -48,7 +48,11 @@ export class Header extends Component {
           </li>
           <li className="nav-item">
             <span className="nav-link">
-              <Link to="/data/download">Data</Link>
+              <StyledLink to="/data/download">
+                <button type="button" className="btn btn-outline-secondary">
+                  Data
+                </button>
+              </StyledLink>
             </span>
           </li>
           <li className="nav-item">

@@ -27,6 +27,8 @@ class Organization(models.Model):
 
     # TODO: 
     # add a way for users to be a part of the organization
+
+    description = models.TextField(blank=True,null=True)
     
 
     # TODO:

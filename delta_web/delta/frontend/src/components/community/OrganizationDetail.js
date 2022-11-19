@@ -1,11 +1,11 @@
 import axios from "axios";
-import React,{useEffect, useState} from "react";
-import {useParams} from "react-router-dom"
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import { downloadCsvFile } from "../../actions/file";
 
-const OrganizationDetail = (props) =>{
+const OrganizationDetail = (props) => {
 
     // in reality you would use a function to grab organization data 
     // based on the passed id
@@ -14,7 +14,7 @@ const OrganizationDetail = (props) =>{
 
     const { id } = useParams();
 
-    const getData = async ()=>{
+    const getData = async () => {
         try {
             const response = await axios.get('/api/organization/' + id + '/');
             setData(response.data);
@@ -47,7 +47,7 @@ const OrganizationDetail = (props) =>{
     return (
         <div className="card">
             <div className="card-body">
-                <h1 className="card-title">Organization Name: {data.name}</h1>
+                <h1 className="card-title" style={{ flex: 1, backgroundColor: '#add8e6' }}>Organization Name: {data.name}</h1>
                 <p className="card-text">User count: {data.following_user_count}</p>
                 <h4 className="card-title">
                     All files under this organization
@@ -55,21 +55,21 @@ const OrganizationDetail = (props) =>{
                 <small>
                     Note that when you register under an organization, all of your public files are now under the organization as well.
                 </small>
-            <hr/>
+                <hr />
 
-            <div>
-                {dataPosts.map((item)=>(
-                    <div className = "border mb-3 container p-3">
-                        <h5>File name: {item.file_name}</h5>
-                        <h5>File id: {item.id}</h5>
-                        <h5>Timestamp: {item.timestamp}</h5>
-                        <h5>Author: {item.author_username}</h5>
-                        <button className="btn btn-success btn-sm" onClick={()=>downloadCsv(item.id)}>
-                            Download
-                        </button>
-                    </div>
-                ))}
-            </div>
+                <div>
+                    {dataPosts.map((item) => (
+                        <div className="border mb-3 container p-3">
+                            <h5>File name: {item.file_name}</h5>
+                            <h5>File id: {item.id}</h5>
+                            <h5>Timestamp: {item.timestamp}</h5>
+                            <h5>Author: {item.author_username}</h5>
+                            <button className="btn btn-success btn-sm" onClick={() => downloadCsv(item.id)}>
+                                Download
+                            </button>
+                        </div>
+                    ))}
+                </div>
 
                 <span>
                     <Link to="/community/organizations">
@@ -81,8 +81,8 @@ const OrganizationDetail = (props) =>{
     );
 }
 
-const mapStateToProps = state =>({
-    auth:state.auth,
+const mapStateToProps = state => ({
+    auth: state.auth,
 })
 
-export default connect(mapStateToProps,{downloadCsvFile})(OrganizationDetail);
+export default connect(mapStateToProps, { downloadCsvFile })(OrganizationDetail);

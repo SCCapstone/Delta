@@ -64,7 +64,7 @@ export class Register extends Component {
 
           <div className="col">
             <div className="card card-body mt-5">
-              <h2 className="text-center">Register</h2>
+              <h2 className="text-center" style={{ backgroundColor: '#86c5d8' }}>Register</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label>First Name</label>
@@ -74,6 +74,7 @@ export class Register extends Component {
                     name="first_name"
                     onChange={this.onChange}
                     value={first_name}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <div className="form-group">
@@ -84,6 +85,7 @@ export class Register extends Component {
                     name="last_name"
                     onChange={this.onChange}
                     value={last_name}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <div className="form-group">
@@ -94,6 +96,7 @@ export class Register extends Component {
                     name="username"
                     onChange={this.onChange}
                     value={username}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <div className="form-group">
@@ -104,6 +107,7 @@ export class Register extends Component {
                     name="email"
                     onChange={this.onChange}
                     value={email}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <div className="form-group">
@@ -114,6 +118,7 @@ export class Register extends Component {
                     name="password"
                     onChange={this.onChange}
                     value={password}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <div className="form-group">
@@ -124,6 +129,7 @@ export class Register extends Component {
                     name="password2"
                     onChange={this.onChange}
                     value={password2}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <div className="form-group">
@@ -135,6 +141,7 @@ export class Register extends Component {
                     onChange={this.onChange}
                     value={organization_key} // needs to change to organization
                     placeholder="Or leave blank if not a part of an organization."
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <br />

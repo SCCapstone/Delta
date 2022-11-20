@@ -24,7 +24,7 @@ export class Organizations extends Component {
     render() {
         return (
             <div className='card'>
-                <h1 className='card-title'>
+                <h1 className='card-title' style={{ flex: 1, backgroundColor: '#add8e6' }}>
                     Organization community
                 </h1>
                 <div className='row g-0'>
@@ -33,7 +33,7 @@ export class Organizations extends Component {
                         <div>
                             {this.state.data.map((item) => (
                                 <div className="border mb-3 container">
-                                    <div className = "row">
+                                    <div className="row">
                                         <div className='col-md-4'>
                                             <img
                                                 src='/media/Generic_Laboratory_Logo.png'
@@ -43,8 +43,8 @@ export class Organizations extends Component {
                                                 height='200'
                                             />
                                         </div>
-                                        <div className = 'col-md-8'>
-                                            <h3 className='card-title'>Organization: {item.name}</h3>
+                                        <div className='col-md-8'>
+                                            <h3 className='card-title' style={{ backgroundColor: '#f5fcff' }}>Organization: {item.name}</h3>
                                             <p className='card-text'>Id: {item.id}</p>
                                             <p className='card-text'>Creation time: {item.timestamp}</p>
                                             <p className='card-text'>Following users: {item.following_user_count}</p>

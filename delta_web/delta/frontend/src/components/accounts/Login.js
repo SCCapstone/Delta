@@ -48,6 +48,7 @@ export class Login extends Component {
                     name='username'
                     onChange={this.onChange}
                     value={username}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
 
                 </div>
@@ -59,6 +60,7 @@ export class Login extends Component {
                     name='password'
                     onChange={this.onChange}
                     value={password}
+                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <br />

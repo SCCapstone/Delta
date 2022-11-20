@@ -56,7 +56,7 @@ export class Organizations extends Component {
                                 </div>
                             ))}
                             <span>
-                                <Link to="/community/personal">
+                                <Link className="btn btn-secondary btn-sm" to="/community/personal">
                                     click to see personal
                                 </Link>
                             </span>

@@ -72,8 +72,8 @@ const OrganizationDetail = (props) =>{
             </div>
 
                 <span>
-                    <Link to="/community/organizations">
-                        back to organizations
+                    <Link className="btn btn-secondary btn-sm" to="/community/organizations">
+                        Back to Organizations
                     </Link>
                 </span>
             </div>

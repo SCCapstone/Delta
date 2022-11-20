@@ -44,7 +44,7 @@ export class Organizations extends Component {
                                             />
                                         </div>
                                         <div className='col-md-8'>
-                                            <h3 className='card-title' style={{ flex: 1, backgroundColor: '#f5fcff' }}>Organization: {item.name}</h3>
+                                            <h3 className='card-title' style={{ backgroundColor: '#f5fcff' }}>Organization: {item.name}</h3>
                                             <p className='card-text'>Id: {item.id}</p>
                                             <p className='card-text'>Creation time: {item.timestamp}</p>
                                             <p className='card-text'>Following users: {item.following_user_count}</p>

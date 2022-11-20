@@ -46,7 +46,7 @@ const OrganizationDetail = (props) => {
 
     return (
         <div className="card">
-            <div className="card-body">
+            <div className="card-body" style={{ backgroundColor: '#f5fcff' }}>
                 <h1 className="card-title" style={{ flex: 1, backgroundColor: '#add8e6' }}>Organization Name: {data.name}</h1>
                 <p className="card-text">User count: {data.following_user_count}</p>
                 <h4 className="card-title">

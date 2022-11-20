@@ -11,7 +11,7 @@ export class Personal extends Component {
                 </h1>
                 <CsvFileTable/>
                 <span>
-                    <Link to="/community/organizations">
+                    <Link className= "btn btn-secondary btn-sm" to="/community/organizations">
                         click to see organizations
                     </Link>
                 </span>

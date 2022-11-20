@@ -48,7 +48,7 @@ export class Organizations extends Component {
                                             <p className='card-text'>Id: {item.id}</p>
                                             <p className='card-text'>Creation time: {item.timestamp}</p>
                                             <p className='card-text'>Following users: {item.following_user_count}</p>
-                                            <Link to={`${item.id}`}>
+                                            <Link className="btn btn-secondary btn-sm" to={`${item.id}`}>
                                                 View
                                             </Link>
                                         </div>

@@ -12,7 +12,7 @@ export class Personal extends Component {
                 <CsvFileTable/>
                 <span>
                     <Link className= "btn btn-secondary btn-sm" to="/community/organizations">
-                        click to see organizations
+                        Click to see Organizations
                     </Link>
                 </span>
             </div>

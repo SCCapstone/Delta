@@ -28,7 +28,10 @@ export class Register extends Component {
     const { username, first_name, last_name, email, password, password2, organization_key } = this.state;
     if (password != password2) {
       this.props.createMessage({ passwordsDoNotMatch: 'Passwords do not match' })
-    } else {
+    } else if(first_name === '' || last_name === '' || email === ''){
+      this.props.createMessage({ passwordsDoNotMatch: 'Please fill all fields' })
+    }
+      else {
       // format a new user
       const newUser = {
         username,

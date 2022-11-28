@@ -41,7 +41,7 @@ export class Login extends Component {
               <h2 className='text-center' style={{ backgroundColor: '#86c5d8' }}>Login</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label>Username</label>
+                  <label style={{ fontWeight: 'bold' }}>Username</label>
                   <input
                     type="text"
                     className='form-control border-dark'
@@ -54,7 +54,7 @@ export class Login extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label>Password</label>
+                  <label style={{ fontWeight: 'bold' }}>Password</label>
                   <input
                     type="password"
                     className='form-control border-dark'

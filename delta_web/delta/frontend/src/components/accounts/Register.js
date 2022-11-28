@@ -150,7 +150,7 @@ export class Register extends Component {
                     Register
                   </button>
                 </div>
-                <p>
+                <p className='text-muted'>
                   Already have an account? <Link to="/login">Login</Link>
                 </p>
               </form>

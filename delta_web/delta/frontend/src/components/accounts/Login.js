@@ -72,7 +72,7 @@ export class Login extends Component {
                   </button>
                 </div>
                 <br />
-                <p>
+                <p className='text-muted'>
                   Don't have an account? <Link to='/register'>Register</Link>
                 </p>
               </form>

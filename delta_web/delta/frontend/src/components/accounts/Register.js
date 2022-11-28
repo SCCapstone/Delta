@@ -28,10 +28,10 @@ export class Register extends Component {
     const { username, first_name, last_name, email, password, password2, organization_key } = this.state;
     if (password != password2) {
       this.props.createMessage({ passwordsDoNotMatch: 'Passwords do not match' })
-    } else if(first_name === '' || last_name === '' || email === ''){
+    } else if (first_name === '' || last_name === '' || email === '') {
       this.props.createMessage({ passwordsDoNotMatch: 'Please fill all fields' })
     }
-      else {
+    else {
       // format a new user
       const newUser = {
         username,
@@ -70,7 +70,7 @@ export class Register extends Component {
                   <label>First Name</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="first_name"
                     onChange={this.onChange}
                     value={first_name}
@@ -81,7 +81,7 @@ export class Register extends Component {
                   <label>Last Name</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="last_name"
                     onChange={this.onChange}
                     value={last_name}
@@ -92,7 +92,7 @@ export class Register extends Component {
                   <label>Username</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="username"
                     onChange={this.onChange}
                     value={username}
@@ -103,7 +103,7 @@ export class Register extends Component {
                   <label>Email</label>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="email"
                     onChange={this.onChange}
                     value={email}
@@ -114,7 +114,7 @@ export class Register extends Component {
                   <label>Password</label>
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="password"
                     onChange={this.onChange}
                     value={password}
@@ -125,7 +125,7 @@ export class Register extends Component {
                   <label>Confirm Password</label>
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="password2"
                     onChange={this.onChange}
                     value={password2}
@@ -136,7 +136,7 @@ export class Register extends Component {
                   <label>Organization Key</label>
                   <input
                     type=""
-                    className="form-control"
+                    className="form-control border-dark"
                     name="organization_key" // needs to change to organization
                     onChange={this.onChange}
                     value={organization_key} // needs to change to organization

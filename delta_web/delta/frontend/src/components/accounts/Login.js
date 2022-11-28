@@ -57,7 +57,7 @@ export class Login extends Component {
                   <label>Password</label>
                   <input
                     type="password"
-                    className='form-control'
+                    className='form-control border-dark'
                     name='password'
                     onChange={this.onChange}
                     value={password}

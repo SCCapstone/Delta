@@ -67,7 +67,7 @@ export class Register extends Component {
               <h2 className="text-center" style={{ backgroundColor: '#86c5d8' }}>Register</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label>First Name</label>
+                  <label style={{ fontWeight: 'bold' }}>First Name</label>
                   <input
                     type="text"
                     className="form-control border-dark"
@@ -78,7 +78,7 @@ export class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Last Name</label>
+                  <label style={{ fontWeight: 'bold' }}>Last Name</label>
                   <input
                     type="text"
                     className="form-control border-dark"
@@ -89,7 +89,7 @@ export class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Username</label>
+                  <label style={{ fontWeight: 'bold' }}>Username</label>
                   <input
                     type="text"
                     className="form-control border-dark"
@@ -100,7 +100,7 @@ export class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Email</label>
+                  <label style={{ fontWeight: 'bold' }}>Email</label>
                   <input
                     type="email"
                     className="form-control border-dark"
@@ -111,7 +111,7 @@ export class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Password</label>
+                  <label style={{ fontWeight: 'bold' }}>Password</label>
                   <input
                     type="password"
                     className="form-control border-dark"
@@ -122,7 +122,7 @@ export class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Confirm Password</label>
+                  <label style={{ fontWeight: 'bold' }}>Confirm Password</label>
                   <input
                     type="password"
                     className="form-control border-dark"
@@ -133,7 +133,7 @@ export class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Organization Key</label>
+                  <label style={{ fontWeight: 'bold' }}>Organization Key</label>
                   <input
                     type=""
                     className="form-control border-dark"

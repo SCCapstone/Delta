@@ -77,6 +77,7 @@ export class Register extends Component {
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
                   <label style={{ fontWeight: 'bold' }}>Last Name</label>
                   <input
@@ -88,6 +89,7 @@ export class Register extends Component {
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
                   <label style={{ fontWeight: 'bold' }}>Username</label>
                   <input
@@ -99,6 +101,7 @@ export class Register extends Component {
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
                   <label style={{ fontWeight: 'bold' }}>Email</label>
                   <input
@@ -110,6 +113,7 @@ export class Register extends Component {
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
                   <label style={{ fontWeight: 'bold' }}>Password</label>
                   <input
@@ -121,6 +125,7 @@ export class Register extends Component {
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
                   <label style={{ fontWeight: 'bold' }}>Confirm Password</label>
                   <input
@@ -132,6 +137,7 @@ export class Register extends Component {
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
                   <label style={{ fontWeight: 'bold' }}>Organization Key</label>
                   <input
@@ -145,6 +151,7 @@ export class Register extends Component {
                   />
                 </div>
                 <br />
+
                 <div className="form-group">
                   <button type="submit" className="btn btn-primary">
                     Register

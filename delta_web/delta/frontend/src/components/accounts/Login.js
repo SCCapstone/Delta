@@ -44,7 +44,7 @@ export class Login extends Component {
                   <label>Username</label>
                   <input
                     type="text"
-                    className='form-control'
+                    className='form-control border-dark'
                     name='username'
                     onChange={this.onChange}
                     value={username}
@@ -52,6 +52,7 @@ export class Login extends Component {
                   />
 
                 </div>
+
                 <div className="form-group">
                   <label>Password</label>
                   <input
@@ -63,6 +64,7 @@ export class Login extends Component {
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <br />
                 <div className="form-group">
                   <button type='submit' className='btn btn-primary'>

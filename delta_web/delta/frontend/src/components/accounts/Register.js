@@ -28,10 +28,10 @@ export class Register extends Component {
     const { username, first_name, last_name, email, password, password2, organization_key } = this.state;
     if (password != password2) {
       this.props.createMessage({ passwordsDoNotMatch: 'Passwords do not match' })
-    } else if(first_name === '' || last_name === '' || email === ''){
+    } else if (first_name === '' || last_name === '' || email === '') {
       this.props.createMessage({ passwordsDoNotMatch: 'Please fill all fields' })
     }
-      else {
+    else {
       // format a new user
       const newUser = {
         username,
@@ -67,76 +67,82 @@ export class Register extends Component {
               <h2 className="text-center" style={{ backgroundColor: '#86c5d8' }}>Register</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label>First Name</label>
+                  <label style={{ fontWeight: 'bold' }}>First Name</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="first_name"
                     onChange={this.onChange}
                     value={first_name}
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label>Last Name</label>
+                  <label style={{ fontWeight: 'bold' }}>Last Name</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="last_name"
                     onChange={this.onChange}
                     value={last_name}
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label>Username</label>
+                  <label style={{ fontWeight: 'bold' }}>Username</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="username"
                     onChange={this.onChange}
                     value={username}
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label>Email</label>
+                  <label style={{ fontWeight: 'bold' }}>Email</label>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="email"
                     onChange={this.onChange}
                     value={email}
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label>Password</label>
+                  <label style={{ fontWeight: 'bold' }}>Password</label>
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="password"
                     onChange={this.onChange}
                     value={password}
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label>Confirm Password</label>
+                  <label style={{ fontWeight: 'bold' }}>Confirm Password</label>
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control border-dark"
                     name="password2"
                     onChange={this.onChange}
                     value={password2}
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label>Organization Key</label>
+                  <label style={{ fontWeight: 'bold' }}>Organization Key</label>
                   <input
                     type=""
-                    className="form-control"
+                    className="form-control border-dark"
                     name="organization_key" // needs to change to organization
                     onChange={this.onChange}
                     value={organization_key} // needs to change to organization
@@ -145,12 +151,13 @@ export class Register extends Component {
                   />
                 </div>
                 <br />
+
                 <div className="form-group">
                   <button type="submit" className="btn btn-primary">
                     Register
                   </button>
                 </div>
-                <p>
+                <p className='text-muted'>
                   Already have an account? <Link to="/login">Login</Link>
                 </p>
               </form>

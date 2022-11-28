@@ -41,10 +41,10 @@ export class Login extends Component {
               <h2 className='text-center' style={{ backgroundColor: '#86c5d8' }}>Login</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label>Username</label>
+                  <label style={{ fontWeight: 'bold' }}>Username</label>
                   <input
                     type="text"
-                    className='form-control'
+                    className='form-control border-dark'
                     name='username'
                     onChange={this.onChange}
                     value={username}
@@ -52,17 +52,19 @@ export class Login extends Component {
                   />
 
                 </div>
+
                 <div className="form-group">
-                  <label>Password</label>
+                  <label style={{ fontWeight: 'bold' }}>Password</label>
                   <input
                     type="password"
-                    className='form-control'
+                    className='form-control border-dark'
                     name='password'
                     onChange={this.onChange}
                     value={password}
                     style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
+
                 <br />
                 <div className="form-group">
                   <button type='submit' className='btn btn-primary'>
@@ -70,7 +72,7 @@ export class Login extends Component {
                   </button>
                 </div>
                 <br />
-                <p>
+                <p className='text-muted'>
                   Don't have an account? <Link to='/register'>Register</Link>
                 </p>
               </form>

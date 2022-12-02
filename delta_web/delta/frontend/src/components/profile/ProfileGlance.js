@@ -8,7 +8,7 @@ export class ProfileGlance extends Component {
     static propTypes = {
         auth:PropTypes.object.isRequired
     }
-
+    //This is the rendering for the profile at a glance page.
     render(){
         const {isAuthenticated, user} = this.props.auth;
         console.log(user);

@@ -10,7 +10,7 @@ export class ProfileGlance extends Component {
     }
     //This is the rendering for the profile at a glance page.
     render(){
-        const {isAuthenticated, user} = this.props.auth;
+        const {isAuthenticated, user} = this.props.auth; //Making sure that its the specific user thats information is displayed 
         console.log(user);
         return(
             <div className='container'>

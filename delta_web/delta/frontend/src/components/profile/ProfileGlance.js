@@ -13,6 +13,8 @@ export class ProfileGlance extends Component {
         const {isAuthenticated, user} = this.props.auth; //Making sure that its the specific user thats information is displayed 
         console.log(user);
         return(
+            //This is the main container that holds the information. User can view all their information without editing the
+            //fields. They can view their organizations and click on the link to go to their organizations page.
             <div className='container'>
                 <h1>
                     <center>Your Information</center>
@@ -48,7 +50,9 @@ export class ProfileGlance extends Component {
                     ))}
                 </div>
                 <br/>
+            
                 <span>
+                    
                     <Link className= "btn btn-info" to="/profile/detailed">
                         Click Update Profile
                     </Link>

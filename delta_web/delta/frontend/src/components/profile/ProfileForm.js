@@ -26,7 +26,7 @@ export class ProfileForm extends Component{
         // call function
         this.props.updateUser(data);
     }
-
+    //This is rendering the editing form, in which the user can edit their information.
     render(){
         const {
             username,

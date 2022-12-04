@@ -42,7 +42,9 @@ export class Header extends Component {
             </span>
           </li>
           <li className="nav-item">
+            //Second Link in navbar
             <span className="nav-link">
+              //Link goes to users profile at a glance screen
               <StyledLink to="/profile/glance">
                 <button type="button" className="btn btn-outline-secondary">
                   Profile

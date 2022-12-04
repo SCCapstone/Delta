@@ -26,6 +26,7 @@ export class Header extends Component {
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
+      //Create the innver Navbar object that hosts the links
       <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
         <ul className="navbar-nav">
           <li className="nav-item">

@@ -34,6 +34,7 @@ export class Header extends Component {
             <span className="nav-link">
               //Links to the homepage
               <StyledLink to="/">
+                //Creates a button for the link, go here to style button
                 <button type="button" className="btn btn-outline-secondary">
                   Home
                 </button>

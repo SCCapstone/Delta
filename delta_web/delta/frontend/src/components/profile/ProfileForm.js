@@ -22,7 +22,11 @@ export class ProfileForm extends Component{
     }
     onChange = e => this.setState(
         {[e.target.name]:e.target.value}
-    )
+    ) 
+    /* 
+    * This defines the actions on what happens when a user click on the submit button.
+    * The function gets called and updates the users information.
+    */
     onSubmit = e =>{
         e.preventDefault();
         const data = this.state;

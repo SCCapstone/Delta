@@ -36,7 +36,7 @@ export class ProfileForm extends Component{
             password
         } = this.state;
         const {isAuthenticated, user} = this.props.auth;
-
+    //This form allows for edited information to be submitted to the backend
         return (
             <form onSubmit = {this.onSubmit}>
                 <div>

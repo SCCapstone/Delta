@@ -65,17 +65,22 @@ export class Header extends Component {
               </StyledLink>
             </span>
           </li>
+          //Fourth link on navbar
           <li className="nav-item">
             <span className="nav-link">
+              //Goes to the user's community page
               <StyledLink to="/community/personal">
+                //Button styling for the community page
                 <button type="button" className="btn btn-outline-secondary">
                   Community
                 </button>
               </StyledLink>
             </span>
           </li>
+          //Fifth button on navbar
           <li className="nav-item">
             <span className="nav-link">
+              //Button which logs the user out
               <button
                 className="btn btn-outline-secondary"
                 onClick={this.props.logout}

@@ -46,6 +46,7 @@ export class Header extends Component {
             <span className="nav-link">
               //Link goes to users profile at a glance screen
               <StyledLink to="/profile/glance">
+                //Button styling for the profile link
                 <button type="button" className="btn btn-outline-secondary">
                   Profile
                 </button>
@@ -57,6 +58,7 @@ export class Header extends Component {
             <span className="nav-link">
               //Goes to the download page
               <StyledLink to="/data/download">
+                //Button styling for the download page link
                 <button type="button" className="btn btn-outline-secondary">
                   Data
                 </button>

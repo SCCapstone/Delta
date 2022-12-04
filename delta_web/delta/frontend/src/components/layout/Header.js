@@ -52,8 +52,10 @@ export class Header extends Component {
               </StyledLink>
             </span>
           </li>
+          //Third Link on navbar
           <li className="nav-item">
             <span className="nav-link">
+              //Goes to the download page
               <StyledLink to="/data/download">
                 <button type="button" className="btn btn-outline-secondary">
                   Data

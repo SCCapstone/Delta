@@ -96,8 +96,10 @@ export class Header extends Component {
       </nav>
     );
     const guestLinks = (
+      //Creates the links that a guest user will see before they sign up or log in
       <ul className="navbar-nav  mr-auto">
         <li className="nav-item">
+          //First link which takes user to register page
           <StyledLink to="/register" className="nav-link">
             <button type="button" className="btn btn-outline-secondary">
               Register
@@ -105,6 +107,7 @@ export class Header extends Component {
           </StyledLink>
         </li>
         <li className="nav-item">
+          //Second link which takes user to the login page
           <StyledLink to="/Login" className="nav-link">
             <button type="button" className="btn btn-outline-secondary">
               Login

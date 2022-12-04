@@ -9,7 +9,10 @@ export class ProfileForm extends Component{
         auth:PropTypes.object.isRequired,
         updateUser:PropTypes.func.isRequired
     }
-
+    /*
+    * These are the different information that is for the specified user. 
+    * It pulls the information stored in the backend. 
+    */
     state = {
         username: this.props.auth.user.username,
         first_name: this.props.auth.user.first_name,

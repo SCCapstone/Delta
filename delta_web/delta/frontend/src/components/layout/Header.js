@@ -32,6 +32,7 @@ export class Header extends Component {
           <li className="nav-item">
             //First link in navbar
             <span className="nav-link">
+              //Links to the homepage
               <StyledLink to="/">
                 <button type="button" className="btn btn-outline-secondary">
                   Home

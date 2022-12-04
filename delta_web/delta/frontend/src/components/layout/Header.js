@@ -26,15 +26,16 @@ export class Header extends Component {
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
-      //Create the innver Navbar object that hosts the links
+      /*
+      Create the innver Navbar object that hosts the links
+      Each nav-item is a new link on the navbar
+      Each button is where the button stylization will be held
+      */
       <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
         <ul className="navbar-nav">
           <li className="nav-item">
-            //First link in navbar
             <span className="nav-link">
-              //Links to the homepage
               <StyledLink to="/">
-                //Creates a button for the link, go here to style button
                 <button type="button" className="btn btn-outline-secondary">
                   Home
                 </button>
@@ -42,45 +43,34 @@ export class Header extends Component {
             </span>
           </li>
           <li className="nav-item">
-            //Second Link in navbar
             <span className="nav-link">
-              //Link goes to users profile at a glance screen
               <StyledLink to="/profile/glance">
-                //Button styling for the profile link
                 <button type="button" className="btn btn-outline-secondary">
                   Profile
                 </button>
               </StyledLink>
             </span>
           </li>
-          //Third Link on navbar
           <li className="nav-item">
             <span className="nav-link">
-              //Goes to the download page
               <StyledLink to="/data/download">
-                //Button styling for the download page link
                 <button type="button" className="btn btn-outline-secondary">
                   Data
                 </button>
               </StyledLink>
             </span>
           </li>
-          //Fourth link on navbar
           <li className="nav-item">
             <span className="nav-link">
-              //Goes to the user's community page
               <StyledLink to="/community/personal">
-                //Button styling for the community page
                 <button type="button" className="btn btn-outline-secondary">
                   Community
                 </button>
               </StyledLink>
             </span>
           </li>
-          //Fifth button on navbar
           <li className="nav-item">
             <span className="nav-link">
-              //Button which logs the user out
               <button
                 className="btn btn-outline-secondary"
                 onClick={this.props.logout}
@@ -99,7 +89,6 @@ export class Header extends Component {
       //Creates the links that a guest user will see before they sign up or log in
       <ul className="navbar-nav  mr-auto">
         <li className="nav-item">
-          //First link which takes user to register page
           <StyledLink to="/register" className="nav-link">
             <button type="button" className="btn btn-outline-secondary">
               Register
@@ -107,7 +96,6 @@ export class Header extends Component {
           </StyledLink>
         </li>
         <li className="nav-item">
-          //Second link which takes user to the login page
           <StyledLink to="/Login" className="nav-link">
             <button type="button" className="btn btn-outline-secondary">
               Login

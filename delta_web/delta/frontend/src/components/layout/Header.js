@@ -26,6 +26,11 @@ export class Header extends Component {
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
+      /*
+      Create the innver Navbar object that hosts the links
+      Each nav-item is a new link on the navbar
+      Each button is where the button stylization will be held
+      */
       <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
         <ul className="navbar-nav">
           <li className="nav-item">
@@ -81,6 +86,7 @@ export class Header extends Component {
       </nav>
     );
     const guestLinks = (
+      //Creates the links that a guest user will see before they sign up or log in
       <ul className="navbar-nav  mr-auto">
         <li className="nav-item">
           <StyledLink to="/register" className="nav-link">

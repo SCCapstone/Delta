@@ -18,7 +18,7 @@ export class Dashboard extends Component {
     const { isAuthenticated, user } = this.props.auth;
     //Defines the values that will be held within the daily graph
     const daily_graph = {
-      labels: [0, 2, 4, 6, 8, 10, 12],
+      labels: [0, 2, 4, 6, 8, 10, 12], //X values of daily graph, hours in this case
       datasets: [
         {
           label: user.username,
@@ -38,7 +38,7 @@ export class Dashboard extends Component {
     };
     //Defines the details that will be in the weekly graph
     const weekly_graph = {
-      labels: [1, 2, 3, 4, 5, 6, 7],
+      labels: [1, 2, 3, 4, 5, 6, 7], //X values of the graph, days of the week in this case
       datasets: [
         {
           label: user.username,
@@ -56,9 +56,9 @@ export class Dashboard extends Component {
         },
       ],
     };
-
+    // Monthly grpah values
     const monthly_graph = {
-      labels: [1, 5, 10, 15, 20, 25, 30],
+      labels: [1, 5, 10, 15, 20, 25, 30], //monthly graph x values
       datasets: [
         {
           label: user.username,

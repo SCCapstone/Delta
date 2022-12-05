@@ -24,14 +24,14 @@ export class Dashboard extends Component {
           label: user.username,
           backgroundColor: "rgb(6, 132, 164)",
           borderColor: "rgb(6, 132, 164)",
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: [0, 10, 5, 2, 20, 30, 45], //User data for daily graph
           lineTension: 0.5,
         },
         {
           label: "Average",
           backgroundColor: "rgb(51, 204, 242)",
           borderColor: "rgb(51, 204, 242)",
-          data: [0, 4, 6, 7, 3, 16, 10],
+          data: [0, 4, 6, 7, 3, 16, 10], // General data for daily graph
           lineTension: 0.5,
         },
       ],
@@ -44,14 +44,14 @@ export class Dashboard extends Component {
           label: user.username,
           backgroundColor: "rgb(6, 132, 164)",
           borderColor: "rgb(6, 132, 164)",
-          data: [0, 5, 13, 16, 20, 25, 15], //Data for daily graph
+          data: [0, 5, 13, 16, 20, 25, 15], // User Data for daily graph
           lineTension: 0.5,
         },
         {
           label: "Average",
           backgroundColor: "rgb(51, 204, 242)",
           borderColor: "rgb(51, 204, 242)",
-          data: [0, 4, 6, 7, 3, 16, 10], //Data for weekly graph
+          data: [0, 4, 6, 7, 3, 16, 10], // General Data for weekly graph
           lineTension: 0.5,
         },
       ],
@@ -64,20 +64,25 @@ export class Dashboard extends Component {
           label: user.username,
           backgroundColor: "rgb(6, 132, 164)",
           borderColor: "rgb(6, 132, 164)",
-          data: [0, 5, 10, 9, 17, 28, 20], //Data for monthly graph
+          data: [0, 5, 10, 9, 17, 28, 20], //User Data for monthly graph
           lineTension: 0.5,
         },
         {
           label: "Average",
           backgroundColor: "rgb(51, 204, 242)",
           borderColor: "rgb(51, 204, 242)",
-          data: [0, 4, 3, 9, 4, 15, 13],
+          data: [0, 4, 3, 9, 4, 15, 13], //General Data for monthly graph
           lineTension: 0.5,
         },
       ],
     };
 
     return (
+      /*
+      Breaks the screen into three separate columns
+      Each column will be filled with a graph going from left to right
+      being the daily, weekly, and monthly user graph,
+      */
       <div className="pt-3">
         <h1>
           Welcome back <strong>{user.username}</strong>.

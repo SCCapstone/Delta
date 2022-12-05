@@ -44,14 +44,14 @@ export class Dashboard extends Component {
           label: user.username,
           backgroundColor: "rgb(6, 132, 164)",
           borderColor: "rgb(6, 132, 164)",
-          data: [0, 5, 13, 16, 20, 25, 15],
+          data: [0, 5, 13, 16, 20, 25, 15], //Data for daily graph
           lineTension: 0.5,
         },
         {
           label: "Average",
           backgroundColor: "rgb(51, 204, 242)",
           borderColor: "rgb(51, 204, 242)",
-          data: [0, 4, 6, 7, 3, 16, 10],
+          data: [0, 4, 6, 7, 3, 16, 10], //Data for weekly graph
           lineTension: 0.5,
         },
       ],
@@ -64,7 +64,7 @@ export class Dashboard extends Component {
           label: user.username,
           backgroundColor: "rgb(6, 132, 164)",
           borderColor: "rgb(6, 132, 164)",
-          data: [0, 5, 10, 9, 17, 28, 20],
+          data: [0, 5, 10, 9, 17, 28, 20], //Data for monthly graph
           lineTension: 0.5,
         },
         {

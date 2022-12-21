@@ -31,7 +31,6 @@ export class Header extends Component {
       Each nav-item is a new link on the navbar
       Each button is where the button stylization will be held
       */
-      <nav className="navbar navbar-expand-lg navbar-dark bg-light mr-auto">
         <ul className="navbar-nav">
           <li className="nav-item">
             <span className="nav-link">
@@ -83,7 +82,6 @@ export class Header extends Component {
                     <strong>{user ? `Welcome ${user.username}` : ""}</strong>
                 </span> */}
         </ul>
-      </nav>
     );
     const guestLinks = (
       //Creates the links that a guest user will see before they sign up or log in
@@ -106,10 +104,25 @@ export class Header extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-lg bg-light navbar-dark">
-        <div className="container">
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
+      // <nav className="navbar navbar-expand-lg bg-light navbar-dark">
+      //   <div className="container">
+      //     <div className="navbar-header">
+      //       <button type="button" className="navbar-toggle" data-toggle="collapse" data-target = ".navbar-collapse"></button>
+      //     </div>
+      //     <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      //       <ul className="navbar-nav mr-auto">
+      //         {isAuthenticated ? authLinks : guestLinks}
+      //       </ul>
+      //     </div>
+      //   </div>
+      // </nav>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div class = "container">
+          <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarToggler">
+            <ul className="navbar-nav mr-auto mt-2 mt-md-0">
               {isAuthenticated ? authLinks : guestLinks}
             </ul>
           </div>

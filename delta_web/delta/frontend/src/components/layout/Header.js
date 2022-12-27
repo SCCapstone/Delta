@@ -1,12 +1,13 @@
 // navbar
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useLocation} from "react-router-dom";
 
 // need to check if logged in, so need redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 import styled from "styled-components";
+
 
 const StyledLink = styled(Link)`
   color: black;

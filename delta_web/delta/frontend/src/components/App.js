@@ -1,6 +1,7 @@
+import "./App.css";
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter as Router, Route,Routes, Redirect} from 'react-router-dom';
+import {HashRouter as Router, Route,Routes} from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute';
 
 import { Provider as AlertProvider } from "react-alert";

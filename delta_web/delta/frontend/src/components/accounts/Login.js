@@ -38,30 +38,30 @@ export class Login extends Component {
 
           <div className="col">
             <div className="card card-body mt-5">
-              <h2 className='text-center' style={{ backgroundColor: '#86c5d8' }}>Login</h2>
+              <h2 className='text-center' >Login</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Username</label>
+                  <label >Username</label>
                   <input
                     type="text"
                     className='form-control border-dark'
                     name='username'
                     onChange={this.onChange}
                     value={username}
-                    style={{ backgroundColor: '#f5fcff' }}
+                    
                   />
 
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Password</label>
+                  <label >Password</label>
                   <input
                     type="password"
                     className='form-control border-dark'
                     name='password'
                     onChange={this.onChange}
                     value={password}
-                    style={{ backgroundColor: '#f5fcff' }}
+                    
                   />
                 </div>
 

@@ -12,18 +12,19 @@ from organizations.serializers import OrganizationSerializer
 
 
 # Register API
+# Used to register new users.
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
-    # CHANGE HERE: added organization_key variable and assignment
-    
+    # Handling post request
     def post(self,request,*args, **kwargs):
 
         serializer = self.get_serializer(data=request.data)
+
         # send back any errors that are needed
         serializer.is_valid(raise_exception=True)
         
-        # MAKE SURE TO UNCOMMENT THE NEXT LINE TO ACTUALLY SAVE THE USER
+        # Save the new user
         user = serializer.save()
 
         # grab the organization key 
@@ -54,6 +55,7 @@ class RegisterAPI(generics.GenericAPIView):
         })
 
 # Login API
+# Used to login existing user 
 class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
@@ -72,6 +74,7 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 # deletion api
+# Used to delete an existing user
 class DeleteAPI(generics.DestroyAPIView):
     permission_classes = [
         permissions.IsAuthenticated
@@ -91,8 +94,11 @@ class DeleteAPI(generics.DestroyAPIView):
         return Response({
             "message":"Account " + request.user.username + " has successfully been deleted."
         })
-# deletion api
+
+# Update API
+# Used to update an existing user
 class UpdateAPI(generics.UpdateAPIView):
+
     permission_classes = [
         permissions.IsAuthenticated
     ]
@@ -108,28 +114,34 @@ class UpdateAPI(generics.UpdateAPIView):
         strNewLastName = request.data.get("last_name",None)
         strNewPassword = request.data.get("password",None)
 
+        # Perform tests on username
         if(strNewUserName):
+            # Try to save new user, raise exception if already have user with username
             try:
                 request.user.username = strNewUserName
                 request.user.save()
             except Exception as e:
                 print(e)
                 return Response(data = {"message":"A user with that username already exists."},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # Perform tests on email
         if(strNewEmail):
             try:
+                # Try to save new email, raise exception if email already exists
                 request.user.email = strNewEmail
                 request.user.save()
             except Exception as e:
                 print(e)
                 return Response(data={"message":"Error with email."},status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # First name last name do not have to be unique
         if(strNewFirstName) :
             request.user.first_name = strNewFirstName
         if(strNewLastName):
             request.user.last_name = strNewLastName
         if(strNewPassword):
             request.user.set_password(strNewPassword)
-        request.user.save()
 
+        # Save the changes
+        request.user.save()
 
         return Response({
             # give the serialized user
@@ -137,6 +149,7 @@ class UpdateAPI(generics.UpdateAPIView):
         })
 
 # Get User API
+# Retrieve instance of user
 class UserAPI(generics.RetrieveAPIView):
     # this route needs protection
     # need a valid token to view
@@ -148,6 +161,7 @@ class UserAPI(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
+    # Get the registered organizations of the user
     @action(methods=['get'],detail=True)
     def registered_orgs(self,request,*args,**kwargs):
         instance = self.get_object()

@@ -8,8 +8,11 @@ from organizations.serializers import OrganizationSerializer
 
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
+    # Number of followed organizations
     followed_organization_count = serializers.SerializerMethodField()
+    # The followed organizations
     followed_organizations = serializers.SerializerMethodField()
+
     class Meta:
         model = User
         fields = ('id','username','email','first_name','last_name','followed_organization_count','followed_organizations')
@@ -24,13 +27,11 @@ class UserSerializer(serializers.ModelSerializer):
         serializer = OrganizationSerializer(listOrgs,many=True)
         return serializer.data
 
-    
-
 # Register serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','username','first_name','last_name','email','password',) # add org stuff here?
+        fields = ('id','username','first_name','last_name','email','password',) 
         extra_kwargs = {'password':{'write_only':True}}
 
     def create(self, validated_data):
@@ -39,8 +40,6 @@ class RegisterSerializer(serializers.ModelSerializer):
                                         last_name=validated_data['last_name'],
                                         email=validated_data['email'],
                                         password=validated_data['password'])
-
-                                         # add org stuff here?
         return user
 
 # Login serializer

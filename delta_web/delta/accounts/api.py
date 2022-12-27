@@ -6,10 +6,10 @@ from rest_framework import status
 from rest_framework.decorators import action
 from knox.models import AuthToken
 from .serializers import UserSerializer,RegisterSerializer,LoginSerializer
-from django.db.utils import IntegrityError
-
 from organizations.serializers import OrganizationSerializer
 
+# Email validation
+from email_validator import validate_email, EmailNotValidError
 
 # Register API
 # Used to register new users.
@@ -126,12 +126,12 @@ class UpdateAPI(generics.UpdateAPIView):
         # Perform tests on email
         if(strNewEmail):
             try:
+                v = validate_email(strNewEmail)
                 # Try to save new email, raise exception if email already exists
                 request.user.email = strNewEmail
                 request.user.save()
             except Exception as e:
-                print(e)
-                return Response(data={"message":"Error with email."},status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(data={"message":str(e)},status = status.HTTP_500_INTERNAL_SERVER_ERROR)
         # First name last name do not have to be unique
         if(strNewFirstName) :
             request.user.first_name = strNewFirstName

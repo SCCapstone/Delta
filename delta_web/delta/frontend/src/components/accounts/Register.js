@@ -64,82 +64,76 @@ export class Register extends Component {
 
           <div className="col">
             <div className="card card-body mt-5">
-              <h2 className="text-center" style={{ backgroundColor: '#86c5d8' }}>Register</h2>
+              <h2 className="text-center">Register</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>First Name</label>
+                  <label >First Name</label>
                   <input
                     type="text"
                     className="form-control border-dark"
                     name="first_name"
                     onChange={this.onChange}
                     value={first_name}
-                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Last Name</label>
+                  <label>Last Name</label>
                   <input
                     type="text"
                     className="form-control border-dark"
                     name="last_name"
                     onChange={this.onChange}
                     value={last_name}
-                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Username</label>
+                  <label>Username</label>
                   <input
                     type="text"
                     className="form-control border-dark"
                     name="username"
                     onChange={this.onChange}
                     value={username}
-                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Email</label>
+                  <label>Email</label>
                   <input
                     type="email"
                     className="form-control border-dark"
                     name="email"
                     onChange={this.onChange}
                     value={email}
-                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Password</label>
+                  <label>Password</label>
                   <input
                     type="password"
                     className="form-control border-dark"
                     name="password"
                     onChange={this.onChange}
                     value={password}
-                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Confirm Password</label>
+                  <label>Confirm Password</label>
                   <input
                     type="password"
                     className="form-control border-dark"
                     name="password2"
                     onChange={this.onChange}
                     value={password2}
-                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontWeight: 'bold' }}>Organization Key</label>
+                  <label>Organization Key</label>
                   <input
                     type=""
                     className="form-control border-dark"
@@ -147,7 +141,6 @@ export class Register extends Component {
                     onChange={this.onChange}
                     value={organization_key} // needs to change to organization
                     placeholder="Or leave blank if not a part of an organization."
-                    style={{ backgroundColor: '#f5fcff' }}
                   />
                 </div>
                 <br />

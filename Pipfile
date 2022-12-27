@@ -12,6 +12,7 @@ django-filter = "*"
 django-rest-knox = "*"
 gunicorn = "*"
 whitenoise = "*"
+email-validator = "*"
 
 [dev-packages]
 

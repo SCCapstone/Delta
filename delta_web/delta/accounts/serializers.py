@@ -14,6 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
     followed_organizations = serializers.SerializerMethodField()
 
     class Meta:
+        # Need unique validator on name and email https://stackoverflow.com/a/38160343/12939325
         model = User
         fields = ('id','username','email','first_name','last_name','followed_organization_count','followed_organizations')
         # cant change id

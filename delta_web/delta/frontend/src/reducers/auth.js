@@ -8,7 +8,6 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    USER_UPDATE_FAIL,
     USER_UPDATE_SUCCESS
 } from "../actions/types"
 

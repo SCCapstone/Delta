@@ -30,7 +30,6 @@ class Organization(models.Model):
 
     description = models.TextField(blank=True,null=True)
     
-
     # TODO:
     # add a code so that you can only join if know the code
     # or some other method of entry

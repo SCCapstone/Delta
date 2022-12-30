@@ -7,15 +7,15 @@ import {connect, Connect} from 'react-redux';
 import PropTypes from "prop-types";
 
 // see: https://stackoverflow.com/questions/69923420/how-to-use-private-route-in-react-router-domv6
-const PrivateRoute = ({auth:{isAuthenticated},children}) => {
-    /*
-    THIS IS LIKELY WHY EVERYTHING GOES BACK TO LOGIN
-    */
-    return isAuthenticated ? children : <Navigate to = "/login"/>;
+const PrivateRoute = ({isAuthenticated,children}) => {
+    if(!isAuthenticated){
+        return <Navigate to ="/login" />
+    }
+    return children;
 }
 
-const mapStateToProps = state =>({
-    auth:state.auth
+const mapStateToProps = (state) =>({
+    isAuthenticated:state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

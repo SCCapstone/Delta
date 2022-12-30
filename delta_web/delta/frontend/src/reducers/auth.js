@@ -14,9 +14,9 @@ import {
 const initialState = {
     // token stored in local storage
     token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    isAuthenticated:localStorage.getItem('isAuthenticated'),
     isLoading: false,
-    user: null,
+    user: localStorage.getItem('user'),
 }
 
 export default function(state=initialState, action){
@@ -24,6 +24,8 @@ export default function(state=initialState, action){
         case USER_LOADING:
             return {...state, isLoading:true};
         case USER_LOADED:
+            localStorage.setItem('user',action.payload);
+            localStorage.setItem('isAuthenticated',true);
             return {
                 ...state,
                 isAuthenticated: true,

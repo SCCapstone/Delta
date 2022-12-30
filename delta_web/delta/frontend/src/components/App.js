@@ -34,9 +34,13 @@ import DataUpload from "./data_transfer/DataUpload";
 
 // private routes
 
-import { createDispatchHook, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from "../store";
 import {loadUser} from '../actions/auth';
+
+// react 18
+// https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
+import {createRoot} from "react-dom/client";
 
 // Alert options
 const alertOptions = {
@@ -50,6 +54,7 @@ class App extends Component{
         store.dispatch(loadUser());
     };
 
+
     render(){
         return(
             <Provider store={store}>
@@ -58,8 +63,6 @@ class App extends Component{
                         <Fragment>
                             <Header/>
                             <Alerts/>
-                            <div className="container">
-                                
                                 <Routes>
                                     <Route exact path ="/" element= {
                                         <PrivateRoute>
@@ -117,7 +120,6 @@ class App extends Component{
                                         <Login/>
                                     }/>
                                 </Routes>
-                            </div>
                         </Fragment>
                     </Router>
                 </AlertProvider>
@@ -126,4 +128,8 @@ class App extends Component{
     }
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<App />);
+
+// ReactDOM.render(<App />, document.getElementById("app"));

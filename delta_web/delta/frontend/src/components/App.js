@@ -85,7 +85,7 @@ class App extends Component{
                                             <CommunityPersonal/>
                                         </PrivateRoute>
                                     }/>
-                                    <Route exact path ={"/community/personal/csvs/:id"} element={
+                                    <Route exact path ={"/csvs/:id"} element={
                                         <PrivateRoute>
                                             <CsvFileDetail/>
                                         </PrivateRoute>

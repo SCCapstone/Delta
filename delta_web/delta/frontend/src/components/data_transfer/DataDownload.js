@@ -5,7 +5,7 @@ import PublicCsvFileTable from './PublicCsvFileTable';
 export class DataDownload extends Component {
     render(){
         return(
-            <div>
+            <div className="container">
                 <h1>
                     Download Page  
                 </h1>

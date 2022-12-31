@@ -108,6 +108,9 @@ export const getCsvFilesPublic = () => (dispatch,getState) =>{
 
 // DOWNLOAD A FILE
 //  id is of file object
+// TODO: Make sure that you can only download files that are public
+// or under your organization
+// or are yours
 export const downloadCsvFile = (id) => (dispatch, getState) =>{
     axios.get(`/api/public_csvs/${id}/download`,tokenConfig(getState))
     .then(res=>{

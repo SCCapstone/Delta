@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import {connect} from 'react-redux';
 import {getCsvFile,deleteCsvFile} from "../../actions/file";
 import {useEffect} from 'react'
-// import CsvFileForm from './CsvFileForm';
-
-// https://ui.dev/react-router-url-parameters
 
 import {
     useParams
@@ -22,6 +19,10 @@ const CsvFileDetail = (props) => {
         setCsvFile(res.data);
       })
     },[])
+
+    const clickDelete = () =>{
+      props.deleteCsvFile(id);
+    }
 
     // should return some spinner
     if(csvFile == null) return;
@@ -74,17 +75,12 @@ const CsvFileDetail = (props) => {
                 type="text" 
                 ></input>
               </div>
-              
-              
-              {/* <CsvFileForm  id={csvFile.id} 
-                            original_file_name={csvFile.file_name} 
-                            original_description={csvFile.description}
-                            original_is_public={csvFile.is_public} />    */}
-
-              <a role="button" href="/#/community/personal" className="btn btn-danger">
-                Cancel
+              <button role="button" onClick={clickDelete} className = "btn btn-danger">
+                Delete
+              </button>
+              <a role="button" href="/#/community/personal" className="btn">
+                Back
               </a>           
-
             </div>
           <h1>
           </h1>

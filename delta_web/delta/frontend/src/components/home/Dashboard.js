@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
-import Form from "./Form";
-import DataAccel from "./DataAccel";
-
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ProfileGlance from "../profile/ProfileGlance";

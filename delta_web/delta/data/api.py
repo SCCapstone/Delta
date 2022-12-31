@@ -1,6 +1,5 @@
 # import necessary models
 from django.http import FileResponse
-from .models import DataAccel
 from .models import CSVFile
 from rest_framework import status,renderers
 from rest_framework.decorators import action
@@ -21,24 +20,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 
 # import necessary serializers
-from .serializers import SerializerCSVFile, SerializerDataAccel
+from .serializers import SerializerCSVFile
 
-# data accel viewset
-# create a full CRUD api w/o having to specify explict methods
-class ViewsetDataAccel(viewsets.ModelViewSet):
-    queryset = DataAccel.objects.all()
-
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
-
-    serializer_class = SerializerDataAccel
-
-    def get_queryset(self):
-        return self.request.user.data_accels.all()
-    
-    def perform_create(self,serializer):
-        serializer.save(author=self.request.user)
 #https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
 class PassthroughRenderer(renderers.BaseRenderer):
     media_type = 'text/csv'

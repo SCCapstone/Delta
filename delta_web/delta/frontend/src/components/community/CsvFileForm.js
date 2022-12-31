@@ -83,9 +83,6 @@ export class CsvFileForm extends Component{
 
                 </div>
 
-              
-
-
                 <div className="form-check">
                   <input  className="form-check-input" type="radio" name="is_public" 
                           id="publicRadio" value="public" checked={this.state.is_public} onChange={this.onRadioChange} />

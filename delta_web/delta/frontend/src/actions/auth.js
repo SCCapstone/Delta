@@ -176,7 +176,7 @@ export const updateUser = ({ username, first_name, last_name, password, email })
 
 // Setup config with token - helper function
 // arrow func that takes in getState
-export const tokenConfig = getState => {
+export const tokenConfig = (getState) => {
     // get token from state
     // looking at auth reducer and getting that token 
     const token = getState().auth.token;

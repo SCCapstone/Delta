@@ -1,67 +1,55 @@
-import React, { Component, Fragment } from 'react';
+import axios from 'axios';
+import React, {useEffect, useState,} from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import { tokenConfig } from '../../actions/auth';
 import {getCsvFiles,deleteCsvFile} from '../../actions/file'; 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 // https://ui.dev/react-router-url-parameters
 
-export class CsvFileTable extends Component {
-  static propTypes = {
-    csvFiles:PropTypes.array.isRequired,
-    deleteCsvFile:PropTypes.func.isRequired,
-  };
+const CsvFileTable = (props) =>{
 
-  componentDidMount(){
-    this.props.getCsvFiles();
-  }
+  var [csvFiles,setCsvFiles] = useState(null);
 
-  render() {
-    return (
-      <Fragment>
-        <h2>Your Csv Files</h2>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>File Id</th>
-              <th>File Name</th>
-              <th>Upload Date</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            { this.props.csvFiles.map(data => (
-              <tr key={data.id}>
-                <td>{data.id}</td>
-                <td>{data.file_name}</td>
-                <td>{data.timestamp}</td>
-                <td>
-                  <a role="button" href={`/#/community/personal/csvs/${data.id}`} className="btn btn-sm btn-success">
-                    Edit
-                  </a> 
-                </td>
-                <td>
-                  <button className="btn btn-danger btn-sm"
-                    onClick={this.props.deleteCsvFile.bind(this,data.id)}
-                  >
-                    Delete
-                  </button>
-                  </td>
+  useEffect(()=>{
+    axios.get('/api/csv/',{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
+    .then(res=>{
+      setCsvFiles(res.data);
+    })
+  },[])
+
+  // probably should return some spinner
+  if(csvFiles == null) return;
+
+  return (
+    <div>
+      <h2>Your Csv Files</h2>
+        {csvFiles.map(data=>(
+          <table className = "table table-striped">
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Upload Date</th>
+                <th>View</th>
               </tr>
-            )) }
-          </tbody>
-        </table>
-      </Fragment>
-    )
-  }
+            </thead>
+            <tbody>
+              <tr key = {data.id}>
+                <th>{data.file_name}</th>
+                <th>{data.timestamp}</th>
+                <Link to = {`/community/personal/csvs/${data.id}`}>
+                  View File
+                </Link>
+              </tr>
+            </tbody>
+          </table>
+        ))}
+    </div>
+  )
 }
 
 const mapStateToProps = state => ({
-  csvFiles: state.csvFile.csvFile
+    auth:state.auth,
 });
 
-export default connect(
-  mapStateToProps,
-    {getCsvFiles,deleteCsvFile}
-    )(CsvFileTable);
+export default connect(mapStateToProps,{getCsvFiles})(CsvFileTable);

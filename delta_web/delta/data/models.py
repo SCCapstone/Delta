@@ -14,17 +14,6 @@ import os
 
 User = get_user_model()
 
-# hold acceleration data
-class DataAccel(models.Model):
-    author = models.ForeignKey(
-        User,related_name="data_accels",on_delete=models.CASCADE,
-        null=True
-    )
-    file_path = models.CharField(max_length=300)
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-
-
 # wrapper for CSV file.
 # NOTE: if ever change directory structure, will have to update every file.
 # this could get annoying!

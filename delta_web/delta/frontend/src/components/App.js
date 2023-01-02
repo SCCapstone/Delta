@@ -26,12 +26,14 @@ import ProfileDetailed from "./profile/ProfileDetailed";
 import {Personal as CommunityPersonal} from "./community/Personal"
 import {Organizations as CommunityOrganizations} from "./community/Organizations"
 import OrganizationDetail from "./community/OrganizationDetail"
-import CsvFileDetail from "./community/CsvFileDetail";
+
+// csvFiles
+import CsvFileDetail from "./csvFile/CsvFileDetail";
+import CsvFileEdit from "./csvFile/CsvFileEdit";
 
 // data page
 import {DataDownload} from "./data_transfer/DataDownload";
 import DataUpload from "./data_transfer/DataUpload";
-
 // private routes
 
 import { Provider } from 'react-redux';
@@ -63,6 +65,7 @@ class App extends Component{
                         <Fragment>
                             <Header/>
                             <Alerts/>
+                                <br/>
                                 <Routes>
                                     <Route exact path ="/" element= {
                                         <PrivateRoute>
@@ -88,6 +91,11 @@ class App extends Component{
                                     <Route exact path ={"/csvs/:id"} element={
                                         <PrivateRoute>
                                             <CsvFileDetail/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route exact path ={"/csvs/:id/edit"} element={
+                                        <PrivateRoute>
+                                            <CsvFileEdit/>
                                         </PrivateRoute>
                                     }/>
                                     <Route exact path ="/community/organizations" element={

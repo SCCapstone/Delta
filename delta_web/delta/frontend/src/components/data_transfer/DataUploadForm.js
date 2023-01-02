@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect,useState} from 'react';
 import {useDropzone} from "react-dropzone";
 import {addCsvFile} from '../../actions/file';
 import {connect} from 'react-redux';
@@ -36,7 +36,22 @@ const DataUploadForm = (props) =>{
   // 5 MB
   const maxSize = 5*1048576;
 
-  const onDrop = useCallback(acceptedFiles =>{
+  var [availableOrgs, setAvailableOrgs] = useState([]);
+
+  const getAvailableOrgs = () =>{
+    // to do
+    // get your organizations
+    //
+    setAvailableOrgs(['ValafarLab','Test']);
+  }
+
+  useEffect(()=>{
+    // on load call this once
+    setAvailableOrgs(['ValafarLab','Test']);
+    console.log(availableOrgs);
+  },[]);
+
+  const onDrop = useCallback(acceptedFiles => {
     // do something if you want here
     acceptedFiles.forEach(file=>{
       $("#fileName").val(file.name)
@@ -97,12 +112,20 @@ const DataUploadForm = (props) =>{
             </div>
             <div className= "form-check">
             <input className ="form-check-input" type="checkbox" value="isPublic" id="flexCheck"/>
-            <label className="form-check-label" for = "flexCheck">
+            <label className="form-check-label" htmlFor = "flexCheck">
                 Publically Visible
             </label>
             </div>
             <div className="input-group">
                 <input type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
+            </div>
+            <div>
+              <h3>Available Organizations</h3>
+              <select className="form-select">
+                  {availableOrgs.map((org)=>{
+                    <option value = {org}>{org}</option>
+                  })}
+              </select>
             </div>
             <br />
             <button className="btn btn-success mb-2">Submit</button>

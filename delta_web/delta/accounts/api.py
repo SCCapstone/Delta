@@ -38,13 +38,11 @@ class RegisterAPI(generics.GenericAPIView):
         # TO DO: 
         # MAKE THIS BETTER
         except Exception as e:
-            print(e)
             # TODO
             # Indicate that the entered organization key is invalid to the user, 
             # and offer them to register again or not
-            pass
-        
-        
+            return Response(data={"message":str(e)})
+            
         return Response({
             # give the serialized user
             "user":UserSerializer(user,context=self.get_serializer_context()).data,

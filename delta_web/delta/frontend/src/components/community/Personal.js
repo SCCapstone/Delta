@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import CsvFileTable from './CsvFileTable';
+import CsvFileTable from '../csvFile/CsvFileTable';
 
 export class Personal extends Component {
     render(){

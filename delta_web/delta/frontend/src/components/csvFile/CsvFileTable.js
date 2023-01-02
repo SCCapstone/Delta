@@ -37,9 +37,11 @@ const CsvFileTable = (props) =>{
               <tr key = {data.id}>
                 <th>{data.file_name}</th>
                 <th>{data.timestamp}</th>
-                <Link to = {`/csvs/${data.id}`}>
-                  View File
-                </Link>
+                <th>
+                  <Link to = {`/csvs/${data.id}`}>
+                    View File
+                  </Link>
+                </th>
               </tr>
             </tbody>
           </table>

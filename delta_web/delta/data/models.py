@@ -12,6 +12,9 @@ from django.contrib.auth import get_user_model
 # for file manip
 import os
 
+# for add to org
+from organizations.models import Organization
+
 User = get_user_model()
 
 # wrapper for CSV file.
@@ -33,6 +36,8 @@ class CSVFile(models.Model):
     description = models.TextField(blank=True,default="")
 
     is_public = models.BooleanField(default=False)
+
+    registered_organizations = models.ManyToManyField(Organization,blank=True,related_name="uploaded_files")
 
     class Meta:
         unique_together = ('author','file_path','file_name')

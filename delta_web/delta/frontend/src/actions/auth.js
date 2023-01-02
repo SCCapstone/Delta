@@ -124,13 +124,14 @@ export const register = ({ username, first_name, last_name, password, email, org
         })
         // if we are not authenticated, no token that matches, need to catch
         .catch((err) => {
-            console.log(err);
+            // console.log(err.response.data);
             // dispatch the error
             dispatch(returnErrors(err.response.data, err.response.status));
             // dispatch the type of error
             dispatch({
                 type: REGISTER_FAIL,
             })
+            dispatch(createMessage({registerFail: "FAIL"}))
         });
 }
 

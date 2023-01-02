@@ -98,6 +98,10 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def retrieve(self,request,*args,**kwargs):
         obj_id = kwargs['pk']
         obj = CSVFile.objects.get(id=obj_id)
+        # ONLY ALLOW USER TO SEE FILE IF THE FOLLOWING CONDITIONS ARE MEET
+        # 1. File is public OR
+        # 2. User owns file OR
+        # 3. User is part of org with file
         serialized = self.get_serializer(obj)
         return Response(serialized.data)
 

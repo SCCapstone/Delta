@@ -12,18 +12,10 @@ from django.contrib.auth import get_user_model
 # for file manip
 import os
 
+# for add to org
+from organizations.models import Organization
+
 User = get_user_model()
-
-# hold acceleration data
-class DataAccel(models.Model):
-    author = models.ForeignKey(
-        User,related_name="data_accels",on_delete=models.CASCADE,
-        null=True
-    )
-    file_path = models.CharField(max_length=300)
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-
 
 # wrapper for CSV file.
 # NOTE: if ever change directory structure, will have to update every file.
@@ -44,6 +36,8 @@ class CSVFile(models.Model):
     description = models.TextField(blank=True,default="")
 
     is_public = models.BooleanField(default=False)
+
+    registered_organizations = models.ManyToManyField(Organization,blank=True,related_name="uploaded_files")
 
     class Meta:
         unique_together = ('author','file_path','file_name')

@@ -52,6 +52,9 @@ export class Alerts extends Component {
             if(message.registerUser){
                 alert.success(message.registerUser);
             }
+            if(message.registerFail){
+                alert.error(message.registerFail);
+            }
             if(message.passwordsDoNotMatch){
                 alert.error(message.passwordsDoNotMatch);
             }

@@ -124,13 +124,14 @@ export const register = ({ username, first_name, last_name, password, email, org
         })
         // if we are not authenticated, no token that matches, need to catch
         .catch((err) => {
-            console.log(err);
+            // console.log(err.response.data);
             // dispatch the error
             dispatch(returnErrors(err.response.data, err.response.status));
             // dispatch the type of error
             dispatch({
                 type: REGISTER_FAIL,
             })
+            dispatch(createMessage({registerFail: "FAIL"}))
         });
 }
 
@@ -176,7 +177,7 @@ export const updateUser = ({ username, first_name, last_name, password, email })
 
 // Setup config with token - helper function
 // arrow func that takes in getState
-export const tokenConfig = getState => {
+export const tokenConfig = (getState) => {
     // get token from state
     // looking at auth reducer and getting that token 
     const token = getState().auth.token;

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import CsvFileTable from './CsvFileTable';
+import CsvFileTable from '../csvFile/CsvFileTable';
 
 export class Personal extends Component {
     render(){
         return(
-            <div>
-                <h1>
+            <div className="container">
+                <h1 className="text-center">
                     Personal community
                 </h1>
                 <CsvFileTable/>

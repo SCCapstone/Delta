@@ -38,11 +38,8 @@ export const addCsvFile= ({file,fileName,isPublic,description}) => (dispatch,get
 export const getCsvFiles = () => (dispatch,getState) =>{
     axios.get('/api/csv/',tokenConfig(getState))
         .then(res => {
-            console.log(res)
-            dispatch({
-                type:GET_CSV_FILES,
-                payload:res.data
-            })
+            console.log(res);
+            return res;
         })
         .catch(err=>dispatch(
             returnErrors(err.response.data,err.response.status)
@@ -111,6 +108,9 @@ export const getCsvFilesPublic = () => (dispatch,getState) =>{
 
 // DOWNLOAD A FILE
 //  id is of file object
+// TODO: Make sure that you can only download files that are public
+// or under your organization
+// or are yours
 export const downloadCsvFile = (id) => (dispatch, getState) =>{
     axios.get(`/api/public_csvs/${id}/download`,tokenConfig(getState))
     .then(res=>{

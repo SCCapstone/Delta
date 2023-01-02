@@ -1,10 +1,9 @@
 from django.urls import path
 
 from rest_framework import routers
-from .api import ViewsetCSVFile, ViewsetDataAccel,UploadCsvApiView, ViewsetPublicCsvFile
+from .api import ViewsetCSVFile,UploadCsvApiView, ViewsetPublicCsvFile
 
 router = routers.DefaultRouter()
-router.register('api/accel',ViewsetDataAccel,'DataAccels')
 router.register('api/csv',ViewsetCSVFile,'CsvFiles')
 router.register('api/public_csvs',ViewsetPublicCsvFile)
 

@@ -1,90 +1,101 @@
-import React, { Component, Fragment } from 'react';
+import React, {useState, useEffect } from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import {getCsvFilesPublic,downloadCsvFile} from '../../actions/file'; 
-import {Link} from 'react-router-dom'
 // note you can style react tables
-import {useTheme} from '@table-library/react-table-library/theme'
 import {Table,
   Header,HeaderRow,HeaderCell,
   Body,Row,Cell
 } from '@table-library/react-table-library/table'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-// to do: convert to functional component
+/*
+TO DO: 
+There should only be one SearchableCsvFileTable function, that can take in different data.
+*/
 
-// https://www.robinwieruch.de/react-table-component/
-// https://www.robinwieruch.de/react-table-search/
 
-export class PublicCsvFileTable extends Component {
-  static propTypes = {
-    csvFiles:PropTypes.array.isRequired,
-    getCsvFilesPublic:PropTypes.func.isRequired,
-    downloadCsvFile:PropTypes.func.isRequired
-  };
-  state = {
-    // the file ids of the data you wish to download
-    checkedFileIds: [],
-    searchText:"",
-    data : []
-  }
+const PublicCsvFileTable = (props) =>{
 
-  componentDidMount(){
-    this.props.getCsvFilesPublic();
-  }
-  onSubmit = e => {
+  // the csv files
+  var [csvFiles, setCsvFiles] = useState(null);
+  // text being searched
+  var [searchText,setSearchText] = useState("");
+  // table data
+  var [tableCsvs,setTableCsvs] = useState(null);
+
+  // the files that user wants to download
+  var arrFilesToDownload = [];
+
+  // on load call this
+  useEffect(()=>{
+    axios.get('/api/public_csvs/',{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
+    .then(res=>{
+      setCsvFiles(res.data);
+      setTableCsvs(res.data);
+    })
+  },[])
+
+  // when submit form
+  const onSubmit = e =>{
     e.preventDefault();
-    // console.log(this.state.checkedFileIds)
-    this.state.checkedFileIds.forEach(id=>{
-        this.props.downloadCsvFile(id)
+    console.log(arrFilesToDownload);
+    arrFilesToDownload.forEach((id)=>{
+      props.downloadCsvFile(id);
     })
   }
-  onCheckChange = (id) =>{
-    if(!this.state.checkedFileIds.includes(id)){
-        // add
-        this.state.checkedFileIds.push(id)
+
+  // called when checkbox is changed
+  const onCheckChange = (id) =>{
+    if(!arrFilesToDownload.includes(id)){
+      // add
+      arrFilesToDownload.push(id);
     }else{
-        // remove item
-        this.state.checkedFileIds = this.state.checkedFileIds.filter(item => item !== id)
+      // remove item
+      arrFilesToDownload = arrFilesToDownload.filter(item => item !== id);
     }
   }
-  onSearchChange = e => {
+  // when search thru table
+  const onSearchChange = (e) =>{
     var strInput = e.target.value;
-    this.setState({searchText:strInput})
+    setSearchText(strInput);
+    // if not enough length, just reset the search
     if(strInput.length < 3){
-      this.setState({data:this.props.csvFiles});
+      setTableCsvs(csvFiles);
       return;
     }
-    var newData = []
-    for(const file of this.props.csvFiles){
-      if(file.file_name.includes(this.state.searchText)){
-        newData.push(file);
+    // else go thru files, find those that match
+    var filteredCsvs = [];
+    for(const csvFile of csvFiles){
+      if(csvFile.file_name.includes(searchText)){
+        filteredCsvs.push(csvFile);
       }
     }
-    this.setState({data:{nodes:newData}});
+    // set the table data
+    setTableCsvs(filteredCsvs);
   }
 
-  render() {
-    var fileData = {nodes:this.props.csvFiles}
-    if(this.state.data.nodes != null){
-      fileData = this.state.data;
-    }
+  if(csvFiles == null) return;
 
-    return (
-      <Fragment>
-        <form onSubmit={this.onSubmit}>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className= "input-group-text">File Name</span>
-            </div>
-            <input id = "search" type="text" className="form-control" placeholder="Enter at least three characters" onChange={this.onSearchChange}/>
-          </div>
-          <Table data={fileData}>{(tableList) =>(
+  var fileData = {nodes:tableCsvs}
+
+  return (
+    <div>
+      <form onSubmit = {onSubmit}>
+         <div className="input-group mb-3">
+           <div className="input-group-prepend">
+             <span className= "input-group-text">File Name</span>
+           </div>
+           <input id = "search" type="text" className="form-control" placeholder="Enter at least three characters" onChange={onSearchChange}/>
+           </div>
+           <Table data={fileData}>{(tableList) =>(
             <>
             <Header>
               <HeaderRow>
                 <HeaderCell>File Id</HeaderCell>
                 <HeaderCell>File Name</HeaderCell>
                 <HeaderCell>Upload Date</HeaderCell>
+                <HeaderCell>View</HeaderCell>
                 <HeaderCell>Download</HeaderCell>
               </HeaderRow>
             </Header>
@@ -95,8 +106,13 @@ export class PublicCsvFileTable extends Component {
                   <Cell>{item.file_name}</Cell>
                   <Cell>{item.timestamp}</Cell>
                   <Cell>
+                    <Link to ={`/csvs/${item.id}`}>
+                      View
+                    </Link>
+                  </Cell>
+                  <Cell>
                     <input type="checkbox"
-                    onChange={()=>{this.onCheckChange(item.id)}}
+                    onChange={()=>{onCheckChange(item.id)}}
                     />
                   </Cell>
                 </Row>
@@ -109,17 +125,16 @@ export class PublicCsvFileTable extends Component {
           <button className='btn btn-sm btn-success mb-2'>
             Download
           </button>
-        </form>
-      </Fragment>
-    )
-  }
+      </form>
+    </div>
+  )
 }
 
 const mapStateToProps = state => ({
-  csvFiles: state.csvFile.csvFile
+  auth:state.auth
 });
 
 export default connect(
   mapStateToProps,
-    {getCsvFilesPublic,downloadCsvFile}
+    {downloadCsvFile}
     )(PublicCsvFileTable);

@@ -1,13 +1,7 @@
 from rest_framework import serializers
-from .models import DataAccel,CSVFile
+from .models import CSVFile
 
 from rest_framework.validators import UniqueTogetherValidator
-
-# Acceleration Data serializer
-class SerializerDataAccel(serializers.ModelSerializer):
-    class Meta:
-        model = DataAccel
-        fields = '__all__'
 
 # this is a csv file serializer
 class SerializerCSVFile(serializers.ModelSerializer):

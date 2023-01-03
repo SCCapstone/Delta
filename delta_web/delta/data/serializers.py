@@ -3,7 +3,6 @@ from .models import CSVFile
 
 from rest_framework.validators import UniqueTogetherValidator
 
-# this is a csv file serializer
 class SerializerCSVFile(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()
     class Meta:

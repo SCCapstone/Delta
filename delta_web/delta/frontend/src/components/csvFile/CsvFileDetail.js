@@ -5,6 +5,7 @@ import {useEffect} from 'react'
 
 import {Link,useParams} from "react-router-dom"
 import axios from 'axios';
+import ReviewForm from './ReviewForm';
 
 const CsvFileDetail = (props) => {
     const {id} = useParams();
@@ -29,44 +30,50 @@ const CsvFileDetail = (props) => {
     if(csvFile == null) return;
 
     return (
-        <div className = "container">
-            <div key={csvFile.id}>
-              <div>
-                <h1>
-                  File Name
-                </h1>
-                <p>
-                  {csvFile.file_name}
-                </p>
-              </div>
-              <div>
-                <h2>
-                  Upload Date
-                </h2>
-                <p>
-                  {csvFile.timestamp}
-                </p>
-              </div>
-              <div>
-                <h2>
-                  Description
-                </h2>
-                <p>
-                  {csvFile.description}
-                </p>
-              </div>
-              <Link to= {`/csvs/${id}/edit`}>
-                <button className="btn btn-primary">
-                  Edit
-                </button>
-              </Link>
-              <button onClick={clickDelete} className = "btn btn-danger">
-                Delete
-              </button>
-            </div>
-            <a role="button" href="/#/community/personal" className="btn">
-              Back
-            </a>           
+        <div>
+            <div className = "container border border-rounded">
+                <div key={csvFile.id}>
+                  <div>
+                    <h1>
+                      File Name
+                    </h1>
+                    <p>
+                      {csvFile.file_name}
+                    </p>
+                  </div>
+                  <div>
+                    <h2>
+                      Upload Date
+                    </h2>
+                    <p>
+                      {csvFile.timestamp}
+                    </p>
+                  </div>
+                  <div>
+                    <h2>
+                      Description
+                    </h2>
+                    <p>
+                      {csvFile.description}
+                    </p>
+                  </div>
+                  <Link to= {`/csvs/${id}/edit`}>
+                    <button className="btn btn-primary">
+                      Edit
+                    </button>
+                  </Link>
+                  <button onClick={clickDelete} className = "btn btn-danger">
+                    Delete
+                  </button>
+                </div>
+                <a role="button" href="/#/community/personal" className="btn">
+                  Back
+                </a>           
+          </div>
+          <div className="container">
+            <h3>Add a review?</h3>
+            <ReviewForm csvFileId = {id}/>
+          </div>
       </div>
     )
 }

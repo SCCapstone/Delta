@@ -6,17 +6,18 @@ import { useState } from 'react';
 import styles from "./cssFile.module.css";
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { addReview } from '../../actions/review';
 
 
 
 const ReviewForm = (props) => {
     const id = props.csvFileId;
-    console.log(props.auth)
 
     var [reviewState, setReviewState] = useState({
         'title':'',
         'text':'',
         'rating':0,
+        'file':`${id}`,
         'author':`${props.auth.user.id}`
     });
 
@@ -27,26 +28,7 @@ const ReviewForm = (props) => {
 
     const onSubmit = (e) =>{
         e.preventDefault();
-        var axios = require('axios');
-        var data = JSON.stringify(reviewState)
-
-        var config = {
-            method: 'post',
-            url: '/api/review/',
-            headers: { 
-                'Authorization': `Token ${props.auth.token}`, 
-                'Content-Type': 'application/json'
-            },
-            data : data
-        };
-
-        axios(config)
-        .then(function (response) {
-            console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+        props.addReview(reviewState);
     }
 
     const RATINGS = ["Poor","Fair","Good","Very good","Excellent"]
@@ -58,7 +40,6 @@ const ReviewForm = (props) => {
         setRatingIndex(index);
         const newState = {...reviewState,'rating':parseInt(index) + 1}
         setReviewState(newState);
-        console.log(reviewState);
     }
 
   return (
@@ -108,4 +89,4 @@ const mapStateToProps = state =>({
     auth:state.auth
 })
 
-export default connect(mapStateToProps,{})(ReviewForm)
+export default connect(mapStateToProps,{addReview})(ReviewForm)

@@ -7,9 +7,7 @@ class SerializerReview(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()
     class Meta:
         model = Review
-        fields = [
-            "title","author","author_username","text","pub_date","rating",'id'
-        ]
+        fields = "__all__"
 
         validators = [
             UniqueTogetherValidator(

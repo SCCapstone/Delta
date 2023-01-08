@@ -58,6 +58,12 @@ export class Alerts extends Component {
             if(message.passwordsDoNotMatch){
                 alert.error(message.passwordsDoNotMatch);
             }
+            if(message.addReviewSuccess){
+                alert.success(message.addReviewSuccess);
+            }
+            if(message.addReviewFail){
+                alert.error(message.addReviewFail);
+            }
         }
     }
 

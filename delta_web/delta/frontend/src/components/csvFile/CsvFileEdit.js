@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import CsvFileForm from './CsvFileForm';
 import {connect} from 'react-redux'
 
@@ -24,6 +24,11 @@ const CsvFileEdit = (props) => {
     <div className = "container">
       <div key = {csvFile.id}>
         <CsvFileForm csvFile={csvFile}/>
+        <Link to = {`/csvs/${csvFile.id}`}>
+          <button className = "btn btn-sm btn-primary">
+            Back
+          </button>
+        </Link>
       </div>
     </div>
   )

@@ -5,17 +5,25 @@ import {useEffect} from 'react'
 
 import {Link,useParams} from "react-router-dom"
 import axios from 'axios';
+
+// components
 import ReviewForm from './ReviewForm';
+import Review from './Review';
 
 const CsvFileDetail = (props) => {
     const {id} = useParams();
 
+    // the csv file itself
     const [csvFile,setCsvFile] = useState(null);
+    // the reviews themself
+    const [arrReviews,setArrReviews] = useState([]);
 
     useEffect(()=>{
+      // get the csv data
       axios.get(`/api/csv/${id}/`,{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
       .then(res=>{
         setCsvFile(res.data);
+        setArrReviews(res.data.reviews);
       })
     },[])
 
@@ -28,6 +36,8 @@ const CsvFileDetail = (props) => {
 
     // should return some spinner
     if(csvFile == null) return;
+
+    console.log(arrReviews);
 
     return (
         <div>
@@ -74,6 +84,15 @@ const CsvFileDetail = (props) => {
             <h3>Add a review?</h3>
             <ReviewForm csvFileId = {id}/>
           </div>
+          <div className="container">
+            <h1>Reviews</h1>
+            <div>
+              {arrReviews.map((data)=>(
+                <Review reviewData={data}/>
+              )
+              )}
+            </div>
+          </div> 
       </div>
     )
 }

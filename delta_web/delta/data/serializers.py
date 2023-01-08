@@ -3,12 +3,16 @@ from .models import CSVFile
 
 from rest_framework.validators import UniqueTogetherValidator
 
+# serializers
+from social.serializers import SerializerReview
+
 class SerializerCSVFile(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()
+    reviews = serializers.SerializerMethodField()
     class Meta:
         model = CSVFile
         fields = [
-            'file_name','timestamp','author','author_username','id','file_path',"description","is_public"
+            'file_name','timestamp','author','author_username','id','file_path',"description","is_public","reviews"
         ]
         validators = [
             UniqueTogetherValidator(
@@ -22,3 +26,6 @@ class SerializerCSVFile(serializers.ModelSerializer):
         ]
     def get_author_username(self,obj):
         return obj.author.username
+    
+    def get_reviews(self,obj):
+        return SerializerReview(obj.review_set.all(),many=True).data

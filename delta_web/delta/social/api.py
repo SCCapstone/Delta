@@ -12,6 +12,7 @@ class ViewsetReview(viewsets.ModelViewSet):
     ]
     serializer_class = SerializerReview
 
+    # get all of the user's created reviews
     def get_queryset(self):
         return self.request.user.review_set.all()
     

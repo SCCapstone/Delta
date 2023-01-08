@@ -9,6 +9,6 @@ export const addReview = (dictData) => (dispatch,getState) =>{
     })
     .catch((err)=>{
         console.log(err);
-        dispatch(createMessage({addReviewFail:err.response.data.message}));
+        dispatch(createMessage({addReviewFail: err.response.data.message}));
     })
 }

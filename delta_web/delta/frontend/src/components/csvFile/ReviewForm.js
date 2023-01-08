@@ -4,7 +4,6 @@ import Star from './Star';
 import { useState } from 'react';
 
 import styles from "./cssFile.module.css";
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { addReview } from '../../actions/review';
 
@@ -47,7 +46,7 @@ const ReviewForm = (props) => {
         <div className = "form-group">
             <label htmlFor = "rating">Rating</label>
             <div className="container">
-            <h1 className="result">{ RATINGS[ratingIndex] ? RATINGS[ratingIndex] : 'You didn\'t review yet'}</h1>
+            <h4 className="result">{ RATINGS[ratingIndex] ? RATINGS[ratingIndex] : 'You didn\'t review yet'}</h4>
             <div className={styles.stars}>
                 {
                     RATINGS.map((rating, index) => (

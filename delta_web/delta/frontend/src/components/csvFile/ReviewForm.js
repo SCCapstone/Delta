@@ -28,6 +28,7 @@ const ReviewForm = (props) => {
     const onSubmit = (e) =>{
         e.preventDefault();
         props.addReview(reviewState);
+        props.handleSubmit();
     }
 
     const RATINGS = ["Poor","Fair","Good","Very good","Excellent"]

@@ -12,3 +12,11 @@ export const addReview = (dictData) => (dispatch,getState) =>{
         dispatch(createMessage({addReviewFail: err.response.data.message}));
     })
 }
+
+export const deleteReview = (id) => (dispatch,getState) => {
+    axios.delete(`api/review/${id}`,tokenConfig(getState))
+    .then((res)=>{
+        dispatch(createMessage({deleteReviewSuccess:"Your review has successfully been deleted."}));
+    })
+    .catch((err)=>{console.log(err)});
+}

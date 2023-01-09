@@ -18,13 +18,17 @@ const CsvFileDetail = (props) => {
     // the reviews themself
     const [arrReviews,setArrReviews] = useState([]);
 
-    useEffect(()=>{
+    const retrieveData = () =>{
       // get the csv data
       axios.get(`/api/csv/${id}/`,{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
       .then(res=>{
         setCsvFile(res.data);
         setArrReviews(res.data.reviews);
       })
+    }
+
+    useEffect(()=>{
+      retrieveData();
     },[])
 
     const clickDelete = () =>{
@@ -82,13 +86,13 @@ const CsvFileDetail = (props) => {
           </div>
           <div className="container">
             <h3>Add a review?</h3>
-            <ReviewForm csvFileId = {id}/>
+            <ReviewForm csvFileId = {id} handleSubmit={retrieveData}/>
           </div>
           <div className="container">
             <h1>Reviews</h1>
-            <div>
+            <div className = "">
               {arrReviews.map((data)=>(
-                <Review reviewData={data}/>
+                <Review reviewData={data} refreshReviews = {retrieveData}/>
               )
               )}
             </div>

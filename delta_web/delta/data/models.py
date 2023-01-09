@@ -44,7 +44,7 @@ class CSVFile(models.Model):
 
     def __str__(self):
         return self.file_path
-
+    
 # when delete the CSVFile model, should also delete the file in the directory
 # see: https://stackoverflow.com/questions/71278989/how-to-call-a-function-when-you-delete-a-model-object-in-django-admin-page-or
 @receiver(post_delete,sender=CSVFile)
@@ -52,3 +52,4 @@ def on_delete_csv(sender,instance,using,**kwargs):
     # delete the file
     if(os.path.exists(instance.file_path)):
         os.remove(instance.file_path)
+    

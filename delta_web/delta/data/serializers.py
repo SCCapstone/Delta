@@ -3,16 +3,23 @@ from .models import CSVFile
 
 from rest_framework.validators import UniqueTogetherValidator
 
+# aggregation of csv reviews
+from django.db.models import Avg
+
 # serializers
 from social.serializers import SerializerReview
 
 class SerializerCSVFile(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()
     reviews = serializers.SerializerMethodField()
+    # THIS MAY BE BETTER CALCULATED AS JUST AN ATTRIBUTE OF THE
+    # CSV FILE MODEL ITSELF
+    avg_rating = serializers.SerializerMethodField()
     class Meta:
         model = CSVFile
         fields = [
-            'file_name','timestamp','author','author_username','id','file_path',"description","is_public","reviews"
+            'file_name','timestamp','author','author_username','id','file_path',"description",
+            "is_public","reviews","avg_rating"
         ]
         validators = [
             UniqueTogetherValidator(
@@ -29,3 +36,9 @@ class SerializerCSVFile(serializers.ModelSerializer):
     
     def get_reviews(self,obj):
         return SerializerReview(obj.review_set.all(),many=True).data
+    
+    def get_avg_rating(self,obj):
+        # note: probably better to store this int as a sum in the csv file
+        if obj.review_set.count() == 0:
+            return 0
+        return obj.review_set.aggregate(Avg('rating'))['rating__avg']

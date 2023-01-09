@@ -41,12 +41,15 @@ const CsvFileDetail = (props) => {
     // should return some spinner
     if(csvFile == null) return;
 
-    console.log(arrReviews);
+    console.log(csvFile)
 
     return (
         <div>
             <div className = "container border border-rounded">
                 <div key={csvFile.id}>
+                  <p>
+                    Avg rating: {csvFile.avg_rating}
+                  </p>
                   <div>
                     <h1>
                       File Name

@@ -15,11 +15,15 @@ class SerializerCSVFile(serializers.ModelSerializer):
     # THIS MAY BE BETTER CALCULATED AS JUST AN ATTRIBUTE OF THE
     # CSV FILE MODEL ITSELF
     avg_rating = serializers.SerializerMethodField()
+    # formated date
+    formatted_date = serializers.SerializerMethodField()
+    # number of reviews
+    review_count = serializers.SerializerMethodField()
     class Meta:
         model = CSVFile
         fields = [
             'file_name','timestamp','author','author_username','id','file_path',"description",
-            "is_public","reviews","avg_rating"
+            "is_public","reviews","avg_rating","formatted_date","review_count"
         ]
         validators = [
             UniqueTogetherValidator(
@@ -42,3 +46,9 @@ class SerializerCSVFile(serializers.ModelSerializer):
         if obj.review_set.count() == 0:
             return 0
         return obj.review_set.aggregate(Avg('rating'))['rating__avg']
+    
+    def get_formatted_date(self,obj):
+        return obj.timestamp.strftime('%Y-%m-%d')
+    
+    def get_review_count(self,obj):
+        return obj.review_set.count()

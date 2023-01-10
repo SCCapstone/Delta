@@ -104,7 +104,7 @@ const PublicCsvFileTable = (props) =>{
                 <Row key={item.id} item={item}>
                   <Cell>{item.id}</Cell>
                   <Cell>{item.file_name}</Cell>
-                  <Cell>{item.timestamp}</Cell>
+                  <Cell>{item.formatted_date}</Cell>
                   <Cell>
                     <Link to ={`/csvs/${item.id}`}>
                       View

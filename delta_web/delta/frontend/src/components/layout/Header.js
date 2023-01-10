@@ -45,6 +45,7 @@ const Header = (props) => {
     Each nav-item is a new link on the navbar
     Each p is where the p stylization will be held
     */
+
     <>
     <ul className="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
       <li className="nav-item text-center mx-2 mx-lg-1">
@@ -96,8 +97,9 @@ const Header = (props) => {
             </Link>
           </span>
       </li>
-    </ul>
-    <ul className="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
+    {/* </ul>
+    <ul className="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0"> */}
+      
       <li className="nav-item text-center mx-2 mx-lg-1">
         <a className="nav-link" href="#!">
           <div>
@@ -178,9 +180,12 @@ const Header = (props) => {
       <nav className="navbar navbar-dark bg-dark">
         <div className="container-fluid">
           {/* <a className="navbar-brand" href="/">Delta</a> */}
-          <button className="btn" type="button" onClick={function(){changeClass()}}>
+
+          <a className="navbar-brand" href="/">Delta</a>
+          <button className="btn me-auto" type="button" onClick={function(){changeClass()}}>
             <span className="navbar-toggler-icon"></span>
           </button>
+          
           <div className="navbar-collapse collapse" id="navbarToggleExternalContent">
             {isAuthenticated ? authLinks : guestLinks}
           </div>

@@ -9,6 +9,7 @@ import axios from 'axios';
 // components
 import ReviewForm from './ReviewForm';
 import Review from './Review';
+import CsvFile from './CsvFile';
 
 const CsvFileDetail = (props) => {
     const {id} = useParams();
@@ -18,79 +19,45 @@ const CsvFileDetail = (props) => {
     // the reviews themself
     const [arrReviews,setArrReviews] = useState([]);
 
-    useEffect(()=>{
+    const retrieveData = () =>{
       // get the csv data
       axios.get(`/api/csv/${id}/`,{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
       .then(res=>{
         setCsvFile(res.data);
         setArrReviews(res.data.reviews);
       })
-    },[])
-
-    const clickDelete = () =>{
-      var dialog = confirm("Would you like to delete this file? There is no going back.");
-      if(dialog){
-        props.deleteCsvFile(id);
-      }
     }
+
+    useEffect(()=>{
+      retrieveData();
+    },[])
 
     // should return some spinner
     if(csvFile == null) return;
 
-    console.log(arrReviews);
-
     return (
-        <div>
-            <div className = "container border border-rounded">
-                <div key={csvFile.id}>
-                  <div>
-                    <h1>
-                      File Name
-                    </h1>
-                    <p>
-                      {csvFile.file_name}
-                    </p>
-                  </div>
-                  <div>
-                    <h2>
-                      Upload Date
-                    </h2>
-                    <p>
-                      {csvFile.timestamp}
-                    </p>
-                  </div>
-                  <div>
-                    <h2>
-                      Description
-                    </h2>
-                    <p>
-                      {csvFile.description}
-                    </p>
-                  </div>
-                  <Link to= {`/csvs/${id}/edit`}>
-                    <button className="btn btn-primary">
-                      Edit
-                    </button>
-                  </Link>
-                  <button onClick={clickDelete} className = "btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-                <a role="button" href="/#/community/personal" className="btn">
-                  Back
-                </a>           
-          </div>
-          <div className="container">
+        <div className="container">
+          <CsvFile csvFileData={csvFile}/>
+          <div className="">
             <h3>Add a review?</h3>
-            <ReviewForm csvFileId = {id}/>
+            <ReviewForm csvFileId = {id} handleSubmit={retrieveData}/>
           </div>
-          <div className="container">
-            <h1>Reviews</h1>
-            <div>
-              {arrReviews.map((data)=>(
-                <Review reviewData={data}/>
-              )
-              )}
+          <br/>
+          <div className="row">
+            <div className="col-4">
+              <h1>Reviews</h1>
+              <div>
+                <h5>{csvFile.avg_rating} out of 5</h5>
+                <h5>{csvFile.review_count} reviews</h5>
+              </div>
+            </div>
+            <div className="col-8">
+              <div className = "">
+                {arrReviews.map((data)=>(
+                  <Review reviewData={data} refreshReviews = {retrieveData}/>
+                )
+                )}
+              </div>
             </div>
           </div> 
       </div>

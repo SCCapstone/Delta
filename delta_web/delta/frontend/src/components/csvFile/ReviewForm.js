@@ -7,15 +7,13 @@ import styles from "./cssFile.module.css";
 import { connect } from 'react-redux';
 import { addReview } from '../../actions/review';
 
-
-
 const ReviewForm = (props) => {
     const id = props.csvFileId;
 
     var [reviewState, setReviewState] = useState({
         'title':'',
         'text':'',
-        'rating':0,
+        'rating':5,
         'file':`${id}`,
         'author':`${props.auth.user.id}`
     });
@@ -28,10 +26,11 @@ const ReviewForm = (props) => {
     const onSubmit = (e) =>{
         e.preventDefault();
         props.addReview(reviewState);
+        props.handleSubmit();
     }
 
     const RATINGS = ["Poor","Fair","Good","Very good","Excellent"]
-    const [ratingIndex,setRatingIndex] = useState();
+    const [ratingIndex,setRatingIndex] = useState(4);
     const activeStar = {
         fill:'yellow'
     }
@@ -44,21 +43,24 @@ const ReviewForm = (props) => {
   return (
     <form onSubmit = {onSubmit}>
         <div className = "form-group">
-            <label htmlFor = "rating">Rating</label>
-            <div className="container">
-            <h4 className="result">{ RATINGS[ratingIndex] ? RATINGS[ratingIndex] : 'You didn\'t review yet'}</h4>
-            <div className={styles.stars}>
-                {
-                    RATINGS.map((rating, index) => (
-                        <Star 
-                            index={index} 
-                            key={rating} 
-                            changeRatingIndex={changeRatingIndex}
-                            style={ ratingIndex >= index ? activeStar : {}}
-                        />
-                    ))
-                }
-            </div>
+            <div className="d-flex justify-content-between">
+                <div className={styles.stars}>
+                    {
+                        RATINGS.map((rating, index) => (
+                            <Star 
+                                index={index} 
+                                key={rating} 
+                                changeRatingIndex={changeRatingIndex}
+                                style={ ratingIndex >= index ? activeStar : {}}
+                            />
+                        ))
+                    }
+                </div>
+                <div>
+                    <p>
+                        Rating: {RATINGS[ratingIndex] ? RATINGS[ratingIndex] : 'No rating present yet.'}
+                    </p>
+                </div>
             </div>
         </div>
         <div className = "form-group">

@@ -14,7 +14,7 @@ class ViewsetReview(viewsets.ModelViewSet):
 
     # get all of the user's created reviews
     def get_queryset(self):
-        return self.request.user.review_set.all()
+        return self.request.user.review_set.all().order_by('-pub_date')
     
     def perform_create(self,serializer):
         serializer.save(author=self.request.user,file=CSVFile.objects.get(pk=self.request.data['file']))

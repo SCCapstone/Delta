@@ -14,6 +14,7 @@ const OrganizationDetail = (props) => {
 
     const { id } = useParams();
 
+    // get the organization
     const getData = async () => {
         try {
             const response = await axios.get('/api/organization/' + id + '/');
@@ -23,10 +24,12 @@ const OrganizationDetail = (props) => {
         }
     }
 
+    // download CSV
     const downloadCsv = (fileId) => {
         props.downloadCsvFile(fileId);
     }
 
+    // get organizations's posts
     const getPosts = async () => {
         try {
             const response = await axios.get('/api/organization/' + id + '/data_posts/');
@@ -42,6 +45,7 @@ const OrganizationDetail = (props) => {
         getPosts();
     }, []);
 
+    // check that data has loaded
     if (data == null || dataPosts == null) return;
 
     return (

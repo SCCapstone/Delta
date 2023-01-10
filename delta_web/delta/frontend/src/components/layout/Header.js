@@ -12,6 +12,28 @@ import { logout } from "../../actions/auth";
 import "./header.css";
 
 const Header = (props) => {
+
+  function changeClass() {
+
+    const show = "navbar-collapse collapse show";
+    const hide = "navbar-collapse collapse";
+
+
+    var obj = document.getElementById("navbarToggleExternalContent").className;
+    
+    if (obj == hide) {
+      document.getElementById("navbarToggleExternalContent").className = show;
+    }
+
+    else if (obj == show) {
+      document.getElementById("navbarToggleExternalContent").className = hide;
+    }
+
+    else {
+      document.getElementById("navbarToggleExternalContent").className = show;
+    }
+  }
+  
   // proptypes
   const { isAuthenticated, user } = props.auth;
 
@@ -153,15 +175,13 @@ const Header = (props) => {
   );
 
   return(
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">Delta</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i className="navbar-toggler-icon"></i>
+          {/* <a className="navbar-brand" href="/">Delta</a> */}
+          <button className="btn" type="button" onClick={function(){changeClass()}}>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="navbar-collapse collapse" id="navbarToggleExternalContent">
             {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>

@@ -31,10 +31,8 @@ class ViewsetOrganizations(viewsets.ModelViewSet):
     def data_posts(self,request,*args,**kwargs):
         instance = self.get_object()
 
-        csvFiles = []
-
-        for modelUser in instance.following_users.all():
-            csvFiles += modelUser.csv_files.all()
+        csvFiles = instance.uploaded_files.all()
+        print(csvFiles)
         
         serializer = SerializerCSVFile(csvFiles,many=True)
 

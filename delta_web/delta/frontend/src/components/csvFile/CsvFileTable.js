@@ -24,28 +24,28 @@ const CsvFileTable = (props) =>{
   return (
     <div>
       <h2>Your Csv Files</h2>
+        <table className = "table">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Upload Date</th>
+              <th>View</th>
+            </tr>
+          </thead>
+          <tbody>
         {csvFiles.map(data=>(
-          <table className = "table table-striped">
-            <thead>
-              <tr>
-                <th>File Name</th>
-                <th>Upload Date</th>
-                <th>View</th>
-              </tr>
-            </thead>
-            <tbody>
               <tr key = {data.id}>
                 <th>{data.file_name}</th>
-                <th>{data.timestamp}</th>
+                <th>{data.formatted_date}</th>
                 <th>
                   <Link to = {`/csvs/${data.id}`}>
                     View File
                   </Link>
                 </th>
               </tr>
-            </tbody>
-          </table>
         ))}
+        </tbody>
+      </table>
     </div>
   )
 }

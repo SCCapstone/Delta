@@ -28,7 +28,7 @@ export class Organizations extends Component {
                 </h1>
                 <div className='row'>
                     {this.state.data.map((item, index) => (
-                        <div className="border container" key={index}>
+                        <div className="border container m-3 p-3" key={index}>
                             <div className="row">
                                 <div className='col-md-4'>
                                     <img

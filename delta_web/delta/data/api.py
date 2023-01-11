@@ -19,6 +19,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 
+# import orgs
+from organizations.models import Organization
+
 # import necessary serializers
 from .serializers import SerializerCSVFile
 
@@ -82,16 +85,15 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     
     def partial_update(self, request, *args, **kwargs):
         # can only update file name
-        # obj = CSVFile.objects.get(id=kwargs['pk'])
-        # print(obj.file_path.split('/')[-1])
-        # print(request.data['file_name'])
-        # try:
-        #     obj.save()
-        # except Exception as e:
-        #     print(e)
-        #     return Response(data={"message":"Error with file name"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
-        # print("PARTIAL UPDATE")
+        obj = CSVFile.objects.get(id=kwargs['pk'])
+        for orgId in request.data['orgs']:
+            # check if org exists
+            try:
+                orgObj = Organization.objects.get(pk=orgId)
+                obj.registered_organizations.add(orgObj)
+            except Organization.DoesNotExist:
+                pass
+        obj.save()
 
         return super().partial_update(request, *args, **kwargs)
     

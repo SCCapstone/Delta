@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import PublicCsvFileTable from './PublicCsvFileTable';
 
-export class DataDownload extends Component {
-    render(){
-        return(
+const DataDownload = () =>{
+    return(
             <div className="container">
                 <h1>
                     Download Page  
@@ -14,8 +14,7 @@ export class DataDownload extends Component {
                   Upload
                 </a> 
             </div>
-        )
-    }
+    )
 }
 
-export default DataDownload;
+export default connect(null,{})(DataDownload);

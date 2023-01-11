@@ -5,15 +5,17 @@ https://upmostly.com/tutorials/react-dropzone-file-uploads-react
 */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import DataUploadForm from './DataUploadForm';
 
-const DataUpload = () => {
+const DataUpload = (props) => {
+  if(props.auth.user.username == undefined) return;
   return(
     <div className = "container">
         <h1>
             Data Upload        
         </h1>
-        <DataUploadForm/>
+        <DataUploadForm availableOrgs= {props.auth.user.followed_organizations}/>
         <a role="button" href="/#/data/download" className="btn btn-danger">
             Cancel
         </a> 
@@ -21,4 +23,9 @@ const DataUpload = () => {
   )
 }
 
-export default DataUpload;
+const mapStateToProps = state => ({
+  auth:state.auth
+});
+
+
+export default connect(mapStateToProps,null)(DataUpload);

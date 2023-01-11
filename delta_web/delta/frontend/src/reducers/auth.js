@@ -14,8 +14,10 @@ import {
 const initialState = {
     // token stored in local storage
     token: localStorage.getItem('token'),
+    // this was originally null
     isAuthenticated:localStorage.getItem('isAuthenticated'),
     isLoading: false,
+    // this was originally null
     user: localStorage.getItem('user'),
 }
 
@@ -24,8 +26,8 @@ export default function(state=initialState, action){
         case USER_LOADING:
             return {...state, isLoading:true};
         case USER_LOADED:
-            localStorage.setItem('user',action.payload);
-            localStorage.setItem('isAuthenticated',true);
+            // these were changed compared to original, 
+            // in order to help refresh maintain place
             return {
                 ...state,
                 isAuthenticated: true,

@@ -11,7 +11,7 @@ export class ProfileGlance extends Component {
     //This is the rendering for the profile at a glance page.
     render(){
         const {isAuthenticated, user} = this.props.auth; //Making sure that its the specific user thats information is displayed 
-        console.log(user);
+        if(user.followed_organizations == null) return;
         return(
             //This is the main container that holds the information. User can view all their information without editing the
             //fields. They can view their organizations and click on the link to go to their organizations page.

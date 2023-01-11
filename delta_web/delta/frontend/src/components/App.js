@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, Route,Routes} from 'react-router-dom';
@@ -32,7 +31,7 @@ import CsvFileDetail from "./csvFile/CsvFileDetail";
 import CsvFileEdit from "./csvFile/CsvFileEdit";
 
 // data page
-import {DataDownload} from "./data_transfer/DataDownload";
+import DataDownload from "./data_transfer/DataDownload";
 import DataUpload from "./data_transfer/DataUpload";
 // private routes
 

@@ -13,7 +13,7 @@ const CsvFile = (props) => {
     }
 
   return (
-    <div className="container border border-rounded m-3 p-3">
+    <div className="border border-rounded m-3 p-3">
         <div className="d-flex justify-content-between">
             <h5>{props.csvFileData.formatted_date}</h5>
         </div>

@@ -39,25 +39,20 @@ const DataUploadForm = (props) =>{
   // 5 MB
   const maxSize = 5*1048576;
 
-  var [availableOrgs, setAvailableOrgs] = useState(null);
-
-  const getAvailableOrgs = () =>{
-    // to do
-    // get your organizations
-    //
-    setAvailableOrgs(
-      [
-        {value:'Valafar Lab',label:'Valafar Lab'},
-        {value:'Test Lab',label:'Test Lab'},
-      ]
-    );
-  }
+  // available organizations
+  const [selectOptions, setSelectOptions] = useState([]);
+  // select values
+  const [selectedValues,setSelectedValues] = useState([]);
 
   useEffect(()=>{
-    // on load call this once
-    // GET ONLY THE ORGANIZATIONS AVAILABLE TO YOURSELF
-    getAvailableOrgs();
-  },[]);
+    var select = []
+    props.availableOrgs.map((org)=>{
+      select.push({
+        'value':org.id,'label':org.name
+      })
+    })
+    setSelectOptions(select);
+  },[])
 
   const onDrop = useCallback(acceptedFiles => {
     // do something if you want here
@@ -77,12 +72,19 @@ const DataUploadForm = (props) =>{
   const isFileTooLarge = false;
   // const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
 
+  const onSelectChange = (arrSelects) =>{
+    arrSelects.map((obj)=>{
+      console.log(obj.value)
+    }) 
+  }
+
   const onSubmit = (e) =>{
     e.preventDefault();
       acceptedFiles.forEach(file=> {
         var isPublic= $("#flexCheck").is(":checked")
         var description = $("#fileDescription").val();
         var fileName = $("#fileName").val();
+        // get the organizations
         const data = {
           'file':file,
           'isPublic':isPublic,
@@ -92,8 +94,6 @@ const DataUploadForm = (props) =>{
         props.addCsvFile(data);
       });
   }
-
-  if(availableOrgs == null) return;
 
   return(
       <form onSubmit = {onSubmit}>
@@ -133,7 +133,8 @@ const DataUploadForm = (props) =>{
           <div>
             <h3>Available Organizations</h3>
             <Select 
-              options = {availableOrgs}
+              options = {selectOptions}
+              onChange={onSelectChange}
               isMulti
             />
           </div>
@@ -142,5 +143,6 @@ const DataUploadForm = (props) =>{
       </form>
   )
 }
+
 
 export default connect(null,{addCsvFile})(DataUploadForm);

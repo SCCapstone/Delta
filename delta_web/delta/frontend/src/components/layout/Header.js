@@ -85,7 +85,7 @@ const Header = (props) => {
           </Link>
         </span>
       </li>
-      <li className="nav-item dropdown text-center mx-2 mx-lg-1">
+      <li className="me-auto nav-item dropdown text-center">
           <span className="nav-link">
             <Link to="/community/personal">
               <div> 
@@ -97,8 +97,8 @@ const Header = (props) => {
             </Link>
           </span>
       </li>
-    {/* </ul>
-    <ul className="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0"> */}
+
+      { /* LEFT RIGHT SPLIT */}
       
       <li className="nav-item text-center mx-2 mx-lg-1">
         <a className="nav-link" href="#!">

@@ -1,23 +1,39 @@
-import React, {Component} from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
+import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import CsvFileTable from '../csvFile/CsvFileTable';
+import SearchableCsvFileTable from '../csvFile/SearchableCsvFileTable';
 
-export class Personal extends Component {
-    render(){
-        return(
-            <div className="container">
-                <h1 className="text-center">
-                    Personal community
-                </h1>
-                <CsvFileTable/>
-                <span>
-                    <Link className= "btn btn-secondary btn-sm" to="/community/organizations">
-                        Click to see Organizations
-                    </Link>
-                </span>
-            </div>
-        )
-    }
+const Personal = (props) => {
+
+    const [csvFiles,setCsvFiles] = useState(null);
+
+    useEffect(()=>{
+        axios.get('/api/csv/',{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
+        .then(res=>{
+            setCsvFiles(res.data);
+        })
+    },[])
+
+    if(csvFiles == null) return;
+
+    return(
+        <div className="container">
+            <h1 className="text-center">
+                Personal community
+            </h1>
+            <SearchableCsvFileTable csvFiles = {csvFiles} textMinLength = {3}/>
+            <span>
+                <Link className= "btn btn-secondary btn-sm" to="/community/organizations">
+                    Click to see Organizations
+                </Link>
+            </span>
+        </div>
+    )
 }
 
-export default Personal;
+const mapStateToProps = (state) =>({
+    auth:state.auth
+})
+
+export default connect(mapStateToProps,{})(Personal);

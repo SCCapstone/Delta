@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { downloadCsvFile } from "../../actions/file";
+import SearchableCsvFileTable from "../csvFile/SearchableCsvFileTable";
 
 const OrganizationDetail = (props) => {
 
@@ -15,13 +16,11 @@ const OrganizationDetail = (props) => {
     const { id } = useParams();
 
     // get the organization
-    const getData = async () => {
-        try {
-            const response = await axios.get('/api/organization/' + id + '/');
-            setData(response.data);
-        } catch (err) {
-            console.log(err)
-        }
+    const getData = () => {
+        axios.get('/api/organization/' + id + '/')
+        .then((res)=>{
+            setData(res.data);
+        })
     }
 
     // download CSV
@@ -30,14 +29,12 @@ const OrganizationDetail = (props) => {
     }
 
     // get organizations's posts
-    const getPosts = async () => {
-        try {
-            const response = await axios.get('/api/organization/' + id + '/data_posts/');
-            console.log(response.data);
-            setDataPosts(response.data)
-        } catch (err) {
-            console.log(err)
-        }
+    const getPosts = () =>{
+        axios.get('/api/organization/' + id + '/data_posts/')
+        .then((res)=>{
+            setDataPosts(res.data);
+            console.log(res.data)
+        })
     }
 
     useEffect(() => {
@@ -50,8 +47,8 @@ const OrganizationDetail = (props) => {
 
     return (
         <div className="card">
-            <div className="card-body" style={{ backgroundColor: '#f5fcff' }}>
-                <h1 className="card-title" style={{ flex: 1, backgroundColor: '#add8e6' }}>Organization Name: {data.name}</h1>
+            <div className="card-body">
+                <h1 className="card-title">Organization Name: {data.name}</h1>
                 <p className="card-text">User count: {data.following_user_count}</p>
                 <h4 className="card-title">
                     All files under this organization
@@ -62,17 +59,7 @@ const OrganizationDetail = (props) => {
                 <hr />
 
                 <div>
-                    {dataPosts.map((item) => (
-                        <div className="border mb-3 container p-3">
-                            <h5>File name: {item.file_name}</h5>
-                            <h5>File id: {item.id}</h5>
-                            <h5>Timestamp: {item.timestamp}</h5>
-                            <h5>Author: {item.author_username}</h5>
-                            <button className="btn btn-success btn-sm" onClick={() => downloadCsv(item.id)}>
-                                Download
-                            </button>
-                        </div>
-                    ))}
+                    <SearchableCsvFileTable csvFiles = {dataPosts} textMinLength = {3}/>
                 </div>
 
                 <span>

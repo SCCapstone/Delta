@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import {connect} from 'react-redux';
-import {getCsvFilesPublic,downloadCsvFile} from '../../actions/file'; 
+import {downloadCsvFile} from '../../actions/file'; 
 // note you can style react tables
 import {Table,
   Header,HeaderRow,HeaderCell,

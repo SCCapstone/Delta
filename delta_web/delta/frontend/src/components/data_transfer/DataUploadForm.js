@@ -44,6 +44,8 @@ const DataUploadForm = (props) =>{
   // select values
   const [selectedValues,setSelectedValues] = useState([]);
 
+  var arrOrgs = []
+
   useEffect(()=>{
     var select = []
     props.availableOrgs.map((org)=>{
@@ -73,8 +75,10 @@ const DataUploadForm = (props) =>{
   // const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
 
   const onSelectChange = (arrSelects) =>{
+    // reset
+    arrOrgs = []
     arrSelects.map((obj)=>{
-      console.log(obj.value)
+      arrOrgs.push(obj.value)
     }) 
   }
 
@@ -89,7 +93,8 @@ const DataUploadForm = (props) =>{
           'file':file,
           'isPublic':isPublic,
           'description':description,
-          'fileName':fileName
+          'fileName':fileName,
+          'orgs':arrOrgs
         }
         props.addCsvFile(data);
       });

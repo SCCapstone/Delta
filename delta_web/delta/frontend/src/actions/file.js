@@ -7,8 +7,9 @@ import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE,
     CSV_FILE_UPDATE_SUCCESS,GET_CSV_FILES_PUBLIC} from "./types";
 
 // POST FILE 
-export const addCsvFile= ({file,fileName,isPublic,description}) => (dispatch,getState) =>{
+export const addCsvFile= ({file,fileName,isPublic,description,orgs}) => (dispatch,getState) =>{
     // pass in token
+    console.log(orgs);
     axios.post('/api/upload/csv/',file,fileTokenConfig(getState,file))
         .then(res=>{
             dispatch(createMessage({addCsvFileSuccess:"File posted"}));
@@ -19,7 +20,7 @@ export const addCsvFile= ({file,fileName,isPublic,description}) => (dispatch,get
             const id = res.data.csvFile.id;
             const file_name = fileName;
             const is_public = isPublic;
-            const data = JSON.stringify({id,file_name,description,is_public})
+            const data = JSON.stringify({id,file_name,description,is_public,orgs})
             axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
             .then(res=>{
                 console.log(res);

@@ -4,6 +4,9 @@ import {addCsvFile} from '../../actions/file';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
+// select
+import Select from 'react-select';
+
 const getColor = (props) => {
   if (props.isDragActive) {
       return '#00e676';
@@ -36,19 +39,24 @@ const DataUploadForm = (props) =>{
   // 5 MB
   const maxSize = 5*1048576;
 
-  var [availableOrgs, setAvailableOrgs] = useState([]);
+  var [availableOrgs, setAvailableOrgs] = useState(null);
 
   const getAvailableOrgs = () =>{
     // to do
     // get your organizations
     //
-    setAvailableOrgs(['ValafarLab','Test']);
+    setAvailableOrgs(
+      [
+        {value:'Valafar Lab',label:'Valafar Lab'},
+        {value:'Test Lab',label:'Test Lab'},
+      ]
+    );
   }
 
   useEffect(()=>{
     // on load call this once
-    setAvailableOrgs(['ValafarLab','Test']);
-    console.log(availableOrgs);
+    // GET ONLY THE ORGANIZATIONS AVAILABLE TO YOURSELF
+    getAvailableOrgs();
   },[]);
 
   const onDrop = useCallback(acceptedFiles => {
@@ -84,53 +92,55 @@ const DataUploadForm = (props) =>{
         props.addCsvFile(data);
       });
   }
-    return(
-        <form onSubmit = {onSubmit}>
-            <div className="container"> 
-            <Container {...getRootProps(isDragActive, isDragReject)}>
-                <input {...getInputProps()}/>
-                {!isDragActive && 'Click here or drop a file to upload.'}
-                {isDragActive && !isDragReject && "Drop File"}
-                {isDragReject && "File type not accepted."}
-                {isFileTooLarge && (
-                <div className = "text-danger mt-2">
-                    File is too large.
-                </div>
-                )}
-            </Container>
-            <ul className = "list-group mt-2">
-                {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile=>(
-                <li className="list-group-item list-group-item-success">
-                    {acceptedFile.name}
-                </li>
-                ))}
-            </ul>
-            </div>
-            <br />
-            <div className="input-group">
-                <input type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
-            </div>
-            <div className= "form-check">
-            <input className ="form-check-input" type="checkbox" value="isPublic" id="flexCheck"/>
-            <label className="form-check-label" htmlFor = "flexCheck">
-                Publically Visible
-            </label>
-            </div>
-            <div className="input-group">
-                <input type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
-            </div>
-            <div>
-              <h3>Available Organizations</h3>
-              <select className="form-select">
-                  {availableOrgs.map((org)=>{
-                    <option value = {org}>{org}</option>
-                  })}
-              </select>
-            </div>
-            <br />
-            <button className="btn btn-success mb-2">Submit</button>
-        </form>
-    )
+
+  if(availableOrgs == null) return;
+
+  return(
+      <form onSubmit = {onSubmit}>
+          <div className="container"> 
+          <Container {...getRootProps(isDragActive, isDragReject)}>
+              <input {...getInputProps()}/>
+              {!isDragActive && 'Click here or drop a file to upload.'}
+              {isDragActive && !isDragReject && "Drop File"}
+              {isDragReject && "File type not accepted."}
+              {isFileTooLarge && (
+              <div className = "text-danger mt-2">
+                  File is too large.
+              </div>
+              )}
+          </Container>
+          <ul className = "list-group mt-2">
+              {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile=>(
+              <li className="list-group-item list-group-item-success">
+                  {acceptedFile.name}
+              </li>
+              ))}
+          </ul>
+          </div>
+          <br />
+          <div className="input-group">
+              <input type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
+          </div>
+          <div className= "form-check">
+          <input className ="form-check-input" type="checkbox" value="isPublic" id="flexCheck"/>
+          <label className="form-check-label" htmlFor = "flexCheck">
+              Publically Visible
+          </label>
+          </div>
+          <div className="input-group">
+              <input type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
+          </div>
+          <div>
+            <h3>Available Organizations</h3>
+            <Select 
+              options = {availableOrgs}
+              isMulti
+            />
+          </div>
+          <br />
+          <button className="btn btn-success mb-2">Submit</button>
+      </form>
+  )
 }
 
 export default connect(null,{addCsvFile})(DataUploadForm);

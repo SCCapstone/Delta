@@ -1,14 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { deleteCsvFile } from '../../actions/file'
 
 const CsvFile = (props) => {
+    var navigate = useNavigate();
+
+    // with reference to
+    // https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page
+    const routeChange = (path) =>{
+        navigate(path);
+    }
+
     const clickDelete = () =>{
         var dialog = confirm("Would you like to delete this file? There is no going back.");
         if(dialog){
-        props.deleteCsvFile(id);
+            props.deleteCsvFile(props.csvFileData.id);
+            // redirect to your uploads
+            routeChange('/community/personal')
         }
     }
 

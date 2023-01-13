@@ -37,7 +37,7 @@ const CsvFileDetail = (props) => {
 
     return (
         <div className="container">
-          <CsvFile csvFileData={csvFile}/>
+          <CsvFile csvFileData={csvFile} />
           <div className="">
             <h3>Add a review?</h3>
             <ReviewForm csvFileId = {id} handleSubmit={retrieveData}/>

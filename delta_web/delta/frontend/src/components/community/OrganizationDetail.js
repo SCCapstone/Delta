@@ -46,15 +46,15 @@ const OrganizationDetail = (props) => {
     if (data == null || dataPosts == null) return;
 
     return (
-        <div className="card">
-            <div className="card-body">
-                <h1 className="card-title">Organization Name: {data.name}</h1>
-                <p className="card-text">User count: {data.following_user_count}</p>
-                <h4 className="card-title">
+        <div className="container">
+            <div>
+                <h1>Organization Name: {data.name}</h1>
+                <p>User count: {data.following_user_count}</p>
+                <h4>
                     All files under this organization
                 </h4>
                 <small>
-                    Note that when you register under an organization, all of your public files are now under the organization as well.
+                    When you upload a file, you can set it to be under any of the organizations you are also a part of.
                 </small>
                 <hr />
 

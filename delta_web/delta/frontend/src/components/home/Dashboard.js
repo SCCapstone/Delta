@@ -80,64 +80,21 @@ export class Dashboard extends Component {
       Each column will be filled with a graph going from left to right
       being the daily, weekly, and monthly user graph,
       */
-      <div className="pt-3">
+      <div className="container">
         <h1>
           Welcome back <strong>{user.username}</strong>.
         </h1>
         <h3>Let's get you caught up</h3>
 
-        <div className="container">
-          <div className="pt-5">
-            <div className="row align-self-start">
-              <div className="col centered">
-                <center>
-                  <h2>Today</h2>
-                </center>
-                <div className="graph1">
-                  <Line data={daily_graph}></Line>
-                </div>
-                <div className="px-4 py-2">
-                  <h6>
-                    This data is not actual calculated data that comes from any
-                    actual usage of the app. This is all just to show off how
-                    the app will look once the full functionality of the graph
-                    has been added. This graph is full of dummy data.
-                  </h6>
-                </div>
-              </div>
-              <div className="col centered">
-                <center>
-                  <h2>This Week</h2>
-                </center>
-                <div className="graph2">
-                  <Line data={weekly_graph}></Line>
-                </div>
-                <div className="px-4 py-2">
-                  <h6>
-                    This graph will show off your activity over the course of
-                    the last week. In each of these graphs, your own personal
-                    data will be compared with data provided by our models to
-                    show where you stack up against the average person.
-                  </h6>
-                </div>
-              </div>
-              <div className="col centered">
-                <center>
-                  <h2>This Month</h2>
-                </center>
-                <div className="graph3">
-                  <Line data={monthly_graph}></Line>
-                </div>
-                <div className="px-4 py-2">
-                  <h6>
-                    Lastly comes the graph showing off your monthly activity.
-                    Again, this graph displays the same comparison between the
-                    user and the average person who's data has been uploaded to
-                    the website, however this graph summarizes monthly data.
-                  </h6>
-                </div>
-              </div>
-            </div>
+        <div className = "row">
+          <div className = "col-4">
+            <Line data={daily_graph}></Line>
+          </div>
+          <div className = "col-4">
+            <Line data={weekly_graph}></Line>
+          </div>
+          <div className = "col-4">
+            <Line data={monthly_graph}></Line>
           </div>
         </div>
       </div>

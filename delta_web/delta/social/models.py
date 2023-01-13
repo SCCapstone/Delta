@@ -31,7 +31,7 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(default = 0,validators=[MinValueValidator(0),MaxValueValidator(5)])
 
     class Meta:
-        unique_together = ('author','title')
+        unique_together = ('author','file')
     
     def __str__(self):
         return self.title

@@ -28,6 +28,8 @@ export default function(state=initialState, action){
         case USER_LOADED:
             // these were changed compared to original, 
             // in order to help refresh maintain place
+            localStorage.setItem('isAuthenticated',true)
+            localStorage.setItem('user',action.payload)
             return {
                 ...state,
                 isAuthenticated: true,

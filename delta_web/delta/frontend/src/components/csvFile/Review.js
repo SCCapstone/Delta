@@ -19,7 +19,9 @@ const Review = (props) => {
 
   const handleDelete = (e) =>{
     props.deleteReview(props.reviewData.id);
-    props.refreshReviews();
+    setTimeout(()=>{
+      props.refreshReviews();
+    },200);
   }
 
   return (

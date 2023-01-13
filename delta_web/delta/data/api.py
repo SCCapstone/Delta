@@ -86,14 +86,15 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         # can only update file name
         obj = CSVFile.objects.get(id=kwargs['pk'])
-        for orgId in request.data['orgs']:
-            # check if org exists
-            try:
-                orgObj = Organization.objects.get(pk=orgId)
-                obj.registered_organizations.add(orgObj)
-            except Organization.DoesNotExist:
-                pass
-        obj.save()
+        if('registered_organizations' in  request.data):
+            for orgId in request.data['registered_organizations']:
+                # check if org exists
+                try:
+                    orgObj = Organization.objects.get(pk=orgId)
+                    obj.registered_organizations.add(orgObj)
+                except Organization.DoesNotExist:
+                    pass
+            obj.save()
 
         return super().partial_update(request, *args, **kwargs)
     

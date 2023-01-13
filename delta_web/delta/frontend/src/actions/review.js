@@ -9,7 +9,7 @@ export const addReview = (dictData) => (dispatch,getState) =>{
     })
     .catch((err)=>{
         console.log(err);
-        dispatch(createMessage({addReviewFail: err.response.data.message}));
+        dispatch(createMessage({addReviewFail: "Failed to add review. User's can only add one review per file."}));
     })
 }
 

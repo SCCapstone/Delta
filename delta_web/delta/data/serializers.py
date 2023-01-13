@@ -23,7 +23,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
         model = CSVFile
         fields = [
             'file_name','timestamp','author','author_username','id','file_path',"description",
-            "is_public","reviews","avg_rating","formatted_date","review_count"
+            "is_public","reviews","avg_rating","formatted_date","review_count","registered_organizations"
         ]
         validators = [
             UniqueTogetherValidator(

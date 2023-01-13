@@ -8,7 +8,8 @@ const CsvFileForm = (props) => {
     'file_name':props.csvFile.file_name,
     'id':props.csvFile.id,
     'description':props.csvFile.description,
-    'is_public':props.csvFile.is_public
+    'is_public':props.csvFile.is_public,
+    "registered_organizations":props.csvFile.registered_organizations
   })
 
   const onChange = (e) =>{

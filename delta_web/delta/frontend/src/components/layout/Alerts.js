@@ -22,15 +22,13 @@ export class Alerts extends Component {
             if(error.msg.username){
                 alert.error(error.msg.username.join());
             }
+            if(error.msg.email){
+                alert.error(error.msg.email.join())
+            }
         }
         // check for changed message
         if(message !== prevProps.message){
-            if(message.deleteDataAccel){
-                alert.success(message.deleteDataAccel);
-            }
-            if(message.addDataAccel){
-                alert.success(message.addDataAccel);
-            }
+            console.log(message);
             if(message.addCsvFileSuccess){
                 alert.success(message.addCsvFileSuccess);
             }

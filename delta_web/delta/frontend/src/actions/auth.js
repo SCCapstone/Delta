@@ -65,7 +65,6 @@ export const login = (username, password) => dispatch => {
         })
         // if we are not authenticated, no token that matches, need to catch
         .catch((err) => {
-            console.log(err);
             // dispatch the error
             dispatch(returnErrors(err.response.data, err.response.status));
             // dispatch the type of error
@@ -108,14 +107,15 @@ export const register = ({ username, first_name, last_name, password, email, org
 
     axios.post('/api/auth/register', body, config)
         .then((res) => {
+            console.log(res)
             // what str to show for message
             var msg = ""
-            if(res.data.user.followed_organization_count != 0){
-                // has an organization
-                msg = "Successfully registered with organization."
+            if(res.data.user.followed_organizations.length <= 0){
+                msg = "You have registered, but not under an organization."
             }else{
-                msg = "Successfully registered, but not registered with an organization."
+                msg = "You have registered under an organization."
             }
+
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
@@ -124,14 +124,13 @@ export const register = ({ username, first_name, last_name, password, email, org
         })
         // if we are not authenticated, no token that matches, need to catch
         .catch((err) => {
-            // console.log(err.response.data);
-            // dispatch the error
-            dispatch(returnErrors(err.response.data, err.response.status));
             // dispatch the type of error
-            dispatch({
-                type: REGISTER_FAIL,
-            })
-            dispatch(createMessage({registerFail: "FAIL"}))
+            if(err.response){
+                dispatch(returnErrors(err.response.data,err.response.status))
+                dispatch({
+                    type: REGISTER_FAIL,
+                })
+            }
         });
 }
 

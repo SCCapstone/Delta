@@ -41,7 +41,7 @@ class RegisterAPI(generics.GenericAPIView):
             # TODO
             # Indicate that the entered organization key is invalid to the user, 
             # and offer them to register again or not
-            return Response(data={"message":str(e)})
+            pass
             
         return Response({
             # give the serialized user

@@ -24,9 +24,13 @@ const ReviewForm = (props) => {
     }
 
     const onSubmit = (e) =>{
+        console.log('here')
         e.preventDefault();
         props.addReview(reviewState);
-        props.handleSubmit();
+        setTimeout(()=>{
+            // refresh reviews
+            props.handleSubmit();
+        },200)
     }
 
     const RATINGS = ["Poor","Fair","Good","Very good","Excellent"]
@@ -79,7 +83,7 @@ const ReviewForm = (props) => {
             />
             <small id = "descriptionHelp">Add a description.</small>
         </div>
-        <button type="submit" className="btn btn-outline-success">
+        <button type="submit" className="btn btn-outline-success" onClick={onSubmit}>
             Submit
         </button>
     </form>

@@ -54,7 +54,7 @@ const CsvFileDetail = (props) => {
             <div className="col-8">
               <div className = "">
                 {arrReviews.map((data)=>(
-                  <Review reviewData={data} refreshReviews = {retrieveData}/>
+                  <Review reviewData={data} refreshReviews = {retrieveData} key={data.id}/>
                 )
                 )}
               </div>

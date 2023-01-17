@@ -28,7 +28,6 @@ export class Alerts extends Component {
         }
         // check for changed message
         if(message !== prevProps.message){
-            console.log(message);
             if(message.addCsvFileSuccess){
                 alert.success(message.addCsvFileSuccess);
             }

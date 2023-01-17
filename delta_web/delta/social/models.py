@@ -55,7 +55,7 @@ class NotificationReview(BaseNotification):
     # here null is false as you always need a recipient for a notification
     recipient = models.ForeignKey(User,on_delete=models.CASCADE,null=False,related_name="recipient_notification_post_set")
 
-    Review = models.ForeignKey(Review,on_delete=models.CASCADE,related_name="notification_post_set",null=False)
+    review = models.ForeignKey(Review,on_delete=models.CASCADE,related_name="notification_post_set",null=False)
 
     def __str__(self):
         return "Notification for review {}".format(Review.title)

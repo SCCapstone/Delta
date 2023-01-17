@@ -32,6 +32,16 @@ class SerializerReview(serializers.ModelSerializer):
 
 # serializer for review notification class
 class SerializerNotificationReview(serializers.ModelSerializer):
+    sender_username = serializers.SerializerMethodField()
+    formatted_date = serializers.SerializerMethodField()
+    file_id = serializers.SerializerMethodField()
     class Meta:
         model = NotificationReview
         fields = "__all__"
+
+    def get_sender_username(self,obj):
+        return obj.sender.username
+    def get_formatted_date(self,obj):
+        return obj.pub_date.strftime('%Y-%m-%d')
+    def get_file_id(self,obj):
+        return obj.review.file.id

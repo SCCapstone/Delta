@@ -42,6 +42,7 @@ import {loadUser} from '../actions/auth';
 // react 18
 // https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
 import {createRoot} from "react-dom/client";
+import NotificationIndex from './notifications/NotificationIndex';
 
 // Alert options
 const alertOptions = {
@@ -71,6 +72,14 @@ class App extends Component{
                                             <Dashboard/>
                                         </PrivateRoute>
                                     }/>
+
+                                    {/* Notifications */}
+                                    <Route exact path ="/notifications" element={
+                                        <PrivateRoute>
+                                            <NotificationIndex/>
+                                        </PrivateRoute>
+                                    }/>
+
                                     {/* Need to use private routes here */}
                                     <Route exact path ="/profile/glance" element={
                                         <PrivateRoute>

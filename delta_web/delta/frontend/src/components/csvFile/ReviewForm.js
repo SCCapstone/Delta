@@ -24,7 +24,6 @@ const ReviewForm = (props) => {
     }
 
     const onSubmit = (e) =>{
-        console.log('here')
         e.preventDefault();
         props.addReview(reviewState);
         setTimeout(()=>{

@@ -42,7 +42,7 @@ export class ProfileGlance extends Component {
                                     {item.name}
                                 </h5>
                                 </Link>
-                                <p class = "card-text">
+                                <p className = "card-text">
                                     {item.description}
                                 </p>
                             </div>

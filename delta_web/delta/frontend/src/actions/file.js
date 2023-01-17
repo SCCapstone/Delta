@@ -16,11 +16,14 @@ export const addCsvFile= ({file,fileName,isPublic,description,orgs}) => (dispatc
                 type:ADD_CSV_FILE,
                 payload: res.data
             });
-            const id = res.data.csvFile.id;
-            const file_name = fileName;
-            const is_public = isPublic;
-            const data = JSON.stringify({id,file_name,description,is_public,orgs})
-            axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
+            const data = {
+                id:res.data.csvFile.id,
+                file_name:fileName,
+                description:description,
+                is_public:isPublic,
+                registered_organizations:orgs
+            }
+            axios.patch(`api/csv/${res.data.csvFile.id}/`,data,tokenConfig(getState))
             .then(res=>{
                 console.log(res);
             })

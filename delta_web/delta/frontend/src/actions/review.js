@@ -7,9 +7,10 @@ export const addReview = (dictData) => (dispatch,getState) =>{
     axios.post('/api/review/',dictData,tokenConfig(getState))
     .then((res)=>{
         // create a notification
-        axios.post('/api/notification_review/',{text:'MyNotification',sender:res.data['author'],recipient:res.data['recipient_id'],review:res.data['id']},tokenConfig(getState))
+        axios.post('/api/notification_review/',{text:`Your file has been reviewed.`,sender:res.data['author'],recipient:res.data['recipient_id'],review:res.data['id']},tokenConfig(getState))
         .then(res=>{
-            console.log(res);
+            // maybe do something here
+
         })
         dispatch(createMessage({addReviewSuccess:"Your review has been posted."}))
     })

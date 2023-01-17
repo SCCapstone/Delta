@@ -32,7 +32,6 @@ class ViewsetOrganizations(viewsets.ModelViewSet):
         instance = self.get_object()
 
         csvFiles = instance.uploaded_files.all()
-        print(csvFiles)
         
         serializer = SerializerCSVFile(csvFiles,many=True)
 

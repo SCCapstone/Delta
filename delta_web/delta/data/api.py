@@ -84,19 +84,21 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
     
     def partial_update(self, request, *args, **kwargs):
-        # can only update file name
+        super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
+        print(request.data.keys())
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists
                 try:
                     orgObj = Organization.objects.get(pk=orgId)
                     obj.registered_organizations.add(orgObj)
+                    print(obj.registered_organizations)
                 except Organization.DoesNotExist:
                     pass
             obj.save()
 
-        return super().partial_update(request, *args, **kwargs)
+        return Response(self.get_serializer(obj).data)
     
     def retrieve(self,request,*args,**kwargs):
         obj_id = kwargs['pk']

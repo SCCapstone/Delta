@@ -70,7 +70,7 @@ const Header = (props) => {
   useEffect(()=>{
     getNotifications()
     setArrMessages(getMessages());
-  },[arrNotifications])  
+  },[])  
 
 
 
@@ -147,7 +147,7 @@ const Header = (props) => {
         </a>
       </li>
       <li className="nav-item text-center mx-2 mx-lg-1">
-        <a className="nav-link" href="#!">
+        <Link className="nav-link" to="/notifications">
           <div>
             <span className="badge rounded-pill badge-notification bg-primary">{arrNotifications.length}</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-globe" viewBox="0 0 16 16">
@@ -155,7 +155,7 @@ const Header = (props) => {
             </svg>
         </div>
           Notifications
-        </a>
+        </Link>
       </li>
       <li className="nav-item text-center mx-2 mx-lg-1" >
         <div onClick={props.logout}>

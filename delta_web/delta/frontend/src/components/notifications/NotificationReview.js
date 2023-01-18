@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { markRead } from '../../actions/notification';
 
 const NotificationReview = (props) => {
 
-    const markRead = () =>{
-        alert('TO DO');
+    const [style,setStyle] = useState({});
+
+    const handleRead = () =>{
+        props.markRead(props.data.id)
+        setStyle({display:'none'})
     }
 
   return (
-    <div className = "container border m-3 p-3">
+    <div className = "container border m-3 p-3" style={style}>
         <div className="d-flex justify-content-between">
             <div>
                 <strong>Notification from {props.data.sender_username}</strong>
@@ -28,7 +33,7 @@ const NotificationReview = (props) => {
             </Link>
         </div>
         <div>
-            <div onClick={markRead}>
+            <div onClick={handleRead}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path></svg>
                 Got it
             </div>
@@ -37,4 +42,8 @@ const NotificationReview = (props) => {
   )
 }
 
-export default NotificationReview;
+const mapStateToProps = state =>({
+    auth:state.auth
+})
+
+export default connect(mapStateToProps,{markRead},)(NotificationReview);

@@ -64,6 +64,9 @@ export class Alerts extends Component {
             if(message.deleteReviewSuccess){
                 alert.success(message.deleteReviewSuccess);
             }
+            if(message.readNotification){
+                alert.success(message.readNotification)
+            }
         }
     }
 

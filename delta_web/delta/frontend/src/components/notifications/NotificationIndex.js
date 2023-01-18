@@ -11,7 +11,7 @@ const NotificationIndex = (props) =>{
   // get notifications
   //
   const getNotifications = () =>{
-    axios.get('/api/notification_review/',{headers:{'Content-Type':'application/json','Authorization': `Token ${props.auth.token}`}})
+    axios.get('/api/notification_review/get_unread',{headers:{'Content-Type':'application/json','Authorization': `Token ${props.auth.token}`}})
     .then((res)=>{
       setArrNotifications(res.data)
     })

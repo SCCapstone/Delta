@@ -43,4 +43,8 @@ class RegistrationTestCase(APITestCase):
             'password':'testPassword',
             'email':'testcase@gmail.com',
         }
-        response = self.client.post()
+        response = self.client.post('/api/auth/register',dataUser)
+
+        # 200 is success response code
+        # Note it destroys the test database afterwards
+        self.assertEqual(response.status_code,status.HTTP_200_OK)

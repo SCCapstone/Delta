@@ -26,3 +26,21 @@ class RegistrationTestCase(APITestCase):
         # 200 is success response code
         # Note it destroys the test database afterwards
         self.assertEqual(response.status_code,status.HTTP_200_OK)
+        
+    def test_registerUserWithOrganization(self):
+        data = {
+            'name':'testcase',
+            'following_user_count':1,
+            'description':'testPassword',
+            'password':'somestupid',
+        }
+        self.client.post('/api/organization/',data)
+        
+        dataUser = {
+            'username':'testcase',
+            'first_name':'testFirstName',
+            'last_name':'testLastName',
+            'password':'testPassword',
+            'email':'testcase@gmail.com',
+        }
+        response = self.client.post()

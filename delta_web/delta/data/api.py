@@ -18,6 +18,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import MultiPartParser
 
 # import orgs
 from organizations.models import Organization
@@ -121,7 +122,8 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
 # 
 ###################
 class UploadCsvApiView(APIView):
-    parser_classes = (FileUploadParser,)
+#    parser_classes = (FileUploadParser,)
+    parser_classes = (MultiPartParser,)
 
     permission_classes = [
         permissions.IsAuthenticated

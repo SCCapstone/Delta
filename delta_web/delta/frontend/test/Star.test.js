@@ -8,6 +8,9 @@ import StarSvg from '../src/components/csvFile/StarSvg'
 import { Provider } from 'react-redux'
 import store from '../src/store'
 
+/*
+Test rendering of star
+*/
 test('Should Render Star',()=>{
     const style = {fill:'none'}
     render(<Provider store={store}><StarSvg

@@ -11,6 +11,9 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+/*
+Test rendering a review
+*/
 test('Should Render Review',()=>{
     const reviewData = {
         id:1,
@@ -42,6 +45,9 @@ test('Should Render Review',()=>{
     render(<Provider store={store}><Review 
         reviewData = {reviewData} auth={auth}
         /></Provider>);
-    const headerElement = screen.getAllByTestId('header-1');
-    expect(headerElement).toBeInTheDocument();
+    const reviewElement = screen.getByTestId('review-1');
+    
+
+    // should render
+    expect(reviewElement).toBeInTheDocument();
 })

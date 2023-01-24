@@ -44,6 +44,12 @@ import {loadUser} from '../actions/auth';
 import {createRoot} from "react-dom/client";
 import NotificationIndex from './notifications/NotificationIndex';
 
+// messages
+import MessageIndex from './conversations/MessageIndex';
+
+// public profile
+import PublicProfile from './profile/PublicProfile';
+
 // Alert options
 const alertOptions = {
     timeout: 3000,
@@ -72,6 +78,12 @@ class App extends Component{
                                             <Dashboard/>
                                         </PrivateRoute>
                                     }/>
+                                    {/* Public profile */}
+                                    <Route exact path ="/profile/:username" element={
+                                        <PrivateRoute>
+                                            <PublicProfile />
+                                        </PrivateRoute>
+                                    }/>
 
                                     {/* Notifications */}
                                     <Route exact path ="/notifications" element={
@@ -79,6 +91,14 @@ class App extends Component{
                                             <NotificationIndex/>
                                         </PrivateRoute>
                                     }/>
+                                    {/* Messages */}
+                                    <Route exact path ="/messages" element = {
+                                        <PrivateRoute>
+                                            <MessageIndex/>
+                                        </PrivateRoute>
+                                    }
+                                    
+                                    />
 
                                     {/* Need to use private routes here */}
                                     <Route exact path ="/profile/glance" element={

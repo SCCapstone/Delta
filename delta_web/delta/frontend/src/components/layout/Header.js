@@ -10,7 +10,7 @@ import { logout } from "../../actions/auth";
 import axios from 'axios'
 
 // styles
-import "./header.css";
+// import "./header.css";
 
 const Header = (props) => {
 

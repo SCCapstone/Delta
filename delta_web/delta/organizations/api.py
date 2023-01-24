@@ -29,7 +29,7 @@ class ViewsetOrganizations(viewsets.ModelViewSet):
     
     def perform_create(self,serializer):
         serializer.save()
-    
+
     @action(methods=['get'],detail=True)
     def data_posts(self,request,*args,**kwargs):
         instance = self.get_object()

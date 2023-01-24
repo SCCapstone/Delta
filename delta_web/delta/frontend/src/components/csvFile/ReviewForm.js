@@ -82,7 +82,7 @@ const ReviewForm = (props) => {
             />
             <small id = "descriptionHelp">Add a description.</small>
         </div>
-        <button type="submit" className="btn btn-outline-success" onClick={onSubmit}>
+        <button type="submit" className="btn btn-outline-success">
             Submit
         </button>
     </form>

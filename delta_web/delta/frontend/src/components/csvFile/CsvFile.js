@@ -22,10 +22,23 @@ const CsvFile = (props) => {
         }
     }
 
+    console.log(props.csvFileData)
+
   return (
     <div className="border border-rounded m-3 p-3">
         <div className="d-flex justify-content-between">
-            <h5>{props.csvFileData.formatted_date}</h5>
+            <div>
+                <h5>{props.csvFileData.formatted_date}</h5>
+            </div>
+            <div>
+                <Link>
+                    <h5>
+                        <Link to ={`/profile/${props.csvFileData.author_username}`}>
+                            {props.csvFileData.author_username}
+                        </Link>
+                    </h5>
+                </Link>
+            </div>
         </div>
         <div>
             <div>

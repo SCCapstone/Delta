@@ -59,3 +59,17 @@ class NotificationReview(BaseNotification):
 
     def __str__(self):
         return "Notification for review {}".format(Review.title)
+
+
+# Conversations
+# these are like chat rooms.
+class Conversation(models.Model):
+    title = models.CharField(max_length = 200,null=False)
+    author = models.ForeignKey(User,on_delete=models.CASCADE,related_name="author_conversation_set")
+    # all other users in the conversation
+    # can be only 1 as well
+    other_users = models.ManyToManyField(User,related_name="participant_conversation_set")
+    pub_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title

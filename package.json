@@ -5,6 +5,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "icons": "^1.0.0",
-    "react-dropzone": "^14.2.3"
+    "react-dropzone": "^14.2.3",
+    "style-loader": "^3.3.1"
   }
 }

@@ -4,8 +4,8 @@ from django.urls import reverse
 class TestSetUp(APITestCase):
     
     def setUp(self):
-        self.reviews_url = reverse('Reviews')
-        self.NotifReviews_url = reverse('NotificationReviews')
+        self.reviews_url = reverse('Reviews-list')
+        self.NotifReviews_url = reverse('NotificationReviews-list')
 
         self.review_data_InvalidRatingLower={
             'title':"Test",
@@ -51,9 +51,9 @@ class TestSetUp(APITestCase):
             'active':"True",
             'rating':"4"
         }
-        
+
         return super().setUp()
 
-    def tearDown():
+    def tearDown(self):
 
         return super().tearDown()

@@ -72,3 +72,20 @@ class RegistrationTestCase(APITestCase):
         # 200 is success response code
         # Note it destroys the test database afterwards
         self.assertEqual(response.status_code,status.HTTP_200_OK)
+
+# Vince
+# passes test, but do this with a debugger and i'm not sure
+# Following this SO post: https://stackoverflow.com/questions/22457557/how-to-test-login-process
+class LoginTestCase(APITestCase):
+
+    def test_login(self):
+
+        url = '/api/auth/login'
+        data = {
+            'username': 'test',
+            'password': 'test'
+        }
+        response = self.client.post(url, data, format='json')
+        # import pdb
+        # pdb.set_trace()
+        self.assertTrue(response.status_code, status.HTTP_200_OK)

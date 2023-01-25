@@ -2,7 +2,7 @@ import React from 'react'
 
 const StarSvg = (props) => {
   return (
-    <svg 
+    <svg data-testid="star" 
         width="58" 
         height="58" 
         viewBox="0 0 24 24" 

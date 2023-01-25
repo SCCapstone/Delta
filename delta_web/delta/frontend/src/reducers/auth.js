@@ -18,7 +18,7 @@ const initialState = {
     isAuthenticated:localStorage.getItem('isAuthenticated'),
     isLoading: false,
     // this was originally null
-    user: localStorage.getItem('user'),
+    user: localStorage.getItem('user')
 }
 
 export default function(state=initialState, action){

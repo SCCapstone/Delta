@@ -25,7 +25,7 @@ const Review = (props) => {
   }
 
   return (
-    <div className ="container border p-3 m-3">
+    <div className ="container border p-3 m-3" data-testid="review-1">
         <div className="d-flex justify-content-between">
           <div className="d-flex flex-row">
             {arrStars.map((starSvg)=>(

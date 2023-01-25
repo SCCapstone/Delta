@@ -22,29 +22,22 @@ To run, first clone the repository by running:
 
 Then cd into `Delta`. 
 
-Enter the virtual environment with:
-`source env/bin/activate`
-##### NOTE: If there are any issues with virtual environments, please see [here](https://pythonbasics.org/virtualenv/)
+You should have installed `pipenv`. Install following `https://pipenv.pypa.io/en/latest/install/` or some other resource online.
 
-Cd into `delta_web` with `cd delta_web`.
+When installed, you should be able to run 
+`pipenv sync` to sync the pipenv file, and then `pipenv install` to install dependencies.
 
+To run the backend, cd into `delta_web` with `cd delta_web`.
 Change directory into `delta` with `cd delta`.
 
 The currect working directory should be something like:
 `[OTHER_DIRECTORIES]/Delta/delta_web/delta/`
 
+Then run `pipenv run python3 manage.py runserver`. Now the backend should be running.
+
+To set up `npm`, from the same directory as prior cd into `frontend`. 
 Install the necessary JavaScript requirements with `npm i`. 
 ### It is possible that certain requirements are not caught by the package manager. If that is the case, please look at the error log and run `npm i [PACKAGE_NAME]` where [PACKAGE_NAME] is the name of the package needed.
-
-Now open up two terminals from your current directory.
-
-On terminal one, type
-`python3 manage.py runserver`
-If there are dependency requirements, install them using pip. There should not be if you are in the virtual environment. 
-
-Check if there are any unapplied migrations. If so, end the server by pressing `CONTROL-C` and run `python manage.py makemigrations` followed by `python manage.py migrate`. Now run `python manage.py runserver` again. This will start the backend server on port 8000 on localhost.
-
-This terminal shall be running the backend REST API.
 
 On terminal two, type:
 `npm run dev` to begin the front end server.

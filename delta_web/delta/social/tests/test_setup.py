@@ -26,8 +26,8 @@ class TestSetUp(APITestCase):
 
         self.review_data_InvalidRatingLower={
             'title':"Test",
-            'author':"nav",
-            'file':"words.txt",
+            'author':self.user.id,
+            'file':self.csvFile.id,
             'text':"The Description",
             'active':"True",
             'rating':"-1"
@@ -35,8 +35,8 @@ class TestSetUp(APITestCase):
 
         self.review_data_InvalidRatingUpper={
             'title':"Test",
-            'author':"nav",
-            'file':"words.txt",
+            'author':self.user.id,
+            'file':self.csvFile.id,
             'text':"The Description",
             'active':"True",
             'rating':"6"
@@ -53,8 +53,8 @@ class TestSetUp(APITestCase):
 
         self.review_data_BlankTitle={
             'title':"",
-            'author':"nav",
-            'file':"words.txt",
+            'author':self.user.id,
+            'file':self.csvFile.id,
             'text':"The Description",
             'active':"True",
             'rating':"4"
@@ -62,8 +62,8 @@ class TestSetUp(APITestCase):
 
         self.review_data_InvalidTitle={
             'title':" This is a sentence that is 101 characters long, it has to be exactly 101 characters to meet the requirement. 101 ",
-            'author':"nav",
-            'file':"words.txt",
+            'author':self.user.id,
+            'file':self.csvFile.id,
             'text':"The Description",
             'active':"True",
             'rating':"4"

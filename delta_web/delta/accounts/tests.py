@@ -89,3 +89,7 @@ class LoginTestCase(APITestCase):
         # import pdb
         # pdb.set_trace()
         self.assertTrue(response.status_code, status.HTTP_200_OK)
+
+    # test_login_bad_credentials
+
+    # expect to fail

@@ -116,17 +116,13 @@ To run the backend tests, remember to start a virtual environment in the Delta d
 
 `pipenv shell`
 
-Then, either navigate to the delta directory `cd delta_web/delta` and run:
+Then, navigate to the delta directory `cd delta_web/delta` and run:
 
 `pipenv run python3 manage.py test`
 
-Or, from the current directory, type:
+To run frontend tests cd to the the delta_web directort `cd delta_web/delta/frontend` and then run:
 
-`pipenv run python3 delta_web/delta/manage.py test`
-
-To run frontend tests cd to the the delta_web directort `cd delta_web` and then run:
-
-`command to run tests, LOOK THIS UP`
+`npm run coverage`
 
 To run the suit of behavioral tests... MORE TO COME
 

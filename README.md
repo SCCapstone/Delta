@@ -83,13 +83,48 @@ There is no setup required as of now. In the future, we may include commands for
 This is where we will put deployment steps.
 
 # Testing
-This is where we will put testing steps.
+Testing the Delta application includes dozens/hundreds of unit tests plus behavioral testing. To accomplish this, we
+use a combination of testing libraries, which are listed below under the next heading.
+
+Unit tests run against APIs in the following directories:
+- accounts/
+- data/
+- organizations/
+- social/
 
 ## Testing Technology
-This is where we will list the testing technologies.
+Testing the Delta application requires two/three/ libraries: 
+
+### Django's built-in testing suite for backend
+This library comes installed with the framework so there is no additional command needed.
+
+### React's built-in testing suite
+This comes installed with React, so again no need to run an additional command.
+
+### Jest [any other frontend stuff] for frontend
+To install Jest type:
+
+`command to install jest, probably npm i Jest`
+
+### Selenium for behavioral testing
+To install Selenium type:
+
+`command to install Selenium, probably npm i selenium`
 
 ## Running Tests
-This is where we will explain the running of tests.
+To run the backend tests, remember to start a virtual environment in the Delta directory:
+
+`pipenv shell`
+
+Then, navigate to the delta directory `cd delta_web/delta` and run:
+
+`pipenv run python3 manage.py test`
+
+To run frontend tests cd to the the delta_web directort `cd delta_web/delta/frontend` and then run:
+
+`npm run coverage`
+
+To run the suit of behavioral tests... MORE TO COME
 
 ## Authors:
 Vince Kolb-Lugo: kolblugo@email.sc.edu

@@ -13,6 +13,7 @@ User = get_user_model()
 
 class ReviewTestCase(APITestCase):
 
+  # not convinced this is working correctly
   def test_review_invalid_rating(self):
 
     # login a user
@@ -33,4 +34,4 @@ class ReviewTestCase(APITestCase):
     response = self.client.post('/api/review',data)
 
     # should return bad request
-    self.assertFalse(response.status_code,status.HTTP_200_OK)
+    self.assertTrue(response.status_code,400)

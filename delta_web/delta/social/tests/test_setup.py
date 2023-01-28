@@ -69,6 +69,15 @@ class TestSetUp(APITestCase):
             'rating':"4"
         }
 
+        self.review_data_NoText={
+            'title':" This is a sentence that is 101 characters long, it has to be exactly 101 characters to meet the requirement. 101 ",
+            'author':self.user.id,
+            'file':self.csvFile.id,
+            'text':"",
+            'active':"True",
+            'rating':"4"
+        }
+
         return super().setUp()
 
     def tearDown(self):

@@ -23,3 +23,11 @@ class TestViews(TestSetUp):
     def test_make_review_invalid_title(self):
         res = self.client.post(self.reviews_url, self.review_data_InvalidTitle, format="json")
         self.assertEqual(res.status_code, 400)
+
+    def test_make_review_no_text(self):
+        res = self.client.post(self.reviews_url, self.review_data_InvalidText, format="json")
+        # import pdb
+        # pdb.set_trace()
+        self.assertEqual(res.status_code,400)
+
+    

@@ -2,7 +2,7 @@
 // https://www.youtube.com/watch?v=ML5egqL3YFE
 import React from 'react'
 import '@testing-library/jest-dom'
-import {render, screen} from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import Review from "../src/components/csvFile/Review"
 
 import { Provider } from 'react-redux'
@@ -14,23 +14,23 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 /*
 Test rendering a review
 */
-test('Should Render Review',()=>{
+test('Should Render Review', () => {
     const reviewData = {
-        id:1,
-        rating:5,
-        title:"TestTitle",
-        author_username:"TestUser",
-        formatted_date:"10/22/22",
-        author:1
+        id: 1,
+        rating: 5,
+        title: "TestTitle",
+        author_username: "TestUser",
+        formatted_date: "10/22/22",
+        author: 1
     }
     const initialAuthState = {
         token: "TEST",
-        isAuthenticated:true,
-        isLoading:false,
-        user:{id:1}
+        isAuthenticated: true,
+        isLoading: false,
+        user: { id: 1 }
     }
-    const auth = function(state = initialAuthState,action){
-        return {...state}
+    const auth = function (state = initialAuthState, action) {
+        return { ...state }
     }
     const reducers = combineReducers({
         auth
@@ -42,12 +42,51 @@ test('Should Render Review',()=>{
         initialState,
         composeWithDevTools(applyMiddleware(...middleware))
     )
-    render(<Provider store={store}><Review 
-        reviewData = {reviewData} auth={auth}
-        /></Provider>);
+    render(<Provider store={store}><Review
+        reviewData={reviewData} auth={auth}
+    /></Provider>);
     const reviewElement = screen.getByTestId('review-1');
-    
+
 
     // should render
     expect(reviewElement).toBeInTheDocument();
+})
+
+test('Invalid Rating', () => {
+    const reviewData = {
+        id: 1,
+        rating: -1,
+        title: "TestTitle",
+        author_username: "TestUser",
+        formatted_date: "10/22/22",
+        author: 1
+    }
+    const initialAuthState = {
+        token: "TEST",
+        isAuthenticated: true,
+        isLoading: false,
+        user: { id: 1 }
+    }
+    const auth = function (state = initialAuthState, action) {
+        return { ...state }
+    }
+    const reducers = combineReducers({
+        auth
+    })
+    const initialState = {}
+    const middleware = [thunk]
+    const store = createStore(
+        reducers,
+        initialState,
+        composeWithDevTools(applyMiddleware(...middleware))
+    )
+
+    // expect to produce an error, find correct way to test this
+    render(<Provider store={store}><Review
+        reviewData={reviewData} auth={auth}
+    /></Provider>)
+    const reviewElement = screen.getByTestId('review-2')
+
+    // should produce an error
+    expect(reviewElement).to
 })

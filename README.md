@@ -83,6 +83,34 @@ There is no setup required as of now. In the future, we may include commands for
 This is where we will put deployment steps.
 
 # Testing
+Testing the Delta application includes dozens/hundreds of unit tests plus behavioral testing. To accomplish this, we
+use a combination of testing libraries, which are listed below under the next heading.
+
+## Testing Technology
+For behavioral tests we use [Jest](https://reactjs.org/docs/testing.html).
+
+For unit tests we use the standard Django testing framework. You can read more on that [here](https://docs.djangoproject.com/en/4.1/topics/testing/overview/)
+
+### Unit tests:
+All unit tests are found in the delta directory
+`/Delta/delta_web/delta`
+
+To run the whole test suite, type `pipenv run python3 manage.py test`. From there the terminal will show what tests are found, 
+what pass, and what warnings or errors are shown. You may also run individual unit tests or directories. 
+
+Whole test suite: `pipenv run python3 manage.py test`
+
+Test directory: `pipenv run python3 manage.py test tests/`
+
+Unit test: `pipenv run python3 manage.py test [specific_test_name]` i.e. `pipenv run python3 manage.py test test_user_make_review_no_data`
+
+
+Unit tests run against APIs in the following directories:
+- accounts/
+- data/
+- organizations/
+- social/
+
 ### Behavioral tests:
 Behavioral tests are performed using [Jest](https://jestjs.io/). You can read more on how Jest is used with React [here](https://reactjs.org/docs/testing.html).
 
@@ -94,20 +122,8 @@ To run the tests, from the above directory type
 
 From there the terminal will show what tests are found, what pass, and what warnings or errors are shown.
 
-Note that when making a behavioral test with Jest you the JS file must have a `.test.js` extension.
-Testing the Delta application includes dozens/hundreds of unit tests plus behavioral testing. To accomplish this, we
-use a combination of testing libraries, which are listed below under the next heading.
+Note that when making a behavioral test with Jest the JS file must have a `.test.js` extension.
 
-Unit tests run against APIs in the following directories:
-- accounts/
-- data/
-- organizations/
-- social/
-
-## Testing Technology
-For behavioral tests we use [Jest](https://reactjs.org/docs/testing.html).
-
-For unit tests we use the standard Django testing framework. You can read more on that [here](https://docs.djangoproject.com/en/4.1/topics/testing/overview/)
 
 ## Running Tests
 This is where we will explain the running of tests.

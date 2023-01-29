@@ -95,9 +95,19 @@ To run the tests, from the above directory type
 From there the terminal will show what tests are found, what pass, and what warnings or errors are shown.
 
 Note that when making a behavioral test with Jest you the JS file must have a `.test.js` extension.
+Testing the Delta application includes dozens/hundreds of unit tests plus behavioral testing. To accomplish this, we
+use a combination of testing libraries, which are listed below under the next heading.
+
+Unit tests run against APIs in the following directories:
+- accounts/
+- data/
+- organizations/
+- social/
 
 ## Testing Technology
-This is where we will list the testing technologies.
+For behavioral tests we use [Jest](https://reactjs.org/docs/testing.html).
+
+For unit tests we use the standard Django testing framework. You can read more on that [here](https://docs.djangoproject.com/en/4.1/topics/testing/overview/)
 
 ## Running Tests
 This is where we will explain the running of tests.

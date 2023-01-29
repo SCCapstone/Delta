@@ -83,6 +83,18 @@ There is no setup required as of now. In the future, we may include commands for
 This is where we will put deployment steps.
 
 # Testing
+### Behavioral tests:
+Behavioral tests are performed using [Jest](https://jestjs.io/). You can read more on how Jest is used with React [here](https://reactjs.org/docs/testing.html).
+
+All the behavioral tests can be found in 
+`/Delta/delta_web/delta/frontend/tests/`
+
+To run the tests, from the above directory type
+`npm run coverage`.
+
+From there the terminal will show what tests are found, what pass, and what warnings or errors are shown.
+
+Note that when making a behavioral test with Jest you the JS file must have a `.test.js` extension.
 Testing the Delta application includes dozens/hundreds of unit tests plus behavioral testing. To accomplish this, we
 use a combination of testing libraries, which are listed below under the next heading.
 
@@ -93,38 +105,12 @@ Unit tests run against APIs in the following directories:
 - social/
 
 ## Testing Technology
-Testing the Delta application requires two/three/ libraries: 
+For behavioral tests we use [Jest](https://reactjs.org/docs/testing.html).
 
-### Django's built-in testing suite for backend
-This library comes installed with the framework so there is no additional command needed.
-
-### React's built-in testing suite
-This comes installed with React, so again no need to run an additional command.
-
-### Jest [any other frontend stuff] for frontend
-To install Jest type:
-
-`command to install jest, probably npm i Jest`
-
-### Selenium for behavioral testing
-To install Selenium type:
-
-`command to install Selenium, probably npm i selenium`
+For unit tests we use the standard Django testing framework. You can read more on that [here](https://docs.djangoproject.com/en/4.1/topics/testing/overview/)
 
 ## Running Tests
-To run the backend tests, remember to start a virtual environment in the Delta directory:
-
-`pipenv shell`
-
-Then, navigate to the delta directory `cd delta_web/delta` and run:
-
-`pipenv run python3 manage.py test`
-
-To run frontend tests cd to the the delta_web directort `cd delta_web/delta/frontend` and then run:
-
-`npm run coverage`
-
-To run the suit of behavioral tests... MORE TO COME
+This is where we will explain the running of tests.
 
 ## Authors:
 Vince Kolb-Lugo: kolblugo@email.sc.edu

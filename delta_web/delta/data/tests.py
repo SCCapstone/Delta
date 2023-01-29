@@ -49,18 +49,18 @@ class DataTestCase(APITestCase):
 
 
 
-    def test_data_upload_no_auth(self):
+    # def test_data_upload_no_auth(self):
 
-        # Get Upload URL
-        self.data_upload = reverse('UploadCSV')
+    #     # Get Upload URL
+    #     self.data_upload = reverse('UploadCSV')
             
-        with open("/home/seekingj/Desktop/data.txt") as file:
-            # import pdb
-            # pdb.set_trace()
-            res = self.client.post('/api/upload/csv/',{'file':file})
+    #     with open("/home/seekingj/Desktop/data.txt") as file:
+    #         # import pdb
+    #         # pdb.set_trace()
+    #         res = self.client.post('/api/upload/csv/',{'file':file})
         
 
-            self.assertEqual(res.status_code,status.HTTP_401_UNAUTHORIZED)
+    #         self.assertEqual(res.status_code,status.HTTP_401_UNAUTHORIZED)
 
     # def test_data_upload_correct_file_with_auth(self):
 

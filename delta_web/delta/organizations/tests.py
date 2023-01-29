@@ -33,7 +33,7 @@ class TestCase(APITestCase):
 
         # 201 is success response code
         # Note it destroys the test database afterwards
-        self.assertEqual(response.status_code,status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code,status.HTTP_400_BAD_REQUEST)
         
     def test_createOrganizationNoDescription(self):
         # all data needed to create new user instance

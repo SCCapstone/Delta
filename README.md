@@ -83,7 +83,18 @@ There is no setup required as of now. In the future, we may include commands for
 This is where we will put deployment steps.
 
 # Testing
-This is where we will put testing steps.
+### Behavioral tests:
+Behavioral tests are performed using [Jest](https://jestjs.io/). You can read more on how Jest is used with React [here](https://reactjs.org/docs/testing.html).
+
+All the behavioral tests can be found in 
+`/Delta/delta_web/delta/frontend/tests/`
+
+To run the tests, from the above directory type
+`npm run coverage`.
+
+From there the terminal will show what tests are found, what pass, and what warnings or errors are shown.
+
+Note that when making a behavioral test with Jest you the JS file must have a `.test.js` extension.
 
 ## Testing Technology
 This is where we will list the testing technologies.

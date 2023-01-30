@@ -95,22 +95,29 @@ For unit tests we use the standard Django testing framework. You can read more o
 All unit tests are found in subdirectories of the the delta directory
 `/Delta/delta_web/delta`
 
+Be sure to be in this directory when running the following commands to perform unit tests.
+
 To run the whole test suite, type `pipenv run python3 manage.py test`. From there the terminal will show what tests are found, 
 what pass, and what warnings or errors are shown. You may also run individual unit tests or directories. 
 
+##### Different commands for testing
 Whole test suite: `pipenv run python3 manage.py test`
 
 Test directory: `pipenv run python3 manage.py test accounts/`
 
-Unit test: `pipenv run python3 manage.py test [directory_name.test_directory_name.TestCaseName.specific_test_name]` i.e. 
+A specific test: `pipenv run python3 manage.py test [directory_name.test_directory_name.TestCaseName.specific_test_name]` i.e. 
 `pipenv run python3 manage.py test accounts.tests.RegistrationTestCase.test_registration`
 
 
 Unit tests run against APIs in the following sub-directories:
 - accounts/
+-- This is under the `tests.py` file.
 - data/
+-- This is under the `tests.py` file.
 - organizations/
+-- This is under the `tests.py` file.
 - social/
+-- This is slightly different and under the `tests` folder. Within this folder are the test models (`test_models.py`), the test setup (`test_setup.py`) and the test views (`test_views.py`).
 
 ### Running Behavioral tests:
 Behavioral tests are performed using [Jest](https://jestjs.io/). You can read more on how Jest is used with React [here](https://reactjs.org/docs/testing.html).
@@ -118,12 +125,16 @@ Behavioral tests are performed using [Jest](https://jestjs.io/). You can read mo
 All the behavioral tests can be found in 
 `/Delta/delta_web/delta/frontend/tests/`
 
+When running behavior tests, be sure to be in the following directory:
+
+`/Delta/delta_web/delta/frontend/`
+
 To run the tests, from the above directory type
 `npm run coverage`.
 
 From there the terminal will show what tests are found, what pass, and what warnings or errors are shown.
 
-Note that when making a behavioral test with Jest the JS file must have a `.test.js` extension.
+Note that when making a behavioral test with Jest the JS file must have a `.test.js` extension. 
 
 ## Authors:
 Vince Kolb-Lugo: kolblugo@email.sc.edu

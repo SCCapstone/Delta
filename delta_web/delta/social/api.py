@@ -3,11 +3,17 @@ from .models import Review
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 
-from .serializers import SerializerReview,SerializerNotificationReview
+from .serializers import SerializerReview,SerializerNotificationReview,SerializerConversation
 from data.models import CSVFile
 
 from rest_framework.decorators import action
 from rest_framework.response import Response
+
+from django.contrib.auth import get_user_model
+
+from .models import Conversation
+
+User = get_user_model()
 
 # review api 
 class ViewsetReview(viewsets.ModelViewSet):
@@ -46,4 +52,22 @@ class ViewsetNotificationReview(viewsets.ModelViewSet):
         instance = self.get_object()
         instance.read = True
         instance.save()
+        return Response(self.get_serializer(instance).data)
+
+class ViewsetConversation(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = SerializerConversation
+    
+    def get_queryset(self):
+        return self.request.user.author_conversation_set.all()
+
+    def create(self,request):
+        author = User.objects.get(pk=request.data.get('author'))
+        other_user = User.objects.get(username=request.data.get('other_user_username'))
+
+        instance = Conversation(other_user=other_user,author=author,title=request.data.get('title'))
+        instance.save()
+
         return Response(self.get_serializer(instance).data)

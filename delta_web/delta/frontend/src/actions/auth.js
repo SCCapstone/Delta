@@ -204,7 +204,7 @@ export const fileTokenConfig = (getState, file) => {
     // headers
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/csv'
         }
     }
 

@@ -131,9 +131,11 @@ class UploadCsvApiView(APIView):
 
     # handle post requests
     def post(self,request):
-
         # get the file, or return None if nothing there
+        print("\n\nHERE")
+        print(request.data)
         dataFile = request.data.get('file',None)
+        print("\n\nHERE")
 
         fileName = Path(str(dataFile)).stem
 

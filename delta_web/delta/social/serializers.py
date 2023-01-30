@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Review,NotificationReview
+from .models import Review,NotificationReview,Conversation
 
 from rest_framework.validators import UniqueTogetherValidator
 
@@ -45,3 +45,9 @@ class SerializerNotificationReview(serializers.ModelSerializer):
         return obj.pub_date.strftime('%Y-%m-%d')
     def get_file_id(self,obj):
         return obj.review.file.id
+
+class SerializerConversation(serializers.ModelSerializer):
+
+    class Meta:
+        model = Conversation
+        fields = "__all__"

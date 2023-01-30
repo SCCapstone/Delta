@@ -34,6 +34,7 @@ export const addCsvFile= ({file,fileName,isPublic,description,orgs}) => (dispatc
         .catch(err=>{
             console.log(err);
             dispatch(createMessage({addCsvFileError:err.response.data.message}))
+            dispatch(createMessage({addCsvFileError:err.response.data.detail}))
         })
 }
 

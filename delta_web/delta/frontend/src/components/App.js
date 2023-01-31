@@ -50,6 +50,9 @@ import MessageIndex from './conversations/MessageIndex';
 // public profile
 import PublicProfile from './profile/PublicProfile';
 
+// conversations
+import ConversationDetail from './conversations/ConversationDetail';
+
 // Alert options
 const alertOptions = {
     timeout: 3000,
@@ -96,9 +99,13 @@ class App extends Component{
                                         <PrivateRoute>
                                             <MessageIndex/>
                                         </PrivateRoute>
-                                    }
-                                    
-                                    />
+                                    }/>
+                                    {/* Conversations */}
+                                    <Route exact path ="/messages/conversations/:id" element = {
+                                        <PrivateRoute>
+                                            <ConversationDetail/>
+                                        </PrivateRoute>
+                                    }/>
 
                                     {/* Need to use private routes here */}
                                     <Route exact path ="/profile/glance" element={

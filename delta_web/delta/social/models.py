@@ -72,3 +72,19 @@ class Conversation(models.Model):
 
     def __str__(self):
         return self.title
+
+# Messages
+class Message(models.Model):
+    # person who wrote message
+    author = models.ForeignKey(User,on_delete = models.CASCADE,related_name="author_message_set")
+    # text of message
+    text = models.CharField(max_length=255)
+    # recipient of message
+    recipient = models.ForeignKey(User,on_delete=models.CASCADE,related_name="recipient_message_set")
+    # when sent
+    pub_date = models.DateTimeField(default=timezone.now)
+    # conversation it is under
+    convo = models.ForeignKey(Conversation,on_delete = models.CASCADE,related_name="convo_message_set")
+
+    def __str__(self):
+        return self.text

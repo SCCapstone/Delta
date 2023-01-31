@@ -3,7 +3,7 @@ from .models import Review
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 
-from .serializers import SerializerReview,SerializerNotificationReview,SerializerConversation
+from .serializers import SerializerReview,SerializerNotificationReview,SerializerConversation,SerializerMessage
 from data.models import CSVFile
 
 from rest_framework.decorators import action
@@ -11,7 +11,10 @@ from rest_framework.response import Response
 
 from django.contrib.auth import get_user_model
 
-from .models import Conversation
+from .models import Conversation,Message
+
+# https://stackoverflow.com/questions/739776/how-do-i-do-an-or-filter-in-a-django-query
+from django.db.models import Q
 
 User = get_user_model()
 
@@ -61,7 +64,26 @@ class ViewsetConversation(viewsets.ModelViewSet):
     serializer_class = SerializerConversation
     
     def get_queryset(self):
-        return self.request.user.author_conversation_set.all()
+        # simply get all conversations that user created
+        return self.request.user.author_conversation_set.all().order_by('-pub_date')
+    
+    def retrieve(self,request,pk=None):
+        return Response(self.serializer_class(Conversation.objects.get(pk=pk)).data)
+    
+    @action(methods=['post'],detail=False)
+    def get_convos_with_user(self,request):
+        # get all conversations with another user
+        # two cases for lookups, need the union of them
+        # 1. You created the conversation, so the other user is a partner (your_created_convos)
+        # 2. The other user created a conversation, so you are partner (other_created_convos)
+        other_user = User.objects.get(username=request.data.get('other_user_username'))
+
+        your_created_convos = self.request.user.author_conversation_set.all().filter(other_user=other_user)
+        your_participate_convos = self.request.user.participant_conversation_set.all().filter(author=other_user)
+        total_convos = your_created_convos.union(your_participate_convos)
+        total_convos = total_convos.order_by('-pub_date')
+
+        return Response(self.get_serializer(total_convos,many=True).data)
 
     def create(self,request):
         author = User.objects.get(pk=request.data.get('author'))
@@ -71,3 +93,31 @@ class ViewsetConversation(viewsets.ModelViewSet):
         instance.save()
 
         return Response(self.get_serializer(instance).data)
+    
+class ViewsetMessage(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = SerializerMessage
+
+    # return all of users messages (created by user)
+    def get_queryset(self):
+        return self.request.user.author_message_set.all().order_by('-pub_date')
+    
+    @action(methods=['post'],detail=False)
+    def get_messages_under_convo(self,request):
+        # get all messages under a conversation
+        convo = Conversation.objects.get(pk=request.data.get('convo_id'))
+        return Response(self.get_serializer(convo.convo_message_set.all(),many=True).data)
+
+    def create(self,request):
+        author = User.objects.get(pk=request.data.get('author_id'))
+        other_user = User.objects.get(username=request.data.get('other_user_username'))
+        text = request.data.get('text')
+        convo = Conversation.objects.get(pk=request.data.get('convo_id'))
+
+        # create message
+        message = Message(author=author,recipient=other_user,text=text,convo=convo)
+        message.save()
+
+        return Response(self.get_serializer(message).data)

@@ -70,6 +70,9 @@ export class Alerts extends Component {
             if(message.addConversationSuccess){
                 alert.success(message.addConversationSuccess)
             }
+            if(message.addMessageSuccess){
+                alert.success(message.addMessageSuccess)
+            }
         }
     }
 

@@ -16,6 +16,7 @@ const PublicProfile = (props) => {
     axios.post('/api/conversation/get_convos_with_user/',{other_user_username:username},{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
     .then((res)=>{setConvos(res.data)})
   },[])
+  console.log(convos)
 
   // hasn't loaded yet
   if(convos == null) return;

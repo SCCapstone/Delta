@@ -107,7 +107,6 @@ export const register = ({ username, first_name, last_name, password, email, org
 
     axios.post('/api/auth/register', body, config)
         .then((res) => {
-            console.log(res)
             // what str to show for message
             var msg = ""
             if(res.data.user.followed_organizations.length <= 0){

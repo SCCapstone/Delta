@@ -1,5 +1,3 @@
-from .models import Review
-
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 
@@ -11,7 +9,7 @@ from rest_framework.response import Response
 
 from django.contrib.auth import get_user_model
 
-from .models import Conversation,Message
+from .models import Conversation,Message,Review
 
 # https://stackoverflow.com/questions/739776/how-do-i-do-an-or-filter-in-a-django-query
 from django.db.models import Q
@@ -31,6 +29,9 @@ class ViewsetReview(viewsets.ModelViewSet):
     
     def perform_create(self,serializer):
         serializer.save(author=self.request.user,file=CSVFile.objects.get(pk=self.request.data['file']))
+
+    def retrieve(self,request,pk=None):
+        return Response(self.serializer_class(Review.objects.get(pk=pk)).data)
 
 # notification API
 class ViewsetNotificationReview(viewsets.ModelViewSet):

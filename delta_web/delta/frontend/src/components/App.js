@@ -53,6 +53,9 @@ import PublicProfile from './profile/PublicProfile';
 // conversations
 import ConversationDetail from './conversations/ConversationDetail';
 
+// Review
+import ReviewDetail from './csvFile/ReviewDetail';
+
 // Alert options
 const alertOptions = {
     timeout: 3000,
@@ -74,7 +77,6 @@ class App extends Component{
                         <Fragment>
                             <Header/>
                             <Alerts/>
-                                <br/>
                                 <Routes>
                                     <Route exact path ="/" element= {
                                         <PrivateRoute>
@@ -154,7 +156,11 @@ class App extends Component{
                                             <DataUpload/>
                                         </PrivateRoute>
                                     }/>
-
+                                    <Route exact path ="/reviews/:id" element={
+                                        <PrivateRoute>
+                                            <ReviewDetail/>
+                                        </PrivateRoute>
+                                    } />
                                     
                                     <Route exact path ="/register"element={
                                         <Register/>

@@ -5,11 +5,17 @@ from organizations.models import Organization
 from rest_framework import status
 from rest_framework.decorators import action
 from knox.models import AuthToken
-from .serializers import UserSerializer,RegisterSerializer,LoginSerializer
+from .serializers import UserSerializer,RegisterSerializer,LoginSerializer,PublicUserSerializer
 from organizations.serializers import OrganizationSerializer
+
+from rest_framework import viewsets, permissions
 
 # Email validation
 from email_validator import validate_email, EmailNotValidError
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Register API
 # Used to register new users.
@@ -169,3 +175,18 @@ class UserAPI(generics.RetrieveAPIView):
         serializer = OrganizationSerializer(orgs,many=True)
 
         return Response(serializer.data)
+
+class ViewsetPublicUser(viewsets.ModelViewSet):
+    # for any action dealing with public info of users
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = PublicUserSerializer
+
+    def get_queryset(self):
+        return self.request.user
+
+    @action(methods=["post"],detail=False)
+    def get_user(self,request):
+        user = User.objects.get(username=request.data.get('username'))
+        return Response(self.serializer_class(user).data)

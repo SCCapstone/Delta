@@ -64,12 +64,27 @@ class NotificationReview(BaseNotification):
 # Conversations
 # these are like chat rooms.
 class Conversation(models.Model):
-    title = models.CharField(max_length = 200,null=False)
+    title = models.CharField(max_length = 200,null=False,blank=False)
     author = models.ForeignKey(User,on_delete=models.CASCADE,related_name="author_conversation_set")
-    # all other users in the conversation
-    # can be only 1 as well
-    other_users = models.ManyToManyField(User,related_name="participant_conversation_set")
+    # for now only one other user
+    other_user = models.ForeignKey(User,related_name="participant_conversation_set",on_delete=models.CASCADE)
     pub_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
+
+# Messages
+class Message(models.Model):
+    # person who wrote message
+    author = models.ForeignKey(User,on_delete = models.CASCADE,related_name="author_message_set")
+    # text of message
+    text = models.CharField(max_length=255)
+    # recipient of message
+    recipient = models.ForeignKey(User,on_delete=models.CASCADE,related_name="recipient_message_set")
+    # when sent
+    pub_date = models.DateTimeField(default=timezone.now)
+    # conversation it is under
+    convo = models.ForeignKey(Conversation,on_delete = models.CASCADE,related_name="convo_message_set")
+
+    def __str__(self):
+        return self.text

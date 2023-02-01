@@ -1,19 +1,26 @@
 import React,{useState} from 'react'
+import { connect } from 'react-redux';
+import { addMessage } from '../../actions/convo_message'
 
-const MessageForm = () => {
-    const [conversationState,setConversationState]=useState({
-        title:'',
-        other_user:'',
-    })
+const MessageForm = (props) => {
+    const convoId = props.convoId;
+    const otherUserUsername = props.otherUserUsername
+    const userId = props.author_id
+
+    const [messageText,setMessageText] = useState('');
 
     const onChange = (e) =>{
-        const newState = {...conversationState,[e.target.name]:e.target.value}
-        setConversationState(newState);
+        setMessageText(e.target.value);
     }
 
     const onSubmit = (e) =>{
         e.preventDefault();
-        alert('submit1')
+        props.addMessage({text:messageText,
+            other_user_username:otherUserUsername,
+            convo_id:convoId,
+            author_id:userId
+        })
+        props.refresh();
     }
 
   return (
@@ -25,8 +32,12 @@ const MessageForm = () => {
             onChange = {onChange}
             />
         </div>
+        <button className="btn btn-outline-success">
+            Send
+        </button>
     </form>
   )
 }
 
-export default MessageForm
+
+export default connect(null,{addMessage})(MessageForm)

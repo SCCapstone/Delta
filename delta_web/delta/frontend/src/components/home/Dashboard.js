@@ -46,7 +46,7 @@ export class Dashboard extends Component {
         },
         {
           label: "Average",
-          backgroundColor: "rgb(51, 204, 242)",
+          backgroundColor: "rgb(100, 204, 242)",
           borderColor: "rgb(51, 204, 242)",
           data: [0, 4, 6, 7, 3, 16, 10], // General Data for weekly graph
           lineTension: 0.5,

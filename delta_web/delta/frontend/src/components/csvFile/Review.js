@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { deleteReview } from '../../actions/review';
 
 import StarSvg from "./StarSvg"
@@ -45,7 +46,9 @@ const Review = (props) => {
         </div>
         {props.auth.user.id == props.reviewData.author &&(
           <div className="d-flex justify-content-between">
-              <button className="btn btn-sm btn-outline-success">Edit</button>
+              <Link to={`/reviews/${props.reviewData.id}`}>
+                <button className="btn btn-sm btn-outline-success">Edit</button>
+              </Link>
               <button className="btn btn-sm btn-outline-danger"
                 onClick={handleDelete}
               >

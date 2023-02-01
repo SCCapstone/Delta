@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Review,NotificationReview
+from .models import Review,NotificationReview,Conversation,Message
 
 from rest_framework.validators import UniqueTogetherValidator
 
@@ -45,3 +45,39 @@ class SerializerNotificationReview(serializers.ModelSerializer):
         return obj.pub_date.strftime('%Y-%m-%d')
     def get_file_id(self,obj):
         return obj.review.file.id
+
+class SerializerConversation(serializers.ModelSerializer):
+    author_username = serializers.SerializerMethodField()
+    other_user_username= serializers.SerializerMethodField()
+    messages = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Conversation
+        fields = "__all__"
+    
+    def get_author_username(self,obj):
+        return obj.author.username
+
+    def get_other_user_username(self,obj):
+        return obj.other_user.username
+    
+    def get_messages(self,obj):
+        return SerializerMessage(obj.convo_message_set.all(),many=True).data
+    
+class SerializerMessage(serializers.ModelSerializer):
+    author_username = serializers.SerializerMethodField()
+    formatted_date = serializers.SerializerMethodField()
+    recipient_username = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Message
+        fields = "__all__"
+
+    def get_author_username(self,obj):
+        return obj.author.username
+
+    def get_recipient_username(self,obj):
+        return obj.recipient.username
+
+    def get_formatted_date(self,obj):
+        return obj.pub_date.strftime('%H:%M, %Y-%m-%d')

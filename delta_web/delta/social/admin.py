@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Review,NotificationReview
+from .models import Review,NotificationReview,Conversation,Message
 
 # Register your models here.
 class ReviewAdmin(admin.ModelAdmin):
@@ -10,5 +10,13 @@ class ReviewAdmin(admin.ModelAdmin):
 class NotificationReviewAdmin(admin.ModelAdmin):
     fields = ['text','read','pub_date','sender','recipient','review']
 
+class ConversationAdmin(admin.ModelAdmin):
+    fields = ['title','other_user','author','pub_date']
+
+class MessageAdmin(admin.ModelAdmin):
+    fields = ['author','recipient','pub_date','convo','text']
+
 admin.site.register(Review,ReviewAdmin)
 admin.site.register(NotificationReview,NotificationReviewAdmin)
+admin.site.register(Conversation,ConversationAdmin)
+admin.site.register(Message,MessageAdmin)

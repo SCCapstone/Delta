@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { addConversation } from '../../actions/conversation'
 import MessageForm from './MessageForm'
 
-const ConversationForm = () => {
+const ConversationForm = (props) => {
+
+    if(props.auth.user.id == undefined){
+        return null;
+    }
 
     const [conversationState,setConversationState]=useState({
+        author:props.auth.user.id,
         title:'',
-        other_user:'',
+        other_user_username: useParams()['username'],
     })
 
     const onChange = (e) =>{
@@ -15,7 +23,7 @@ const ConversationForm = () => {
 
     const onSubmit = (e) =>{
         e.preventDefault();
-        alert('submit')
+        props.addConversation(conversationState) 
     }
 
   return (
@@ -35,4 +43,8 @@ const ConversationForm = () => {
   )
 }
 
-export default ConversationForm
+const mapStateToProps = state =>({
+    auth:state.auth
+})
+
+export default connect(mapStateToProps,{addConversation})(ConversationForm)

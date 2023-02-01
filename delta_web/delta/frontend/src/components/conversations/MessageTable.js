@@ -15,14 +15,14 @@ const MessageTable = (props) => {
                 <div
                     className="d-flex flex-row-reverse"
                 >
-                    <MessageDetail author_username={item.author_username} date={item.pub_date} text={item.text}/>
+                    <MessageDetail author_username={item.author_username} date={item.formatted_date} text={item.text}/>
                 </div>
                 :
                 // Other person
                 <div
                     className="d-flex flex-row"
                 >
-                    <MessageDetail author_username={item.author_username} date={item.pub_date} text={item.text}/>
+                    <MessageDetail author_username={item.author_username} date={item.formatted_date} text={item.text}/>
                 </div>
                 }
             </div>

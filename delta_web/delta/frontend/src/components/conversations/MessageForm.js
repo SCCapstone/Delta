@@ -20,6 +20,7 @@ const MessageForm = (props) => {
             convo_id:convoId,
             author_id:userId
         })
+        props.refresh();
     }
 
   return (
@@ -31,7 +32,6 @@ const MessageForm = (props) => {
             onChange = {onChange}
             />
         </div>
-        <br/>
         <button className="btn btn-outline-success">
             Send
         </button>

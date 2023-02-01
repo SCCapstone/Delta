@@ -66,6 +66,7 @@ class SerializerConversation(serializers.ModelSerializer):
     
 class SerializerMessage(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()
+    formatted_date = serializers.SerializerMethodField()
     recipient_username = serializers.SerializerMethodField()
 
     class Meta:
@@ -77,3 +78,6 @@ class SerializerMessage(serializers.ModelSerializer):
 
     def get_recipient_username(self,obj):
         return obj.recipient.username
+
+    def get_formatted_date(self,obj):
+        return obj.pub_date.strftime('%H:%M, %Y-%m-%d')

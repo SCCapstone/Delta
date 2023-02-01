@@ -31,7 +31,7 @@ const ConversationDetail = (props) => {
         <h1>
             Conversation Detail
         </h1>
-        <div className="border m-3 p-3">
+        <div>
             <h5>Title: {convo.title}</h5>
             <p>Published: {convo.pub_date}</p>
             <p>Other user: <Link to={`/profile/${convo.other_user_username}`}>{convo.other_user_username}</Link></p>
@@ -42,10 +42,12 @@ const ConversationDetail = (props) => {
                 <MessageTable messages={convo.messages} user={props.auth.user}/>
             </div>
             <MessageForm convoId = {convo.id} 
+            refresh={getData}
             otherUserUsername={convo.other_user_username}
             author_id={props.auth.user.id}
             />
         </div>
+        <br/>
     </div>
   )
 }

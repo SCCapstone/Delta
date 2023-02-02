@@ -27,3 +27,21 @@ export const deleteReview = (id) => (dispatch,getState) => {
     })
     .catch((err)=>{console.log(err)});
 }
+
+export const updateReview = (data) => (dispatch,getState) =>{
+    // data expects
+    /*
+    id: id of review
+    title: title of review
+    text: text of review
+    rating: int rating of review
+    */
+    axios.patch(`api/review/${data.id}/`,data,tokenConfig(getState))
+    .then((res)=>{
+        console.log(res);
+        dispatch(createMessage({updateReviewSuccess:"Your review has successfully been updated."}))
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}

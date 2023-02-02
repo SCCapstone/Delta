@@ -33,6 +33,10 @@ class ViewsetReview(viewsets.ModelViewSet):
     def retrieve(self,request,pk=None):
         return Response(self.serializer_class(Review.objects.get(pk=pk)).data)
 
+    def partial_update(self,request,*args,**kwargs):
+        super().partial_update(request,*args,**kwargs)
+        return Response(self.serializer_class(Review.objects.get(pk=kwargs['pk'])).data)
+
 # notification API
 class ViewsetNotificationReview(viewsets.ModelViewSet):
     permission_classes = [

@@ -12,11 +12,14 @@ class UserSerializer(serializers.ModelSerializer):
     followed_organization_count = serializers.SerializerMethodField()
     # The followed organizations
     followed_organizations = serializers.SerializerMethodField()
+    # bio
+    bio = serializers.SerializerMethodField()
 
     class Meta:
         # Need unique validator on name and email https://stackoverflow.com/a/38160343/12939325
         model = User
-        fields = ('id','username','email','first_name','last_name','followed_organization_count','followed_organizations')
+        fields = ('id','username','email','first_name','last_name',
+            'followed_organization_count','followed_organizations','bio')
         # cant change id
         read_only_fields = ['id']
     
@@ -27,6 +30,9 @@ class UserSerializer(serializers.ModelSerializer):
         listOrgs = obj.followed_organizations.all()
         serializer = OrganizationSerializer(listOrgs,many=True)
         return serializer.data
+    
+    def get_bio(self,obj):
+        return obj.profile.bio
 
 # Register serializer
 class RegisterSerializer(serializers.ModelSerializer):
@@ -54,3 +60,15 @@ class LoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Incorrect Credentials")
+
+# serializer for public info on users
+class PublicUserSerializer(serializers.ModelSerializer):
+    # bio 
+    bio = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ('username','bio')
+    
+    def get_bio(self,obj):
+        return obj.profile.bio

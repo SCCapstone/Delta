@@ -1,113 +1,108 @@
-import React, { Component } from 'react'
+import React,{useState} from 'react'
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
 import {updateUser} from "../../actions/auth"
-import styled from 'styled-components';
 
-export class ProfileForm extends Component{
-    static propTypes = {
-        auth:PropTypes.object.isRequired,
-        updateUser:PropTypes.func.isRequired
+const ProfileForm = (props) => {
+
+    if(props.auth.user.username == null) return;
+
+    const [userInfo,setUserInfo] = useState(
+        {
+            username:props.auth.user.username,
+            first_name:props.auth.user.first_name,
+            last_name:props.auth.user.last_name,
+            email:props.auth.user.email,
+            bio:props.auth.user.bio,
+            password:"",
+        }
+    );
+
+    const onChange = (e) => {
+        const newState = {...userInfo,[e.target.name]: e.target.value};
+        setUserInfo(newState);
     }
-    /*
-    * These are the different information that is for the specified user. 
-    * It pulls the information stored in the backend. 
-    */
-    state = {
-        username: this.props.auth.user.username,
-        first_name: this.props.auth.user.first_name,
-        last_name: this.props.auth.user.last_name,
-        email: this.props.auth.user.email,
-        password:""
-    }
-    onChange = e => this.setState(
-        {[e.target.name]:e.target.value}
-    ) 
     /* 
     * This defines the actions on what happens when a user click on the submit button.
     * The function gets called and updates the users information.
     */
-    onSubmit = e =>{
-        e.preventDefault();
-        const data = this.state;
-        // call function
-        this.props.updateUser(data);
+    const onSubmit = (e) =>{
+        e.preventDefault()
+        props.updateUser(userInfo);
     }
-    //This is rendering the editing form, in which the user can edit their information.
-    render(){
-        const {
-            username,
-            first_name,
-            last_name,
-            email,
-            password
-        } = this.state;
-        const {isAuthenticated, user} = this.props.auth;
     //This form allows for edited information to be submitted to the backend
-        return (
-            <form onSubmit = {this.onSubmit}>
-                <div>
-                    First Name: 
-                    <input
-                    name = "first_name"
-                    value = {this.state.first_name}
-                    onChange={this.onChange}
-                    className = "form-control"
-                    placeholder={user.first_name}
-                    >
-                    </input>
-                </div>
-                <div>
-                    Last Name:
-                    <input
-                    className="form-control"
-                    name = "last_name"
-                    value = {this.state.last_name}
-                    onChange = {this.onChange}
-                    placeholder={user.last_name}
-                    >
-                    </input>
-                </div>
-                <div>
-                    Email:
-                    <input
-                    className="form-control"
-                    name = "email"
-                    value = {this.state.email}
-                    onChange={this.onChange}
-                    placeholder={user.email}
-                    >
-                    </input>
-                </div>
-                <div>
-                    Username:
-                    <input 
-                    className="form-control"
-                    name = "username"
-                    value = {this.state.username}
-                    onChange={this.onChange}
-                    placeholder={user.username}
-                    >
-                    </input>
-                </div>
-                <div>
-                    Password:
-                    <input
-                    className="form-control"
-                    name = "password"
-                    placeholder="Or enter nothing if no change"
-                    value = {this.state.password}
-                    onChange = {this.onChange}
-                    >
-                    </input>
-                </div>
-                <br/>
-                <button className="btn btn-success">
-                    Update Information
-                </button>
-            </form>
-        )
-    }
+    return (
+        <form onSubmit = {onSubmit}>
+            <div>
+                First Name: 
+                <input
+                name = "first_name"
+                value = {userInfo.first_name}
+                onChange={onChange}
+                className = "form-control"
+                placeholder={userInfo.first_name}
+                >
+                </input>
+            </div>
+            <div>
+                Last Name:
+                <input
+                className="form-control"
+                name = "last_name"
+                value = {userInfo.last_name}
+                onChange = {onChange}
+                placeholder={userInfo.last_name}
+                >
+                </input>
+            </div>
+            <div>
+                Email:
+                <input
+                className="form-control"
+                name = "email"
+                value = {userInfo.email}
+                onChange={onChange}
+                placeholder={userInfo.email}
+                >
+                </input>
+            </div>
+            <div>
+                Username:
+                <input 
+                className="form-control"
+                name = "username"
+                value = {userInfo.username}
+                onChange={onChange}
+                placeholder={userInfo.username}
+                >
+                </input>
+            </div>
+            <div>
+                Password:
+                <input
+                className="form-control"
+                name = "password"
+                placeholder="Or enter nothing if no change"
+                value = {userInfo.password}
+                onChange = {onChange}
+                >
+                </input>
+            </div>
+            <div>
+                Bio:
+                <input
+                className="form-control"
+                name="bio"
+                placeholder={userInfo.bio}
+                onChange={onChange}
+                >
+                </input>
+            </div>
+            <br/>
+            <button className="btn btn-success">
+                Update Information
+            </button>
+        </form>
+    )
 }
 
 const mapStateToProps = state =>({

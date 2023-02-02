@@ -4,6 +4,10 @@ import {addCsvFile} from '../../actions/file';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
+import TagsInput from './TagsInput';
+
+import styles from "./tags.module.css";
+
 // select
 import Select from 'react-select';
 
@@ -144,6 +148,10 @@ const DataUploadForm = (props) =>{
             />
           </div>
           <br />
+          <div>
+            <h5>Tags</h5>
+            <TagsInput/>
+          </div>
           <button className="btn btn-success mb-2">Submit</button>
       </form>
   )

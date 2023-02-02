@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ConversationForm from '../conversations/ConversationForm'
 import { connect } from 'react-redux'
 import ConversationTable from '../conversations/ConversationTable'
@@ -53,14 +53,26 @@ const PublicProfile = (props) => {
         </div>
       </div>
       <hr/>
+
       <div>
-        <h4>Start a Conversation?</h4>
-        <ConversationForm/>
+        {
+          props.auth.user.username == username ?
+          <div>
+            <p>This is how you appear to others.</p>
+            <Link to = "/profile/glance" className="btn btn-primary">
+              See your private profile
+            </Link>
+          </div>
+          :
+          <div>
+            <h4>Start a Conversation?</h4>
+            <ConversationForm/>
+            <h4>Past Conversations</h4>
+            <ConversationTable convos={convos} />
+          </div>
+        }
       </div>
-      <div>
-        <h4>Past Conversations</h4>
-        <ConversationTable convos={convos} />
-      </div>
+      
     </div>
   )
 }

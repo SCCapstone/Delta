@@ -117,6 +117,7 @@ class UpdateAPI(generics.UpdateAPIView):
         strNewFirstName = request.data.get("first_name",None)
         strNewLastName = request.data.get("last_name",None)
         strNewPassword = request.data.get("password",None)
+        strNewBio = request.data.get('bio',None)
 
         # Perform tests on username
         if(strNewUserName):
@@ -143,6 +144,9 @@ class UpdateAPI(generics.UpdateAPIView):
             request.user.last_name = strNewLastName
         if(strNewPassword):
             request.user.set_password(strNewPassword)
+        if(strNewBio):
+            request.user.profile.bio = strNewBio
+            request.user.profile.save()
 
         # Save the changes
         request.user.save()

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CSVFile
+from .models import (CSVFile,TagCsvFile)
 
 from rest_framework.validators import UniqueTogetherValidator
 
@@ -52,3 +52,9 @@ class SerializerCSVFile(serializers.ModelSerializer):
     
     def get_review_count(self,obj):
         return obj.review_set.count()
+
+class SerializerTagCsvFile(serializers.ModelSerializer):
+
+    class Meta:
+        model = TagCsvFile
+        fields = "__all__"

@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 import TagsInput from './TagsInput';
 
-import styles from "./tags.module.css";
 
 // select
 import Select from 'react-select';
@@ -47,6 +46,8 @@ const DataUploadForm = (props) =>{
   const [selectOptions, setSelectOptions] = useState([]);
   // select values
   const [selectedValues,setSelectedValues] = useState([]);
+  // tags
+  const [tags,setTags] = useState([]);
 
   var arrOrgs = []
 
@@ -101,7 +102,12 @@ const DataUploadForm = (props) =>{
           'orgs':arrOrgs
         }
         props.addCsvFile(data);
+        props.createTags({tags:tags,file:file});
       });
+  }
+
+  const updateTags = (tags) =>{
+    setTags(tags)
   }
 
   return(
@@ -150,7 +156,7 @@ const DataUploadForm = (props) =>{
           <br />
           <div>
             <h5>Tags</h5>
-            <TagsInput/>
+            <TagsInput updateParentTags={updateTags} />
           </div>
           <button className="btn btn-success mb-2">Submit</button>
       </form>

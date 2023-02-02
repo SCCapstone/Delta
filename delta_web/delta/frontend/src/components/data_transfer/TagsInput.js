@@ -3,19 +3,28 @@ import { useState } from "react";
 import styles from "./tags.module.css";
 
 // src/components/TagsInput.js
-function TagsInput(){
+function TagsInput(props){
     const [tags, setTags] = useState([])
 
     function handleKeyDown(e){
         if(e.key !== 'Enter') return
         const value = e.target.value
-        if(!value.trim()) return
+        // no duplicates
+        if(tags.includes(value.trim())) return;
+        if(!value.trim()) return;
         setTags([...tags, value])
         e.target.value = ''
+        if(props.updateParentTags){
+            props.updateParentTags([...tags,value]);
+        }
     }
 
     function removeTag(index){
-        setTags(tags.filter((el, i) => i !== index))
+        const newTags = tags.filter((el, i) => i !== index);
+        setTags(newTags)
+        if(props.updateParentTags){
+            props.updateParentTags(newTags);
+        }
     }
 
     return (

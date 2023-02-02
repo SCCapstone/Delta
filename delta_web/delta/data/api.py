@@ -87,7 +87,7 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
-        print(request.data.keys())
+        # print(request.data.keys())
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists
@@ -132,10 +132,7 @@ class UploadCsvApiView(APIView):
     # handle post requests
     def post(self,request):
         # get the file, or return None if nothing there
-        print("\n\nHERE")
-        print(request.data)
         dataFile = request.data.get('file',None)
-        print("\n\nHERE")
 
         fileName = Path(str(dataFile)).stem
 

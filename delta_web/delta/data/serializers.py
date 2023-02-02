@@ -39,7 +39,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
         return obj.author.username
     
     def get_reviews(self,obj):
-        return SerializerReview(obj.review_set.all(),many=True).data
+        return SerializerReview(obj.review_set.all().order_by('-pub_date'),many=True).data
     
     def get_avg_rating(self,obj):
         # note: probably better to store this int as a sum in the csv file

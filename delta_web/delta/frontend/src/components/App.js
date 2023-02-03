@@ -11,6 +11,7 @@ import Dashboard from './home/Dashboard';
 import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
+import NotFound from './home/NotFound'
 
 // profile
 /*
@@ -167,6 +168,9 @@ class App extends Component{
                                     }/>
                                     <Route exact path ="/login" element={
                                         <Login/>
+                                    }/>
+                                    <Route exact path ="*" element={
+                                        <NotFound/>
                                     }/>
                                 </Routes>
                         </Fragment>

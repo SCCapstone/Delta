@@ -15,6 +15,9 @@ from email_validator import validate_email, EmailNotValidError
 
 from django.contrib.auth import get_user_model
 
+# Profiles
+from .models import Profile
+
 User = get_user_model()
 
 # Register API
@@ -32,6 +35,7 @@ class RegisterAPI(generics.GenericAPIView):
         
         # Save the new user
         user = serializer.save()
+        user.profile = Profile(user=user)
 
         # grab the organization key 
         organization_key = request.data.get("organization_key")

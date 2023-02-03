@@ -102,7 +102,7 @@ const DataUploadForm = (props) =>{
           'orgs':arrOrgs
         }
         props.addCsvFile(data);
-        props.createTags({tags:tags,file:file});
+        // props.createTags({tags:tags,file:file});
       });
   }
 

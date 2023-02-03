@@ -36,6 +36,7 @@ class RegisterAPI(generics.GenericAPIView):
         # Save the new user
         user = serializer.save()
         user.profile = Profile(user=user)
+        user.profile.save()
 
         # grab the organization key 
         organization_key = request.data.get("organization_key")

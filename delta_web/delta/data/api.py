@@ -122,8 +122,8 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
 # 
 ###################
 class UploadCsvApiView(APIView):
-#    parser_classes = (FileUploadParser,)
-    parser_classes = (MultiPartParser,)
+    parser_classes = (FileUploadParser,)
+    # parser_classes = (MultiPartParser,)
 
     permission_classes = [
         permissions.IsAuthenticated

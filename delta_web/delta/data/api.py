@@ -24,7 +24,7 @@ from rest_framework.parsers import MultiPartParser
 from organizations.models import Organization
 
 # import necessary serializers
-from .serializers import SerializerCSVFile
+from .serializers import SerializerCSVFile,SerializerTagCsvFile
 
 #https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
 class PassthroughRenderer(renderers.BaseRenderer):

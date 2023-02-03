@@ -4,6 +4,9 @@ import {addCsvFile} from '../../actions/file';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
+import TagsInput from './TagsInput';
+
+
 // select
 import Select from 'react-select';
 
@@ -43,6 +46,8 @@ const DataUploadForm = (props) =>{
   const [selectOptions, setSelectOptions] = useState([]);
   // select values
   const [selectedValues,setSelectedValues] = useState([]);
+  // tags
+  const [tags,setTags] = useState([]);
 
   var arrOrgs = []
 
@@ -97,7 +102,12 @@ const DataUploadForm = (props) =>{
           'orgs':arrOrgs
         }
         props.addCsvFile(data);
+        props.createTags({tags:tags,file:file});
       });
+  }
+
+  const updateTags = (tags) =>{
+    setTags(tags)
   }
 
   return(
@@ -144,6 +154,10 @@ const DataUploadForm = (props) =>{
             />
           </div>
           <br />
+          <div>
+            <h5>Tags</h5>
+            <TagsInput updateParentTags={updateTags} />
+          </div>
           <button className="btn btn-success mb-2">Submit</button>
       </form>
   )

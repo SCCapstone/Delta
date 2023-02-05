@@ -65,7 +65,7 @@ class BaseTag(models.Model):
 
 # CSVFileTag
 class TagCsvFile(BaseTag):
-    file = models.ForeignKey(CSVFile,on_delete = models.CASCADE)
+    file = models.ForeignKey(CSVFile,on_delete = models.CASCADE,related_name="tag_set")
 
     def __str__(self):
         return "Tag {}".format(self.text)

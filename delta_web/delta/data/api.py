@@ -1,6 +1,6 @@
 # import necessary models
 from django.http import FileResponse
-from .models import CSVFile
+from .models import CSVFile, TagCsvFile
 from rest_framework import status,renderers
 from rest_framework.decorators import action
 
@@ -181,3 +181,27 @@ class UploadCsvApiView(APIView):
 
         else:
             return Response(data={"message":"Error upon uploading file"})
+
+class ViewsetTagCsvFile(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = SerializerTagCsvFile
+
+    # never use this, just need for api to work
+    def get_queryset(self):
+        return TagCsvFile.objects.all()
+    
+    def create(self,request):
+        # file is file id
+        file = CSVFile.objects.get(pk=request.data.get('file'))
+        # text is an array
+        arrTags = request.data.get('tags')
+        newTags = []
+        for tag in arrTags:
+            tag = TagCsvFile(file=file,text=tag)
+            tag.save()
+            newTags.append(tag)
+
+        return Response(self.get_serializer(newTags,many=True).data)

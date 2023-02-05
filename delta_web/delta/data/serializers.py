@@ -19,12 +19,11 @@ class SerializerCSVFile(serializers.ModelSerializer):
     formatted_date = serializers.SerializerMethodField()
     # number of reviews
     review_count = serializers.SerializerMethodField()
+    # tags
+    tags = serializers.SerializerMethodField()
     class Meta:
         model = CSVFile
-        fields = [
-            'file_name','timestamp','author','author_username','id','file_path',"description",
-            "is_public","reviews","avg_rating","formatted_date","review_count","registered_organizations"
-        ]
+        fields = '__all__'
         validators = [
             UniqueTogetherValidator(
                 queryset=CSVFile.objects.all(),
@@ -52,6 +51,9 @@ class SerializerCSVFile(serializers.ModelSerializer):
     
     def get_review_count(self,obj):
         return obj.review_set.count()
+    
+    def get_tags(self,obj):
+        return SerializerTagCsvFile(obj.tag_set.all().order_by('-pub_date'),many=True).data
 
 class SerializerTagCsvFile(serializers.ModelSerializer):
 

@@ -5,24 +5,38 @@ import {fileTokenConfig,tokenConfig} from './auth';
 
 import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE, 
     CSV_FILE_UPDATE_SUCCESS,GET_CSV_FILES_PUBLIC} from "./types";
+import { addTags } from './tags';
 
 // POST FILE 
-export const addCsvFile= ({file,fileName,isPublic,description,orgs}) => (dispatch,getState) =>{
+export const addCsvFile= (dictData) => (dispatch,getState) =>{
+    /*
+    Dict data has keys
+    file: file object
+    isPublic: bool
+    description: str
+    orgs: array of orgs
+    */
     // pass in token
-    axios.post('/api/upload/csv/',file,fileTokenConfig(getState,file))
+    axios.post('/api/upload/csv/',dictData['file'],fileTokenConfig(getState,dictData['file']))
         .then(res=>{
             dispatch(createMessage({addCsvFileSuccess:"File posted"}));
             dispatch({
                 type:ADD_CSV_FILE,
                 payload: res.data
             });
+            // add tags, if tags sent
+            if(dictData.hasOwnProperty('tags')) {
+                dispatch(addTags({file:res.data.csvFile.id,tags:dictData['tags']}))
+            }
+
             const data = {
                 id:res.data.csvFile.id,
-                file_name:fileName,
-                description:description,
-                is_public:isPublic,
-                registered_organizations:orgs
+                file_name:dictData['fileName'],
+                description:dictData['description'],
+                is_public:dictData['isPublic'],
+                registered_organizations:dictData['orgs']
             }
+            // add all other attributes
             axios.patch(`api/csv/${res.data.csvFile.id}/`,data,tokenConfig(getState))
             .then(res=>{
                 console.log(res);

@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate
 
 from organizations.serializers import OrganizationSerializer
 
+from rest_framework.response import Response
+from rest_framework import status
+
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
     # Number of followed organizations
@@ -42,12 +45,20 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password':{'write_only':True}}
 
     def create(self, validated_data):
+        # password validation
         user = User.objects.create_user(username=validated_data['username'],
                                         first_name=validated_data['first_name'],
                                         last_name=validated_data['last_name'],
                                         email=validated_data['email'],
                                         password=validated_data['password'])
         return user
+    
+    # https://stackoverflow.com/questions/31278418/django-rest-framework-custom-fields-validation
+    def validate(self,data):
+        # need at least 8 char
+        if(len(data['password']) < 8):
+            raise serializers.ValidationError("Need at least 8 characters in password")
+        return data
 
 # Login serializer
 # validation of user

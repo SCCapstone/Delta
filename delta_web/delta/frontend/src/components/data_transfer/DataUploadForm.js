@@ -99,10 +99,10 @@ const DataUploadForm = (props) =>{
           'isPublic':isPublic,
           'description':description,
           'fileName':fileName,
-          'orgs':arrOrgs
+          'orgs':arrOrgs,
+          'tags':tags
         }
         props.addCsvFile(data);
-        // props.createTags({tags:tags,file:file});
       });
   }
 
@@ -111,7 +111,9 @@ const DataUploadForm = (props) =>{
   }
 
   return(
-      <form onSubmit = {onSubmit}>
+      <form onSubmit = {onSubmit}
+      onKeyDown={(e)=> {e.key === 'Enter' && e.preventDefault()}}
+      >
           <div className="container"> 
           <Container {...getRootProps(isDragActive, isDragReject)}>
               <input {...getInputProps()}/>
@@ -158,6 +160,7 @@ const DataUploadForm = (props) =>{
             <h5>Tags</h5>
             <TagsInput updateParentTags={updateTags} />
           </div>
+          <br/>
           <button className="btn btn-success mb-2">Submit</button>
       </form>
   )

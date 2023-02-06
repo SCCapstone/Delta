@@ -36,7 +36,7 @@ const Review = (props) => {
           <h4>{props.reviewData.title}</h4>
         </div>
         <div className="d-flex justify-content-between">
-          <h5>Reviewed by {props.reviewData.author_username} on {props.reviewData.formatted_date}</h5>
+          <h5>Reviewed by <Link to={`/profile/${props.reviewData.author_username}`}>{props.reviewData.author_username}</Link> on {props.reviewData.formatted_date}</h5>
         </div>
         <hr/>
         <div>

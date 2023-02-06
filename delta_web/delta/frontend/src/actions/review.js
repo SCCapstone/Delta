@@ -1,7 +1,6 @@
 import {createMessage,returnErrors} from './messages';
 import {tokenConfig} from './auth';
 import axios from 'axios';
-import { addNotification } from './notification';
 
 export const addReview = (dictData) => (dispatch,getState) =>{
     axios.post('/api/review/',dictData,tokenConfig(getState))

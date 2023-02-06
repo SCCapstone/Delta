@@ -10,6 +10,9 @@ const ConversationDetail = (props) => {
 
     const [convo, setConvo] = useState(null);
 
+    var otherUserUsername = null;
+
+
     const getData = () =>{
         axios.get(`/api/conversation/${id}/`,{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
         .then((res)=>{
@@ -26,6 +29,13 @@ const ConversationDetail = (props) => {
 
     if(convo == null) return;
 
+    // setting who the other user is
+    if(props.auth.user.username != convo.author_username){
+        otherUserUsername = convo.author_username
+    }else{
+        otherUserUsername = convo.other_user_username
+    }
+
   return (
     <div className="container">
         <h1>
@@ -34,7 +44,9 @@ const ConversationDetail = (props) => {
         <div>
             <h5>Title: {convo.title}</h5>
             <p>Published: {convo.pub_date}</p>
-            <p>Other user: <Link to={`/profile/${convo.other_user_username}`}>{convo.other_user_username}</Link></p>
+            <p>Other user: 
+                <Link to={`/profile/${otherUserUsername}`}>{otherUserUsername}</Link>
+            </p>
         </div>
         <div>
             <h5>Messages</h5>
@@ -43,7 +55,7 @@ const ConversationDetail = (props) => {
             </div>
             <MessageForm convoId = {convo.id} 
             refresh={getData}
-            otherUserUsername={convo.other_user_username}
+            otherUserUsername={otherUserUsername}
             author_id={props.auth.user.id}
             />
         </div>

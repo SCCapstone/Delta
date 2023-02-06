@@ -3,6 +3,8 @@ import axios from 'axios'
 import React from 'react'
 import { tokenConfig } from './auth'
 import { createMessage } from './messages'
+// create notification
+import { addNotificationMessage } from './notification'
 
 export const addMessage = (dictData) => (dispatch,getState) => {
     /*
@@ -14,7 +16,14 @@ export const addMessage = (dictData) => (dispatch,getState) => {
     */
    axios.post('/api/message/',dictData,tokenConfig(getState))
    .then((res)=>{
+        console.log(res);
         dispatch(createMessage({addMessageSuccess:"Successfully sent message."}))
+        dispatch(addNotificationMessage({
+          text:`New message from ${res.data.author_username}.`,
+          sender:res.data.author,
+          message:res.data.id,
+          recipient:res.data.recipient,
+        }))
    })
    .catch((err)=>{
         console.log(err)

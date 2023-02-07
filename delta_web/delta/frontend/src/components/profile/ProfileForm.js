@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { connect } from 'react-redux';
 import {updateUser} from "../../actions/auth"
+import OrganizationThumbnail from './OrganizationThumbnail';
 
 const ProfileForm = (props) => {
 
@@ -14,13 +15,27 @@ const ProfileForm = (props) => {
             email:props.auth.user.email,
             bio:props.auth.user.bio,
             password:"",
+            organizations:props.auth.user.followed_organizations,
+            newOrgKey:""
         }
     );
+
 
     const onChange = (e) => {
         const newState = {...userInfo,[e.target.name]: e.target.value};
         setUserInfo(newState);
     }
+
+    const parentOnRemoveOrg = (orgObj) =>{
+        const newOrgs = userInfo['organizations'].filter(item => item !== orgObj )
+        setUserInfo({...userInfo,['organizations']:newOrgs})
+    }
+
+    const parentOnPutBackOrg = (orgObj) =>{
+        const newOrgs = userInfo['organizations'].concat(orgObj)
+        setUserInfo({...userInfo,['organizations']:newOrgs})
+    }
+
     /* 
     * This defines the actions on what happens when a user click on the submit button.
     * The function gets called and updates the users information.
@@ -29,6 +44,7 @@ const ProfileForm = (props) => {
         e.preventDefault()
         props.updateUser(userInfo);
     }
+
     //This form allows for edited information to be submitted to the backend
     return (
         <form onSubmit = {onSubmit}>
@@ -96,6 +112,26 @@ const ProfileForm = (props) => {
                 onChange={onChange}
                 >
                 </input>
+            </div>
+            <h5>Currently followed organizations</h5>
+            <div>
+                {props.auth.user.followed_organizations.map(orgObj => (
+                    <OrganizationThumbnail org={orgObj} 
+                    parentOnPutBackOrg={parentOnPutBackOrg} 
+                    parentOnRemoveOrg={parentOnRemoveOrg} 
+                    />
+                ))}
+            </div>
+            <h5>Add organization</h5>
+            <div>
+                <input
+                    type=""
+                    className="form-control"
+                    name="newOrgKey"
+                    onChange={onChange}
+                    value={userInfo.newOrgKey}
+                    placeholder="Or leave blank if not adding an organization"
+                />
             </div>
             <br/>
             <button className="btn btn-success">

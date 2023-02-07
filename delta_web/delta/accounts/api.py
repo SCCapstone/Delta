@@ -49,6 +49,7 @@ class RegisterAPI(generics.GenericAPIView):
         # TO DO: 
         # MAKE THIS BETTER
         except Exception as e:
+            print(e)
             # TODO
             # Indicate that the entered organization key is invalid to the user, 
             # and offer them to register again or not
@@ -124,6 +125,7 @@ class UpdateAPI(generics.UpdateAPIView):
         strNewPassword = request.data.get("password",None)
         strNewBio = request.data.get('bio',None)
 
+
         # Perform tests on username
         if(strNewUserName):
             # Try to save new user, raise exception if already have user with username
@@ -152,6 +154,38 @@ class UpdateAPI(generics.UpdateAPIView):
         if(strNewBio):
             request.user.profile.bio = strNewBio
             request.user.profile.save()
+
+        # TODO: make better
+        # NAVEEN: THIS IS YOUR JOB TO MAKE PRETTY
+        #
+        qsOrgs = []
+        for orgJson in request.data.get('organizations'):
+            orgObj = Organization.objects.get(pk=orgJson['id'])
+            if(orgObj in request.user.followed_organizations.all()):
+                # then have authority to remove or add
+                qsOrgs.append(Organization.objects.get(pk=orgJson['id']))
+        
+        # clear user orgs
+        for orgObj in request.user.followed_organizations.all():
+            orgObj.following_users.remove(request.user)
+            orgObj.save()
+        
+        # then reupdate the orgs
+        for orgObj in qsOrgs:
+            orgObj.following_users.add(request.user)
+            orgObj.save()
+
+        # check for new organizations
+        # using the new org key
+        newOrgKey = request.data.get('newOrgKey')
+        try:
+            modelOrg = Organization.objects.get(key=newOrgKey)
+            modelOrg.following_users.add(request.user)
+            modelOrg.save()
+        except Exception as e:
+            print(e)
+            # TODO
+            pass
 
         # Save the changes
         request.user.save()

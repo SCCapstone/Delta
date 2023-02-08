@@ -42,7 +42,7 @@ class CSVFile(models.Model):
     registered_organizations = models.ManyToManyField(Organization,blank=True,related_name="uploaded_files")
 
     class Meta:
-        unique_together = ('author','file_path','file_name')
+        unique_together = ('author','file_name')
 
     def __str__(self):
         return self.file_path

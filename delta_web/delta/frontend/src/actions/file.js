@@ -36,6 +36,7 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
                 is_public:dictData['isPublic'],
                 registered_organizations:dictData['orgs']
             }
+            console.log(data)
             // add all other attributes
             axios.patch(`api/csv/${res.data.csvFile.id}/`,data,tokenConfig(getState))
             .then(res=>{

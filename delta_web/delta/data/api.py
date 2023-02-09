@@ -1,6 +1,6 @@
 # import necessary models
 from django.http import FileResponse
-from .models import CSVFile
+from .models import CSVFile, TagCsvFile
 from rest_framework import status,renderers
 from rest_framework.decorators import action
 
@@ -24,7 +24,7 @@ from rest_framework.parsers import MultiPartParser
 from organizations.models import Organization
 
 # import necessary serializers
-from .serializers import SerializerCSVFile
+from .serializers import SerializerCSVFile,SerializerTagCsvFile
 
 #https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
 class PassthroughRenderer(renderers.BaseRenderer):
@@ -87,7 +87,7 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
-        print(request.data.keys())
+        # print(request.data.keys())
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists
@@ -122,8 +122,8 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
 # 
 ###################
 class UploadCsvApiView(APIView):
-#    parser_classes = (FileUploadParser,)
-    parser_classes = (MultiPartParser,)
+    parser_classes = (FileUploadParser,)
+    # parser_classes = (MultiPartParser,)
 
     permission_classes = [
         permissions.IsAuthenticated
@@ -132,10 +132,7 @@ class UploadCsvApiView(APIView):
     # handle post requests
     def post(self,request):
         # get the file, or return None if nothing there
-        print("\n\nHERE")
-        print(request.data)
         dataFile = request.data.get('file',None)
-        print("\n\nHERE")
 
         fileName = Path(str(dataFile)).stem
 
@@ -184,3 +181,27 @@ class UploadCsvApiView(APIView):
 
         else:
             return Response(data={"message":"Error upon uploading file"})
+
+class ViewsetTagCsvFile(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = SerializerTagCsvFile
+
+    # never use this, just need for api to work
+    def get_queryset(self):
+        return TagCsvFile.objects.all()
+    
+    def create(self,request):
+        # file is file id
+        file = CSVFile.objects.get(pk=request.data.get('file'))
+        # text is an array
+        arrTags = request.data.get('tags')
+        newTags = []
+        for tag in arrTags:
+            tag = TagCsvFile(file=file,text=tag)
+            tag.save()
+            newTags.append(tag)
+
+        return Response(self.get_serializer(newTags,many=True).data)

@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { connect } from 'react-redux';
 import { addMessage } from '../../actions/convo_message'
+import { addNotificationMessage } from '../../actions/notification';
 
 const MessageForm = (props) => {
     const convoId = props.convoId;

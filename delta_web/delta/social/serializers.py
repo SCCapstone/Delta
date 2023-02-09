@@ -1,7 +1,9 @@
 from rest_framework import serializers
-from .models import Review,NotificationReview,Conversation,Message
+from .models import (Review,NotificationReview,
+Conversation,Message,NotificationMessage)
 
 from rest_framework.validators import UniqueTogetherValidator
+from rest_framework.decorators import action
 
 # Serializer for review class
 class SerializerReview(serializers.ModelSerializer):
@@ -75,6 +77,24 @@ class SerializerMessage(serializers.ModelSerializer):
 
     def get_author_username(self,obj):
         return obj.author.username
+
+    def get_recipient_username(self,obj):
+        return obj.recipient.username
+
+    def get_formatted_date(self,obj):
+        return obj.pub_date.strftime('%H:%M, %Y-%m-%d')
+
+class SerializerNotificationMessage(serializers.ModelSerializer):
+    sender_username = serializers.SerializerMethodField()
+    recipient_username = serializers.SerializerMethodField()
+    formatted_date = serializers.SerializerMethodField()
+
+    class Meta:
+        model = NotificationMessage
+        fields = "__all__"
+    
+    def get_sender_username(self,obj):
+        return obj.sender.username
 
     def get_recipient_username(self,obj):
         return obj.recipient.username

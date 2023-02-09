@@ -2,12 +2,9 @@ import React, {useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import {downloadCsvFile} from '../../actions/file'; 
 // note you can style react tables
-import {Table,
-  Header,HeaderRow,HeaderCell,
-  Body,Row,Cell
-} from '@table-library/react-table-library/table'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import DataCard from './DataCard';
 
 /*
 TO DO: 
@@ -77,7 +74,12 @@ const PublicCsvFileTable = (props) =>{
 
   if(csvFiles == null) return;
 
-  var fileData = {nodes:tableCsvs}
+  // split tables into chunks of three
+  var subTables = [],size = 3
+  while(tableCsvs.length > 0){
+    subTables.push(tableCsvs.splice(0,size));
+  }
+  console.log(subTables)
 
   return (
     <div>
@@ -88,40 +90,42 @@ const PublicCsvFileTable = (props) =>{
            </div>
            <input id = "search" type="text" className="form-control" placeholder="Enter at least three characters" onChange={onSearchChange}/>
            </div>
-           <Table data={fileData}>{(tableList) =>(
-            <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>File Id</HeaderCell>
-                <HeaderCell>File Name</HeaderCell>
-                <HeaderCell>Upload Date</HeaderCell>
-                <HeaderCell>View</HeaderCell>
-                <HeaderCell>Download</HeaderCell>
-              </HeaderRow>
-            </Header>
-            <Body>
-              {tableList.map((item)=>(
-                <Row key={item.id} item={item}>
-                  <Cell>{item.id}</Cell>
-                  <Cell>{item.file_name}</Cell>
-                  <Cell>{item.formatted_date}</Cell>
-                  <Cell>
-                    <Link to ={`/csvs/${item.id}`}>
-                      View
-                    </Link>
-                  </Cell>
-                  <Cell>
-                    <input type="checkbox"
-                    onChange={()=>{onCheckChange(item.id)}}
+            <div className = "container">
+              {subTables.map((subTable,index)=>(
+                  <div className="row mb-3" key={index}>
+                    {subTable.map((item,index)=>(
+                    <DataCard 
+                      author={item.author_username}
+                      date={item.formatted_date}
+                      rating = {item.avg_rating}
+                      key = {item.id}
+                      title={item.file_name}
+                      link={`/csvs/${item.id}`}
+                      linkText={"See file"}
+                      text={item.description}
+                      id = {item.id}
+                      parentOnCheckChange={onCheckChange}
+                      tags = {item.tags}
                     />
-                  </Cell>
-                </Row>
+                    )
+                    )}
+                  </div>
+                // <div className="container m-3 p-3">
+                //   <h5>{item.file_name}</h5> 
+                //   <hr/>
+                //     <Link to ={`/csvs/${item.id}`}>
+                //       View
+                //     </Link>
+                //     <input type="checkbox"
+                //     onChange={()=>{onCheckChange(item.id)}}
+                //     />
+                //   <div>
+                //     <h6>Tags</h6>
+                //   </div>
+                // </div>
               ))}
-
-            </Body>
-            </>
-          )}
-          </Table>
+            </div>
+          <br/>
           <button className='btn btn-sm btn-success mb-2'>
             Download
           </button>

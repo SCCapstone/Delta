@@ -11,6 +11,7 @@ import Dashboard from './home/Dashboard';
 import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
+import NotFound from './home/NotFound'
 
 // profile
 /*
@@ -42,10 +43,8 @@ import {loadUser} from '../actions/auth';
 // react 18
 // https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
 import {createRoot} from "react-dom/client";
-import NotificationIndex from './notifications/NotificationIndex';
-
-// messages
-import MessageIndex from './conversations/MessageIndex';
+import NotificationReviewIndex from './notifications/NotificationReviewIndex';
+import NotificationMessageIndex from './notifications/NotificationMessageIndex';
 
 // public profile
 import PublicProfile from './profile/PublicProfile';
@@ -91,15 +90,15 @@ class App extends Component{
                                     }/>
 
                                     {/* Notifications */}
-                                    <Route exact path ="/notifications" element={
+                                    <Route exact path ="/notifications/reviews" element={
                                         <PrivateRoute>
-                                            <NotificationIndex/>
+                                            <NotificationReviewIndex/>
                                         </PrivateRoute>
                                     }/>
                                     {/* Messages */}
-                                    <Route exact path ="/messages" element = {
+                                    <Route exact path ="/notifications/messages" element = {
                                         <PrivateRoute>
-                                            <MessageIndex/>
+                                            <NotificationMessageIndex/>
                                         </PrivateRoute>
                                     }/>
                                     {/* Conversations */}
@@ -167,6 +166,9 @@ class App extends Component{
                                     }/>
                                     <Route exact path ="/login" element={
                                         <Login/>
+                                    }/>
+                                    <Route exact path ="*" element={
+                                        <NotFound/>
                                     }/>
                                 </Routes>
                         </Fragment>

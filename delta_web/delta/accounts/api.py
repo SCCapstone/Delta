@@ -5,11 +5,20 @@ from organizations.models import Organization
 from rest_framework import status
 from rest_framework.decorators import action
 from knox.models import AuthToken
-from .serializers import UserSerializer,RegisterSerializer,LoginSerializer
+from .serializers import UserSerializer,RegisterSerializer,LoginSerializer,PublicUserSerializer
 from organizations.serializers import OrganizationSerializer
+
+from rest_framework import viewsets, permissions
 
 # Email validation
 from email_validator import validate_email, EmailNotValidError
+
+from django.contrib.auth import get_user_model
+
+# Profiles
+from .models import Profile
+
+User = get_user_model()
 
 # Register API
 # Used to register new users.
@@ -26,6 +35,8 @@ class RegisterAPI(generics.GenericAPIView):
         
         # Save the new user
         user = serializer.save()
+        user.profile = Profile(user=user)
+        user.profile.save()
 
         # grab the organization key 
         organization_key = request.data.get("organization_key")
@@ -38,6 +49,7 @@ class RegisterAPI(generics.GenericAPIView):
         # TO DO: 
         # MAKE THIS BETTER
         except Exception as e:
+            print(e)
             # TODO
             # Indicate that the entered organization key is invalid to the user, 
             # and offer them to register again or not
@@ -111,6 +123,8 @@ class UpdateAPI(generics.UpdateAPIView):
         strNewFirstName = request.data.get("first_name",None)
         strNewLastName = request.data.get("last_name",None)
         strNewPassword = request.data.get("password",None)
+        strNewBio = request.data.get('bio',None)
+
 
         # Perform tests on username
         if(strNewUserName):
@@ -137,6 +151,41 @@ class UpdateAPI(generics.UpdateAPIView):
             request.user.last_name = strNewLastName
         if(strNewPassword):
             request.user.set_password(strNewPassword)
+        if(strNewBio):
+            request.user.profile.bio = strNewBio
+            request.user.profile.save()
+
+        # TODO: make better
+        # NAVEEN: THIS IS YOUR JOB TO MAKE PRETTY
+        #
+        qsOrgs = []
+        for orgJson in request.data.get('organizations'):
+            orgObj = Organization.objects.get(pk=orgJson['id'])
+            if(orgObj in request.user.followed_organizations.all()):
+                # then have authority to remove or add
+                qsOrgs.append(Organization.objects.get(pk=orgJson['id']))
+        
+        # clear user orgs
+        for orgObj in request.user.followed_organizations.all():
+            orgObj.following_users.remove(request.user)
+            orgObj.save()
+        
+        # then reupdate the orgs
+        for orgObj in qsOrgs:
+            orgObj.following_users.add(request.user)
+            orgObj.save()
+
+        # check for new organizations
+        # using the new org key
+        newOrgKey = request.data.get('newOrgKey')
+        try:
+            modelOrg = Organization.objects.get(key=newOrgKey)
+            modelOrg.following_users.add(request.user)
+            modelOrg.save()
+        except Exception as e:
+            print(e)
+            # TODO
+            pass
 
         # Save the changes
         request.user.save()
@@ -169,3 +218,18 @@ class UserAPI(generics.RetrieveAPIView):
         serializer = OrganizationSerializer(orgs,many=True)
 
         return Response(serializer.data)
+
+class ViewsetPublicUser(viewsets.ModelViewSet):
+    # for any action dealing with public info of users
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = PublicUserSerializer
+
+    def get_queryset(self):
+        return self.request.user
+
+    @action(methods=["post"],detail=False)
+    def get_user(self,request):
+        user = User.objects.get(username=request.data.get('username'))
+        return Response(self.serializer_class(user).data)

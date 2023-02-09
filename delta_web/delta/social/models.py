@@ -88,3 +88,13 @@ class Message(models.Model):
 
     def __str__(self):
         return self.text
+
+# notification for message
+class NotificationMessage(BaseNotification):
+    sender = models.ForeignKey(User,on_delete=models.CASCADE,null=True,related_name='sender_notification_message_set')
+    recipient = models.ForeignKey(User,on_delete=models.CASCADE,null=False,related_name="recipient_notification_message_set")
+
+    message = models.ForeignKey(Message,on_delete=models.CASCADE,related_name="notification_message_set",null=False)
+
+    def __str__(self):
+        return "Notification for message {}".format(self.message.convo.title)

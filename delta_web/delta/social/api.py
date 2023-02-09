@@ -1,7 +1,8 @@
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 
-from .serializers import SerializerReview,SerializerNotificationReview,SerializerConversation,SerializerMessage
+from .serializers import (SerializerReview,SerializerNotificationReview,
+SerializerConversation,SerializerMessage,SerializerNotificationMessage)
 from data.models import CSVFile
 
 from rest_framework.decorators import action
@@ -9,7 +10,7 @@ from rest_framework.response import Response
 
 from django.contrib.auth import get_user_model
 
-from .models import Conversation,Message,Review
+from .models import Conversation,Message,Review,NotificationMessage
 
 # https://stackoverflow.com/questions/739776/how-do-i-do-an-or-filter-in-a-django-query
 from django.db.models import Q
@@ -32,6 +33,10 @@ class ViewsetReview(viewsets.ModelViewSet):
 
     def retrieve(self,request,pk=None):
         return Response(self.serializer_class(Review.objects.get(pk=pk)).data)
+
+    def partial_update(self,request,*args,**kwargs):
+        super().partial_update(request,*args,**kwargs)
+        return Response(self.serializer_class(Review.objects.get(pk=kwargs['pk'])).data)
 
 # notification API
 class ViewsetNotificationReview(viewsets.ModelViewSet):
@@ -122,3 +127,28 @@ class ViewsetMessage(viewsets.ModelViewSet):
         message.save()
 
         return Response(self.get_serializer(message).data)
+
+# Notification Message API
+class ViewsetNotificationMessage(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = SerializerNotificationMessage
+
+    def get_queryset(self):
+        return self.request.user.sender_notification_message_set.all().order_by('-pub_date')
+    
+    def perform_create(self,serializer):
+        serializer.save()
+
+    @action(methods=['get'],detail=True)
+    def perform_read(self,*args,**kwargs):
+        instance = NotificationMessage.objects.get(pk=kwargs['pk'])
+        instance.read = True
+        instance.save()
+        return Response(self.get_serializer(instance).data)
+
+    # get all unread posts
+    @action(methods=['get'],detail=False)
+    def get_unread(self,request):
+        return Response(self.get_serializer(self.request.user.recipient_notification_message_set.filter(read=False).order_by('-pub_date'),many=True).data)

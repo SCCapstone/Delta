@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 # signal when the model is deleted
 # see: https://stackoverflow.com/questions/71278989/how-to-call-a-function-when-you-delete-a-model-object-in-django-admin-page-or
@@ -53,4 +54,18 @@ def on_delete_csv(sender,instance,using,**kwargs):
     # delete the file
     if(os.path.exists(instance.file_path)):
         os.remove(instance.file_path)
-    
+
+class BaseTag(models.Model):
+    # tag text
+    text = models.CharField(max_length = 100,null=False)
+    pub_date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        abstract = True
+
+# CSVFileTag
+class TagCsvFile(BaseTag):
+    file = models.ForeignKey(CSVFile,on_delete = models.CASCADE,related_name="tag_set")
+
+    def __str__(self):
+        return "Tag {}".format(self.text)

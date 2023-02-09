@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { markReadNotificationReview} from '../../actions/notification';
+import { markReadNotificationMessage} from '../../actions/notification';
 
-const NotificationReview = (props) => {
+const NotificationMessage = (props) => {
 
     const [style,setStyle] = useState({});
 
     const handleRead = () =>{
-        props.markReadNotificationReview(props.data.id)
+        props.markReadNotificationMessage(props.data.id)
         setStyle({display:'none'})
     }
 
@@ -28,8 +28,8 @@ const NotificationReview = (props) => {
             </p>
         </div>
         <div>
-            <Link to = {`/csvs/${props.data.file_id}`}>
-                See file
+            <Link >
+                See message
             </Link>
         </div>
         <div>
@@ -46,4 +46,4 @@ const mapStateToProps = state =>({
     auth:state.auth
 })
 
-export default connect(mapStateToProps,{markReadNotificationReview},)(NotificationReview);
+export default connect(mapStateToProps,{markReadNotificationMessage},)(NotificationMessage);

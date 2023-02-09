@@ -38,15 +38,6 @@ export class Dashboard extends Component {
                 </div>
                 <span class="ml-auto mb-auto">
                   <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn btn-light btn-sm rounded"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <i class="mdi mdi-dots-vertical"></i>
-                    </button>
                     <div class="dropdown-menu dropdown-menu-right">
                       <button class="dropdown-item" type="button">
                         <i class="mdi mdi-delete"></i> Delete
@@ -66,29 +57,10 @@ export class Dashboard extends Component {
                     We found a job at askbootstrap Ltd that you may be
                     interested in Vivamus imperdiet venenatis est...
                   </div>
-                  <button type="button" class="btn btn-outline-success btn-sm">
-                    View Jobs
-                  </button>
                 </div>
                 <span class="ml-auto mb-auto">
                   <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn btn-light btn-sm rounded"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <i class="mdi mdi-dots-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">
-                        <i class="mdi mdi-delete"></i> Delete
-                      </button>
-                      <button class="dropdown-item" type="button">
-                        <i class="mdi mdi-close"></i> Turn Off
-                      </button>
-                    </div>
+                    <div class="dropdown-menu dropdown-menu-right"></div>
                   </div>
                   <br />
                   <div class="text-right text-muted pt-1">4d</div>

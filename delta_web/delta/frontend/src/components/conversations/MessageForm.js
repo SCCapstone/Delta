@@ -26,16 +26,26 @@ const MessageForm = (props) => {
 
   return (
     <form onSubmit = {onSubmit}>
-        <div className = "form-group">
-            <label htmlFor="text">Start a message</label>
-            <input className="form-control" id = "text"
-            name="text"
-            onChange = {onChange}
-            />
+        <div>
+            <small>
+                Send a message
+            </small>
         </div>
-        <button className="btn btn-outline-success">
-            Send
-        </button>
+        <div className="row">
+            <div className="col-9">
+                <div className = "form-group">
+                    <input className="form-control" id = "text"
+                    name="text"
+                    onChange = {onChange}
+                    />
+                </div>
+            </div>
+            <div className= "col-3">
+                <button className="btn btn-outline-success">
+                    Send
+                </button>
+            </div>
+        </div>
     </form>
   )
 }

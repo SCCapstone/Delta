@@ -105,13 +105,12 @@ const ProfileForm = (props) => {
             </div>
             <div>
                 Bio:
-                <input
+                <textarea
                 className="form-control"
                 name="bio"
                 placeholder={userInfo.bio}
                 onChange={onChange}
-                >
-                </input>
+                />
             </div>
             <h5>Currently followed organizations</h5>
             <div>

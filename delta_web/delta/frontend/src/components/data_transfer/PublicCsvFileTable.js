@@ -15,11 +15,11 @@ There should only be one SearchableCsvFileTable function, that can take in diffe
 const PublicCsvFileTable = (props) =>{
 
   // the csv files
-  var [csvFiles, setCsvFiles] = useState(null);
+  const [csvFiles, setCsvFiles] = useState(null);
   // text being searched
-  var [searchText,setSearchText] = useState("");
+  const [searchText,setSearchText] = useState("");
   // table data
-  var [tableCsvs,setTableCsvs] = useState(null);
+  const [tableCsvs,setTableCsvs] = useState(null);
 
   // the files that user wants to download
   var arrFilesToDownload = [];
@@ -36,7 +36,6 @@ const PublicCsvFileTable = (props) =>{
   // when submit form
   const onSubmit = e =>{
     e.preventDefault();
-    console.log(arrFilesToDownload);
     arrFilesToDownload.forEach((id)=>{
       props.downloadCsvFile(id);
     })
@@ -74,12 +73,6 @@ const PublicCsvFileTable = (props) =>{
 
   if(csvFiles == null) return;
 
-  // split tables into chunks of three
-  var subTables = [],size = 3
-  while(tableCsvs.length > 0){
-    subTables.push(tableCsvs.splice(0,size));
-  }
-  console.log(subTables)
 
   return (
     <div>
@@ -91,39 +84,22 @@ const PublicCsvFileTable = (props) =>{
            <input id = "search" type="text" className="form-control" placeholder="Enter at least three characters" onChange={onSearchChange}/>
            </div>
             <div className = "container">
-              {subTables.map((subTable,index)=>(
-                  <div className="row mb-3" key={index}>
-                    {subTable.map((item,index)=>(
-                    <DataCard 
-                      author={item.author_username}
-                      date={item.formatted_date}
-                      rating = {item.avg_rating}
-                      key = {item.id}
-                      title={item.file_name}
-                      link={`/csvs/${item.id}`}
-                      linkText={"See file"}
-                      text={item.description}
-                      id = {item.id}
-                      parentOnCheckChange={onCheckChange}
-                      tags = {item.tags}
-                    />
-                    )
-                    )}
-                  </div>
-                // <div className="container m-3 p-3">
-                //   <h5>{item.file_name}</h5> 
-                //   <hr/>
-                //     <Link to ={`/csvs/${item.id}`}>
-                //       View
-                //     </Link>
-                //     <input type="checkbox"
-                //     onChange={()=>{onCheckChange(item.id)}}
-                //     />
-                //   <div>
-                //     <h6>Tags</h6>
-                //   </div>
-                // </div>
-              ))}
+              {tableCsvs.map((item,index)=>(
+                  <DataCard 
+                    author={item.author_username}
+                    date={item.formatted_date}
+                    rating = {item.avg_rating}
+                    key = {item.id}
+                    title={item.file_name}
+                    link={`/csvs/${item.id}`}
+                    linkText={"See file"}
+                    text={item.description}
+                    id = {item.id}
+                    parentOnCheckChange={onCheckChange}
+                    tags = {item.tags}
+                  />
+                  )
+              )}
             </div>
           <br/>
           <button className='btn btn-sm btn-success mb-2'>

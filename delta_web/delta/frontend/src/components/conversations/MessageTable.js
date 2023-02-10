@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import MessageDetail from './MessageDetail';
 
 const MessageTable = (props) => {
@@ -6,8 +6,13 @@ const MessageTable = (props) => {
   // needs an array of message objs
   if(props.messages == undefined) return null;
 
+  const listRef = useRef();
+  useEffect(()=>{
+    listRef.current.scrollTo(0,listRef.current.scrollHeight,'auto');
+  },[]);
+
   return (
-    <div>
+    <div className="overflow-scroll" style={{height:"20rem"}} id="list" ref={listRef}>
         {props.messages.map((item,index)=>(
             <div key = {index}>
                 {item.author_username == props.user.username ? 

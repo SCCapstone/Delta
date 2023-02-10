@@ -35,7 +35,7 @@ export class ProfileDetailed extends Component {
         return(
             <div className="container-xl px-4 mt-4">
                 <div className="row">
-                    <div className="col-xl-8">
+                    <div className="">
                         <div className="card mb-4">
                             <div className="card-header">Change your information</div>
                             <div className="card-body">

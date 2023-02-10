@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { addConversation } from '../../actions/conversation'
-import MessageForm from './MessageForm'
 
 const ConversationForm = (props) => {
 
@@ -37,7 +36,7 @@ const ConversationForm = (props) => {
             <small id="titleHelp">In order to begin messaging, you must first start a conversation. The conversation title should be related to what the following messages will be about.</small>
         </div>
         <button type="submit" className="btn btn-outline-success">
-            Submit
+            Start conversation
         </button>
     </form>
   )

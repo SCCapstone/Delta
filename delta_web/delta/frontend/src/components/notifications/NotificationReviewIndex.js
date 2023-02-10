@@ -25,8 +25,8 @@ const NotificationReviewIndex = (props) =>{
             <h1>Notifications</h1>
             <hr/>
             <div>
-              {arrNotifications.map((objNotif)=>(
-                <NotificationReview data = {objNotif} />
+              {arrNotifications.map((objNotif,index)=>(
+                <NotificationReview data = {objNotif} key={index}/>
               ))}
             </div>
         </div>

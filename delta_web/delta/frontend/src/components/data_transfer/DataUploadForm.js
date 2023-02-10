@@ -27,11 +27,13 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    border-width: 2px;
-    border-radius: 2px;
+    border-width: 0.2em;
+    text-align:center;
+    border-radius: 0.2em;
     border-color: ${props => getColor(props)};
     border-style: dashed;
     background-color: #d2d2d2;
+    height:10em;
     color: #000000;
     outline: none;
     transition: border .24s ease-in-out;
@@ -127,41 +129,62 @@ const DataUploadForm = (props) =>{
               )}
           </Container>
           <ul className = "list-group mt-2">
-              {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile=>(
-              <li className="list-group-item list-group-item-success">
+              {acceptedFiles.length > 0 && acceptedFiles.map((acceptedFile,index)=>(
+              <li className="list-group-item list-group-item-success" key={index}>
                   {acceptedFile.name}
               </li>
               ))}
           </ul>
           </div>
           <br />
-          <div className="input-group">
-              <input type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
-          </div>
-          <div className= "form-check">
-          <input className ="form-check-input" type="checkbox" value="isPublic" id="flexCheck"/>
-          <label className="form-check-label" htmlFor = "flexCheck">
-              Publically Visible
-          </label>
-          </div>
-          <div className="input-group">
-              <input type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
-          </div>
           <div>
-            <h3>Available Organizations</h3>
-            <Select 
-              options = {selectOptions}
-              onChange={onSelectChange}
-              isMulti
-            />
+            {/* Inputs */}
+            <div>
+              <h3>File Name</h3>
+              <small>
+                File names should be descriptive of the file being uploaded. Don't worry about appending `.csv` to your files.
+              </small>
+              <div className="input-group">
+                <input type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
+              </div>
+            </div>
+            <div>
+              <h3>File Description</h3>
+              <small>
+                File descriptions should indicate important information about the file contents, the methods of collecting the data, and any other important information such as rights of use.
+              </small>
+              <div className="input-group">
+                <textarea type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
+              </div>
+            </div>
+            <div>
+              <h3>Visibility</h3>
+              <div className= "form-check">
+                <input className ="form-check-input" type="checkbox" value="isPublic" id="flexCheck"/>
+                <label className="form-check-label" htmlFor = "flexCheck">
+                    Publically Visible
+                </label>
+              </div>
+            </div>
+            <div>
+              <h3>Available Organizations</h3>
+              <small>
+                When you select an organization, the file will be visible to all members of the organization when you make it publically visible.
+              </small>
+              <Select 
+                options = {selectOptions}
+                onChange={onSelectChange}
+                isMulti
+              />
+            </div>
+            <br />
+            <div>
+              <h5>Tags</h5>
+              <TagsInput updateParentTags={updateTags} />
+            </div>
+            <br/>
+            <button className="btn btn-success mb-2">Submit</button>
           </div>
-          <br />
-          <div>
-            <h5>Tags</h5>
-            <TagsInput updateParentTags={updateTags} />
-          </div>
-          <br/>
-          <button className="btn btn-success mb-2">Submit</button>
       </form>
   )
 }

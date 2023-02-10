@@ -87,17 +87,16 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
-        # print(request.data.keys())
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists
                 try:
                     orgObj = Organization.objects.get(pk=orgId)
                     obj.registered_organizations.add(orgObj)
-                    print(obj.registered_organizations)
-                except Organization.DoesNotExist:
+                    obj.save()
+                except Organization.DoesNotExist as e:
+                    print(e)
                     pass
-            obj.save()
 
         return Response(self.get_serializer(obj).data)
     
@@ -163,7 +162,8 @@ class UploadCsvApiView(APIView):
                 csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=fileName)
                 csvFile.save()
             except Exception as e:
-                return Response(data={"message":e})
+                print("\n\nHERE\n\n")
+                return Response({"msg":"bad"},status=status.HTTP_400_BAD_REQUEST)
             # if get thru the first try, know that the file is unique.
             # next try is to actually write the file
             try:

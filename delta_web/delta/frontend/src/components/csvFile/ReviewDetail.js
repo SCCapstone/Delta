@@ -108,7 +108,7 @@ const ReviewDetail = (props) => {
         </form>
         <br/>
         <div>
-            <Link to = {`/csvs/${reviewData.file}`} className="btn btn-success">
+            <Link to = {`/csvs/${reviewData.file}`} className="btn btn-danger">
                 Back
             </Link>
         </div>

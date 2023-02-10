@@ -44,7 +44,7 @@ const ProfileForm = (props) => {
         e.preventDefault()
         props.updateUser(userInfo);
     }
-
+    console.log(props.auth.user.followed_organizations.length);
     //This form allows for edited information to be submitted to the backend
     return (
         <form onSubmit = {onSubmit}>
@@ -113,13 +113,15 @@ const ProfileForm = (props) => {
                 >
                 </input>
             </div>
+            <br/>
             <h5>Currently followed organizations</h5>
             <div>
-                {props.auth.user.followed_organizations.map(orgObj => (
-                    <OrganizationThumbnail org={orgObj} 
-                    parentOnPutBackOrg={parentOnPutBackOrg} 
-                    parentOnRemoveOrg={parentOnRemoveOrg} 
-                    />
+                { props.auth.user.followed_organizations.length === 0 ? <p> Not part of any Organizations</p> :
+                    props.auth.user.followed_organizations.map(orgObj => (
+                        <OrganizationThumbnail org={orgObj} 
+                        parentOnPutBackOrg={parentOnPutBackOrg} 
+                        parentOnRemoveOrg={parentOnRemoveOrg} 
+                        />
                 ))}
             </div>
             <h5>Add organization</h5>

@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { updateCsvFile } from '../../actions/file';
 
 const CsvFileForm = (props) => {
-  console.log(props)
   // csvFile properties
   var [csvFileState,setCsvFileState] = useState({
     'file_name':props.csvFile.file_name,
     'id':props.csvFile.id,
     'description':props.csvFile.description,
     'is_public':props.csvFile.is_public,
+    'is_public_orgs':props.csvFile.is_public_orgs,
     "registered_organizations":props.csvFile.registered_organizations
   })
 
@@ -19,11 +19,28 @@ const CsvFileForm = (props) => {
   }
   const onSubmit = (e) =>{
     e.preventDefault();
+    console.log(csvFileState)
     props.updateCsvFile(csvFileState);
   }
 
   const onRadioChange = (e) =>{
-    const newState = {...csvFileState,[e.target.name]: e.target.value == "public"}
+
+    var isPublic = false;
+    var publicOrgs = false;
+
+    // Check which radio was clicked
+    if (e.target.id == "publicRadio" && e.target.checked) {
+      isPublic = true;
+      publicOrgs = false;
+    } else if (e.target.id == "publicOrgRadio" && e.target.checked) {
+      isPublic = false;
+      publicOrgs = true;
+    } else if (e.target.id == "privateRadio" && e.target.checked ) {
+      isPublic = false;
+      publicOrgs = false;
+    }
+
+    const newState = {...csvFileState,["is_public"]: isPublic,["is_public_orgs"]: publicOrgs }
     setCsvFileState(newState);
   }
 
@@ -71,7 +88,7 @@ const CsvFileForm = (props) => {
 
       <div className="form-check">
         <input  className="form-check-input" type="radio" name="is_public" 
-                id="publicRadio" value="public" checked={csvFileState.is_public} onChange={onRadioChange} />
+                id="publicRadio" value="is_public" checked={csvFileState.is_public} onChange={onRadioChange} />
         <label className="form-check-label">
           Public
         </label>
@@ -79,7 +96,16 @@ const CsvFileForm = (props) => {
 
       <div className="form-check">
         <input  className="form-check-input" type="radio" name="is_public" 
-                id="privateRadio" value="private" checked={!csvFileState.is_public} onChange={onRadioChange} />
+                id="publicOrgRadio" value="is_public_orgs" checked={csvFileState.is_public_orgs} onChange={onRadioChange} />
+        <label className="form-check-label">
+          Public To Orgs
+        </label>
+      </div>
+
+
+      <div className="form-check">
+        <input  className="form-check-input" type="radio" name="is_public" 
+                id="privateRadio" value="private" checked={!csvFileState.is_public && !csvFileState.is_public_orgs} onChange={onRadioChange} />
         <label className="form-check-label">
           Private
         </label>

@@ -38,14 +38,7 @@ export class Dashboard extends Component {
                 </div>
                 <span class="ml-auto mb-auto">
                   <div class="btn-group">
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">
-                        <i class="mdi mdi-delete"></i> Delete
-                      </button>
-                      <button class="dropdown-item" type="button">
-                        <i class="mdi mdi-close"></i> Turn Off
-                      </button>
-                    </div>
+                    <div class="dropdown-menu dropdown-menu-right"></div>
                   </div>
                   <br />
                   <div class="text-right text-muted pt-1">3d</div>

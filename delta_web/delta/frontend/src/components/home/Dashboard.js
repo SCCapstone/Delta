@@ -26,9 +26,9 @@ export class Dashboard extends Component {
         </h1>
         <h3>Here's what you've missed.</h3>
         <div class="row">
-          <div class="box shadow-sm rounded bg-gray mb-3">
-            <div class="box-body p-0">
-              <div class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header">
+          <div class="box shadow-sm rounded bg-gray mb-3 border border-gray">
+            <div class="box-body p-1">
+              <div class="p-3 d-flex align-items-center bg-light border-bottom">
                 <div class="font-weight-bold mr-3">
                   <div class="text-truncate">DAILY RUNDOWN: WEDNESDAY</div>
                   <div class="small">
@@ -37,14 +37,11 @@ export class Dashboard extends Component {
                   </div>
                 </div>
                 <span class="ml-auto mb-auto">
-                  <div class="btn-group">
-                    <div class="dropdown-menu dropdown-menu-right"></div>
-                  </div>
                   <br />
                   <div class="text-right text-muted pt-1">3d</div>
                 </span>
               </div>
-              <div class="p-3 d-flex align-items-center osahan-post-header">
+              <div class="p-3 d-flex align-items-center">
                 <div class="font-weight-bold mr-3">
                   <div class="mb-2">
                     We found a job at askbootstrap Ltd that you may be

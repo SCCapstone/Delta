@@ -29,23 +29,19 @@ export class Dashboard extends Component {
           <div class="box shadow-sm rounded bg-gray mb-3 border border-gray">
             <div class="box-body p-1">
               <div class="p-3 d-flex align-items-center bg-light border-bottom">
-                <div class="col font-weight-bold mr-3">
-                  <div class="text-truncate">DAILY RUNDOWN: WEDNESDAY</div>
+                <div class="col mr-3">
+                  <div class="text-truncate">Organization Update</div>
                   <div class="small">
-                    Income tax sops on the cards, The bias in VC funding, and
-                    other top news for you
+                    Jacob Johnson has joined your organization "Valafar Lab"
                   </div>
                 </div>
-                <span class="ml-auto mb-auto">
-                  <br />
-                  <div class="col text-right text-muted pt-1">3d</div>
-                </span>
+                <div class="text-right text-muted pt-1">3d</div>
               </div>
               <div class="p-3 d-flex align-items-center">
-                <div class="col text-left font-weight-bold mr-3">
-                  <div class="mb-2">
-                    We found a job at askbootstrap Ltd that you may be
-                    interested in Vivamus imperdiet venenatis est...
+                <div class="col text-left mr-3">
+                  <div class="text-truncate">Review on File</div>
+                  <div class="small">
+                    User test1234 has added a review to your file "upload544"
                   </div>
                 </div>
                 <div class="text-right text-muted pt-1">4d</div>

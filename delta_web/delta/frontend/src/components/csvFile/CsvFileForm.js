@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateCsvFile } from '../../actions/file';
 
 const CsvFileForm = (props) => {
+  console.log(props)
   // csvFile properties
   var [csvFileState,setCsvFileState] = useState({
     'file_name':props.csvFile.file_name,
@@ -96,6 +97,7 @@ const CsvFileForm = (props) => {
 }
 
 const mapStateToProps = (state) =>({
+  auth:state.auth
 })
 
 export default connect(mapStateToProps,{updateCsvFile})(CsvFileForm);

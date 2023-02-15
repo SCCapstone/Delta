@@ -42,17 +42,16 @@ const CsvFileDetail = (props) => {
             <h3>Add a review?</h3>
             <ReviewForm csvFileId = {id} handleSubmit={retrieveData}/>
           </div>
-          <br/>
           <div className="row">
             <div className="col-4">
-              <h1>Reviews</h1>
+              <h1>Review Stats</h1>
               <div>
                 <h5>{csvFile.avg_rating} out of 5</h5>
-                <h5>{csvFile.review_count} reviews</h5>
+                <h5>{csvFile.review_count} review(s)</h5>
               </div>
             </div>
             <div className="col-8">
-              <div className = "">
+              <div className = "overflow-scroll" style={{height:"20rem"}}>
                 {arrReviews.map((data)=>(
                   <Review reviewData={data} refreshReviews = {retrieveData} key={data.id}/>
                 )

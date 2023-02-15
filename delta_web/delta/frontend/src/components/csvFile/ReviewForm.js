@@ -76,7 +76,7 @@ const ReviewForm = (props) => {
         </div>
         <div className = "form-group">
             <label htmlFor = "description">Description</label>
-            <input type="text" className = "form-control" id = "description"
+            <textarea type="text" className = "form-control" id = "description"
             onChange = {onChange}
             name = "text"
             />

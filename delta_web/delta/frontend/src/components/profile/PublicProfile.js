@@ -49,7 +49,9 @@ const PublicProfile = (props) => {
           {username}'s profile
         </h1>
         <div>
-          {userData.bio}
+          <i>
+            {userData.bio}
+          </i>
         </div>
       </div>
       <hr/>

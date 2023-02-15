@@ -11,10 +11,11 @@
 }
 
 .tag_item{
-    background-color: rgb(218, 216, 216);
+    background-color: rgb(182, 182, 182);
     display: inline-block;
-    padding: .5em .75em;
-    border-radius: 20px;
+    padding: .3em .5em;
+    margin:.1em;
+    border-radius: 10px;
 }
 .tag_item .close{
     height: 20px;

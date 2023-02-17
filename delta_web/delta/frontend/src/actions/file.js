@@ -17,8 +17,9 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
     orgs: array of orgs
     */
     // pass in token
-    axios.post('/api/upload/csv/',dictData['file'],fileTokenConfig(getState,dictData['file']))
+    axios.post('/api/upload/csv/',dictData,fileTokenConfig(getState,dictData['file']))
         .then(res=>{
+            console.log(res)
             dispatch(createMessage({addCsvFileSuccess:"File posted"}));
             dispatch({
                 type:ADD_CSV_FILE,
@@ -48,9 +49,13 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
             })
         })
         .catch(err=>{
-            console.log(err);
-            dispatch(createMessage({addCsvFileError:err.response.data.message}))
-            dispatch(createMessage({addCsvFileError:err.response.data.detail}))
+            console.log(err)
+            if(err.response){
+                dispatch(createMessage({addCsvFileError:err.response.data.message}))
+            }
+            else{
+                dispatch(createMessage({addCsvFileError:"Error uploading file. Check that the file name is unique compared to your previously uploaded files."}))
+            }
         })
 }
 

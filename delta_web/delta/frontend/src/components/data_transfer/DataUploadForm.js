@@ -99,10 +99,11 @@ const DataUploadForm = (props) =>{
         // get the organizations
         const data = {
           'file':file,
-          'isPublic':isPublic,
-          'isPublicOrgs':isPublicOrgs,
+          'is_public':isPublic,
+          'is_public_orgs':isPublicOrgs,
           'description':description,
-          'fileName':fileName,
+          'file_name':fileName,
+          'file_path':fileName,
           'orgs':arrOrgs,
           'tags':tags
         }

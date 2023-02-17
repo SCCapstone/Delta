@@ -54,7 +54,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
     
     def get_tags(self,obj):
         return SerializerTagCsvFile(obj.tag_set.all().order_by('-pub_date'),many=True).data
-
+    
 class SerializerTagCsvFile(serializers.ModelSerializer):
 
     class Meta:

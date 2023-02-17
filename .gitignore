@@ -216,3 +216,4 @@ sketch
 
 # Files
 static/users/*
+*.csv

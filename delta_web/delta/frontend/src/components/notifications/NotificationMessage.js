@@ -5,6 +5,8 @@ import { markReadNotificationMessage} from '../../actions/notification';
 
 const NotificationMessage = (props) => {
 
+    console.log(props)
+
     const [style,setStyle] = useState({});
 
     const handleRead = () =>{
@@ -28,7 +30,7 @@ const NotificationMessage = (props) => {
             </p>
         </div>
         <div>
-            <Link >
+            <Link to = {`/messages/conversations/${props.data.convo_id}`}>
                 See message
             </Link>
         </div>

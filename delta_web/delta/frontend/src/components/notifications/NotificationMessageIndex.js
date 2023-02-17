@@ -25,8 +25,8 @@ const NotificationMessageIndex = (props) =>{
             <h1>Message Notification</h1>
             <hr/>
             <div>
-              {arrNotifications.map((objNotif)=>(
-                <NotificationMessage data = {objNotif} />
+              {arrNotifications.map((objNotif,index)=>(
+                <NotificationMessage data = {objNotif} key={index}/>
               ))}
             </div>
         </div>

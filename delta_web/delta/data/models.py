@@ -38,6 +38,8 @@ class CSVFile(models.Model):
 
     is_public = models.BooleanField(default=False)
 
+    is_public_orgs = models.BooleanField(default=False)
+
     # the organizations the file is under
     registered_organizations = models.ManyToManyField(Organization,blank=True,related_name="uploaded_files")
 

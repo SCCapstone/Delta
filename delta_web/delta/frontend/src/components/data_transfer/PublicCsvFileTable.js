@@ -83,7 +83,7 @@ const PublicCsvFileTable = (props) =>{
            </div>
            <input id = "search" type="text" className="form-control" placeholder="Enter at least three characters" onChange={onSearchChange}/>
            </div>
-            <div className = "container">
+            <div className = "row">
               {tableCsvs.map((item,index)=>(
                   <DataCard 
                     author={item.author_username}

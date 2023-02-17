@@ -92,13 +92,15 @@ const DataUploadForm = (props) =>{
   const onSubmit = (e) =>{
     e.preventDefault();
       acceptedFiles.forEach(file=> {
-        var isPublic= $("#flexCheck").is(":checked")
+        var isPublic= $("#flexCheckPublic").is(":checked");
+        var isPublicOrgs = $("#flexCheckPublicToOrg").is(":checked");
         var description = $("#fileDescription").val();
         var fileName = $("#fileName").val();
         // get the organizations
         const data = {
           'file':file,
           'isPublic':isPublic,
+          'isPublicOrgs':isPublicOrgs,
           'description':description,
           'fileName':fileName,
           'orgs':arrOrgs,
@@ -158,13 +160,32 @@ const DataUploadForm = (props) =>{
               </div>
             </div>
             <div>
+
               <h3>Visibility</h3>
               <div className= "form-check">
-                <input className ="form-check-input" type="checkbox" value="isPublic" id="flexCheck"/>
-                <label className="form-check-label" htmlFor = "flexCheck">
+                <input className ="form-check-input" name="flexCheck" type="radio" value="isPublic" id="flexCheckPublic"/>
+                <label className="form-check-label" htmlFor = "flexCheckPublic">
                     Publically Visible
                 </label>
               </div>
+
+
+              <div className= "form-check">
+                <input className ="form-check-input" name="flexCheck" type="radio" value="isPublic" id="flexCheckPublicToOrg"/>
+                <label className="form-check-label" htmlFor = "flexCheckPublicToOrg">
+                    Public to Orgs
+                </label>
+              </div>
+
+
+              <div className= "form-check">
+                <input className ="form-check-input" name="flexCheck" type="radio" value="isPublic" id="flexCheckPrivate"/>
+                <label className="form-check-label" htmlFor = "flexCheckPrivate">
+                    Private
+                </label>
+              </div>
+
+
             </div>
             <div>
               <h3>Available Organizations</h3>

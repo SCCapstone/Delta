@@ -21,7 +21,9 @@ const MessageForm = (props) => {
             convo_id:convoId,
             author_id:userId
         })
-        props.refresh();
+        setTimeout(()=>{
+            props.refresh();
+        },200)
     }
 
   return (

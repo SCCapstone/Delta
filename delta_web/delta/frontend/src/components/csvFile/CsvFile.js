@@ -25,19 +25,17 @@ const CsvFile = (props) => {
     }
 
   return (
-    <div className="border border-rounded m-3 p-3">
+    <div className="border border-rounded m-2 p-2 container">
         <div className="d-flex justify-content-between">
             <div>
-                <h5>{props.csvFileData.formatted_date}</h5>
+                <h5>
+                    <Link to ={`/profile/${props.csvFileData.author_username}`}>
+                        Posted by {props.csvFileData.author_username}
+                    </Link>
+                </h5>
             </div>
             <div>
-                <Link>
-                    <h5>
-                        <Link to ={`/profile/${props.csvFileData.author_username}`}>
-                            {props.csvFileData.author_username}
-                        </Link>
-                    </h5>
-                </Link>
+                <h5>{props.csvFileData.formatted_date}</h5>
             </div>
         </div>
         <div>
@@ -52,7 +50,7 @@ const CsvFile = (props) => {
         <br/>
         <div>
             <h6>Tags</h6>
-            <div>
+            <div className="mb-2">
                 {props.csvFileData.tags.map((objTag,index)=>(
                     <div className={tag_styles.tag_item} key={index}>
                         <span className={tag_styles.text}>{objTag.text}</span>

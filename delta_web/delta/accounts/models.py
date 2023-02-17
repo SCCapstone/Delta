@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # https://www.youtube.com/watch?v=FdVuKt_iuSI
 
 class Profile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,null=True)
     # TO DO, or just not do it
     bio = models.CharField(max_length = 255)
 

@@ -88,6 +88,7 @@ class SerializerNotificationMessage(serializers.ModelSerializer):
     sender_username = serializers.SerializerMethodField()
     recipient_username = serializers.SerializerMethodField()
     formatted_date = serializers.SerializerMethodField()
+    convo_id = serializers.SerializerMethodField()
 
     class Meta:
         model = NotificationMessage
@@ -101,3 +102,6 @@ class SerializerNotificationMessage(serializers.ModelSerializer):
 
     def get_formatted_date(self,obj):
         return obj.pub_date.strftime('%H:%M, %Y-%m-%d')
+    
+    def get_convo_id(self,obj):
+        return obj.message.convo.id

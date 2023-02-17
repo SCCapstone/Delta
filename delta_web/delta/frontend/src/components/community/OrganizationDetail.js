@@ -13,6 +13,7 @@ const OrganizationDetail = (props) => {
     const [data, setData] = useState(null);
     const [dataPosts, setDataPosts] = useState(null);
 
+
     const { id } = useParams();
 
     // get the organization

@@ -23,7 +23,6 @@ import ProfileGlance from "./profile/ProfileGlance";
 import ProfileDetailed from "./profile/ProfileDetailed";
 
 // community
-import Personal from "./community/Personal"
 import {Organizations as CommunityOrganizations} from "./community/Organizations"
 import OrganizationDetail from "./community/OrganizationDetail"
 
@@ -117,11 +116,6 @@ class App extends Component{
                                     <Route exact path ="/profile/detailed" element={
                                         <PrivateRoute>
                                             <ProfileDetailed/>
-                                        </PrivateRoute>
-                                    }/>
-                                    <Route exact path ="/community/personal" element={
-                                        <PrivateRoute>
-                                            <Personal/>
                                         </PrivateRoute>
                                     }/>
                                     <Route exact path ={"/csvs/:id"} element={

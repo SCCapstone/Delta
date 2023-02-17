@@ -43,7 +43,7 @@ const DataCard = (props) => {
     }
 
   return (
-    <div className="card m-1 p-1" style={style}>
+    <div className="card" style={style}>
         <div className="card-body">
             <div className="d-flex justify-content-between">
                 <p>

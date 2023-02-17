@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import OrganizationCard from './OrganizationCard';
 
 export class Organizations extends Component {
     // grab oraganization information
@@ -28,34 +29,13 @@ export class Organizations extends Component {
                 </h1>
                 <div className='row'>
                     {this.state.data.map((item, index) => (
-                        <div className="border container m-3 p-3" key={index}>
-                            <div className="row">
-                                <div className='col-md-4'>
-                                    <img
-                                        src='/media/Generic_Laboratory_Logo.png'
-                                        className='card-img-fluid rounded-start'
-                                        alt='place holder text right now'
-                                        width='200'
-                                        height='200'
-                                    />
-                                </div>
-                                <div className='col-md-8'>
-                                    <h3 className='card-title'>{item.name}</h3>
-                                    <p className='card-text'>Here since {item.date_us_format}</p>
-                                    <p className='card-text'>Following users: {item.following_user_count}</p>
-                                    <Link className="link" to={`${item.id}`}>
-                                        View
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
+                        <OrganizationCard
+                            orgObj = {item}
+                            imgSrc = {'/media/Generic_Laboratory_Logo.png'}
+                            key={index}
+                        />
                     ))}
                 </div>
-                <span>
-                    <Link className="btn btn-secondary btn-sm" to="/community/personal">
-                        Click to see Personal
-                    </Link>
-                </span>
             </div>
         )
     }

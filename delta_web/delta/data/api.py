@@ -52,6 +52,7 @@ class ViewsetPublicCsvFile(viewsets.ModelViewSet):
     @action(methods=['get'],detail=True,renderer_classes=(PassthroughRenderer,))
     def download(self,*args,**kwargs):
         instance = self.get_object()
+        print(instance)
         with open(instance.file_path,'rb') as file:
             return Response(
                 file.read(),
@@ -90,7 +91,6 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
-        print(request.data)
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists
@@ -140,7 +140,7 @@ class UploadCsvApiView(APIView):
 
         if(dataFile):
             # create a random file name
-            fileName = ''.join(random.choices(string.ascii_lowercase+string.digits+string.ascii_uppercase,k=100))
+            fileName = Path(str(dataFile)).stem
 
             # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
             strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
@@ -149,20 +149,23 @@ class UploadCsvApiView(APIView):
             if not os.path.exists(strUserCsvFolder):
                 os.makedirs(strUserCsvFolder)
 
-            strFilePath = os.path.join(strUserCsvFolder,fileName)
+            strFilePath = os.path.join(strUserCsvFolder,str(dataFile))
 
             # if a file already present, do not overwrite
 
-            while(os.path.exists(strFilePath)):
-                strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
-                strFilePath += "_"+ strRandom
-            # finally add .csv
-            strFilePath+=".csv"
+            if(os.path.exists(strFilePath)):
+                while(os.path.exists(strFilePath)):
+                    strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
+                    strFilePath += "_"+ strRandom
+                # finally add .csv
+                strFilePath+=".csv"
 
+            print(strFilePath)
             csvFile = None
             try:
-                csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=fileName)
+                csvFile = CSVFile(author=request.user,file_path =strFilePath,file_name=fileName)
                 csvFile.save()
+                print(csvFile.file_path)
             except Exception as e:
                 return Response(data={"message":"{}".format(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             # if get thru the first try, know that the file is unique.

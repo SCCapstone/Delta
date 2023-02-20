@@ -103,7 +103,6 @@ const DataUploadForm = (props) =>{
           'is_public_orgs':isPublicOrgs,
           'description':description,
           'file_name':fileName,
-          'file_path':fileName,
           'registered_organizations':arrOrgs,
           'tags':tags
         }

@@ -37,6 +37,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
                 fields = ['author','file_name','file_path']
             )
         ]
+        read_only_fields = ['id','file_path']
     def get_author_username(self,obj):
         return obj.author.username
     

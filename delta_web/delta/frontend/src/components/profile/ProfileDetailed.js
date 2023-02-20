@@ -26,6 +26,7 @@ const ProfileDetailed = (props) => {
         borderBottom: "1px solid rgba(33, 40, 50, 0.125)",
     };
 
+
     return (
         <div className='container'>
             <div className="row">

@@ -13,7 +13,7 @@ username
 */
 
 const ProfileSidebar = (props) => {
-    console.log(props);
+    //console.log(props);
     return (
         <div className="profile-nav col-md-3">
             <div className="panel">
@@ -27,7 +27,7 @@ const ProfileSidebar = (props) => {
                 <ul className="nav nav-pills flex-column">
                     <li className="active"><Link to='/profile/glance'>Profile</Link></li>
                     <li><Link to={`/profile/${props.username}`}>Public profile</Link></li>
-                    <li><Link to='#'>Your Files</Link></li>
+                    <li><Link to='/profile/personal'>Your Files</Link></li>
                     <li><Link to='/profile/detailed'>Edit profile</Link></li>
                 </ul>
             </div>

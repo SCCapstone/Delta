@@ -100,6 +100,13 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
                 except Organization.DoesNotExist as e:
                     print(e)
                     pass
+        if('tags' in request.data):
+            # remove old tags
+            obj.tag_set.all().delete()
+            # create new tags
+            for strTag in request.data['tags']:
+                tag = TagCsvFile(file=obj,text=strTag)
+                tag.save()
 
         return Response(self.get_serializer(obj).data)
     
@@ -133,13 +140,13 @@ class UploadCsvApiView(APIView):
     serializer_class = SerializerCSVFile
 
     # handle post requests
-    def post(self,request):
+    def post(self,request,*args,**kwargs):
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
 
-        fileName = Path(str(dataFile)).stem
-
         if(dataFile):
+            # create a random file name
+            fileName = Path(str(dataFile)).stem
 
             # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
             strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
@@ -152,15 +159,16 @@ class UploadCsvApiView(APIView):
 
             # if a file already present, do not overwrite
 
-            while(os.path.exists(strFilePath)):
-                strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
-                strFilePath += "_"+ strRandom
-            strFilePath+=".csv"
+            if(os.path.exists(strFilePath)):
+                while(os.path.exists(strFilePath)):
+                    strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
+                    strFilePath += "_"+ strRandom
+                # finally add .csv
+                strFilePath+=".csv"
 
-            # first try is just to see if this is a unique user+filepath combo
             csvFile = None
             try:
-                csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=fileName)
+                csvFile = CSVFile(author=request.user,file_path =strFilePath,file_name=fileName)
                 csvFile.save()
             except Exception as e:
                 return Response(data={"message":"{}".format(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -9,6 +9,8 @@ from django.db.models import Avg
 # serializers
 from social.serializers import SerializerReview
 
+from organizations.serializers import OrganizationSerializer
+
 class SerializerCSVFile(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()
     reviews = serializers.SerializerMethodField()
@@ -21,6 +23,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
     review_count = serializers.SerializerMethodField()
     # tags
     tags = serializers.SerializerMethodField()
+    org_objs = serializers.SerializerMethodField()
     class Meta:
         model = CSVFile
         fields = '__all__'
@@ -34,6 +37,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
                 fields = ['author','file_name','file_path']
             )
         ]
+        read_only_fields = ['id','file_path']
     def get_author_username(self,obj):
         return obj.author.username
     
@@ -54,6 +58,9 @@ class SerializerCSVFile(serializers.ModelSerializer):
     
     def get_tags(self,obj):
         return SerializerTagCsvFile(obj.tag_set.all().order_by('-pub_date'),many=True).data
+    
+    def get_org_objs(self,obj):
+        return OrganizationSerializer(obj.registered_organizations.all(),many=True).data
     
 class SerializerTagCsvFile(serializers.ModelSerializer):
 

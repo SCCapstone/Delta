@@ -28,7 +28,6 @@ const DataCard = (props) => {
             // uncheck
             setToDownload(false);
             setStyle({...style,backgroundColor:""})
-            setButtonStyle({borderColor:"green"})
             props.parentOnCheckChange(props.id)
         }else{
             setToDownload(true)

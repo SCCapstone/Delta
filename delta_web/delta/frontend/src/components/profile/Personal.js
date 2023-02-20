@@ -20,17 +20,23 @@ const Personal = (props) => {
     return (
         <div className="container">
             <div className="row">
+                <ProfileSidebar
+                    first_name = {props.auth.first_name}
+                    last_name = {props.auth.last_name}
+                    email = {props.auth.email}
+                    username = {props.auth.username}
+                />
                 
+                <h1 className="text-center">
+                    Personal community
+                </h1>
+                <SearchableCsvFileTable csvFiles={csvFiles} textMinLength={3} />
+                <span>
+                    <Link className="btn btn-secondary btn-sm" to="/community/organizations">
+                        Click to see Organizations
+                    </Link>
+                </span>
             </div>
-            <h1 className="text-center">
-                Personal community
-            </h1>
-            <SearchableCsvFileTable csvFiles={csvFiles} textMinLength={3} />
-            <span>
-                <Link className="btn btn-secondary btn-sm" to="/community/organizations">
-                    Click to see Organizations
-                </Link>
-            </span>
         </div>
     )
 }

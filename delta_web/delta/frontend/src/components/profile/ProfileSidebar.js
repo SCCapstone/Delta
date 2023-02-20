@@ -25,8 +25,9 @@ const ProfileSidebar = (props) => {
                     <p>{props.email}</p>
                 </div>
                 <ul className="nav nav-pills flex-column">
-                    <li className="active"><a aria-current="page">Profile</a></li>
+                    <li className="active"><Link to='/profile/glance'>Profile</Link></li>
                     <li><Link to={`/profile/${props.username}`}>Public profile</Link></li>
+                    <li><Link to='#'>Your Files</Link></li>
                     <li><Link to='/profile/detailed'>Edit profile</Link></li>
                 </ul>
             </div>

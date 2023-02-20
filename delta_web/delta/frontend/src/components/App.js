@@ -21,7 +21,7 @@ https://stackoverflow.com/questions/70140588/const-authenticated-this-props-is-u
 */
 import ProfileGlance from "./profile/ProfileGlance";
 import ProfileDetailed from "./profile/ProfileDetailed";
-
+import Personal from "./profile/Personal";
 // community
 import Organizations from "./community/Organizations"
 import OrganizationDetail from "./community/OrganizationDetail"
@@ -120,7 +120,7 @@ class App extends Component{
                                     }/>
                                     <Route exact path ="/profile/personal" element={
                                         <PrivateRoute>
-                                            <ProfileDetailed/>
+                                            <Personal/>
                                         </PrivateRoute>
                                     }/>
                                     <Route exact path ={"/csvs/:id"} element={

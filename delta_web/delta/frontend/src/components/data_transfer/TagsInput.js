@@ -1,10 +1,17 @@
 // with help from https://dev.to/0shuvo0/lets_create_an_add_tags_input_with_react_js_d29
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./tags.module.css";
 
 // src/components/TagsInput.js
 function TagsInput(props){
     const [tags, setTags] = useState([])
+
+    // if have prior tags, set them
+    useEffect(()=>{
+        if(props.priorTags){
+            setTags(props.priorTags)
+        }
+    },[])
 
     function handleKeyDown(e){
         if(e.key !== 'Enter') return

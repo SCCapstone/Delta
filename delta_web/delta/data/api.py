@@ -101,6 +101,14 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
                 except Organization.DoesNotExist as e:
                     print(e)
                     pass
+        if('tags' in request.data):
+            print(request.data)
+            # remove old tags
+            obj.tag_set.all().delete()
+            # create new tags
+            for strTag in request.data['tags']:
+                tag = TagCsvFile(file=obj,text=strTag)
+                tag.save()
 
         return Response(self.get_serializer(obj).data)
     

@@ -9,14 +9,14 @@ import Select from 'react-select'
 
 const CsvFileForm = (props) => {
   // csvFile properties
-  var [csvFileState,setCsvFileState] = useState({
+  const [csvFileState,setCsvFileState] = useState({
     'file_name':props.csvFile.file_name,
     'id':props.csvFile.id,
     'description':props.csvFile.description,
     'is_public':props.csvFile.is_public,
     'is_public_orgs':props.csvFile.is_public_orgs,
     "registered_organizations":props.csvFile.registered_organizations,
-    "tags":props.csvFile.tags
+    "tags":undefined
   })
 
   // available orgs
@@ -32,6 +32,7 @@ const CsvFileForm = (props) => {
   })
 
   useEffect(()=>{
+    // set up the select
     var select = [];
     props.auth.user.followed_organizations.map((org)=>{
       select.push({
@@ -39,7 +40,15 @@ const CsvFileForm = (props) => {
       })
     })
     setSelectOptions(select);
+    // set up the tags
+    var tags = []
+    props.csvFile.tags.map((tagObj)=>{
+      tags.push(tagObj.text)
+    })
+    setCsvFileState({...csvFileState,"tags":tags})
   },[])
+
+  if(csvFileState.tags == undefined) return;
 
   const onSelectChange = (arrSelects) =>{
     // reset
@@ -81,7 +90,9 @@ const CsvFileForm = (props) => {
   }
 
   return (
-    <form onSubmit = {onSubmit}>
+    <form onSubmit = {onSubmit}
+    onKeyDown={(e)=>{e.key === 'Enter' && e.preventDefault()}}
+    >
       {/* File name input group */}
       <div className="input-group mb-3">
 
@@ -146,12 +157,26 @@ const CsvFileForm = (props) => {
           Private
         </label>
       </div>
-      <Select
-        defaultValue={defaultSelectValues}
-        options = {selectOptions}
-        onChange={onSelectChange}
-        isMulti
-      />
+      <div>
+        <h6>
+          Registered Organizations
+        </h6>
+        <Select
+          defaultValue={defaultSelectValues}
+          options = {selectOptions}
+          onChange={onSelectChange}
+          isMulti
+        />
+      </div>
+      <div>
+        <h6>
+          Tags
+        </h6>
+        <TagsInput 
+          priorTags={csvFileState['tags']}
+          updateParentTags={(tags)=>setCsvFileState({...csvFileState,"tags":tags})}
+        />
+      </div>
 
       <br />
       <br />

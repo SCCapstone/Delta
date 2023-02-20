@@ -24,6 +24,7 @@ const ProfileGlance = (props) => {
                     last_name = {user.last_name}
                     email = {user.email}
                     username = {user.username}
+                    pagename = {"Profile"}
                 />
                 <div className="profile-info col-md-9">
                     <div className="panel">

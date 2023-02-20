@@ -27,6 +27,7 @@ const Personal = (props) => {
                     last_name={props.auth.user.last_name}
                     email={props.auth.user.email}
                     username={props.auth.user.username}
+                    pagename={"Personal"}
                 />
                 <div className='profile-info col-md-9'>
                     <h1 className="text-center">

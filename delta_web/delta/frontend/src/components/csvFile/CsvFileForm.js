@@ -1,6 +1,11 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { connect } from 'react-redux';
 import { updateCsvFile } from '../../actions/file';
+
+import TagsInput from '../data_transfer/TagsInput';
+
+// select
+import Select from 'react-select'
 
 const CsvFileForm = (props) => {
   // csvFile properties
@@ -10,8 +15,40 @@ const CsvFileForm = (props) => {
     'description':props.csvFile.description,
     'is_public':props.csvFile.is_public,
     'is_public_orgs':props.csvFile.is_public_orgs,
-    "registered_organizations":props.csvFile.registered_organizations
+    "registered_organizations":props.csvFile.registered_organizations,
+    "tags":props.csvFile.tags
   })
+
+  // available orgs
+  const [selectOptions, setSelectOptions] = useState([]);
+  // select values
+  const [selectedValues,setSelectedValues] = useState([]);
+
+  var defaultSelectValues = []
+  props.csvFile.org_objs.map((org)=>{
+    defaultSelectValues.push({
+      'label':org.name,'value':org.id
+    })
+  })
+
+  useEffect(()=>{
+    var select = [];
+    props.auth.user.followed_organizations.map((org)=>{
+      select.push({
+        'value':org.id,'label':org.name
+      })
+    })
+    setSelectOptions(select);
+  },[])
+
+  const onSelectChange = (arrSelects) =>{
+    // reset
+    var arrOrgs = []
+    arrSelects.map((obj)=>{
+      arrOrgs.push(obj.value)
+    })
+    setCsvFileState({...csvFileState,'registered_organizations':arrOrgs})
+  }
 
   const onChange = (e) =>{
     const newState = {...csvFileState, [e.target.name]:e.target.value}
@@ -19,7 +56,6 @@ const CsvFileForm = (props) => {
   }
   const onSubmit = (e) =>{
     e.preventDefault();
-    console.log(csvFileState)
     props.updateCsvFile(csvFileState);
   }
 
@@ -110,6 +146,12 @@ const CsvFileForm = (props) => {
           Private
         </label>
       </div>
+      <Select
+        defaultValue={defaultSelectValues}
+        options = {selectOptions}
+        onChange={onSelectChange}
+        isMulti
+      />
 
       <br />
       <br />

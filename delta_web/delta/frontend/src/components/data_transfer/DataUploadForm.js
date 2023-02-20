@@ -104,7 +104,7 @@ const DataUploadForm = (props) =>{
           'description':description,
           'file_name':fileName,
           'file_path':fileName,
-          'orgs':arrOrgs,
+          'registered_organizations':arrOrgs,
           'tags':tags
         }
         props.addCsvFile(data);

@@ -90,6 +90,7 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
+        print(request.data)
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists
@@ -133,13 +134,13 @@ class UploadCsvApiView(APIView):
     serializer_class = SerializerCSVFile
 
     # handle post requests
-    def post(self,request):
+    def post(self,request,*args,**kwargs):
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
 
-        fileName = Path(str(dataFile)).stem
-
         if(dataFile):
+            # create a random file name
+            fileName = ''.join(random.choices(string.ascii_lowercase+string.digits+string.ascii_uppercase,k=100))
 
             # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
             strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
@@ -148,16 +149,16 @@ class UploadCsvApiView(APIView):
             if not os.path.exists(strUserCsvFolder):
                 os.makedirs(strUserCsvFolder)
 
-            strFilePath = os.path.join(strUserCsvFolder,str(dataFile))
+            strFilePath = os.path.join(strUserCsvFolder,fileName)
 
             # if a file already present, do not overwrite
 
             while(os.path.exists(strFilePath)):
                 strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
                 strFilePath += "_"+ strRandom
+            # finally add .csv
             strFilePath+=".csv"
 
-            # first try is just to see if this is a unique user+filepath combo
             csvFile = None
             try:
                 csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=fileName)

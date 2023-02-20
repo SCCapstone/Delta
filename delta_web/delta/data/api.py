@@ -52,7 +52,6 @@ class ViewsetPublicCsvFile(viewsets.ModelViewSet):
     @action(methods=['get'],detail=True,renderer_classes=(PassthroughRenderer,))
     def download(self,*args,**kwargs):
         instance = self.get_object()
-        print(instance)
         with open(instance.file_path,'rb') as file:
             return Response(
                 file.read(),
@@ -102,7 +101,6 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
                     print(e)
                     pass
         if('tags' in request.data):
-            print(request.data)
             # remove old tags
             obj.tag_set.all().delete()
             # create new tags
@@ -168,12 +166,10 @@ class UploadCsvApiView(APIView):
                 # finally add .csv
                 strFilePath+=".csv"
 
-            print(strFilePath)
             csvFile = None
             try:
                 csvFile = CSVFile(author=request.user,file_path =strFilePath,file_name=fileName)
                 csvFile.save()
-                print(csvFile.file_path)
             except Exception as e:
                 return Response(data={"message":"{}".format(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             # if get thru the first try, know that the file is unique.

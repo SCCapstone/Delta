@@ -17,7 +17,7 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
     orgs: array of orgs
     */
     // pass in token
-    axios.post('/api/upload/csv/',dictData,fileTokenConfig(getState,dictData['file']))
+    axios.post('/api/upload/csv/',dictData['file'],fileTokenConfig(getState,dictData['file']))
         .then(res=>{
             dispatch(createMessage({addCsvFileSuccess:"File posted"}));
             dispatch({

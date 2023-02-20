@@ -118,6 +118,11 @@ class App extends Component{
                                             <ProfileDetailed/>
                                         </PrivateRoute>
                                     }/>
+                                    <Route exact path ="/profile/personal" element={
+                                        <PrivateRoute>
+                                            <ProfileDetailed/>
+                                        </PrivateRoute>
+                                    }/>
                                     <Route exact path ={"/csvs/:id"} element={
                                         <PrivateRoute>
                                             <CsvFileDetail/>

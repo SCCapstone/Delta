@@ -52,6 +52,7 @@ const PublicProfile = (props) => {
           last_name={props.auth.user.last_name}
           email={props.auth.user.email}
           username={props.auth.user.username}
+          pagename={"Public"}
         />
         <div className='profile-info col-md-9'>
           <div>

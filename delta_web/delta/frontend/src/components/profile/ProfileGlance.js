@@ -24,6 +24,7 @@ const ProfileGlance = (props) => {
                     last_name = {user.last_name}
                     email = {user.email}
                     username = {user.username}
+                    pagename = {"Profile"}
                 />
                 <div className="profile-info col-md-9">
                     <div className="panel">
@@ -46,9 +47,9 @@ const ProfileGlance = (props) => {
                                     <p><span>Email:</span> {user.email}</p>
                                 </div>
                                 <h1>Your Organizations</h1>
-                                <div class="row">
+                                <div className="row">
                                     {(user.followed_organizations).map((item, index) => (
-                                        <div class="col-sm-6">
+                                        <div className="col-sm-6">
                                             <div className="card m-1 p-1" style={{ width: '24rem' }} key={index}>
                                                 <img
                                                     src='/media/Generic_Laboratory_Logo.png'

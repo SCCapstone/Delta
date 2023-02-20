@@ -35,6 +35,7 @@ const ProfileDetailed = (props) => {
                     last_name={props.auth.user.last_name}
                     email={props.auth.user.email}
                     username={props.auth.user.username}
+                    pagename={"Detail"}
                 />
                 {/* <div className="container-xl px-4 mt-4"> */}
 

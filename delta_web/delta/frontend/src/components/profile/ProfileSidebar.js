@@ -10,6 +10,7 @@ firstname
 lastname
 email
 username
+pagename
 */
 
 const ProfileSidebar = (props) => {
@@ -25,10 +26,10 @@ const ProfileSidebar = (props) => {
                     <p>{props.email}</p>
                 </div>
                 <ul className="nav nav-pills flex-column">
-                    <li className="active"><Link to='/profile/glance'>Profile</Link></li>
-                    <li><Link to={`/profile/${props.username}`}>Public profile</Link></li>
-                    <li><Link to='/profile/personal'>Your Files</Link></li>
-                    <li><Link to='/profile/detailed'>Edit profile</Link></li>
+                    <li className= {props.pagename === "Profile" ? "active":"NotActive"}><Link to='/profile/glance'>Profile</Link></li>
+                    <li className= {props.pagename === "Public" ? "active":"NotActive"}><Link to={`/profile/${props.username}`}>Public profile</Link></li>
+                    <li className= {props.pagename === "Personal" ? "active":"NotActive"}><Link to='/profile/personal'>Your Files</Link></li>
+                    <li className= {props.pagename === "Detail" ? "active":"NotActive"}><Link to='/profile/detailed'>Edit profile</Link></li>
                 </ul>
             </div>
         </div>

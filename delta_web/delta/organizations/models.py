@@ -18,7 +18,7 @@ class Organization(models.Model):
 
     name = models.CharField(max_length = 300)
 
-    key = models.CharField(max_length=100)
+    key = models.CharField(max_length=100,unique=True)
 
     # TO DO: 
     # ADD REGISTERED AND FOLLOWING

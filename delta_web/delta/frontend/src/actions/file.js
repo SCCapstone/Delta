@@ -29,15 +29,7 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
                 dispatch(addTags({file:res.data.csvFile.id,tags:dictData['tags']}))
             }
 
-            const data = {
-                id:res.data.csvFile.id,
-                file_name:dictData['fileName'],
-                description:dictData['description'],
-                is_public:dictData['isPublic'],
-                is_public_orgs:dictData['isPublicOrgs'],
-                registered_organizations:dictData['orgs']
-            }
-            console.log(data)
+            const data = {...dictData,"id":res.data.csvFile.id}
             // add all other attributes
             axios.patch(`api/csv/${res.data.csvFile.id}/`,data,tokenConfig(getState))
             .then(res=>{
@@ -48,9 +40,13 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
             })
         })
         .catch(err=>{
-            console.log(err);
-            dispatch(createMessage({addCsvFileError:err.response.data.message}))
-            dispatch(createMessage({addCsvFileError:err.response.data.detail}))
+            console.log(err)
+            if(err.response){
+                dispatch(createMessage({addCsvFileError:err.response.data.message}))
+            }
+            else{
+                dispatch(createMessage({addCsvFileError:"Error uploading file. Check that the file name is unique compared to your previously uploaded files."}))
+            }
         })
 }
 
@@ -82,11 +78,18 @@ export const getCsvFile = (id) => (dispatch,getState) =>{
                 }
         )
 }
-// UPDATE FILE
-// only allow update name
-export const updateCsvFile = ({id,file_name,description,is_public,is_public_orgs}) => (dispatch,getState)=>{
-    const data = JSON.stringify({id,file_name,description,is_public,is_public_orgs})
-    axios.patch(`api/csv/${id}/`,data,tokenConfig(getState))
+// dict data expects:
+/*
+file_name
+description
+is_public
+is_public_orgs
+registered_organizations
+tags
+id (id of file)
+*/
+export const updateCsvFile = (dictData) => (dispatch,getState)=>{
+    axios.patch(`api/csv/${dictData['id']}/`,dictData,tokenConfig(getState))
         .then(res=>{
             dispatch(createMessage({updateCsvFileSuccess:"File successfully updated."}))
             dispatch({

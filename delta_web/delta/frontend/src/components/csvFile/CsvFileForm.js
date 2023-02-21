@@ -1,17 +1,63 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { connect } from 'react-redux';
 import { updateCsvFile } from '../../actions/file';
 
+import TagsInput from '../data_transfer/TagsInput';
+
+// select
+import Select from 'react-select'
+
 const CsvFileForm = (props) => {
   // csvFile properties
-  var [csvFileState,setCsvFileState] = useState({
+  const [csvFileState,setCsvFileState] = useState({
     'file_name':props.csvFile.file_name,
     'id':props.csvFile.id,
     'description':props.csvFile.description,
     'is_public':props.csvFile.is_public,
     'is_public_orgs':props.csvFile.is_public_orgs,
-    "registered_organizations":props.csvFile.registered_organizations
+    "registered_organizations":props.csvFile.registered_organizations,
+    "tags":undefined
   })
+
+  // available orgs
+  const [selectOptions, setSelectOptions] = useState([]);
+  // select values
+  const [selectedValues,setSelectedValues] = useState([]);
+
+  var defaultSelectValues = []
+  props.csvFile.org_objs.map((org)=>{
+    defaultSelectValues.push({
+      'label':org.name,'value':org.id
+    })
+  })
+
+  useEffect(()=>{
+    // set up the select
+    var select = [];
+    props.auth.user.followed_organizations.map((org)=>{
+      select.push({
+        'value':org.id,'label':org.name
+      })
+    })
+    setSelectOptions(select);
+    // set up the tags
+    var tags = []
+    props.csvFile.tags.map((tagObj)=>{
+      tags.push(tagObj.text)
+    })
+    setCsvFileState({...csvFileState,"tags":tags})
+  },[])
+
+  if(csvFileState.tags == undefined) return;
+
+  const onSelectChange = (arrSelects) =>{
+    // reset
+    var arrOrgs = []
+    arrSelects.map((obj)=>{
+      arrOrgs.push(obj.value)
+    })
+    setCsvFileState({...csvFileState,'registered_organizations':arrOrgs})
+  }
 
   const onChange = (e) =>{
     const newState = {...csvFileState, [e.target.name]:e.target.value}
@@ -19,7 +65,6 @@ const CsvFileForm = (props) => {
   }
   const onSubmit = (e) =>{
     e.preventDefault();
-    console.log(csvFileState)
     props.updateCsvFile(csvFileState);
   }
 
@@ -45,7 +90,9 @@ const CsvFileForm = (props) => {
   }
 
   return (
-    <form onSubmit = {onSubmit}>
+    <form onSubmit = {onSubmit}
+    onKeyDown={(e)=>{e.key === 'Enter' && e.preventDefault()}}
+    >
       {/* File name input group */}
       <div className="input-group mb-3">
 
@@ -109,6 +156,26 @@ const CsvFileForm = (props) => {
         <label className="form-check-label">
           Private
         </label>
+      </div>
+      <div>
+        <h6>
+          Registered Organizations
+        </h6>
+        <Select
+          defaultValue={defaultSelectValues}
+          options = {selectOptions}
+          onChange={onSelectChange}
+          isMulti
+        />
+      </div>
+      <div>
+        <h6>
+          Tags
+        </h6>
+        <TagsInput 
+          priorTags={csvFileState['tags']}
+          updateParentTags={(tags)=>setCsvFileState({...csvFileState,"tags":tags})}
+        />
       </div>
 
       <br />

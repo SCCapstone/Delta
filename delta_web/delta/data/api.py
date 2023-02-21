@@ -26,6 +26,9 @@ from organizations.models import Organization
 # import necessary serializers
 from .serializers import SerializerCSVFile,SerializerTagCsvFile
 
+# exceptions
+
+
 #https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
 class PassthroughRenderer(renderers.BaseRenderer):
     media_type = 'text/csv'
@@ -97,6 +100,13 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
                 except Organization.DoesNotExist as e:
                     print(e)
                     pass
+        if('tags' in request.data):
+            # remove old tags
+            obj.tag_set.all().delete()
+            # create new tags
+            for strTag in request.data['tags']:
+                tag = TagCsvFile(file=obj,text=strTag)
+                tag.save()
 
         return Response(self.get_serializer(obj).data)
     
@@ -127,18 +137,16 @@ class UploadCsvApiView(APIView):
     permission_classes = [
         permissions.IsAuthenticated
     ]
+    serializer_class = SerializerCSVFile
 
     # handle post requests
-    def post(self,request):
+    def post(self,request,*args,**kwargs):
         # get the file, or return None if nothing there
         dataFile = request.data.get('file',None)
 
-        fileName = Path(str(dataFile)).stem
-
-        if len(CSVFile.objects.filter(file_name=fileName)) > 0:
-            return Response(data={"message":"File names need to be unique"},status=status.HTTP_400_BAD_REQUEST)
-
         if(dataFile):
+            # create a random file name
+            fileName = Path(str(dataFile)).stem
 
             # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
             strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
@@ -151,19 +159,19 @@ class UploadCsvApiView(APIView):
 
             # if a file already present, do not overwrite
 
-            while(os.path.exists(strFilePath)):
-                strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
-                strFilePath += "_"+ strRandom + ".csv"
+            if(os.path.exists(strFilePath)):
+                while(os.path.exists(strFilePath)):
+                    strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
+                    strFilePath += "_"+ strRandom
+                # finally add .csv
+                strFilePath+=".csv"
 
-            
-            # first try is just to see if this is a unique user+filepath combo
             csvFile = None
             try:
-                csvFile = CSVFile(author=request.user,file_path = strFilePath,file_name=fileName)
+                csvFile = CSVFile(author=request.user,file_path =strFilePath,file_name=fileName)
                 csvFile.save()
             except Exception as e:
-                print("\n\nHERE\n\n")
-                return Response({"msg":"bad"},status=status.HTTP_400_BAD_REQUEST)
+                return Response(data={"message":"{}".format(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             # if get thru the first try, know that the file is unique.
             # next try is to actually write the file
             try:
@@ -177,7 +185,7 @@ class UploadCsvApiView(APIView):
             except Exception as e:
                 # delete the csvFile, something went wrong with writing
                 csvFile.delete()
-                return Response(data={"message":e})
+                return Response(data={"message":"{}".format(e)})
 
         else:
             return Response(data={"message":"Error upon uploading file"})

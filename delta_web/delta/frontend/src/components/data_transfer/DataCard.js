@@ -20,30 +20,24 @@ img path
 const DataCard = (props) => {
 
     const [toDownload,setToDownload] = useState(false);
-    const [style,setStyle] = useState({width: '24rem'})
-    const [buttonText,setButtonText] = useState("Add to downloads?")
-    const [buttonStyle,setButtonStyle] = useState({borderColor:"green"})
+    const [style,setStyle] = useState({width:'25rem'})
 
     const checkDownload = (e) =>{
         e.preventDefault()
         if(toDownload){
             // uncheck
             setToDownload(false);
-            setStyle({...style,borderColor:""})
-            setButtonText("Add to downloads?")
-            setButtonStyle({borderColor:"green"})
+            setStyle({...style,backgroundColor:""})
             props.parentOnCheckChange(props.id)
         }else{
             setToDownload(true)
-            setStyle({...style,borderColor:"green"})
-            setButtonStyle({borderColor:"red"})
-            setButtonText("Remove from downloads?")
+            setStyle({...style,backgroundColor:"#cce6ff"})
             props.parentOnCheckChange(props.id)
         }
     }
 
   return (
-    <div className="card" style={style}>
+    <div className="card m-2 pt-2 pb-2" style={style} onMouseDown={checkDownload}>
         <div className="card-body">
             <div className="d-flex justify-content-between">
                 <p>
@@ -75,9 +69,6 @@ const DataCard = (props) => {
             <Link to={props.link} className="btn btn-sm btn-primary">
                 {props.linkText}
             </Link>
-            <button className="btn btn-sm" style={buttonStyle} onClick={checkDownload}>
-                {buttonText}
-            </button>
         </div>
     </div>
   )

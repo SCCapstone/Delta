@@ -50,6 +50,7 @@ const DataUploadForm = (props) =>{
   const [selectedValues,setSelectedValues] = useState([]);
   // tags
   const [tags,setTags] = useState([]);
+  const [errors,setErrors] = useState('');
 
   var arrOrgs = []
 
@@ -63,18 +64,34 @@ const DataUploadForm = (props) =>{
     setSelectOptions(select);
   },[])
 
-  const onDrop = useCallback(acceptedFiles => {
-    // do something if you want here
-    acceptedFiles.forEach(file=>{
-      $("#fileName").val(file.name)
-    })
-  },[]);
+  // const onDrop = useCallback(acceptedFiles => {
+  //   // do something if you want here
+  //   acceptedFiles.forEach(file=>{
+  //     $("#fileName").val(file.name)
+  //   })
+  // },[]);
 
   const { isDragActive, getRootProps, getInputProps, isDragReject, acceptedFiles, rejectedFiles } = useDropzone({
-    onDrop,
+    onDrop:(acceptedFiles,fileRejections) =>{
+      fileRejections.forEach((file)=>{
+        file.errors.forEach((err) =>{
+          if(err.code === "file-too-large"){
+            setErrors(`Error: ${err.message}`);
+          }
+          if(err.code === "file-invalid-type"){
+            setErrors(`Error: ${err.message}`);
+          }
+        })
+      })
+      acceptedFiles.forEach((file)=>{
+        $("fileName").val(file.name)
+        setErrors('')
+      })
+    },
     accept: 'text/csv',
     minSize: 0,
     maxSize:maxSize,
+    multiple:false,
   });
 
   // to do: check if file too large
@@ -99,11 +116,11 @@ const DataUploadForm = (props) =>{
         // get the organizations
         const data = {
           'file':file,
-          'isPublic':isPublic,
-          'isPublicOrgs':isPublicOrgs,
+          'is_public':isPublic,
+          'is_public_orgs':isPublicOrgs,
           'description':description,
-          'fileName':fileName,
-          'orgs':arrOrgs,
+          'file_name':fileName,
+          'registered_organizations':arrOrgs,
           'tags':tags
         }
         props.addCsvFile(data);
@@ -124,12 +141,10 @@ const DataUploadForm = (props) =>{
               {!isDragActive && 'Click here or drop a file to upload.'}
               {isDragActive && !isDragReject && "Drop File"}
               {isDragReject && "File type not accepted."}
-              {isFileTooLarge && (
-              <div className = "text-danger mt-2">
-                  File is too large.
-              </div>
-              )}
           </Container>
+          <p className="text-bg-danger">
+            {errors}
+          </p>
           <ul className = "list-group mt-2">
               {acceptedFiles.length > 0 && acceptedFiles.map((acceptedFile,index)=>(
               <li className="list-group-item list-group-item-success" key={index}>

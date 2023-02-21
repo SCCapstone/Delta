@@ -51,7 +51,7 @@ const ConversationDetail = (props) => {
         <div>
             <h5>Messages</h5>
             <div>
-                <MessageTable messages={convo.messages} user={props.auth.user}/>
+                <MessageTable messages={convo.messages} user={props.auth.user} />
             </div>
             <MessageForm convoId = {convo.id} 
             refresh={getData}

@@ -47,14 +47,18 @@ const PublicProfile = (props) => {
   return (
     <div className="container">
       <div className='row'>
-        <ProfileSidebar
-          first_name={props.auth.user.first_name}
-          last_name={props.auth.user.last_name}
-          email={props.auth.user.email}
-          username={props.auth.user.username}
-          pagename={"Public"}
-        />
-        <div className='profile-info col-md-9'>
+        {props.auth.user.username == username ?
+          <ProfileSidebar
+            first_name={props.auth.user.first_name}
+            last_name={props.auth.user.last_name}
+            email={props.auth.user.email}
+            username={props.auth.user.username}
+            pagename={"Public"}
+          />
+          :
+          console.log()
+        }
+        <div className= {props.auth.user.username == username ? 'profile-info col-md-9' : 'something'}>
           <div>
             <h1>
               {username}'s profile

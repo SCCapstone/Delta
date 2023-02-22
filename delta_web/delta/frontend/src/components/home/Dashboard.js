@@ -5,6 +5,7 @@ import { Line } from "react-chartjs-2";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ProfileGlance from "../profile/ProfileGlance";
+import HomepageNotificationMessage from "./HomepageNotificationMessage";
 
 export class Dashboard extends Component {
   static propTypes = {
@@ -27,25 +28,42 @@ export class Dashboard extends Component {
         <h3>Here's what you've missed.</h3>
         <div class="row">
           <div class="box shadow-sm rounded bg-gray mb-3 border border-gray">
-            <div class="box-body p-2">
-              <div class="p-3 d-flex align-items-center bg-light border-bottom">
-                <div class="col mr-3">
-                  <div class="text-truncate">Organization Update</div>
-                  <div class="small">
-                    Jacob Johnson has joined your organization "Valafar Lab"
-                  </div>
+            <div
+              id="carouselExampleControls"
+              class="carousel slide"
+              data-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <HomepageNotificationMessage />
                 </div>
-                <div class="text-right text-muted pt-1">3d</div>
+                <div class="carousel-item"></div>
+                <div class="carousel-item"></div>
               </div>
-              <div class="p-3 d-flex align-items-center bg-light">
-                <div class="col text-left mr-3">
-                  <div class="text-truncate">Review on File</div>
-                  <div class="small">
-                    User test1234 has added a review to your file "upload544"
-                  </div>
-                </div>
-                <div class="text-right text-muted pt-1">4d</div>
-              </div>
+              <a
+                class="carousel-control-prev"
+                href="#carouselExampleControls"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a
+                class="carousel-control-next"
+                href="#carouselExampleControls"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
           </div>
         </div>

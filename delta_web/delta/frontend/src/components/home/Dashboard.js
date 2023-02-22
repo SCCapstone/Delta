@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ProfileGlance from "../profile/ProfileGlance";
 import HomepageNotificationMessage from "./HomepageNotificationMessage";
+import "./dashboard.css";
 
 export class Dashboard extends Component {
   static propTypes = {
@@ -14,13 +15,8 @@ export class Dashboard extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-
+    const data = [1, 2, 3, 4, 5, 6, 7, 8];
     return (
-      /*
-      Breaks the screen into three separate columns
-      Each column will be filled with a graph going from left to right
-      being the daily, weekly, and monthly user graph,
-      */
       <div className="container">
         <h1>
           Welcome back <strong>{user.username}</strong>.
@@ -31,39 +27,42 @@ export class Dashboard extends Component {
             <div
               id="carouselExampleControls"
               class="carousel slide"
-              data-ride="carousel"
+              data-bs-ride="carousel"
             >
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <HomepageNotificationMessage />
                 </div>
-                <div class="carousel-item"></div>
-                <div class="carousel-item"></div>
+                {data.map((data) => (
+                  <div class="carousel-item">
+                    <HomepageNotificationMessage />
+                  </div>
+                ))}
               </div>
-              <a
+              <button
                 class="carousel-control-prev"
-                href="#carouselExampleControls"
-                role="button"
-                data-slide="prev"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev"
               >
                 <span
                   class="carousel-control-prev-icon"
                   aria-hidden="true"
                 ></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
                 class="carousel-control-next"
-                href="#carouselExampleControls"
-                role="button"
-                data-slide="next"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="next"
               >
                 <span
                   class="carousel-control-next-icon"
                   aria-hidden="true"
                 ></span>
-                <span class="sr-only">Next</span>
-              </a>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
         </div>

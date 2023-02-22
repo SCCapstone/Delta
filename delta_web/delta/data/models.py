@@ -49,6 +49,13 @@ class CSVFile(models.Model):
     def __str__(self):
         return self.file_path
     
+    def save(self,*args,**kwargs):
+        # if no file name given, give it the file name generated from the file path
+        # 
+        if not self.file_name:
+            self.file_name = str(os.path.basename(self.file_path))
+        super().save(*args,**kwargs)
+    
 # when delete the CSVFile model, should also delete the file in the directory
 # see: https://stackoverflow.com/questions/71278989/how-to-call-a-function-when-you-delete-a-model-object-in-django-admin-page-or
 @receiver(post_delete,sender=CSVFile)

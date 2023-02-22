@@ -162,7 +162,7 @@ const DataUploadForm = (props) =>{
                 File names should be descriptive of the file being uploaded. Don't worry about appending `.csv` to your files.
               </small>
               <div className="input-group">
-                <input type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
+                <input required type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
               </div>
             </div>
             <div>
@@ -171,7 +171,7 @@ const DataUploadForm = (props) =>{
                 File descriptions should indicate important information about the file contents, the methods of collecting the data, and any other important information such as rights of use.
               </small>
               <div className="input-group">
-                <textarea type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
+                <textarea required type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
               </div>
             </div>
             <div>

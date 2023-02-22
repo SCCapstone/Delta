@@ -13,7 +13,6 @@ const OrganizationDetail = (props) => {
     const [data, setData] = useState(null);
     const [dataPosts, setDataPosts] = useState(null);
 
-
     const { id } = useParams();
 
     // get the organization
@@ -31,7 +30,7 @@ const OrganizationDetail = (props) => {
 
     // get organizations's posts
     const getPosts = () =>{
-        axios.get('/api/organization/' + id + '/data_posts/')
+        axios.get('/api/organization/' + id + '/data_posts/',{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
         .then((res)=>{
             setDataPosts(res.data);
             console.log(res.data)

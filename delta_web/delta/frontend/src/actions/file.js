@@ -29,6 +29,7 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
                 dispatch(addTags({file:res.data.csvFile.id,tags:dictData['tags']}))
             }
 
+            console.log(dictData);
             const data = {...dictData,"id":res.data.csvFile.id}
             // add all other attributes
             axios.patch(`api/csv/${res.data.csvFile.id}/`,data,tokenConfig(getState))

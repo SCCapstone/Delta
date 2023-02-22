@@ -33,9 +33,13 @@ export class Dashboard extends Component {
                 <div class="carousel-item active">
                   <HomepageNotificationMessage />
                 </div>
-                {data.map((data) => (
+                {data.map((data, index) => (
                   <div class="carousel-item">
-                    <HomepageNotificationMessage />
+                    <HomepageNotificationMessage
+                      notificationTitle={data}
+                      notificationMessage={data}
+                      date={data}
+                    />
                   </div>
                 ))}
               </div>

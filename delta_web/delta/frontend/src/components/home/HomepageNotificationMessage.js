@@ -3,12 +3,14 @@ import React, { useState } from "react";
 const HomepageNotificationMessage = (props) => {
   return (
     <div className="container">
-      <div className="mx-5 d-flex align-items-center bg-light border-bottom">
-        <div className="col-6 mr-3 px-5">
+      <div className="row border mx-5 my-2 bg-white">
+        <div className="col-10 mr-3 px-5 py-2">
           <div className="text-truncate">{props.notificationTitle}</div>
           <div className="small">{props.notificationMessage}</div>
         </div>
-        <div className="col text-right text-muted pt-1 pr-5">{props.date}</div>
+        <div className="col text-right text-center text-muted pt-1 pr-5">
+          {props.date}
+        </div>
       </div>
     </div>
   );

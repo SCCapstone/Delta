@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Chart from "chart.js/auto";
-import { Line } from "react-chartjs-2";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -27,14 +25,20 @@ export class Dashboard extends Component {
         </h1>
         <h3>Here's what you've missed.</h3>
         <div className="row">
-          <div className="box shadow-sm rounded bg-gray mb-3 border border-gray">
+          <div className="box shadow-sm rounded bg-light mb-3 border border-gray">
             <Swiper
               navigation={true}
               modules={[Navigation]}
               className="mySwiper"
             >
               {data.map((data, index) => (
-                <SwiperSlide>Slide {index}</SwiperSlide>
+                <SwiperSlide>
+                  <HomepageNotificationMessage
+                    notificationTitle={data}
+                    notificationMessage={data}
+                    date={data}
+                  />
+                </SwiperSlide>
               ))}
             </Swiper>
           </div>

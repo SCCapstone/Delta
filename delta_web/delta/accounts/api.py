@@ -150,6 +150,8 @@ class UpdateAPI(generics.UpdateAPIView):
         if(strNewLastName):
             request.user.last_name = strNewLastName
         if(strNewPassword):
+            if(len(strNewPassword)) < 8:
+                return Response(data={"message":"Passwords must be at least 8 characters"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             request.user.set_password(strNewPassword)
         if(strNewBio):
             request.user.profile.bio = strNewBio

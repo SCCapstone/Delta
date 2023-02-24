@@ -172,12 +172,15 @@ export const updateUser = (data) => (dispatch, getState) => {
             // dispatch error
             // TO DO: 
             // MODIFY ERROR RETURN IN API
-            dispatch(returnErrors(err.response.data, err.response.status));
-            // type of error
-            dispatch(createMessage({ updateUserFail: err.response.data["message"] }))
-            dispatch({
-                type: USER_UPDATE_FAIL
-            })
+            console.log(err)
+            if(err.response){
+                dispatch(returnErrors(err.response.data, err.response.status));
+                // type of error
+                dispatch(createMessage({ updateUserFail: err.response.data["message"] }))
+                dispatch({
+                    type: USER_UPDATE_FAIL
+                })
+            }
         });
 };
 

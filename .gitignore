@@ -215,5 +215,5 @@ sketch
 
 
 # Files
-static/users/*
-*.csv
+# static/users/*
+# *.csv

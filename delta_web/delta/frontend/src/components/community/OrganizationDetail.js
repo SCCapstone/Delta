@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { downloadCsvFile } from "../../actions/file";
-import SearchableCsvFileTable from "../csvFile/SearchableCsvFileTable";
+import PublicCsvFileTable from "../data_transfer/PublicCsvFileTable";
 
 const OrganizationDetail = (props) => {
 
@@ -49,7 +49,7 @@ const OrganizationDetail = (props) => {
         <div className="container">
             <div>
                 <h1>Organization Name: {data.name}</h1>
-                <p>User count: {data.following_user_count}</p>
+                <p>Number of users: {data.following_user_count}</p>
                 <h4>
                     All files under this organization
                 </h4>
@@ -59,7 +59,7 @@ const OrganizationDetail = (props) => {
                 <hr />
 
                 <div>
-                    <SearchableCsvFileTable csvFiles = {dataPosts} textMinLength = {3}/>
+                    <PublicCsvFileTable csvs = {dataPosts} textMinLength = {3}/>
                 </div>
 
                 <span>

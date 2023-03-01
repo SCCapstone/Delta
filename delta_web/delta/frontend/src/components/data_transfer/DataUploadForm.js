@@ -52,7 +52,7 @@ const DataUploadForm = (props) =>{
   const [tags,setTags] = useState([]);
   const [errors,setErrors] = useState('');
 
-  var arrOrgs = []
+  const [arrOrgs,setArrOrgs] = useState([]);
 
   useEffect(()=>{
     var select = []
@@ -63,13 +63,6 @@ const DataUploadForm = (props) =>{
     })
     setSelectOptions(select);
   },[])
-
-  // const onDrop = useCallback(acceptedFiles => {
-  //   // do something if you want here
-  //   acceptedFiles.forEach(file=>{
-  //     $("#fileName").val(file.name)
-  //   })
-  // },[]);
 
   const { isDragActive, getRootProps, getInputProps, isDragReject, acceptedFiles, rejectedFiles } = useDropzone({
     onDrop:(acceptedFiles,fileRejections) =>{
@@ -100,10 +93,11 @@ const DataUploadForm = (props) =>{
 
   const onSelectChange = (arrSelects) =>{
     // reset
-    arrOrgs = []
+    let orgIds = []
     arrSelects.map((obj)=>{
-      arrOrgs.push(obj.value)
+      orgIds.push(obj.value)
     }) 
+    setArrOrgs(orgIds);
   }
 
   const onSubmit = (e) =>{

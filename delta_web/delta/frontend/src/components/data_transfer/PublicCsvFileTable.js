@@ -1,45 +1,26 @@
 import React, {useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import {downloadCsvFile} from '../../actions/file'; 
-// note you can style react tables
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 import DataCard from './DataCard';
 
 /*
-TO DO: 
-There should only be one SearchableCsvFileTable function, that can take in different data.
 */
 
-
 const PublicCsvFileTable = (props) =>{
+  /*
+  Takes in:
+  props.csvs: an array of csv objects
+  */
 
   // the csv files
-  const [csvFiles, setCsvFiles] = useState(null);
+  const [csvFiles, setCsvFiles] = useState(props.csvs);
   // text being searched
   const [searchText,setSearchText] = useState("");
   // table data
-  const [tableCsvs,setTableCsvs] = useState(null);
+  const [tableCsvs,setTableCsvs] = useState(props.csvs);
 
   // the files that user wants to download
   var arrFilesToDownload = [];
-
-  // on load call this
-  useEffect(()=>{
-    axios.get('/api/public_csvs/',{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
-    .then(res=>{
-      setCsvFiles(res.data);
-      setTableCsvs(res.data);
-    })
-  },[])
-
-  // when submit form
-  const onSubmit = e =>{
-    e.preventDefault();
-    arrFilesToDownload.forEach((id)=>{
-      props.downloadCsvFile(id);
-    })
-  }
 
   // called when checkbox is changed
   const onCheckChange = (id) =>{
@@ -56,19 +37,26 @@ const PublicCsvFileTable = (props) =>{
     var strInput = e.target.value;
     setSearchText(strInput);
     // if not enough length, just reset the search
-    if(strInput.length < 3){
-      setTableCsvs(csvFiles);
+    if(strInput.length < props.textMinLength){
+      setTableCsvs(props.csvs);
       return;
     }
     // else go thru files, find those that match
     var filteredCsvs = [];
-    for(const csvFile of csvFiles){
+    for(const csvFile of props.csvs){
       if(csvFile.file_name.includes(searchText)){
         filteredCsvs.push(csvFile);
       }
     }
     // set the table data
     setTableCsvs(filteredCsvs);
+  }
+
+  const onSubmit = e =>{
+    e.preventDefault();
+    arrFilesToDownload.forEach((id)=>{
+      props.downloadCsvFile(id);
+    })
   }
 
   if(csvFiles == null) return;
@@ -81,7 +69,7 @@ const PublicCsvFileTable = (props) =>{
            <div className="input-group-prepend">
              <span className= "input-group-text">File Name</span>
            </div>
-           <input id = "search" type="text" className="form-control" placeholder="Enter at least three characters" onChange={onSearchChange}/>
+           <input id = "search" type="text" className="form-control" placeholder= {`Enter at least ${props.textMinLength} characters`} onChange={onSearchChange}/>
            </div>
             <div className = "row">
               {tableCsvs.map((item,index)=>(

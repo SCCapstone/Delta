@@ -90,6 +90,7 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
+        print(request.data)
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists

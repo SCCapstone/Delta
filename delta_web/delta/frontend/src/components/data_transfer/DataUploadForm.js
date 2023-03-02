@@ -65,6 +65,9 @@ const DataUploadForm = (props) =>{
   },[])
 
   const { isDragActive, getRootProps, getInputProps, isDragReject, acceptedFiles, rejectedFiles } = useDropzone({
+    accept:{
+      'text/csv':['.csv']
+    },
     onDrop:(acceptedFiles,fileRejections) =>{
       fileRejections.forEach((file)=>{
         file.errors.forEach((err) =>{
@@ -81,7 +84,6 @@ const DataUploadForm = (props) =>{
         setErrors('')
       })
     },
-    accept: 'text/csv',
     minSize: 0,
     maxSize:maxSize,
     multiple:false,
@@ -107,6 +109,7 @@ const DataUploadForm = (props) =>{
         var isPublicOrgs = $("#flexCheckPublicToOrg").is(":checked");
         var description = $("#fileDescription").val();
         var fileName = $("#fileName").val();
+        console.log(file.path)
         // get the organizations
         const data = {
           'file':file,
@@ -117,7 +120,7 @@ const DataUploadForm = (props) =>{
           'registered_organizations':arrOrgs,
           'tags':tags
         }
-        props.addCsvFile(data);
+        // props.addCsvFile(data);
       });
   }
 

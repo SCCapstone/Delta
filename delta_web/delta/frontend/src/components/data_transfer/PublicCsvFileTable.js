@@ -39,7 +39,8 @@ const PublicCsvFileTable = (props) =>{
   }
   // when search thru table
   const onSearchChange = (e) =>{
-    var strInput = e.target.value;
+    // to lowercase to make case insensitive
+    var strInput = e.target.value.toLowerCase();
     setSearchText(strInput);
     // if not enough length, just reset the search
     if(strInput.length < props.textMinLength){
@@ -49,7 +50,8 @@ const PublicCsvFileTable = (props) =>{
     // else go thru files, find those that match
     var filteredCsvs = [];
     for(const csvFile of props.csvs){
-      if(csvFile.file_name.includes(searchText)){
+      // convert to lowercase to ensure case insensitive
+      if(csvFile.file_name.toLowerCase().includes(searchText)){
         filteredCsvs.push(csvFile);
       }
     }

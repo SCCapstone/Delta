@@ -19,17 +19,22 @@ const PublicCsvFileTable = (props) =>{
   // table data
   const [tableCsvs,setTableCsvs] = useState(props.csvs);
 
-  // the files that user wants to download
-  var arrFilesToDownload = [];
+  const [arrFilesToDownload,setArrFilesToDownload] = useState([]);
+  const [numfilesSelected,setNumFilesSelected] = useState(0);
 
   // called when checkbox is changed
   const onCheckChange = (id) =>{
+    let newFiles = arrFilesToDownload
     if(!arrFilesToDownload.includes(id)){
       // add
-      arrFilesToDownload.push(id);
+      newFiles.push(id)
+      setArrFilesToDownload(newFiles);
+      setNumFilesSelected(numfilesSelected+1) ;
     }else{
       // remove item
-      arrFilesToDownload = arrFilesToDownload.filter(item => item !== id);
+      newFiles = newFiles.filter(item=>item!==id);
+      setArrFilesToDownload(newFiles);
+      setNumFilesSelected(numfilesSelected-1) ;
     }
   }
   // when search thru table
@@ -61,7 +66,6 @@ const PublicCsvFileTable = (props) =>{
 
   if(csvFiles == null) return;
 
-
   return (
     <div>
       <form onSubmit = {onSubmit}>
@@ -69,9 +73,13 @@ const PublicCsvFileTable = (props) =>{
            <div className="input-group-prepend">
              <span className= "input-group-text">File Name</span>
            </div>
-           <input id = "search" type="text" className="form-control" placeholder= {`Enter at least ${props.textMinLength} characters`} onChange={onSearchChange}/>
+            <input id = "search" type="text" className="form-control" placeholder= {`Enter at least ${props.textMinLength} characters`} onChange={onSearchChange}/>
            </div>
-            <div className = "row">
+           <div>
+            <p>Number of files selected for download: {numfilesSelected}</p>
+           </div>
+            <div style={{"height":"20rem","overflow":"auto"}}>
+            <div className = "row" >
               {tableCsvs.map((item,index)=>(
                   <DataCard 
                     author={item.author_username}
@@ -88,6 +96,7 @@ const PublicCsvFileTable = (props) =>{
                   />
                   )
               )}
+            </div>
             </div>
           <br/>
           <button className='btn btn-sm btn-success mb-2'>

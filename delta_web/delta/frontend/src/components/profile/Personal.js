@@ -6,6 +6,8 @@ import SearchableCsvFileTable from '../csvFile/SearchableCsvFileTable';
 import "./profile.css"
 import ProfileSidebar from './ProfileSidebar';
 
+import PublicCsvFileTable from '../data_transfer/PublicCsvFileTable';
+
 const Personal = (props) => {
     //console.log(props);
     const [csvFiles, setCsvFiles] = useState(null);
@@ -33,7 +35,10 @@ const Personal = (props) => {
                     <h1 className="text-center">
                         Personal community
                     </h1>
-                    <SearchableCsvFileTable csvFiles={csvFiles} textMinLength={3} />
+                    <PublicCsvFileTable
+                        csvs = {csvFiles}
+                        textMinLength={3}
+                    />
                     <span>
                         <Link className="btn btn-secondary btn-sm" to="/community/organizations">
                             Click to see Organizations

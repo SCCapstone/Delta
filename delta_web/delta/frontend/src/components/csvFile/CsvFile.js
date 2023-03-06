@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { deleteCsvFile } from '../../actions/file'
+import { downloadCsvFile,deleteCsvFile } from '../../actions/file'
 import tag_styles from "../data_transfer/tags.module.css"
 
 const CsvFile = (props) => {
@@ -18,10 +18,16 @@ const CsvFile = (props) => {
     const clickDelete = () =>{
         var dialog = confirm("Would you like to delete this file? There is no going back.");
         if(dialog){
-            props.deleteCsvFile(props.csvFileData.id);
+            setTimeout(()=>{
+                props.deleteCsvFile(props.csvFileData.id);
+            },200);
             // redirect to your uploads
             routeChange('/community/personal')
         }
+    }
+
+    const clickDownload = () =>{
+        props.downloadCsvFile(props.csvFileData.id);
     }
 
   return (
@@ -60,11 +66,16 @@ const CsvFile = (props) => {
         </div>
         {props.auth.user.id == props.csvFileData.author &&(
             <div className="d-flex justify-content-between">
-                <Link to= {`/csvs/${props.csvFileData.id}/edit`}>
-                    <button className="btn btn-primary">
-                        Edit
+                <div>
+                    <Link to= {`/csvs/${props.csvFileData.id}/edit`}>
+                        <button className="btn btn-primary">
+                            Edit
+                        </button>
+                    </Link>
+                    <button className="btn btn-success" onClick={clickDownload}>
+                        Download
                     </button>
-                </Link>
+                </div>
                 <button onClick={clickDelete} className = "btn btn-danger">
                 Delete
                 </button>
@@ -78,4 +89,4 @@ const mapStateToProps = state =>({
     auth:state.auth
 })
 
-export default connect(mapStateToProps,{deleteCsvFile})(CsvFile)
+export default connect(mapStateToProps,{deleteCsvFile,downloadCsvFile})(CsvFile)

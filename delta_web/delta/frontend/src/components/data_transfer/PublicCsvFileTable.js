@@ -25,6 +25,8 @@ const PublicCsvFileTable = (props) =>{
   const [arrFilesToDownload,setArrFilesToDownload] = useState([]);
   const [numfilesSelected,setNumFilesSelected] = useState(0);
 
+  const textMinLength = (props.textMinLength != undefined) ? props.textMinLength : 3
+
   // called when checkbox is changed
   const onCheckChange = (id) =>{
     let newFiles = arrFilesToDownload
@@ -67,7 +69,7 @@ const PublicCsvFileTable = (props) =>{
       })
     }
     // search 2: names
-    if(strFileNameSearch.length >= props.textMinLength){
+    if(strFileNameSearch.length >= textMinLength){
       filteredCsvs.forEach((csvFile)=>{
         if(!csvFile.file_name.toLowerCase().includes(strFileNameSearch)){
           filteredCsvs = filteredCsvs.filter((e)=>{return e != csvFile});
@@ -98,7 +100,7 @@ const PublicCsvFileTable = (props) =>{
              <span className= "input-group-text">File Name</span>
            </div>
             <input id = "inputSearchFileName" type="text" className="form-control" 
-            placeholder= {`Enter at least ${props.textMinLength} characters`} 
+            placeholder= {`Enter at least ${textMinLength} characters`} 
             onChange={onSearchChange}/>
           </div>
           <div className="input-group mb-3">

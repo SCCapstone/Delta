@@ -126,13 +126,16 @@ const ProfileForm = (props) => {
             <h5>Add organization</h5>
             <div>
                 <input
-                    type=""
+                    type="password"
                     className="form-control"
                     name="newOrgKey"
                     onChange={onChange}
                     value={userInfo.newOrgKey}
-                    placeholder="Or leave blank if not adding an organization"
+                    autoComplete="new-password"
                 />
+                <small>
+                    Enter the key of an organization you wish to join, or nothing if no change.
+                </small>
             </div>
             <br/>
             <button className="btn btn-success">

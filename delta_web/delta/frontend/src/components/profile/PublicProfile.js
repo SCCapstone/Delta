@@ -56,7 +56,8 @@ const PublicProfile = (props) => {
             pagename={"Public"}
           />
           :
-          console.log()
+          <div>
+          </div>
         }
         <div className= {props.auth.user.username == username ? 'profile-info col-md-9' : 'something'}>
           <div>

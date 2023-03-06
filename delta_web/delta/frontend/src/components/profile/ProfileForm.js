@@ -123,7 +123,7 @@ const ProfileForm = (props) => {
                         />
                 ))}
             </div>
-            <h5>Add organization</h5>
+            <h5>Join Organization via Secret Key</h5>
             <div>
                 <input
                     type="password"
@@ -135,6 +135,8 @@ const ProfileForm = (props) => {
                 />
                 <small>
                     Enter the key of an organization you wish to join, or nothing if no change.
+                    All organizations have a secret key; admins of the organizations will provide the key to you if you
+                    are supposed to be in the organization.
                 </small>
             </div>
             <br/>

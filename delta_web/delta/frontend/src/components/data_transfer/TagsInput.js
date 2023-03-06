@@ -14,7 +14,7 @@ function TagsInput(props){
     },[])
 
     function handleKeyDown(e){
-        if(e.key !== 'Enter') return
+        if(e.key !== 'Enter' || e.which == 32) return
         const value = e.target.value
         // no duplicates
         if(tags.includes(value.trim())) return;
@@ -42,7 +42,12 @@ function TagsInput(props){
                     <span className={styles.close} onClick={() => removeTag(index)}>&times;</span>
                 </div>
             )) }
-            <input onKeyDown={handleKeyDown} type="text" className={styles.tags_input} placeholder="Type something" />
+            <input  
+                onKeyDown={handleKeyDown} 
+                type="text" 
+                className={styles.tags_input} 
+                placeholder="Type something" 
+            />
         </div>
     )
 }

@@ -120,7 +120,7 @@ const DataUploadForm = (props) =>{
           'registered_organizations':arrOrgs,
           'tags':tags
         }
-        // props.addCsvFile(data);
+        props.addCsvFile(data);
       });
   }
 

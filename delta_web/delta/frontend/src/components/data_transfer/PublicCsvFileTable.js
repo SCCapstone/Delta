@@ -16,6 +16,9 @@ const PublicCsvFileTable = (props) =>{
   const [csvFiles, setCsvFiles] = useState(props.csvs);
   // text being searched
   const [searchText,setSearchText] = useState("");
+  // tags being searched
+  // note that this is an array
+  const [searchTags,setSearchTags] = useState([]);
   // table data
   const [tableCsvs,setTableCsvs] = useState(props.csvs);
 
@@ -38,24 +41,43 @@ const PublicCsvFileTable = (props) =>{
     }
   }
   // when search thru table
-  const onSearchChange = (e) =>{
-    // to lowercase to make case insensitive
-    var strInput = e.target.value.toLowerCase();
-    setSearchText(strInput);
+  // via name AND tags
+  const onSearchChange = () =>{
+    // get text for filename search
+    const strFileNameSearch = $('#inputSearchFileName').val().toLowerCase()
+    // get array for tag search
+    const arrStrTagSearch = $("#inputSearchTags").val().split(" ").filter((e)=>{return e != ""}).map(e=>e.toLowerCase());
+
     // if not enough length, just reset the search
-    if(strInput.length < props.textMinLength){
-      setTableCsvs(props.csvs);
-      return;
+    // go thru tags
+
+
+    var filteredCsvs = props.csvs;
+    // search 1: tags
+    // only perform operation of search on tags if there are tags
+    if(arrStrTagSearch.length > 0){
+      filteredCsvs.forEach((csvFile)=>{
+        const arrStrFileTags= csvFile.tags.map((strObj)=>strObj.text);
+        const isSubset =arrStrTagSearch.every(searchTag=>arrStrFileTags.includes(searchTag));
+        if(!isSubset){
+          // can safely remove file
+          filteredCsvs = filteredCsvs.filter((e)=>{return e != csvFile})
+          return;      
+        }
+      })
     }
-    // else go thru files, find those that match
-    var filteredCsvs = [];
-    for(const csvFile of props.csvs){
-      // convert to lowercase to ensure case insensitive
-      if(csvFile.file_name.toLowerCase().includes(searchText)){
-        filteredCsvs.push(csvFile);
-      }
+    // search 2: names
+    if(strFileNameSearch.length >= props.textMinLength){
+      filteredCsvs.forEach((csvFile)=>{
+        if(!csvFile.file_name.toLowerCase().includes(strFileNameSearch)){
+          filteredCsvs = filteredCsvs.filter((e)=>{return e != csvFile});
+          return
+        }
+      })
     }
     // set the table data
+    setSearchText(strFileNameSearch);
+    setSearchTags(arrStrTagSearch);
     setTableCsvs(filteredCsvs);
   }
 
@@ -71,16 +93,28 @@ const PublicCsvFileTable = (props) =>{
   return (
     <div>
       <form onSubmit = {onSubmit}>
-         <div className="input-group mb-3">
+          <div className="input-group mb-3">
            <div className="input-group-prepend">
              <span className= "input-group-text">File Name</span>
            </div>
-            <input id = "search" type="text" className="form-control" placeholder= {`Enter at least ${props.textMinLength} characters`} onChange={onSearchChange}/>
+            <input id = "inputSearchFileName" type="text" className="form-control" 
+            placeholder= {`Enter at least ${props.textMinLength} characters`} 
+            onChange={onSearchChange}/>
+          </div>
+          <div className="input-group mb-3">
+           <div className="input-group-prepend">
+             <span className= "input-group-text">Tags</span>
            </div>
-           <div>
+            <input id = "inputSearchTags" type="text" className="form-control" 
+            placeholder= {"Enter tags to search for, separated by spaces. For instance, you could enter \"cat dog\" to see files with tags of \"cat\" and \"dog\""} 
+            onChange={onSearchChange}/>
+          </div>
+
+          <div>
             <p>Number of files selected for download: {numfilesSelected}</p>
-           </div>
-            <div style={{"height":"20rem","overflow":"auto"}}>
+          </div>
+
+          <div style={{"height":"20rem","overflow":"auto"}}>
             <div className = "row" >
               {tableCsvs.map((item,index)=>(
                   <DataCard 

@@ -1,3 +1,20 @@
+########################
+#
+# Delta project.
+#
+# Authors:
+# Lexington Whalen (@lxaw)
+# Carter Marlowe (@Cmarlowe132)
+# Vince Kolb-LugoVince (@vancevince) 
+# Blake Seekings (@j-blake-s)
+# Naveen Chithan (@nchithan)
+#
+# File name:
+# serializer.py
+#
+# Brief description:
+#
+# The serializers relevant to `accounts` app.
 from operator import truediv
 from rest_framework import serializers
 from django.contrib.auth.models import User

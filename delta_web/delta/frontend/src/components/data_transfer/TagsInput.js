@@ -15,9 +15,11 @@ function TagsInput(props){
 
     function handleKeyDown(e){
         if(e.key !== 'Enter' || e.which == 32) return
-        const value = e.target.value
+        // remove whitespace
+        const value = e.target.value.replace(/\s/g,"");
+
         // no duplicates
-        if(tags.includes(value.trim())) return;
+        if(tags.includes(value)) return;
         if(!value.trim()) return;
         setTags([...tags, value])
         e.target.value = ''
@@ -46,7 +48,7 @@ function TagsInput(props){
                 onKeyDown={handleKeyDown} 
                 type="text" 
                 className={styles.tags_input} 
-                placeholder="Type something" 
+                placeholder="Type something. Note that tags cannot have whitespace."
             />
         </div>
     )

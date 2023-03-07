@@ -1,3 +1,18 @@
+########################
+#
+# Delta project.
+#
+# Authors:
+# Lexington Whalen (@lxaw)
+# Carter Marlowe (@Cmarlowe132)
+# Vince Kolb-LugoVince (@vancevince) 
+# Blake Seekings (@j-blake-s)
+# Naveen Chithan (@nchithan)
+#
+# File name:
+#
+# Brief description:
+#
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework import status,viewsets,renderers

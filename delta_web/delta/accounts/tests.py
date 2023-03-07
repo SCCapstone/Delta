@@ -1,3 +1,21 @@
+########################
+#
+# Delta project.
+#
+# Authors:
+# Lexington Whalen (@lxaw)
+# Carter Marlowe (@Cmarlowe132)
+# Vince Kolb-LugoVince (@vancevince) 
+# Blake Seekings (@j-blake-s)
+# Naveen Chithan (@nchithan)
+#
+# File name:
+# tests.py
+#
+# Brief description:
+#
+# Contains all the tests for the `accounts` app.
+
 from django.test import TestCase
 
 from django.contrib.auth import get_user_model

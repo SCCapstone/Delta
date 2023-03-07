@@ -1,3 +1,22 @@
+########################
+#
+# Delta project.
+#
+# Authors:
+# Lexington Whalen (@lxaw)
+# Carter Marlowe (@Cmarlowe132)
+# Vince Kolb-LugoVince (@vancevince) 
+# Blake Seekings (@j-blake-s)
+# Naveen Chithan (@nchithan)
+#
+# File name:
+#
+# api.py
+# Brief description:
+#
+# Is the API functionality for the `accounts` app of Django.
+# Deals with all user actions, such as registration, login, logout, et cetera.
+
 from unicodedata import name
 from rest_framework import generics, permissions
 from rest_framework.response import Response
@@ -22,12 +41,14 @@ User = get_user_model()
 
 # Register API
 # Used to register new users.
+# To register new users, hit the endpoint given in this folder's `urls.py` using a POST method.
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
     # Handling post request
     def post(self,request,*args, **kwargs):
 
+        # create a serialized object from the request's data
         serializer = self.get_serializer(data=request.data)
 
         # send back any errors that are needed
@@ -35,6 +56,8 @@ class RegisterAPI(generics.GenericAPIView):
         
         # Save the new user
         user = serializer.save()
+        # users have a profile that is a 1-1 match, so need to create that as well.
+        # the profile stores the bio of the user.
         user.profile = Profile(user=user)
         user.profile.save()
 
@@ -49,8 +72,6 @@ class RegisterAPI(generics.GenericAPIView):
         # TO DO: 
         # MAKE THIS BETTER
         except Exception as e:
-            print(e)
-            # TODO
             # Indicate that the entered organization key is invalid to the user, 
             # and offer them to register again or not
             pass
@@ -96,6 +117,7 @@ class DeleteAPI(generics.DestroyAPIView):
         # NOTE:
         # DO NOT ACTUALLY DELETE THE USER.
         # ONLY MARK THEM AS INACTIVE
+        # This was as determined by Dr. Valafar.
         # see: https://stackoverflow.com/questions/44735385/how-can-i-delete-a-user-account-in-django-rest-framework
         
         request.user.is_active = False
@@ -114,10 +136,16 @@ class UpdateAPI(generics.UpdateAPIView):
     ]
     serializer_class = UserSerializer
 
+    # Update user attributes.
+    # Expected arguments:
+    # username: str representing the new username of the user
+    # email: str representing the new email of the user
+    # first_name: str representing the new first name of the user
+    # last_name: str representing the new last name of the user
+    # password: str representing the new password of the user
+    # bio: str representing the new bio of the user
     def patch(self,request,*args,**kwargs):
-        # TODO: check email
-        # PERFORM CHECKS
-        # update user
+
         strNewUserName = request.data.get("username",None)
         strNewEmail = request.data.get("email",None)
         strNewFirstName = request.data.get("first_name",None)
@@ -150,6 +178,8 @@ class UpdateAPI(generics.UpdateAPIView):
         if(strNewLastName):
             request.user.last_name = strNewLastName
         if(strNewPassword):
+            # simple password test
+            # Needs to be at least 8 characters.
             if(len(strNewPassword)) < 8:
                 return Response(data={"message":"Passwords must be at least 8 characters"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             request.user.set_password(strNewPassword)
@@ -157,9 +187,11 @@ class UpdateAPI(generics.UpdateAPIView):
             request.user.profile.bio = strNewBio
             request.user.profile.save()
 
-        # TODO: make better
-        # NAVEEN: THIS IS YOUR JOB TO MAKE PRETTY
-        #
+        # First we get all the new organizations, put them into a list.
+        # then we clear the user from any orgs.
+        # then we add the user back.
+        # NOTE: you could check to see if the qsOrg elements are similar to request.user.followed_organizations.all()
+        # from there, you can see if you need to actually remove the user or not.
         qsOrgs = []
         for orgJson in request.data.get('organizations'):
             orgObj = Organization.objects.get(pk=orgJson['id'])
@@ -180,13 +212,13 @@ class UpdateAPI(generics.UpdateAPIView):
         # check for new organizations
         # using the new org key
         newOrgKey = request.data.get('newOrgKey')
+
+        # need a try except here as Django returns an error when no org object exists with the key
         try:
             modelOrg = Organization.objects.get(key=newOrgKey)
             modelOrg.following_users.add(request.user)
             modelOrg.save()
         except Exception as e:
-            print(e)
-            # TODO
             pass
 
         # Save the changes
@@ -221,8 +253,9 @@ class UserAPI(generics.RetrieveAPIView):
 
         return Response(serializer.data)
 
+# for any action dealing with public info of users
+# For instance, this is shown on the public profile page of users.
 class ViewsetPublicUser(viewsets.ModelViewSet):
-    # for any action dealing with public info of users
     permission_classes = [
         permissions.IsAuthenticated,
     ]
@@ -231,6 +264,8 @@ class ViewsetPublicUser(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user
 
+    # Expects:
+    # username: str representing the user
     @action(methods=["post"],detail=False)
     def get_user(self,request):
         user = User.objects.get(username=request.data.get('username'))

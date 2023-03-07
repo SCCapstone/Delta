@@ -1,3 +1,18 @@
+########################
+#
+# Delta project.
+#
+# Authors:
+# Lexington Whalen (@lxaw)
+# Carter Marlowe (@Cmarlowe132)
+# Vince Kolb-LugoVince (@vancevince) 
+# Blake Seekings (@j-blake-s)
+# Naveen Chithan (@nchithan)
+#
+# File name:
+#
+# Brief description:
+#
 """
     Managed to get rid of the authentication issue with uploading files. 
     All actions taken to solve this issue can be found in the tests.py file under data.

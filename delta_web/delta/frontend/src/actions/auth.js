@@ -161,8 +161,13 @@ export const updateUser = (data) => (dispatch, getState) => {
 
     axios.patch('/api/auth/update', data, tokenConfig(getState))
         .then(res => {
-            // dispatch message
-            dispatch(createMessage({ updateUser: "User successfully updated." }))
+            if(res.data.msg != ""){
+                // then the backend is trying to tell us something
+                dispatch(createMessage({ updateUserBadOrg: res.data.msg }))
+            }else{
+                // dispatch message
+                dispatch(createMessage({updateUser:"Update successful."}))
+            }
             dispatch({
                 type: USER_UPDATE_SUCCESS,
                 payload: res.data

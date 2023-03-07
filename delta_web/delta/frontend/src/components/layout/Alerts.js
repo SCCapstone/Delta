@@ -43,6 +43,10 @@ export class Alerts extends Component {
             if(message.updateUser){
                 alert.success(message.updateUser);
             }
+            if(message.updateUserBadOrg){
+                // bad org key but all else good for update user
+                alert.error(message.updateUserBadOrg);
+            }
             if(message.updateUserFail){
                 alert.error(message.updateUserFail);
             }

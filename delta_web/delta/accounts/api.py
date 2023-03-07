@@ -213,12 +213,14 @@ class UpdateAPI(generics.UpdateAPIView):
         # using the new org key
         newOrgKey = request.data.get('newOrgKey')
 
+        msg = ""
         # need a try except here as Django returns an error when no org object exists with the key
         try:
             modelOrg = Organization.objects.get(key=newOrgKey)
             modelOrg.following_users.add(request.user)
             modelOrg.save()
         except Exception as e:
+            msg = "Invalid organization key. All other changes were saved."
             pass
 
         # Save the changes
@@ -227,6 +229,7 @@ class UpdateAPI(generics.UpdateAPIView):
         return Response({
             # give the serialized user
             "user":UserSerializer(request.user,context=self.get_serializer_context()).data,
+            "msg":msg
         })
 
 # Get User API

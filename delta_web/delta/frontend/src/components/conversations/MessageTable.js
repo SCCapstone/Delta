@@ -12,7 +12,7 @@ const MessageTable = (props) => {
   },[]);
 
   return (
-    <div className="overflow-scroll" style={{height:"20rem"}} id="list" ref={listRef}>
+    <div className="overflow-scroll container" style={{height:"20rem"}} id="list" ref={listRef}>
         {props.messages.map((item,index)=>(
             <div key = {index}>
                 {item.author_username == props.user.username ? 

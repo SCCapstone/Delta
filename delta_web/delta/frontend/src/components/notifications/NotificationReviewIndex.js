@@ -23,6 +23,9 @@ const NotificationReviewIndex = (props) =>{
     return (
         <div className="container">
             <h1>Notifications</h1>
+            <p>
+              Here are all your notifications. At the moment, these deal primarily with reviews of your files.
+            </p>
             <hr/>
             <div>
               {arrNotifications.map((objNotif,index)=>(

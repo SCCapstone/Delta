@@ -42,7 +42,7 @@ const ProfileDetailed = (props) => {
                     <div className="profile-info col-md-9">
 
                         <div className="card mb-4">
-                            <div className="card-header">Change your information</div>
+                            <div className="card-header">Change your information.</div>
                             <div className="card-body">
                                 <ProfileForm />
                                 <br />

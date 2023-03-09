@@ -22,7 +22,13 @@ const NotificationMessageIndex = (props) =>{
 
     return (
         <div className="container">
-            <h1>Message Notification</h1>
+            <h1>Notifications of Messages</h1>
+            <p>
+              Here are all your messages. You can view the user who sent you the message by clicking their username, and
+              you can see the contents of the message by clicking "See message".
+              
+              To remove the notification, click "Got it".
+            </p>
             <hr/>
             <div>
               {arrNotifications.map((objNotif,index)=>(

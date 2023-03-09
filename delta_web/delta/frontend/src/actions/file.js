@@ -8,6 +8,11 @@ import {ADD_CSV_FILE, DELETE_CSV_FILE, GET_CSV_FILES,GET_CSV_FILE,
 import { addTags } from './tags';
 
 // POST FILE 
+/*
+The strat is that you first create the csv object in the database.
+This will let you know if the file name overlaps with any other files.
+Then you actually write the file to the system, only if no errors with the file 
+*/
 export const addCsvFile= (dictData) => (dispatch,getState) =>{
     /*
     Dict data has keys
@@ -17,38 +22,36 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
     orgs: array of orgs
     */
     // pass in token
-    axios.post('/api/upload/csv/',dictData['file'],fileTokenConfig(getState,dictData['file']))
-        .then(res=>{
-            dispatch(createMessage({addCsvFileSuccess:"File posted"}));
-            dispatch({
-                type:ADD_CSV_FILE,
-                payload: res.data
-            });
-            // add tags, if tags sent
-            if(dictData.hasOwnProperty('tags')) {
-                dispatch(addTags({file:res.data.csvFile.id,tags:dictData['tags']}))
-            }
 
-            console.log(dictData);
-            const data = {...dictData,"id":res.data.csvFile.id}
-            // add all other attributes
-            axios.patch(`api/csv/${res.data.csvFile.id}/`,data,tokenConfig(getState))
+    return axios.post('/api/csv/',dictData,tokenConfig(getState))
+    .then((res)=>{
+        // this means that the creation of the csv file model in django sucessful
+        // thus we move onto actually creating the file
+        axios.post('/api/upload/csv/',dictData['file'],fileTokenConfig(getState,dictData['file']))
             .then(res=>{
-                console.log(res);
+                dispatch(createMessage({addCsvFileSuccess:"File posted"}));
+                dispatch({
+                    type:ADD_CSV_FILE,
+                    payload: res.data
+                });
+                return res;
             })
             .catch(err=>{
-                console.log(err);
+                console.log(err)
+                if(err.response){
+                    dispatch(createMessage({addCsvFileError:err.response.data.message}))
+                }
+                else{
+                    dispatch(createMessage({addCsvFileError:"Error uploading file. Check that the file name is unique compared to your previously uploaded files."}))
+                }
+                return err;
             })
-        })
-        .catch(err=>{
-            console.log(err)
-            if(err.response){
-                dispatch(createMessage({addCsvFileError:err.response.data.message}))
-            }
-            else{
-                dispatch(createMessage({addCsvFileError:"Error uploading file. Check that the file name is unique compared to your previously uploaded files."}))
-            }
-        })
+    })
+    .catch((err)=>{
+        dispatch(createMessage({addCsvFileError:"Error uploading file. Check that the file name is unique compared to your previously uploaded files."}))
+
+        return err;
+    })
 }
 
 // GET FILES

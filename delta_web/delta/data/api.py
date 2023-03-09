@@ -41,8 +41,12 @@ from organizations.models import Organization
 # import necessary serializers
 from .serializers import SerializerCSVFile,SerializerTagCsvFile
 
-# exceptions
+# helper function to get folder path
+def getUserFolderPath(strUser):
+    return 'static/users/{}/csvs'.format(strUser)
 
+def getUserFilePath(strFileName,strUser):
+    return os.path.join(getUserFolderPath(strUser),strFileName)
 
 #https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
 class PassthroughRenderer(renderers.BaseRenderer):
@@ -99,13 +103,49 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.csv_files.all()
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+    # https://stackoverflow.com/questions/30650008/django-rest-framework-override-create-in-modelserializer-passing-an-extra-par
+    def create(self,request):
+        author = self.request.user
+        is_public = self.request.data.get("is_public")
+        desc = self.request.data.get('description')
+        file_name = self.request.data.get('file_name')
+        arr_int_registered_orgs = self.request.data.get('registered_organizations')
+        arr_tags = self.request.data.get('tags')
+        is_public_orgs = self.request.data.get('is_public_orgs')
+        file_path = self.request.data.get("file")['path']
+
+        obj = CSVFile(author=author,file_name=file_name,is_public=is_public,
+                      is_public_orgs=is_public_orgs,description=desc)
+        # here we should test
+        obj.save()
+
+        # now give all other features
+        for orgId in arr_int_registered_orgs:
+            # check if org exists
+            try:
+                orgObj = Organization.objects.get(pk=orgId)
+                obj.registered_organizations.add(orgObj)
+                obj.save()
+            except Organization.DoesNotExist as e:
+                pass
+        for tag in arr_tags:
+            tag = TagCsvFile(file=obj,text=tag)
+            tag.save()
+
+        # give it the file path
+        # note the file path is only to be based on the file name.
+        # this is only temporary and is used to link to the functionality of actually saving files
+        # the `post` method of UploadCsvFile only knows the file name and the user.
+        # thus we can only keep the file path as the file name for now.
+        strFilePath = getUserFilePath(strFileName=file_path,strUser=request.user.username)
+        obj.file_path = strFilePath
+        obj.save()
+
+        return Response(self.get_serializer(obj).data)
     
     def partial_update(self, request, *args, **kwargs):
         super().partial_update(request,*args,**kwargs)
         obj = CSVFile.objects.get(id=kwargs['pk'])
-        print(request.data)
         if('registered_organizations' in  request.data):
             for orgId in request.data['registered_organizations']:
                 # check if org exists
@@ -123,6 +163,13 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
             for strTag in request.data['tags']:
                 tag = TagCsvFile(file=obj,text=strTag)
                 tag.save()
+    
+        # add the file path to the obj
+        strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
+        # create dir if doesnt exist
+        if not os.path.exists(strUserCsvFolder):
+            os.makedirs(strUserCsvFolder)
+
 
         return Response(self.get_serializer(obj).data)
     
@@ -161,20 +208,14 @@ class UploadCsvApiView(APIView):
         dataFile = request.data.get('file',None)
 
         if(dataFile):
-            # create a random file name
-            fileName = Path(str(dataFile)).stem
+            fileName = Path(str(dataFile))
 
-            # see https://stackoverflow.com/questions/45866307/python-and-django-how-to-use-in-memory-and-temporary-files
-            strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
+            strFilePath = getUserFilePath(fileName,request.user.username)
 
-            # create dir if doesnt exist
-            if not os.path.exists(strUserCsvFolder):
-                os.makedirs(strUserCsvFolder)
-
-            strFilePath = os.path.join(strUserCsvFolder,str(dataFile))
+            # get the last one
+            csvFileObj = CSVFile.objects.filter(author=request.user,file_path=strFilePath).last()
 
             # if a file already present, do not overwrite
-
             if(os.path.exists(strFilePath)):
                 while(os.path.exists(strFilePath)):
                     strRandom = ''.join(random.choices(string.ascii_lowercase+string.digits,k=100))
@@ -182,26 +223,17 @@ class UploadCsvApiView(APIView):
                 # finally add .csv
                 strFilePath+=".csv"
 
-            csvFile = None
-            try:
-                csvFile = CSVFile(author=request.user,file_path =strFilePath,file_name=fileName)
-                csvFile.save()
-            except Exception as e:
-                return Response(data={"message":"{}".format(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            # if get thru the first try, know that the file is unique.
-            # next try is to actually write the file
-            try:
-                with open(strFilePath,'wb+') as file:
-                    for chunk in dataFile.chunks():
-                        file.write(chunk)
-                # file is now saved.
-                return Response({
-                    "csvFile":SerializerCSVFile(csvFile).data
-                })
-            except Exception as e:
-                # delete the csvFile, something went wrong with writing
-                csvFile.delete()
-                return Response(data={"message":"{}".format(e)})
+            with open(strFilePath,'wb+') as file:
+                for chunk in dataFile.chunks():
+                    file.write(chunk)
+            # file is now saved.
+            # update the new file path
+            csvFileObj.file_path = strFilePath
+            csvFileObj.save()
+            
+            return Response({
+                "csvFile":SerializerCSVFile(csvFileObj).data
+            })
 
         else:
             return Response(data={"message":"Error upon uploading file"})

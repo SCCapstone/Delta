@@ -41,7 +41,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
     org_objs = serializers.SerializerMethodField()
     class Meta:
         model = CSVFile
-        fields = '__all__'
+        fields = "__all__"
         validators = [
             UniqueTogetherValidator(
                 queryset=CSVFile.objects.all(),
@@ -49,13 +49,13 @@ class SerializerCSVFile(serializers.ModelSerializer):
                 # server does that on its own
                 # NOTE: 
                 # CHANGING OF FILE NAMES EACH TIME COULD BE A VERY SLOW OPERATION!
-                fields = ['author','file_name','file_path']
+                fields = ['author','file_name']
             )
         ]
         read_only_fields = ['id','file_path']
     def get_author_username(self,obj):
         return obj.author.username
-    
+
     def get_reviews(self,obj):
         return SerializerReview(obj.review_set.all().order_by('-pub_date'),many=True).data
     

@@ -44,8 +44,8 @@ class CSVFile(models.Model):
         null=True
     )
     # SEE: https://stackoverflow.com/questions/53058631/foreignkey-object-has-no-attribute
-    file_path= models.TextField(db_column='file_path',blank=False,null=False)
-    file_name = models.TextField(db_column="file_name",blank=False,null=False)
+    file_path= models.TextField(db_column='file_path',blank=True,null=True)
+    file_name = models.TextField(db_column="file_name",blank=False,null=False,unique=True)
     # timestamp of creation
     timestamp= models.DateTimeField(auto_now_add=True)
 
@@ -62,8 +62,7 @@ class CSVFile(models.Model):
         unique_together = ('author','file_name')
 
     def __str__(self):
-        return self.file_path
-    
+        return self.file_name
     def save(self,*args,**kwargs):
         # if no file name given, give it the file name generated from the file path
         # 
@@ -76,7 +75,7 @@ class CSVFile(models.Model):
 @receiver(post_delete,sender=CSVFile)
 def on_delete_csv(sender,instance,using,**kwargs):
     # delete the file
-    if(os.path.exists(instance.file_path)):
+    if(instance.file_path and os.path.exists(instance.file_path)):
         os.remove(instance.file_path)
 
 class BaseTag(models.Model):

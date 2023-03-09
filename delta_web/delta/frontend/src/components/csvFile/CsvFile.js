@@ -7,7 +7,6 @@ import tag_styles from "../data_transfer/tags.module.css"
 
 const CsvFile = (props) => {
     var navigate = useNavigate();
-    console.log(props)
 
     // with reference to
     // https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page

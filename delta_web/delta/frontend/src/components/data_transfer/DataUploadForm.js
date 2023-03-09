@@ -3,6 +3,7 @@ import {useDropzone} from "react-dropzone";
 import {addCsvFile} from '../../actions/file';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {useNavigate} from 'react-router-dom';
 
 import TagsInput from './TagsInput';
 
@@ -40,6 +41,9 @@ const Container = styled.div`
 `;
 
 const DataUploadForm = (props) =>{
+  if(props.auth.user.username == undefined) return;
+  var navigate = useNavigate();
+
   // max size of file
   // 5 MB
   const maxSize = 5*1048576;
@@ -109,18 +113,26 @@ const DataUploadForm = (props) =>{
         var isPublicOrgs = $("#flexCheckPublicToOrg").is(":checked");
         var description = $("#fileDescription").val();
         var fileName = $("#fileName").val();
-        console.log(file.path)
+        console.log(file);
         // get the organizations
-        const data = {
-          'file':file,
+        const dictData= {
           'is_public':isPublic,
           'is_public_orgs':isPublicOrgs,
           'description':description,
           'file_name':fileName,
           'registered_organizations':arrOrgs,
-          'tags':tags
+          'tags':tags,
+          'file':file,
+          'author':props.auth.user.id,
         }
-        props.addCsvFile(data);
+        props.addCsvFile(dictData)
+          .then((res)=>{
+              // good response
+              if(res == undefined){
+                navigate('/data/download')
+              }
+            }
+          );
       });
   }
 
@@ -222,5 +234,8 @@ const DataUploadForm = (props) =>{
   )
 }
 
+const mapStateToProps = state =>({
+  auth:state.auth
+})
 
-export default connect(null,{addCsvFile})(DataUploadForm);
+export default connect(mapStateToProps,{addCsvFile})(DataUploadForm);

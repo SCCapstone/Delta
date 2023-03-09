@@ -43,7 +43,7 @@ const ConversationDetail = (props) => {
         </h1>
         <div>
             <h5>Title: {convo.title}</h5>
-            <p>Published: {convo.pub_date}</p>
+            <p>Started: {convo.pub_date}</p>
             <p>Other user: 
                 <Link to={`/profile/${otherUserUsername}`}>{otherUserUsername}</Link>
             </p>

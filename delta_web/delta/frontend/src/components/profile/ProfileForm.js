@@ -97,23 +97,29 @@ const ProfileForm = (props) => {
                 <input
                 className="form-control"
                 name = "password"
-                placeholder="Or enter nothing if no change"
+                placeholder="Or enter nothing if no change wanted."
                 value = {userInfo.password}
                 onChange = {onChange}
                 >
                 </input>
             </div>
             <div>
-                Bio:
+                <label htmlFor="textareaBio" className="form-label">
+                Bio
+                </label>
                 <textarea
+                id="textareaBio"
                 className="form-control"
                 name="bio"
                 placeholder={userInfo.bio}
                 onChange={onChange}
                 />
+                <div id="textareaBioHelp" class="form-text">
+                    Here you can write a little bit about yourself, your work, or your interests.
+                </div>
             </div>
             <br/>
-            <h5>Currently followed organizations</h5>
+            <h5>Currently followed organizations:</h5>
             <div>
                 { props.auth.user.followed_organizations.length === 0 ? <p> Not part of any Organizations</p> :
                     props.auth.user.followed_organizations.map(orgObj => (

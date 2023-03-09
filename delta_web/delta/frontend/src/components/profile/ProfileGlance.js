@@ -29,7 +29,12 @@ const ProfileGlance = (props) => {
                 <div className="profile-info col-md-9">
                     <div className="panel">
                         <div className="bio-graph-heading">
-                            {user.bio}
+                            <p>
+                                Your bio:
+                            </p>
+                            <p>
+                                {user.bio}
+                            </p>
                         </div>
                         <div className="panel-body bio-graph-info">
                             <h2>Basic Information</h2>

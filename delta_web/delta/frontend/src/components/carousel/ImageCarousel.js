@@ -1,10 +1,18 @@
 /**
- * Vince Kolb-Lugo
- * Copyright 2022
+ * Delta Project
+ * 
+ * Authors:
+ * Lexington Whalen (@lxaw)
+ * Carter Marlowe (@Cmarlowe123)
+ * Vince Kolb-Lugo (@vancevince)
+ * Blake Seekings (@j-blake-s)
+ * Naveen Chithan (@nchithan)
+ * 
+ * ImageCarousel.js
  * 
  * A simple carousel for the Login and Registration pages.
- * Displays a variety of freely licensed images depicting smiling, warm, inviting people,
- * cozy locations, and active behaviors.
+ * Displays a variety of free-use licensed images depicting smiling, warm, inviting people,
+ * cozy locations, and active behaviors. Want to invite users to the application.
  */
 
 import React, { Component } from "react";

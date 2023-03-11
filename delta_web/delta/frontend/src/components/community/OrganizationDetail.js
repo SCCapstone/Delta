@@ -1,3 +1,21 @@
+/**
+ * Delta Project
+ * 
+ * Authors:
+ * Lexington Whalen (@lxaw)
+ * Carter Marlowe (@Cmarlowe123)
+ * Vince Kolb-Lugo (@vancevince)
+ * Blake Seekings (@j-blake-s)
+ * Naveen Chithan (@nchithan)
+ * 
+ * OrganizationDetail.js
+ * 
+ * This is a detailed view of an organization registered under the 
+ * Delta project. Here app users can see what posts the given organization
+ * has made public, the data sets uploaded by the organization, and the
+ * users who follow the organization.
+ */
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
@@ -18,9 +36,9 @@ const OrganizationDetail = (props) => {
     // get the organization
     const getData = () => {
         axios.get('/api/organization/' + id + '/')
-        .then((res)=>{
-            setData(res.data);
-        })
+            .then((res) => {
+                setData(res.data);
+            })
     }
 
     // download CSV
@@ -29,12 +47,12 @@ const OrganizationDetail = (props) => {
     }
 
     // get organizations's posts
-    const getPosts = () =>{
-        axios.get('/api/organization/' + id + '/data_posts/',{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
-        .then((res)=>{
-            setDataPosts(res.data);
-            console.log(res.data)
-        })
+    const getPosts = () => {
+        axios.get('/api/organization/' + id + '/data_posts/', { headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${props.auth.token}` } })
+            .then((res) => {
+                setDataPosts(res.data);
+                console.log(res.data)
+            })
     }
 
     useEffect(() => {
@@ -59,7 +77,7 @@ const OrganizationDetail = (props) => {
                 <hr />
 
                 <div>
-                    <PublicCsvFileTable csvs = {dataPosts} textMinLength = {3}/>
+                    <PublicCsvFileTable csvs={dataPosts} textMinLength={3} />
                 </div>
 
                 <span>

@@ -10,18 +10,12 @@ const CsvFile = (props) => {
 
     // with reference to
     // https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page
-    const routeChange = (path) =>{
-        navigate(path);
-    }
 
     const clickDelete = () =>{
         var dialog = confirm("Would you like to delete this file? There is no going back.");
         if(dialog){
-            setTimeout(()=>{
-                props.deleteCsvFile(props.csvFileData.id);
-            },200);
-            // redirect to your uploads
-            routeChange('/community/personal')
+            props.deleteCsvFile(props.csvFileData.id);
+            navigate('/data/download')
         }
     }
 

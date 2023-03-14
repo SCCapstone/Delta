@@ -6,15 +6,9 @@ import tag_styles from "./tags.module.css";
 /*
 A card for the public csv table
 
-Expects 
+Expects:
+csvFileData: the serialized csv file
 
-title
-desc
-imgSrc (optional)
-imgAlt (optional)
-link (optional)
-linkText (optional)
-img path
 */
 
 const DataCard = (props) => {
@@ -48,6 +42,7 @@ const DataCard = (props) => {
                 </p>
             </div>
             <h6>Rating: {props.rating}</h6>
+            <small>Download count: {props.downloadCount}</small>
             <h6 className="card-title">
                 File Name: {props.title}
             </h6>

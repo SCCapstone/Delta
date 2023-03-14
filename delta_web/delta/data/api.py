@@ -71,6 +71,9 @@ class ViewsetPublicCsvFile(viewsets.ModelViewSet):
     @action(methods=['get'],detail=True,renderer_classes=(PassthroughRenderer,))
     def download(self,*args,**kwargs):
         instance = self.get_object()
+        # increase the download count
+        instance.download_count += 1
+        instance.save()
         with open(instance.file_path,'rb') as file:
             return Response(
                 file.read(),

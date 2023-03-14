@@ -6,6 +6,7 @@ import { downloadCsvFile,deleteCsvFile } from '../../actions/file'
 import tag_styles from "../data_transfer/tags.module.css"
 
 const CsvFile = (props) => {
+    console.log(props.csvFileData)
     var navigate = useNavigate();
 
     // with reference to
@@ -40,6 +41,7 @@ const CsvFile = (props) => {
         <div>
             <div>
                 <h4>File name: {props.csvFileData.file_name}</h4>
+                <small>Download count: {props.csvFileData.download_count}</small>
             </div>
             <hr/>
             <div>

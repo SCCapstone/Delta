@@ -55,6 +55,9 @@ class CSVFile(models.Model):
 
     is_public_orgs = models.BooleanField(default=False)
 
+    # number of times the file has been downloaded
+    download_count = models.IntegerField(default=0)
+
     # the organizations the file is under
     registered_organizations = models.ManyToManyField(Organization,blank=True,related_name="uploaded_files")
 

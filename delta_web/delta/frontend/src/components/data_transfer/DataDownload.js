@@ -8,12 +8,15 @@ const DataDownload = (props) =>{
     // the csv files
     const [csvFiles, setCsvFiles] = useState(undefined);
 
-    // on load call this
-    useEffect(()=>{
+    const getCsvs = () =>{
         axios.get('/api/public_csvs/',{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
         .then(res=>{
         setCsvFiles(res.data);
         })
+    }
+    // on load call this
+    useEffect(()=>{
+        getCsvs()
     },[])
 
     if (csvFiles == undefined) return;
@@ -32,6 +35,7 @@ const DataDownload = (props) =>{
             <PublicCsvFileTable 
             csvs = {csvFiles}
             textMinLength = {3}
+            refreshCsvs = {getCsvs}
             />
             <Link to="/data/upload" className="btn btn-secondary btn-sm"> 
                 Upload

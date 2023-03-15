@@ -6,22 +6,17 @@ import { downloadCsvFile,deleteCsvFile } from '../../actions/file'
 import tag_styles from "../data_transfer/tags.module.css"
 
 const CsvFile = (props) => {
+    console.log(props.csvFileData)
     var navigate = useNavigate();
 
     // with reference to
     // https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page
-    const routeChange = (path) =>{
-        navigate(path);
-    }
 
     const clickDelete = () =>{
         var dialog = confirm("Would you like to delete this file? There is no going back.");
         if(dialog){
-            setTimeout(()=>{
-                props.deleteCsvFile(props.csvFileData.id);
-            },200);
-            // redirect to your uploads
-            routeChange('/community/personal')
+            props.deleteCsvFile(props.csvFileData.id);
+            navigate('/data/download')
         }
     }
 
@@ -46,6 +41,7 @@ const CsvFile = (props) => {
         <div>
             <div>
                 <h4>File name: {props.csvFileData.file_name}</h4>
+                <small>Download count: {props.csvFileData.download_count}</small>
             </div>
             <hr/>
             <div>

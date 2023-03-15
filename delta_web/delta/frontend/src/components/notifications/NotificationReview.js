@@ -13,7 +13,7 @@ const NotificationReview = (props) => {
     }
 
   return (
-    <div className = "container border m-3 p-3" style={style}>
+    <div className = "container border m-3 p-3" style={style} data-testid="notification_review-1">
         <div className="d-flex justify-content-between">
             <div>
                 <strong>Notification from <Link to={`/profile/${props.data.sender_username}`}>{props.data.sender_username}</Link></strong>

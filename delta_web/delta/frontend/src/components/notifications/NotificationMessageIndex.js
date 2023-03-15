@@ -21,7 +21,7 @@ const NotificationMessageIndex = (props) =>{
     },[]);
 
     return (
-        <div className="container">
+        <div className="container" data-testid="notification_message_index-1">
             <h1>Notifications of Messages</h1>
             <p>
               Here are all your messages. You can view the user who sent you the message by clicking their username, and

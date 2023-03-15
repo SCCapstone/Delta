@@ -21,7 +21,7 @@ const NotificationReviewIndex = (props) =>{
     },[]);
 
     return (
-        <div className="container">
+        <div className="container" data-testid="notification_review_index-1">
             <h1>Notifications</h1>
             <p>
               Here are all your notifications. At the moment, these deal primarily with reviews of your files.

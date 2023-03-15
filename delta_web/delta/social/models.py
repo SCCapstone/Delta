@@ -61,6 +61,17 @@ class BaseNotification(models.Model):
     class Meta:
         abstract = True
 
+# notifications for new features / things within Delta
+class NotificationNews(BaseNotification):
+    # here null is false as you always need a recipient for a notification
+    recipient = models.ForeignKey(User,on_delete=models.CASCADE,null=False,related_name="recipient_notification_news_set")
+
+# notifications for hot new things in Delta (ie new communities, topical events)
+class NotificationWhatsHot(BaseNotification):
+    # here null is false as you always need a recipient for a notification
+    recipient = models.ForeignKey(User,on_delete=models.CASCADE,null=False,related_name="recipient_notification_whats_hot_set")
+    
+
 # notifications that relate to a review
 class NotificationReview(BaseNotification):
     # sender of notification, ie in the case of a review being created, 

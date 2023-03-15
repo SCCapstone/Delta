@@ -68,10 +68,10 @@ const PublicProfile = (props) => {
   }, [])
 
   // hasn't loaded yet
-  if (convos == null || userData == null) return;
+  if (convos == null || userData == null) return <div data-testid="public_profile-1" ></div>;
 
   return (
-    <div className="container">
+    <div className="container" data-testid="public_profile-1">
       <div className='row'>
         {props.auth.user.username == username ?
           <ProfileSidebar

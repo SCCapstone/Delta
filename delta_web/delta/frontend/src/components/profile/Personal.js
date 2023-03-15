@@ -19,14 +19,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import SearchableCsvFileTable from '../csvFile/SearchableCsvFileTable';
+// need to comment out styles when testing
 import "./profile.css"
 import ProfileSidebar from './ProfileSidebar';
 
 import PublicCsvFileTable from '../data_transfer/PublicCsvFileTable';
 
 const Personal = (props) => {
-    //console.log(props);
     const [csvFiles, setCsvFiles] = useState(null);
 
     useEffect(() => {
@@ -36,10 +35,10 @@ const Personal = (props) => {
             })
     }, [])
 
-    if (csvFiles == null) return;
+    if (csvFiles == null) return <div data-testid="personal-1"></div>;
 
     return (
-        <div className="container">
+        <div className="container" data-testid="personal-1">
             <div className="row">
                 <ProfileSidebar
                     first_name={props.auth.user.first_name}

@@ -17,9 +17,7 @@
 *************************************/
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { deleteUser } from "../../actions/auth";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ProfileForm from './ProfileForm';
 import ProfileSidebar from './ProfileSidebar';
@@ -46,7 +44,7 @@ const ProfileDetailed = (props) => {
 
 
     return (
-        <div className='container'>
+        <div className='container' data-testid="profile_detailed-1">
             <div className="row">
                 <ProfileSidebar
                     first_name={props.auth.user.first_name}

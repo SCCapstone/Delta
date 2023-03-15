@@ -40,7 +40,7 @@ pagename
 const ProfileSidebar = (props) => {
     //console.log(props);
     return (
-        <div className="profile-nav col-md-3">
+        <div className="profile-nav col-md-3" data-testid="profile_sidebar-1">
             <div className="panel">
                 <div className="user-heading round">
                     <h1>{props.first_name} {props.last_name}</h1>

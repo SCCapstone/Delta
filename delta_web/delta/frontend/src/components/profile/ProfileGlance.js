@@ -39,7 +39,7 @@ const ProfileGlance = (props) => {
         //fields. They can view their organizations and click on the link to go to their organizations page.
 
         //<div>
-        <div className='container bootstrap snippets bootdey'>
+        <div className='container bootstrap snippets bootdey' data-testid="profile_glance-1">
             <div className="row">
                 <ProfileSidebar
                     first_name = {user.first_name}

@@ -25,7 +25,7 @@ const OrganizationThumbnail = (props) => {
     props.org is an organization object
     */
   return (
-    <div style={style}>
+    <div style={style} data-testid="organization_thumbnail-1">
         <div className="border p-3 d-flex justify-content-between">
             <div>
                 {props.org.name}

@@ -44,10 +44,9 @@ const ProfileForm = (props) => {
         e.preventDefault()
         props.updateUser(userInfo);
     }
-    console.log(props.auth.user.followed_organizations.length);
     //This form allows for edited information to be submitted to the backend
     return (
-        <form onSubmit = {onSubmit}>
+        <form onSubmit = {onSubmit} data-testid="profile_form-1">
             <div>
                 First Name: 
                 <input

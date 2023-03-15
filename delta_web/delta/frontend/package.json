@@ -7,7 +7,7 @@
     "dev": "webpack --mode development --watch ./src/index.js --output-path ./static/frontend",
     "build": "webpack --mode production ./src/index.js --output-path ./static/frontend",
     "test": "test",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage --env=jsdom"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +25,9 @@
     "css-loader": "^6.7.3",
     "eslint-plugin-jest": "^27.2.1",
     "i": "^0.3.7",
-    "jest": "^29.3.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.5.0",
+    "jest-css-modules-transform": "^4.4.2",
     "jest-environment-jsdom": "^29.3.1",
     "react-test-renderer": "^18.2.0",
     "style-loader": "^3.3.1",

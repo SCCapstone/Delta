@@ -1,3 +1,20 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* File name: OrganizationThumbnail.js
+*
+* Brief description: This file allows for the user to join or leave an organization. It calls on a parent function that will remove the organization from the database.
+*                    This file also styles the organization when the user clicks on the remove, or put back buttons in the Profile form. 
+*************************************/
+
 import React,{useState} from 'react'
 
 const OrganizationThumbnail = (props) => {

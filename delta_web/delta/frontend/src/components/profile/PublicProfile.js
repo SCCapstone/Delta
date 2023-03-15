@@ -25,6 +25,11 @@ import axios from 'axios'
 import "./profile.css"
 import ProfileSidebar from './ProfileSidebar';
 
+
+// UTILITY: This is used to render and display the Public Profile Page. 
+// INPUTS: Props is immutable data that is passed to the function.
+// OUTPUTS: The output is the rendered Public Profile Page. With a sidebar if the user is viewing their 
+//          own public profile or without a sidebar and the ability to converse with that user in a direct message form if they are viewing someone elses public profile.
 const PublicProfile = (props) => {
 
   const [convos, setConvos] = useState(null)
@@ -33,6 +38,8 @@ const PublicProfile = (props) => {
   // public profile that you are viewing's username
   const { username } = useParams()
 
+// UTILITY: get Conversations 
+// OUTPUTS: Is the return of the conversations the user had with the other user. 
   const getConvos = () => {
     axios.post('/api/conversation/get_convos_with_user/', { other_user_username: username }, { headers: { 'content-type': 'application/json', 'authorization': `token ${props.auth.token}` } })
       .then((res) => {
@@ -43,7 +50,8 @@ const PublicProfile = (props) => {
         console.log(err)
       })
   }
-  // get public user data
+// UTILITY: get public user data 
+// OUTPUTS: Is the return of the User's information such as their username, name, and any information that is needed.
   const getUserData = () => {
     axios.post('/api/user/get_user/', { username: username }, { headers: { 'content-type': 'application/json', 'authorization': `token ${props.auth.token}` } })
       .then((res) => {

@@ -59,6 +59,6 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.6",
-    "swiper": "^9.0.5"
+    "swiper": "^9.1.0"
   }
 }

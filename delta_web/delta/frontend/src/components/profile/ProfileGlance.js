@@ -1,3 +1,21 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* File name: ProfileGlance.js
+*
+* Brief description: This file renders the brief easy overview of the user's profile. The user will be able to
+*                    quickly and easily see all the information that is on their account in a read only format.
+*                    Items that are displayed include username, firstname, lastname, email, bio, and followed organizations. 
+*************************************/
+
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,6 +25,10 @@ import "./profile.css";
 import ProfileSidebar from "./ProfileSidebar";
 
 <script src="https://kit.fontawesome.com/f45b95bc62.js" crossorigin="anonymous"></script>
+
+// UTILITY: This is used to render and display the Profile at a Glance Page. This is a read only of the users information.  
+// INPUTS: Props is immutable data that is passed to the function. It should have all of the user's information passed into this.
+// OUTPUTS: The output is the rendered Profile at a Glance Page. With the sidebar on the left hand side of the page. Displays all of users information.
 const ProfileGlance = (props) => {
     //This is the rendering for the profile at a glance page.
     const { isAuthenticated, user } = props.auth; //Making sure that its the specific user thats information is displayed

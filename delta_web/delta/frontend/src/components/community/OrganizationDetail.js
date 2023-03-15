@@ -11,9 +11,10 @@
  * OrganizationDetail.js
  * 
  * This is a detailed view of an organization registered under the 
- * Delta project. Here app users can see what posts the given organization
- * has made public, the data sets uploaded by the organization, and the
- * users who follow the organization.
+ * Delta project. Here app users can see reviews of the organization 
+ * posted by other users. Users can search for a file name or by tag.
+ * Contains a PublicCsvFileTable component to display reviews and 
+ * reviewer information.
  */
 
 import axios from "axios";

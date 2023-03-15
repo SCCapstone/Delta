@@ -13,8 +13,9 @@
  * Organizations.js
  * 
  * This page displays all organizations registered with the Delta project.
- * Just makes a call to the organizations api to retrieve data. Also, this
- * page jumps to more detailed pages for each organization.
+ * Just makes a call to the organizations api to retrieve data and displays it
+ * in an OrganizationCard. This page jumps to more detailed pages for 
+ * each organization.
  */
 
 import axios from 'axios';

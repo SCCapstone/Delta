@@ -1,3 +1,20 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* File name: Personal.js
+*
+* Brief description: This page allows for the user to see their personal files that they have uploaded into Delta.
+*                    They can search for their files and can view their organizations.  
+*************************************/
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';

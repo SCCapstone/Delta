@@ -1,3 +1,21 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* File name: ProfileDetailed.js
+*
+* Brief description: This is the parent frame of the Edit Profile page. This has the side bar and the main frame that the editing form is in.
+*                    The Remove account button can be found here. 
+*                    
+*************************************/
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteUser } from "../../actions/auth";

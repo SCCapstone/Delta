@@ -25,7 +25,7 @@ const OrganizationCard = (props) => {
 
     const style = {
         background: hover ? '#cce6ff' : '',
-        width: "18rem"
+        width: "21rem"
     }
     return (
         <div className="border card m-2" style={style} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
@@ -35,9 +35,6 @@ const OrganizationCard = (props) => {
                     <h5 className="card-title">
                         {props.orgObj.name}
                     </h5>
-                    <p className="card-text">
-                        {props.orgObj.description}
-                    </p>
                 </div>
             </Link>
         </div>

@@ -7,7 +7,6 @@ import DataCard from './DataCard';
 */
 
 const PublicCsvFileTable = (props) =>{
-  console.log(props.refreshCsvs)
   /*
   Takes in:
   props.csvs: an array of csv objects
@@ -89,11 +88,6 @@ const PublicCsvFileTable = (props) =>{
     arrFilesToDownload.forEach((id)=>{
       props.downloadCsvFile(id);
     })
-    // refresh the csvs
-    // since now downloaded, need to update download count
-    if(props.refreshCsvs){
-      props.refreshCsvs()
-    }
   }
 
   if(csvFiles == null) return;

@@ -22,7 +22,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { downloadCsvFile } from "../../actions/file";
 import PublicCsvFileTable from "../data_transfer/PublicCsvFileTable";
 
 const OrganizationDetail = (props) => {
@@ -40,11 +39,6 @@ const OrganizationDetail = (props) => {
             .then((res) => {
                 setData(res.data);
             })
-    }
-
-    // download CSV
-    const downloadCsv = (fileId) => {
-        props.downloadCsvFile(fileId);
     }
 
     // get organizations's posts
@@ -69,6 +63,15 @@ const OrganizationDetail = (props) => {
             <div>
                 <h1>Organization Name: {data.name}</h1>
                 <p>Number of users: {data.following_user_count}</p>
+                <hr/>
+                <div>
+                    <p>Organization description:</p>
+                    <p>
+                        <i>
+                            {data.description}
+                        </i>
+                    </p>
+                </div>
                 <h4>
                     All files under this organization
                 </h4>
@@ -95,4 +98,4 @@ const mapStateToProps = state => ({
     auth: state.auth,
 })
 
-export default connect(mapStateToProps, { downloadCsvFile })(OrganizationDetail);
+export default connect(mapStateToProps, { })(OrganizationDetail);

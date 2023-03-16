@@ -1,75 +1,123 @@
-import React, { Component } from "react";
-
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import ProfileGlance from "../profile/ProfileGlance";
-import HomepageNotificationMessage from "./HomepageNotificationMessage";
+import NotificationNews from "./NotificationNews";
+import NotificationWhatsHot from "./NotificationWhatsHot";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./dashboard.css";
+import axios from "axios";
 
-export class Dashboard extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-  };
+const Dashboard = (props) => {
 
-  render() {
-    const { isAuthenticated, user } = this.props.auth;
-    const data = [
-      {
-        id: 1,
-        title: "New post in your organization",
-        description:
-          "A new post has been created in your organization, Valafar Lab, go to the organization page to see what's there! The information containined in these notifications is manually input for the sake of showing the notification block under use. Later, notifications will actually be generated and displayed by the app",
-        date: "2-24-23",
-      },
-      {
-        id: 2,
-        title: "A new update has come to the website",
-        description:
-          "There's been a new update that allows users to send each other messages now, find people in your organization to try this out with!",
-        date: "2-20-23",
-      },
-      {
-        id: 3,
-        title: "You have unread messages",
-        description:
-          "You have 15 unread messages, make sure you go and check these so that you don't fall behind",
-        date: "1-5-23",
-      },
-    ];
-    return (
+  const [arrNotificationNews,setArrNotificationNews] = useState([]);
+  const [arrNotificationWhatsHot,setArrNotificationWhatsHot] = useState([]);
+
+  const data = []
+
+  const getNotificationNews = () =>{
+    axios.get('/api/notification_news/get_unread',{headers:{'Content-Type':'application/json','Authorization': `Token ${props.auth.token}`}})
+    .then((res)=>{
+      setArrNotificationNews(res.data);
+    })
+  }
+  const getNotificationWhatsHot = () =>{
+    axios.get('/api/notification_whats_hot/get_unread',{headers:{'Content-Type':'application/json','Authorization': `Token ${props.auth.token}`}})
+    .then((res)=>{
+      setArrNotificationWhatsHot(res.data);
+    })
+  }
+
+  useEffect(()=>{
+    getNotificationNews();
+    getNotificationWhatsHot();
+  },[])
+
+  const removeNotificationNews = (id) =>{
+    let newNotifs = arrNotificationNews.filter(item=>item.id != id);
+    setArrNotificationNews(newNotifs);
+  }
+
+  const removeNotificationWhatsHot = (id) =>{
+    let newNotifs = arrNotificationWhatsHot.filter(item=>item.id != id);
+    setArrNotificationWhatsHot(newNotifs);
+  }
+
+  if(props.auth.user.username == undefined) return;
+
+  return(
       <div className="container">
         <h1>
-          Welcome back <strong>{user.username}</strong>.
+          Welcome back <strong>{props.auth.user.username}</strong>.
         </h1>
         <h3>Here's what you've missed.</h3>
 
-        <div
-          className="box shadow-sm rounded bg-light mb-3 border border-gray"
-          style={{ height: "40vh" }}
-        >
-          <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-            {data.map((data, index) => (
-              <SwiperSlide>
-                <HomepageNotificationMessage
-                  notificationTitle={data.title}
-                  notificationMessage={data.description}
-                  date={data.date}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        <div>
+          <h5>Recent News in Delta</h5>
+          {arrNotificationNews.length !=0 ? 
+          (
+            <div
+              className="box shadow-sm rounded bg-light mb-3 border border-gray"
+              style={{ height: "40vh" }}
+            >
+            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+              {arrNotificationNews.map((data, index) => (
+                <SwiperSlide key={index}>
+                  <NotificationNews
+                    parentRemoveNotif = {removeNotificationNews}
+                    notif={data}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            </div>
+          )
+          :
+          (
+            <div>
+              <p>Looks like you're all caught up. Well done!</p>
+            </div>
+          ) 
+          }
         </div>
+
+        <div>
+          <h5>Whats Hot in Delta</h5>
+          {arrNotificationWhatsHot.length !=0 ? 
+          (
+            <div
+              className="box shadow-sm rounded bg-light mb-3 border border-gray"
+              style={{ height: "40vh" }}
+            >
+            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+              {arrNotificationWhatsHot.map((data, index) => (
+                <SwiperSlide index={index}>
+                  <NotificationWhatsHot
+                    parentRemoveNotif = {removeNotificationWhatsHot}
+                    notif={data}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            </div>
+          )
+          :
+          (
+            <div>
+              <p>Looks like you're all caught up. Well done!</p>
+            </div>
+          ) 
+          }
+        </div>
+
       </div>
-    );
-  }
+  ) 
 }
+
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps,{})(Dashboard);

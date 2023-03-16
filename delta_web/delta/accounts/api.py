@@ -37,6 +37,9 @@ from django.contrib.auth import get_user_model
 # Profiles
 from .models import Profile
 
+# Notifications
+from social.models import (NotificationNews,NotificationWhatsHot)
+
 User = get_user_model()
 
 # Register API
@@ -75,6 +78,47 @@ class RegisterAPI(generics.GenericAPIView):
             # Indicate that the entered organization key is invalid to the user, 
             # and offer them to register again or not
             pass
+        
+        ######
+        # Create notifications for the new users.
+        #
+        # This should be automated in the future to create notifications from a set of prexisting ones. 
+        # For now we just create them here.
+        #
+        listNotificationNewsDicts = [
+            {
+                "title":"Welcome!",
+                "text":"Welcome to Delta!"
+            },
+            {
+                "title": "What is this?",
+                "text": "You can do a lot here, from upload data sets to writing reviews to messaging other users. Be sure to check it all out!"
+            }
+            ,
+            {
+                "title":"How do I get rid of these?",
+                "text":"To remove these notifications from your screen, please click the \"Got it\" button.",
+            }
+        ]
+        listNotificationWhatsHotDicts = [
+            {
+                "title":"New Organization: ValafarLab",
+                "text":"Dr. Valafar's lab, \"ValafarLab\" now joins the Delta family!",
+            },
+            {
+                "title":"Delta enters the Forbes 500 list!",
+                "text":"Yeah, right!"
+            }
+        ]
+        # create notifs
+        for notifDict in listNotificationNewsDicts:
+            notif = NotificationNews(title=notifDict["title"],text=notifDict["text"],recipient=user)
+            notif.save()
+
+        for notifDict in listNotificationWhatsHotDicts:
+            notif = NotificationWhatsHot(title=notifDict["title"],text=notifDict["text"],recipient=user)
+            notif.save()
+
             
         return Response({
             # give the serialized user

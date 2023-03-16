@@ -37,3 +37,23 @@ export const markReadNotificationMessage = (notificationId) => (dispatch,getStat
     })
     .catch((err)=>{console.log(err)})
 }
+
+// notification news
+export const markReadNotificationNews = (notificationId) => (dispatch,getState) => {
+    axios.get(`/api/notification_news/${notificationId}/perform_read/`,tokenConfig(getState))
+    .then((res)=>{
+        console.log(res)
+        dispatch(createMessage({readNotification:"Notification has been read."}))
+    })
+    .catch((err)=>{console.log(err)})
+}
+
+// notification whats hot
+export const markReadNotificationWhatsHot = (notificationId) => (dispatch,getState) => {
+    axios.get(`/api/notification_whats_hot/${notificationId}/perform_read/`,tokenConfig(getState))
+    .then((res)=>{
+        console.log(res)
+        dispatch(createMessage({readNotification:"Notification has been read."}))
+    })
+    .catch((err)=>{console.log(err)})
+}

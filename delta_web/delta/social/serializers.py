@@ -15,6 +15,7 @@
 #
 from rest_framework import serializers
 from .models import (Review,NotificationReview,
+NotificationWhatsHot,NotificationNews,
 Conversation,Message,NotificationMessage)
 
 from rest_framework.validators import UniqueTogetherValidator
@@ -62,6 +63,26 @@ class SerializerNotificationReview(serializers.ModelSerializer):
         return obj.pub_date.strftime('%Y-%m-%d')
     def get_file_id(self,obj):
         return obj.review.file.id
+
+# serializer for news notification class
+class SerializerNotificationNews(serializers.ModelSerializer):
+    formatted_date = serializers.SerializerMethodField()
+    class Meta:
+        model = NotificationNews
+        fields = "__all__"
+
+    def get_formatted_date(self,obj):
+        return obj.pub_date.strftime('%Y-%m-%d')
+
+# serializer for WhatsHot notification class
+class SerializerNotificationWhatsHot(serializers.ModelSerializer):
+    formatted_date = serializers.SerializerMethodField()
+    class Meta:
+        model = NotificationWhatsHot
+        fields = "__all__"
+
+    def get_formatted_date(self,obj):
+        return obj.pub_date.strftime('%Y-%m-%d')
 
 class SerializerConversation(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()

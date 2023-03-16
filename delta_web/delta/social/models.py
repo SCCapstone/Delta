@@ -57,6 +57,7 @@ class BaseNotification(models.Model):
     text = models.CharField(max_length=300,null=False)
     read = models.BooleanField(default=False)
     pub_date = models.DateTimeField(default=timezone.now)
+    title = models.CharField(max_length=100,null=True,blank=True)
 
     class Meta:
         abstract = True

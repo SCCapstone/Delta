@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from 'react'
 
-const HomepageNotificationMessage = (props) => {
+// holds data for notifications
+const NotificationData = (props) => {
   return (
     <div className="container">
       <div
@@ -8,15 +9,15 @@ const HomepageNotificationMessage = (props) => {
         style={{ height: "37vh" }}
       >
         <div className="col-10 mr-3 px-5 pt-2">
-          <div className="text-truncate">{props.notificationTitle}</div>
-          <div className="small">{props.notificationMessage}</div>
+          <div className="text-truncate">{props.notif.title}</div>
+          <div className="small">{props.notif.text}</div>
         </div>
         <div className="col text-right text-center text-muted pt-1 pr-5">
-          {props.date}
+          {props.notif.formatted_date}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomepageNotificationMessage;
+export default NotificationData;

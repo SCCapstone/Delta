@@ -16,7 +16,9 @@
 from django.contrib import admin
 
 from .models import (Review,NotificationReview,
-Conversation, Message,NotificationMessage)
+Conversation, Message,NotificationMessage,NotificationNews,
+NotificationWhatsHot
+)
 
 # Register your models here.
 class ReviewAdmin(admin.ModelAdmin):
@@ -24,7 +26,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 class NotificationReviewAdmin(admin.ModelAdmin):
-    fields = ['text','read','pub_date','sender','recipient','review']
+    fields = ['text','read','pub_date','sender','recipient','review','title']
 
 class ConversationAdmin(admin.ModelAdmin):
     fields = ['title','other_user','author','pub_date']
@@ -33,10 +35,18 @@ class MessageAdmin(admin.ModelAdmin):
     fields = ['author','recipient','pub_date','convo','text']
 
 class NotificationMessageAdmin(admin.ModelAdmin):
-    fields = ['text','read','pub_date','sender','recipient','message']
+    fields = ['text','read','pub_date','sender','recipient','message','title']
+
+class NotificationNewsAdmin(admin.ModelAdmin):
+    fields = ['text','read','pub_date','recipient','title']
+
+class NotificationWhatsHotAdmin(admin.ModelAdmin):
+    fields = ['text','read','pub_date','recipient','title']
 
 admin.site.register(Review,ReviewAdmin)
 admin.site.register(NotificationReview,NotificationReviewAdmin)
 admin.site.register(Conversation,ConversationAdmin)
 admin.site.register(Message,MessageAdmin)
 admin.site.register(NotificationMessage,NotificationMessageAdmin)
+admin.site.register(NotificationWhatsHot,NotificationWhatsHotAdmin)
+admin.site.register(NotificationNews,NotificationNewsAdmin)

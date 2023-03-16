@@ -17,7 +17,9 @@ from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 
 from .serializers import (SerializerReview,SerializerNotificationReview,
-SerializerConversation,SerializerMessage,SerializerNotificationMessage)
+SerializerConversation,SerializerMessage,SerializerNotificationMessage,
+SerializerNotificationWhatsHot,SerializerNotificationNews
+)
 from data.models import CSVFile
 
 from rest_framework.decorators import action
@@ -70,6 +72,56 @@ class ViewsetNotificationReview(viewsets.ModelViewSet):
     @action(methods=['get'],detail=False)
     def get_unread(self,request):
         return Response(SerializerNotificationReview(self.request.user.recipient_notification_post_set.filter(read=False).order_by('-pub_date'),many=True).data)
+    
+    @action(methods=['get'],detail=True)
+    def perform_read(self,*args,**kwargs):
+        instance = self.get_object()
+        instance.read = True
+        instance.save()
+        return Response(self.get_serializer(instance).data)
+
+# notification API
+class ViewsetNotificationWhatsHot(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = SerializerNotificationWhatsHot
+
+    def get_queryset(self):
+        return self.request.user.recipient_notification_whats_hot_set.all().order_by('-pub_date')
+    
+    def perform_create(self,serializer):
+        serializer.save()
+    
+    # get all unread posts
+    @action(methods=['get'],detail=False)
+    def get_unread(self,request):
+        return Response(SerializerNotificationWhatsHot(self.request.user.recipient_notification_whats_hot_set.filter(read=False).order_by('-pub_date'),many=True).data)
+    
+    @action(methods=['get'],detail=True)
+    def perform_read(self,*args,**kwargs):
+        instance = self.get_object()
+        instance.read = True
+        instance.save()
+        return Response(self.get_serializer(instance).data)
+
+# notification API
+class ViewsetNotificationNews(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = SerializerNotificationNews
+
+    def get_queryset(self):
+        return self.request.user.recipient_notification_news_set.all().order_by('-pub_date')
+    
+    def perform_create(self,serializer):
+        serializer.save()
+    
+    # get all unread posts
+    @action(methods=['get'],detail=False)
+    def get_unread(self,request):
+        return Response(SerializerNotificationNews(self.request.user.recipient_notification_news_set.filter(read=False).order_by('-pub_date'),many=True).data)
     
     @action(methods=['get'],detail=True)
     def perform_read(self,*args,**kwargs):

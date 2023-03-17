@@ -8,7 +8,7 @@
  * Blake Seekings (@j-blake-s)
  * Naveen Chithan (@nchithan)
  *
- * CsvFileDetail.js
+ * CsvFileForm.js
  *
  * File form that will take in all of the data that will be displayed with a file.
  * Used for both the initial creation and editing the details of a file

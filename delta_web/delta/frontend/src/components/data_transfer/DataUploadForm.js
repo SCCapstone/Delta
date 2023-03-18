@@ -1,3 +1,28 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  DataUploadForm.js
+
+Brief description: 
+    This file defines the layout for the upload form. The upload form is
+  how users can upload data. It allows them to change the file name, add tags,
+  registered organizations, and descriptions.
+
+###############################################################################
+*/
+
+
+
+
 import React, {useCallback, useEffect,useState} from 'react';
 import {useDropzone} from "react-dropzone";
 import {addCsvFile} from '../../actions/file';
@@ -11,6 +36,10 @@ import TagsInput from './TagsInput';
 // select
 import Select from 'react-select';
 
+
+// UTILITY: Determines the color of the DropZone depending on whether isDrag is 
+//          active or not.
+// RETURNS: A hex code describing a particular color.
 const getColor = (props) => {
   if (props.isDragActive) {
       return '#00e676';
@@ -58,6 +87,10 @@ const DataUploadForm = (props) =>{
 
   const [arrOrgs,setArrOrgs] = useState([]);
 
+  // UTILITY: Users can add registered organizations to a file on upload.
+  //          To do this, the user must have already joined said org.
+  //          This method assembles all of the users organizations and
+  //          adds them to the list of select options on the upload form.
   useEffect(()=>{
     var select = []
     props.availableOrgs.map((org)=>{
@@ -72,6 +105,9 @@ const DataUploadForm = (props) =>{
     accept:{
       'text/csv':['.csv']
     },
+
+    // UTILITY: When a user drops selected file(s), display error messages 
+    // for any rejections.
     onDrop:(acceptedFiles,fileRejections) =>{
       fileRejections.forEach((file)=>{
         file.errors.forEach((err) =>{
@@ -93,9 +129,9 @@ const DataUploadForm = (props) =>{
     multiple:false,
   });
 
-  // to do: check if file too large
   const isFileTooLarge = false;
   // const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+
 
   const onSelectChange = (arrSelects) =>{
     // reset
@@ -106,15 +142,20 @@ const DataUploadForm = (props) =>{
     setArrOrgs(orgIds);
   }
 
+  // UTILITY: This function determines what happens when a user submits the
+  //          data upload form.
   const onSubmit = (e) =>{
-    e.preventDefault();
+    e.preventDefault(); // Prevent empty uploads
+      
+      // For every file that is accepted by the dropzone, do the following.
       acceptedFiles.forEach(file=> {
         var isPublic= $("#flexCheckPublic").is(":checked");
         var isPublicOrgs = $("#flexCheckPublicToOrg").is(":checked");
         var description = $("#fileDescription").val();
         var fileName = $("#fileName").val();
         console.log(file);
-        // get the organizations
+
+        // Take all of the data from the upload form and create a dictionary
         const dictData= {
           'is_public':isPublic,
           'is_public_orgs':isPublicOrgs,
@@ -125,6 +166,8 @@ const DataUploadForm = (props) =>{
           'file':file,
           'author':props.auth.user.id,
         }
+
+        // Use the dictionary to create a csvFile object and upload it. 
         props.addCsvFile(dictData)
           .then((res)=>{
               // good response
@@ -144,6 +187,9 @@ const DataUploadForm = (props) =>{
       <form onSubmit = {onSubmit}
       onKeyDown={(e)=> {e.key === 'Enter' && e.preventDefault()}}
       >
+
+          {/* Dropzone */}
+          
           <div className="container"> 
           <Container {...getRootProps(isDragActive, isDragReject)}>
               <input {...getInputProps()}/>
@@ -163,8 +209,14 @@ const DataUploadForm = (props) =>{
           </ul>
           </div>
           <br />
+
+
           <div>
-            {/* Inputs */}
+
+
+
+            {/* File Name Form Control*/}
+
             <div>
               <h3>File Name</h3>
               <small>
@@ -174,6 +226,11 @@ const DataUploadForm = (props) =>{
                 <input required type="text" className="form-control" placeholder = "Enter name of file" id= "fileName"/>
               </div>
             </div>
+
+
+
+            {/* File Description Form Control*/}
+
             <div>
               <h3>File Description</h3>
               <small>
@@ -183,8 +240,15 @@ const DataUploadForm = (props) =>{
                 <textarea required type="text" className="form-control" placeholder="Enter a description of the file" id = "fileDescription"/>
               </div>
             </div>
+
+
+
+
+            {/* Visibility Radios */}
+            
             <div>
 
+              
               <h3>Visibility</h3>
               <div className= "form-check">
                 <input className ="form-check-input" name="flexCheck" type="radio" value="isPublic" id="flexCheckPublic"/>
@@ -211,6 +275,12 @@ const DataUploadForm = (props) =>{
 
 
             </div>
+
+
+
+
+            {/* Available Organizations Selection */}
+
             <div>
               <h3>Available Organizations</h3>
               <small>
@@ -223,11 +293,18 @@ const DataUploadForm = (props) =>{
               />
             </div>
             <br />
+
+
+            {/* Tag Form Control */}
+
             <div>
               <h5>Tags</h5>
               <TagsInput updateParentTags={updateTags} />
             </div>
             <br/>
+
+            {/* Submit Button */}
+
             <button className="btn btn-success mb-2">Submit</button>
           </div>
       </form>

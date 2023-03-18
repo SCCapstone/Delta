@@ -1,21 +1,39 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  DataCard.js
+
+Brief description: 
+    When viewing public data, entries are shown via a data card which
+displays all of the relevant information in an appealing manner. This file 
+defines the layout of that data card and how it can be interacted with.
+
+###############################################################################
+*/
+
+
+
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import tag_styles from "./tags.module.css";
-
-/*
-A card for the public csv table
-
-Expects:
-csvFileData: the serialized csv file
-
-*/
 
 const DataCard = (props) => {
 
     const [toDownload,setToDownload] = useState(false);
     const [style,setStyle] = useState({width:'25rem'})
 
+    // UTILITY: Changes the ToDownload attribute of the DataCard when clicked.
+    // UTILITY: Initial state is false, every click changes it to true and vice-versa.
     const checkDownload = (e) =>{
         e.preventDefault()
         if(toDownload){

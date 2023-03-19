@@ -28,7 +28,9 @@ const OrganizationCard = (props) => {
         width: "21rem"
     }
     return (
-        <div className="border card m-2" style={style} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+        <div 
+            data-testid = "organization_card-1"
+        className="border card m-2" style={style} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <Link to={`/community/organizations/${props.orgObj.id}`} style={{ textDecoration: 'none' }}>
                 <img src={props.imgSrc} className="card-img-top" alt={`Image for ${props.orgObj.name}`} />
                 <div className="card-body">

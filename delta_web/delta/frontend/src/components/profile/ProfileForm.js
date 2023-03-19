@@ -9,11 +9,11 @@
 * Blake Seekings (@j-blake-s)
 * Naveen Chithan (@nchithan)
 *
-* File name: ProfileForm.js
+* ProfileForm.js
 *
-* Brief description: This file allows the user to edit their information that is stored on the site. 
-*                    They can join and leave organizations on this page as well. Password change is also presented here.
-*                    This is the helper file that is in ProfileDetailed and has the actual form.  
+* This file allows the user to edit their information that is stored on the site. 
+* They can join and leave organizations on this page as well. Password change is also presented here.
+* This is the helper file that is in ProfileDetailed and has the actual form.  
 *************************************/
 
 import React,{useState} from 'react'

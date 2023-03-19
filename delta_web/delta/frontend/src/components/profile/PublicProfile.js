@@ -9,11 +9,11 @@
 * Blake Seekings (@j-blake-s)
 * Naveen Chithan (@nchithan)
 *
-* File name: PublicProfile.js
+* PublicProfile.js
 *
-* Brief description: This file is used to display the Public Profile page. 
-*                    This is what other users (not yourself) will see when they view your profile. There is a sidebar for only when the user is viewing their profile.
-*                    You can also view conversations and converse with a user from this page. 
+* This file is used to display the Public Profile page. 
+* This is what other users (not yourself) will see when they view your profile. There is a sidebar for only when the user is viewing their profile.
+* You can also view conversations and converse with a user from this page. 
 *************************************/
 
 import React, { useEffect, useState } from 'react'

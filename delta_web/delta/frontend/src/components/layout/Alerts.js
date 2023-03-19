@@ -1,3 +1,23 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* Alerts.js
+*
+* This file allows for the different alert messages to appear if 
+* the conditions apply. Some of the alert messages include needing to
+* fill out required parts of a form, username is already in use, passwords matching,
+* and etc.  
+*************************************/
+
+
 import React, { Component,Fragment } from 'react'
 import { withAlert } from 'react-alert';
 import { connect } from 'react-redux';

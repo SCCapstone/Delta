@@ -9,10 +9,10 @@
 * Blake Seekings (@j-blake-s)
 * Naveen Chithan (@nchithan)
 *
-* File name: ProfileDetailed.js
+* ProfileDetailed.js
 *
-* Brief description: This is the parent frame of the Edit Profile page. This has the side bar and the main frame that the editing form is in.
-*                    The Remove account button can be found here. 
+* This is the parent frame of the Edit Profile page. This has the side bar and the main frame that the editing form is in.
+* The Remove account button can be found here. 
 *                    
 *************************************/
 

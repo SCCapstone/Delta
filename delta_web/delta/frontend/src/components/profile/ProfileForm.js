@@ -139,8 +139,9 @@ const ProfileForm = (props) => {
             <h5>Currently followed organizations:</h5>
             <div>
                 { props.auth.user.followed_organizations.length === 0 ? <p> Not part of any Organizations</p> :
-                    props.auth.user.followed_organizations.map(orgObj => (
+                    props.auth.user.followed_organizations.map((orgObj,index) => (
                         <OrganizationThumbnail org={orgObj} 
+                        key={index}
                         parentOnPutBackOrg={parentOnPutBackOrg} 
                         parentOnRemoveOrg={parentOnRemoveOrg} 
                         />

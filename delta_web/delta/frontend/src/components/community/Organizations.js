@@ -36,10 +36,10 @@ const Organizations = (props) => {
                 console.log(err)
             })
     }, [])
-    if (orgData == null) return;
+    if (orgData == null) return <div data-testid="organizations-1"></div>;
 
     return (
-        <div className="container">
+        <div className="container" data-testid="organizations-1">
             <div>
                 <h1 className="text-center">
                     Organizations

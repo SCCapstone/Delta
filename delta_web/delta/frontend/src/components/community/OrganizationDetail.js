@@ -56,10 +56,10 @@ const OrganizationDetail = (props) => {
     }, []);
 
     // check that data has loaded
-    if (data == null || dataPosts == null) return;
+    if (data == null || dataPosts == null) return <div data-testid="organization_detail-1"></div>;
 
     return (
-        <div className="container">
+        <div className="container" data-testid="organization_detail-1">
             <div>
                 <h1>Organization Name: {data.name}</h1>
                 <p>Number of users: {data.following_user_count}</p>

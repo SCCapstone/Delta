@@ -76,7 +76,7 @@ const ProfileGlance = (props) => {
                                 <h1>Your Organizations</h1>
                                 <div className="row">
                                     {(user.followed_organizations).map((item, index) => (
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-6" key={index}>
                                             <div className="card m-1 p-1" style={{ width: '24rem' }} key={index}>
                                                 <img
                                                     src='/media/Generic_Laboratory_Logo.png'
@@ -107,40 +107,6 @@ const ProfileGlance = (props) => {
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-        //  <div>
-        //                 {(user.followed_organizations).map((item,index)=>(
-        //                     <div className = "card" key={index}>
-        //                         <div className = "card-body">
-        //                             <Link to = {`/community/organizations/${item.id}`}>
-        //                             <h5 className="card-title">
-        //                                 {item.name}
-        //                             </h5>
-        //                             </Link>
-        //                             <p className = "card-text">
-        //                                 {item.description}
-        //                             </p>
-        //                         </div>
-        //                     </div>
-        //                 ))}
-        //             </div>
-        //             <br/>
-
-        //             <div>
-        //                 <Link className= "btn btn-info" to="/profile/detailed">
-        //                     Click Update Profile
-        //                 </Link>
-        //                 <br/>
-        //                 <br/>
-        //                 <Link className="btn btn-success" to={`/profile/${props.auth.user.username}`}>
-        //                     See your public profile
-        //                 </Link>
-        //             </div> 
     )
 }
 

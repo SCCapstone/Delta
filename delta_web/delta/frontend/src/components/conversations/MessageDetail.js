@@ -1,3 +1,25 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  MessageDetail.js
+
+Brief description: 
+    When having a conversation with another user, messages appear in cards.
+Each card displays the message, the time sent, and the user who sent the
+message. This file defines the layout of that message card.
+
+###############################################################################
+*/
+
 import React from 'react';
 import {Link} from 'react-router-dom';
 

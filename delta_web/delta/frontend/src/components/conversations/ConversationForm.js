@@ -1,3 +1,26 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  ConversationForm.js
+
+Brief description: 
+    When a user visits another users profile, you are able to start
+conversations with them. This is done through a form object allowing the user
+to pick a title for the convo and then start it. This file defines that
+interaction.
+
+###############################################################################
+*/
+
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'

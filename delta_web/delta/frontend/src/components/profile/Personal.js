@@ -9,10 +9,10 @@
 * Blake Seekings (@j-blake-s)
 * Naveen Chithan (@nchithan)
 *
-* File name: Personal.js
+* Personal.js
 *
-* Brief description: This page allows for the user to see their personal files that they have uploaded into Delta.
-*                    They can search for their files and can view their organizations.  
+* This page allows for the user to see their personal files that they have uploaded into Delta.
+* They can search for their files and can view their organizations.  
 *************************************/
 
 import axios from 'axios';

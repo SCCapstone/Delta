@@ -1,3 +1,24 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  auth.js
+
+Brief description: 
+    This file handles a variety of different actions relating to 
+authentication. This is mostly with login/logout and registration.
+
+###############################################################################
+*/
+
 import {
     USER_LOADED,
     USER_LOADING,

@@ -1,3 +1,26 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  Register.js
+
+Brief description: 
+    This file defines the layout of registration page and allows the user to
+create an account.
+
+###############################################################################
+*/
+
+
+
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -22,6 +45,7 @@ export class Register extends Component {
     isAuthenticated: PropTypes.bool
   }
 
+  // UTILITY: Determines how an account is created when the user hits submit.
   onSubmit = e => {
     e.preventDefault();
     // pull the password and password2 from the state

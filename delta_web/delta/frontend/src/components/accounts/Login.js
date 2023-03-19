@@ -1,3 +1,27 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  Login.js
+
+Brief description: 
+    This file defines the layout of the login page. It allows users to enter
+a username and password to login. If they do not have an account,there is also
+a link to the register page.
+
+###############################################################################
+*/
+
+
+
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -15,11 +39,13 @@ export class Login extends Component {
     isAuthenticated: PropTypes.bool
   }
 
+  // UTILITY: Uses the entered username and password to log user in.
   onSubmit = e => {
     e.preventDefault();
     this.props.login(this.state.username, this.state.password);
   }
 
+  // UTILITY: When the form element is updated, change the corresponding state
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {

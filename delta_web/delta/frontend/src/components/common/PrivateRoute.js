@@ -1,5 +1,24 @@
-// proxy for a regular route, check to see if a user is logged in
-// protects a url
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  PrivateRoute.js
+
+Brief description: 
+    This file defines the proxy for a regular route and checks to see if
+the user is logged in.  Users must be authenticated to reach the interior
+of the website or else they are redirected to the login page.
+
+###############################################################################
+*/
 
 import React from 'react'
 import {Route, Navigate} from 'react-router-dom';

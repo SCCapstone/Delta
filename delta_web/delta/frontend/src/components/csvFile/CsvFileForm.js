@@ -91,6 +91,7 @@ const CsvFileForm = (props) => {
 
   return (
     <form onSubmit = {onSubmit}
+    data-testid="csv_file_form-1"
     onKeyDown={(e)=>{e.key === 'Enter' && e.preventDefault()}}
     >
       {/* File name input group */}

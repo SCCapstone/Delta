@@ -42,9 +42,9 @@ const CsvFile = (props) => {
     }
   };
 
-  /*UTILITY: An example function. Here you would write a bit about what it actually is meant to do / does.
-   * INPUTS: Here you write about the inputs. Say something about the `dataType` for `arg1` and what `arg1` is.
-   * OUTPUTS: Here you write about the outputs. Explain what data type is returned, and what it  # means.
+  /*UTILITY: Downloads the csv file currently selected.
+   * INPUTS: Makes use of the current csvFile ID.
+   * OUTPUTS: Downloads a version of the csv file for the user.
    */
   const clickDownload = () => {
     props.downloadCsvFile(props.csvFileData.id);

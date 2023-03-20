@@ -18,10 +18,12 @@ const CsvFileEdit = (props) => {
   },[])
 
   // should return some spinner
-  if(csvFile == null) return;
+  if(csvFile == null) return <div data-testid="csv_file_edit-1"></div>;
 
   return (
-    <div className = "container">
+    <div className = "container"
+    data-testid="csv_file_edit-1"
+    >
       <div key = {csvFile.id}>
         <CsvFileForm csvFile={csvFile}/>
         <Link to = {`/csvs/${csvFile.id}`}>

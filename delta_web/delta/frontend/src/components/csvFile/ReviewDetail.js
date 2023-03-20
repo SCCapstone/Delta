@@ -47,7 +47,7 @@ const ReviewDetail = (props) => {
         })
     }
 
-    if(reviewData == null) return;
+    if(reviewData == null) return <div data-testid="review_detail-1"></div>;
 
     const RATINGS = ["Poor","Fair","Good","Very good","Excellent"]
     const activeStar = {
@@ -61,7 +61,7 @@ const ReviewDetail = (props) => {
     }
 
     return(
-    <div className="container">
+    <div className="container" dadta-testid="review_detail-1">
         <form onSubmit = {onSubmit}>
             <div className = "form-group">
                 <div className="d-flex justify-content-between">

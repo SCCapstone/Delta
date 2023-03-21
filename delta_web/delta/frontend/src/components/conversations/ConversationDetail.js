@@ -1,3 +1,25 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  ConversationDetail.js
+
+Brief description: 
+    When a user clicks on a conversation card, they are able to take a closer
+look at the conversation. Here they are able to add to the conversation and
+see what other users have said. This file defines that interaction.
+
+###############################################################################
+*/
+
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
@@ -13,6 +35,7 @@ const ConversationDetail = (props) => {
     var otherUserUsername = null;
 
 
+    // UTILITY: Get the data for a specific conversation
     const getData = () =>{
         axios.get(`/api/conversation/${id}/`,{headers:{'Content-Type':'application/json','Authorization':`Token ${props.auth.token}`}})
         .then((res)=>{

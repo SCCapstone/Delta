@@ -8,4 +8,5 @@ module.exports = {
     moduleNameMapper: {
         "/\.(css|sass)$": "identity-obj-proxy",
       },
+    setupFiles:['<rootDir>/setup.js'],
 };

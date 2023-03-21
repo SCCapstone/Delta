@@ -1,7 +1,21 @@
 /*
+###############################################################################
 
-Upload files via drag and drop.
-https://upmostly.com/tutorials/react-dropzone-file-uploads-react
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  DataUpload.js
+
+Brief description: 
+    This file defines the layout of the data upload page.
+
+###############################################################################
 */
 
 import React from 'react';

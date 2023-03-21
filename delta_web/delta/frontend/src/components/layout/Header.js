@@ -1,3 +1,21 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* Header.js
+*
+* This file contains the header for all pages in the website. The main item in here is
+* the navbar. The navbar has links to main pages and notifications along with the log out button. 
+* 
+*************************************/
+
 // navbar
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -14,9 +32,9 @@ import axios from 'axios'
 
 const Header = (props) => {
 
-  // toggles the navbar
-  // for some reason this is an issue with the current version of bootstrap
-  //
+// This is used to toggle the navbar.
+// Does not expect inputs.
+// The output is to either display the navbar or hide it behind an icon.
   function changeClass() {
 
     const show = "navbar-collapse collapse show";

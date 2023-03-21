@@ -59,10 +59,10 @@ const CsvFileDetail = (props) => {
   }, []);
 
   // should return some spinner
-  if (csvFile == null) return;
+  if (csvFile == null) return <div data-testid="csv_file_detail-1"></div>;
 
   return (
-    <div className="container">
+    <div className="container" data-testid="csv_file_detail-1">
       <CsvFile csvFileData={csvFile} />
       <div className="">
         <h3>Add a review?</h3>

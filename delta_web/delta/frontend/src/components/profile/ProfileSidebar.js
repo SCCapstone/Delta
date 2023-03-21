@@ -9,13 +9,13 @@
 * Blake Seekings (@j-blake-s)
 * Naveen Chithan (@nchithan)
 *
-* File name: ProfileSidebar.js
+* ProfileSidebar.js
 *
-* Brief description: This file is a template that is used in every page under profile. It is a 
-*                    Sidebar that allows the user to easily navigate between 4 different pages
-*                    that relate to profile. The current page is also highlighted in the sidebar.
-*                    There are 5 things that this file requires for use. firstname, lastname, email,
-*                    username, and pagename. These values should be added to props for it to be functional.
+* This file is a template that is used in every page under profile. It is a 
+* Sidebar that allows the user to easily navigate between 4 different pages
+* that relate to profile. The current page is also highlighted in the sidebar.
+* There are 5 things that this file requires for use. firstname, lastname, email,
+* username, and pagename. These values should be added to props for it to be functional.
 *************************************/
 
 import React, { Component, useState } from 'react';
@@ -33,9 +33,9 @@ username
 pagename
 */
 
-// UTILITY: This is used to render and display the Profile Sidebar. 
-// INPUTS: Props is immutable data that is passed to the function. It expects to have firstname, lastname, email, username, and pagename within props.
-// OUTPUTS: The output is the rendered Sidebar with highlighted page the user is on.
+// This is used to render and display the Profile Sidebar. 
+// Props is immutable data that is passed to the function. It expects to have firstname, lastname, email, username, and pagename within props.
+// The output is the rendered Sidebar with highlighted page the user is on.
 
 const ProfileSidebar = (props) => {
     //console.log(props);

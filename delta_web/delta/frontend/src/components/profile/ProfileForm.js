@@ -9,11 +9,11 @@
 * Blake Seekings (@j-blake-s)
 * Naveen Chithan (@nchithan)
 *
-* File name: ProfileForm.js
+* ProfileForm.js
 *
-* Brief description: This file allows the user to edit their information that is stored on the site. 
-*                    They can join and leave organizations on this page as well. Password change is also presented here.
-*                    This is the helper file that is in ProfileDetailed and has the actual form.  
+* This file allows the user to edit their information that is stored on the site. 
+* They can join and leave organizations on this page as well. Password change is also presented here.
+* This is the helper file that is in ProfileDetailed and has the actual form.  
 *************************************/
 
 import React,{useState} from 'react'
@@ -139,8 +139,9 @@ const ProfileForm = (props) => {
             <h5>Currently followed organizations:</h5>
             <div>
                 { props.auth.user.followed_organizations.length === 0 ? <p> Not part of any Organizations</p> :
-                    props.auth.user.followed_organizations.map(orgObj => (
+                    props.auth.user.followed_organizations.map((orgObj,index) => (
                         <OrganizationThumbnail org={orgObj} 
+                        key={index}
                         parentOnPutBackOrg={parentOnPutBackOrg} 
                         parentOnRemoveOrg={parentOnRemoveOrg} 
                         />

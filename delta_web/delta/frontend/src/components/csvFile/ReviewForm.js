@@ -74,7 +74,7 @@ const ReviewForm = (props) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} data-testid="review_form-1">
       <div className="form-group">
         <div className="d-flex justify-content-between">
           <div className={styles.stars}>

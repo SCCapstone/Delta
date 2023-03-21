@@ -1,3 +1,26 @@
+/*
+###############################################################################
+
+Delta project
+
+Authors:
+Lexington Whalen (@lxaw)
+Carter Marlowe (@Cmarlowe132)
+Vince Kolb-LugoVince (@vancevince) 
+Blake Seekings (@j-blake-s)
+Naveen Chithan (@nchithan)
+
+File name:  PublicCsvFileTable.js
+
+Brief description: 
+    When users visit the data download page, they are able to search through
+all public files via name and tags and see that data. This file determines
+how that searching is done and allows users to download files.
+
+###############################################################################
+*/
+
+
 import React, {useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import {downloadCsvFile} from '../../actions/file'; 

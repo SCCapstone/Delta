@@ -38,10 +38,10 @@ const CsvFileTable = (props) => {
   }, []);
 
   // probably should return some spinner
-  if (csvFiles == null) return;
+  if (csvFiles == null) return <div data-testid="csv_file_table-1"></div>;
 
   return (
-    <div>
+    <div data-testid="csv_file_table-1">
       <h2>Your Csv Files</h2>
       <table className="table">
         <thead>

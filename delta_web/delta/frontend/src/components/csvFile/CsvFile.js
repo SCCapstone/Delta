@@ -22,7 +22,6 @@ import { downloadCsvFile, deleteCsvFile } from "../../actions/file";
 import tag_styles from "../data_transfer/tags.module.css";
 
 const CsvFile = (props) => {
-  console.log(props.csvFileData);
   var navigate = useNavigate();
 
   // with reference to
@@ -51,7 +50,10 @@ const CsvFile = (props) => {
   };
 
   return (
-    <div className="border border-rounded m-2 p-2 container">
+    <div
+      className="border border-rounded m-2 p-2 container"
+      data-testid="csv_file-1"
+    >
       <div className="d-flex justify-content-between">
         <div>
           <h5>

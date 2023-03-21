@@ -87,9 +87,9 @@ const ReviewDetail = (props) => {
     fill: "yellow",
   };
 
-  /* UTILITY: Increases the review's index by 1.
-   * INPUTS: Takes in the index of the current review.
-   * OUTPUTS: Updated review with increased index.
+  /* UTILITY: Increases the rating's index by 1.
+   * INPUTS: Takes in the index of the rating.
+   * OUTPUTS: Updated review state with increased rating index.
    */
   const changeRatingIndex = (index) => {
     console.log(index);

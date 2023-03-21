@@ -10,7 +10,7 @@
  *
  * NotificationData.js
  *
- * Defines each individual card for notifications.
+ * Defines the individual card for notifications.
  * Takes in the title, notification detail, and date of the notification and
  * orients it.
  */

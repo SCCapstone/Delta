@@ -1,3 +1,17 @@
+/**
+ * Delta Project
+ *
+ * Authors:
+ * Lexington Whalen (@lxaw)
+ * Carter Marlowe (@Cmarlowe123)
+ * Vince Kolb-Lugo (@vancevince)
+ * Blake Seekings (@j-blake-s)
+ * Naveen Chithan (@nchithan)
+ *
+ * StarSvg.js
+ *
+ * Defines the Star itself in svg form
+ */
 import React from "react";
 
 const StarSvg = (props) => {

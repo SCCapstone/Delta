@@ -10,7 +10,7 @@
  *
  * Dashboard.js
  *
- * Defins the home page that a user is brought to after logging in.
+ * Defines the home page that a user is brought to after logging in.
  * Contains the notification scrollers that display any notifications that a user has built up.
  */
 import React, { useEffect, useState } from "react";

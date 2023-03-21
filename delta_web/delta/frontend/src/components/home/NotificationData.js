@@ -1,4 +1,20 @@
-import React from 'react'
+/**
+ * Delta Project
+ *
+ * Authors:
+ * Lexington Whalen (@lxaw)
+ * Carter Marlowe (@Cmarlowe123)
+ * Vince Kolb-Lugo (@vancevince)
+ * Blake Seekings (@j-blake-s)
+ * Naveen Chithan (@nchithan)
+ *
+ * NotificationData.js
+ *
+ * Defines the individual card for notifications.
+ * Takes in the title, notification detail, and date of the notification and
+ * orients it.
+ */
+import React from "react";
 
 // holds data for notifications
 const NotificationData = (props) => {
@@ -17,7 +33,7 @@ const NotificationData = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default NotificationData;

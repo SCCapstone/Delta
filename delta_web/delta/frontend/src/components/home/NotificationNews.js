@@ -10,7 +10,7 @@
  *
  * NotificationNews.js
  *
- * Displays the notification and gives it a button to allow the user to
+ * Displays a news notification and gives it a button to allow the user to
  * read a notification.
  * By clicking the button the notification will be set as read.
  */

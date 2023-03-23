@@ -9,9 +9,11 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: urls.py
 #
-# Brief description:
+# Brief description: 
+#       This file handles the urls related to accounts. This is
+# mainly register, delete, login, and logout. 
 #
 from django.urls import path, include
 from .api import (RegisterAPI,LoginAPI,UserAPI

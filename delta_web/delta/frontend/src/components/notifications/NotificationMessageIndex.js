@@ -1,3 +1,21 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* NotificationMessageIndex.js
+*
+* This file is the parent class of NotificationMessage.js. It is used to display
+* all the notifications of messages that the user has received. This also allows the 
+* user to view the message and remove the notification.
+*************************************/
+
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux"
 import axios from 'axios';

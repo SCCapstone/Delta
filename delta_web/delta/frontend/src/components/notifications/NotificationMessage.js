@@ -1,3 +1,21 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* NotificationMessage.js
+*
+* This file is the child class of NotificationMessageIndex.js. It is used to display the
+* notification messages that are sent to the user. It will give the user the message is from 
+* and the date the message was sent.
+*************************************/
+
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,7 +26,7 @@ const NotificationMessage = (props) => {
     console.log(props)
 
     const [style,setStyle] = useState({});
-
+    
     const handleRead = () =>{
         props.markReadNotificationMessage(props.data.id)
         setStyle({display:'none'})

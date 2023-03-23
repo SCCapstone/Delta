@@ -1,3 +1,22 @@
+/************************************
+*
+* Delta project.
+*
+* Authors:
+* Lexington Whalen (@lxaw)
+* Carter Marlowe (@Cmarlowe132)
+* Vince Kolb-LugoVince (@vancevince) 
+* Blake Seekings (@j-blake-s)
+* Naveen Chithan (@nchithan)
+*
+* NotificationReview.js
+*
+* This file is the child class of NotificationReviewIndex.js. It is used to display the
+* review messages that are sent to the user. It will give the user the message is from 
+* and the date the message was sent.
+*************************************/
+
+
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';

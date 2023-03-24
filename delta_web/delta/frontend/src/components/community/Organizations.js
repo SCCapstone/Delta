@@ -1,4 +1,4 @@
-/**
+/************************************************
  * Delta Project
  * 
  * Authors:
@@ -16,7 +16,7 @@
  * Just makes a call to the organizations api to retrieve data and displays it
  * in an OrganizationCard. This page jumps to more detailed pages for 
  * each organization.
- */
+ ***********************************************/
 
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';

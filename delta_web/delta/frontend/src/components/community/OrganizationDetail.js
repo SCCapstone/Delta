@@ -33,8 +33,13 @@ const OrganizationDetail = (props) => {
 
     const { id } = useParams();
 
-    // get the organization
+    // get an organization's data
     const getData = () => {
+        /**
+        * UTILITY: Gets an organization's data by its ID
+        * INPUTS: None
+        * OUTPUTS: An organization object with its identifying information
+        */
         axios.get('/api/organization/' + id + '/')
             .then((res) => {
                 setData(res.data);
@@ -43,6 +48,11 @@ const OrganizationDetail = (props) => {
 
     // get organizations's posts
     const getPosts = () => {
+        /**
+        * UTILITY: Fetches an organization's posts (reviews, csv files)
+        * INPUTS: None
+        * OUTPUTS: List of data posts associated with the organization
+        */
         axios.get('/api/organization/' + id + '/data_posts/', { headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${props.auth.token}` } })
             .then((res) => {
                 setDataPosts(res.data);
@@ -63,7 +73,7 @@ const OrganizationDetail = (props) => {
             <div>
                 <h1>Organization Name: {data.name}</h1>
                 <p>Number of users: {data.following_user_count}</p>
-                <hr/>
+                <hr />
                 <div>
                     <p>Organization description:</p>
                     <p>
@@ -98,4 +108,4 @@ const mapStateToProps = state => ({
     auth: state.auth,
 })
 
-export default connect(mapStateToProps, { })(OrganizationDetail);
+export default connect(mapStateToProps, {})(OrganizationDetail);

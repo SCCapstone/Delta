@@ -9,9 +9,9 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: admin.py
 #
-# Brief description:
+# Brief description: Contains the information of organizations for the admin page of the Django project
 #
 from django.contrib import admin
 

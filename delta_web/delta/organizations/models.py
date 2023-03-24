@@ -9,10 +9,11 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: models.py
 #
-# Brief description:
-#
+# Brief description: Defines the actual organization model that will be used by the app
+# Creates all of the data fields contained by an organization and the relations between other models
+# 
 from django.db import models
 
 from django.contrib.auth import get_user_model
@@ -49,6 +50,10 @@ class Organization(models.Model):
     # add a code so that you can only join if know the code
     # or some other method of entry
     # add functions for this as well
+    
+    # UTILITY: Getter for the name of an organization
+    # INPUT: Current organization instance
+    # OUTPUT: Name of the organization
     def __str__(self):
         return self.name
 

@@ -9,9 +9,9 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: apps.py
 #
-# Brief description:
+# Brief description: Creates the config for the organizations app in Django
 #
 from django.apps import AppConfig
 

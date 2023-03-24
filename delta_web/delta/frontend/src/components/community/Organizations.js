@@ -2,8 +2,6 @@
  * Delta Project
  * 
  * Authors:
- * 
- * Authors:
  * Lexington Whalen (@lxaw)
  * Carter Marlowe (@Cmarlowe123)
  * Vince Kolb-Lugo (@vancevince)

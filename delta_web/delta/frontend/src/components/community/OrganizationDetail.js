@@ -1,4 +1,4 @@
-/**
+/**************************************************
  * Delta Project
  * 
  * Authors:
@@ -15,8 +15,7 @@
  * posted by other users. Users can search for a file name or by tag.
  * Contains a PublicCsvFileTable component to display reviews and 
  * reviewer information.
- */
-
+ *************************************************/
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
@@ -25,7 +24,6 @@ import { connect } from 'react-redux';
 import PublicCsvFileTable from "../data_transfer/PublicCsvFileTable";
 
 const OrganizationDetail = (props) => {
-
     // in reality you would use a function to grab organization data 
     // based on the passed id
     const [data, setData] = useState(null);
@@ -33,26 +31,24 @@ const OrganizationDetail = (props) => {
 
     const { id } = useParams();
 
-    // get an organization's data
+    /**getData
+    * UTILITY: Gets an organization's data by its ID
+    * INPUTS: None
+    * OUTPUTS: An organization object with its identifying information
+    */
     const getData = () => {
-        /**
-        * UTILITY: Gets an organization's data by its ID
-        * INPUTS: None
-        * OUTPUTS: An organization object with its identifying information
-        */
         axios.get('/api/organization/' + id + '/')
             .then((res) => {
                 setData(res.data);
             })
     }
 
-    // get organizations's posts
+    /**getPosts
+     * UTILITY: Fetches an organization's posts (reviews, csv files)
+     * INPUTS: None
+     * OUTPUTS: List of data posts associated with the organization
+     */
     const getPosts = () => {
-        /**
-        * UTILITY: Fetches an organization's posts (reviews, csv files)
-        * INPUTS: None
-        * OUTPUTS: List of data posts associated with the organization
-        */
         axios.get('/api/organization/' + id + '/data_posts/', { headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${props.auth.token}` } })
             .then((res) => {
                 setDataPosts(res.data);

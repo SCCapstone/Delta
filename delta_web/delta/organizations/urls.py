@@ -9,9 +9,10 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: urls.py
 #
-# Brief description:
+# Brief description: Creates the url paths for making use of the API for organizations
+# Uses a rest framework
 #
 from django.urls import path
 

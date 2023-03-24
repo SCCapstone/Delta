@@ -9,9 +9,10 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: api.py
 #
-# Brief description:
+# Brief description: Defines the api for gathering organizations and organization data.
+# Makes use of a Rest API framework
 #
 from rest_framework import generics, permissions
 from rest_framework.response import Response
@@ -37,15 +38,27 @@ class ViewsetOrganizations(viewsets.ModelViewSet):
 
     permission_classes = []
 
+    # UTILITY: Returns the full queryset containing all organizations
+    # INPUT: Current instance
+    # OUTPUT: set of all Organizations
     def get_queryset(self):
         return Organization.objects.all()
 
+    # UTILITY: Retrieves data from a request from a model
+    # INPUT: Current instance, the request being made, and arguments made for the request
+    # OUTPUT: Returns the response to the request
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
     
+    # UTILITY: Creates an organization
+    # INPUT: Current instance and the serializer used to create an organization
+    # OUTPUT: Saves the serializer
     def perform_create(self,serializer):
         serializer.save()
 
+    # UTILITY: Gathers the data posts within an organization
+    # INPUT: Current instance, the request for data being made, and arguments for the request
+    # OUTPUT: Response of the serialized data containing csv files
     @action(methods=['get'],detail=True)
     def data_posts(self,request,*args,**kwargs):
         instance = self.get_object()

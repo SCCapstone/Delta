@@ -9,9 +9,9 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: models.py
 #
-# Brief description:
+# Brief description: Defines the models used in the social aspects of the Delta Project.
 #
 from django.db import models
 from django.utils import timezone
@@ -84,6 +84,9 @@ class NotificationReview(BaseNotification):
 
     review = models.ForeignKey(Review,on_delete=models.CASCADE,related_name="notification_post_set",null=False)
 
+    # UTILITY: Returns review notiication object
+    # INPUT: Base notification class
+    # OUTPUT: Formatted review notification for review in question
     def __str__(self):
         return "Notification for review {}".format(Review.title)
 
@@ -97,6 +100,9 @@ class Conversation(models.Model):
     other_user = models.ForeignKey(User,related_name="participant_conversation_set",on_delete=models.CASCADE)
     pub_date = models.DateTimeField(default=timezone.now)
 
+    # UTILITY: Returns conversation object
+    # INPUT: Generic model class
+    # OUTPUT: Formatted conversation with title
     def __str__(self):
         return self.title
 
@@ -113,6 +119,9 @@ class Message(models.Model):
     # conversation it is under
     convo = models.ForeignKey(Conversation,on_delete = models.CASCADE,related_name="convo_message_set")
 
+    # UTILITY: Returns message object
+    # INPUT: Generic model class
+    # OUTPUT: String of message text
     def __str__(self):
         return self.text
 
@@ -123,5 +132,8 @@ class NotificationMessage(BaseNotification):
 
     message = models.ForeignKey(Message,on_delete=models.CASCADE,related_name="notification_message_set",null=False)
 
+    # UTILITY: Returns message notiication object
+    # INPUT: Base notification class
+    # OUTPUT: Formatted message notification for conversation in question
     def __str__(self):
         return "Notification for message {}".format(self.message.convo.title)

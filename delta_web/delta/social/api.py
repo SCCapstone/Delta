@@ -9,9 +9,10 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# File name: api.py
 #
-# Brief description:
+# Brief description: Constains the rules for how to interact with the server side of the 
+# Delta project.
 #
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response

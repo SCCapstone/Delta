@@ -45,10 +45,10 @@ const DataDownload = (props) =>{
     },[])
 
 
-    if (csvFiles == undefined) return;
+    if (csvFiles == undefined) return <div data-testid="data_download-1"></div>;
 
     return(
-        <div className="container">
+        <div className="container" data-testid="data_download-1">
             <div>
                 <h1>
                     Download Page  

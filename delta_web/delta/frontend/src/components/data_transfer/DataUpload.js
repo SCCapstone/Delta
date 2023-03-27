@@ -25,7 +25,7 @@ import DataUploadForm from './DataUploadForm';
 const DataUpload = (props) => {
   if(props.auth.user.username == undefined) return;
   return(
-    <div className = "container">
+    <div className = "container" data-testid="data_upload-1">
         <h1>
             Data Upload        
         </h1>

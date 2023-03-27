@@ -49,7 +49,9 @@ const DataCard = (props) => {
     }
 
   return (
-    <div className="card m-2 pt-2 pb-2" style={style} onMouseDown={checkDownload}>
+    <div className="card m-2 pt-2 pb-2" style={style} onMouseDown={checkDownload}
+        data-testid="data_card-1"
+    >
         <div className="card-body">
             <div className="d-flex justify-content-between">
                 <p>

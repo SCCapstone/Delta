@@ -116,7 +116,7 @@ const PublicCsvFileTable = (props) =>{
   if(csvFiles == null) return;
 
   return (
-    <div>
+    <div data-testid="public_csv_file_table-1">
       <form onSubmit = {onSubmit}>
           <div className="input-group mb-3">
            <div className="input-group-prepend">

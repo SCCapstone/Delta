@@ -38,7 +38,7 @@ const CsvFileTable = (props) => {
   }, []);
 
   // probably should return some spinner
-  if (csvFiles == null) return <div data-testid="csv_file_table-1"></div>;
+  if (csvFiles == null) return <div data-testid="csv_file_table-1"></div>
 
   return (
     <div data-testid="csv_file_table-1">

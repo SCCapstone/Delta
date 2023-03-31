@@ -83,7 +83,20 @@ const PublicCsvFileTable = (props) =>{
     if(arrStrTagSearch.length > 0){
       filteredCsvs.forEach((csvFile)=>{
         const arrStrFileTags= csvFile.tags.map((strObj)=>strObj.text);
-        const isSubset =arrStrTagSearch.every(searchTag=>arrStrFileTags.includes(searchTag));
+        var isSubset = false;
+        for(let strSearchTag of arrStrTagSearch){
+          for(let strFileTag of arrStrFileTags){
+            if(strFileTag.toLowerCase().includes(strSearchTag.toLowerCase())){
+              isSubset = true;
+            }
+          }
+        }
+        arrStrTagSearch.every((searchTag)=> 
+        {
+
+          arrStrFileTags.includes(searchTag)
+        }
+        );
         if(!isSubset){
           // can safely remove file
           filteredCsvs = filteredCsvs.filter((e)=>{return e != csvFile})

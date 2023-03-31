@@ -9,9 +9,9 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# models.py
 #
-# Brief description:
+# Stores all the information related to the models of `data` app.
 #
 from django.conf import settings
 from django.db import models
@@ -37,6 +37,9 @@ User = get_user_model()
 # NOTE: if ever change directory structure, will have to update every file.
 # this could get annoying!
 
+# CSVFile model
+# The CSVFile model holds the information about the CSV file.
+# This includes when it was created, description, and the file path.
 class CSVFile(models.Model):
     # user who created the file
     author = models.ForeignKey(
@@ -89,7 +92,9 @@ class BaseTag(models.Model):
     class Meta:
         abstract = True
 
-# CSVFileTag
+# CSVFileTag model
+# The CSVFileTag model holds the information about the tags of the CSV file. 
+# This involves the text of the tag.
 class TagCsvFile(BaseTag):
     file = models.ForeignKey(CSVFile,on_delete = models.CASCADE,related_name="tag_set")
 

@@ -9,9 +9,10 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# urls.py
 #
-# Brief description:
+# This file is the configuration for the urls of the `data` Django app.
+# This is mainly the csv, tags, and the viewablity of the csv
 #
 from django.urls import path
 

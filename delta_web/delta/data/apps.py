@@ -9,9 +9,9 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# apps.py
 #
-# Brief description:
+# A default created file by Django.
 #
 from django.apps import AppConfig
 

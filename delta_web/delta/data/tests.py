@@ -9,9 +9,9 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# tests.py
 #
-# Brief description:
+# Contains all the tests for the data app.
 #
 """
     Managed to get rid of the authentication issue with uploading files. 
@@ -40,6 +40,7 @@ from rest_framework import status
 
 User = get_user_model()
 
+# Tests if the data uploads correctly
 class DataTestCase(APITestCase):
 
     def test_data_upload_no_file(self):

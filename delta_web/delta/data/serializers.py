@@ -9,9 +9,9 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# serializers.py
 #
-# Brief description:
+# The serializers for the data app.
 #
 from rest_framework import serializers
 from .models import (CSVFile,TagCsvFile)
@@ -26,6 +26,7 @@ from social.serializers import SerializerReview
 
 from organizations.serializers import OrganizationSerializer
 
+# serializer for csv file
 class SerializerCSVFile(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField()
     reviews = serializers.SerializerMethodField()
@@ -76,7 +77,8 @@ class SerializerCSVFile(serializers.ModelSerializer):
     
     def get_org_objs(self,obj):
         return OrganizationSerializer(obj.registered_organizations.all(),many=True).data
-    
+
+# serializer for tag csv file
 class SerializerTagCsvFile(serializers.ModelSerializer):
 
     class Meta:

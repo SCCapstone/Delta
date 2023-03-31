@@ -259,13 +259,14 @@ class UpdateAPI(generics.UpdateAPIView):
 
         msg = ""
         # need a try except here as Django returns an error when no org object exists with the key
-        try:
-            modelOrg = Organization.objects.get(key=newOrgKey)
-            modelOrg.following_users.add(request.user)
-            modelOrg.save()
-        except Exception as e:
-            msg = "Invalid organization key. All other changes were saved."
-            pass
+        if newOrgKey != "":
+            try:
+                modelOrg = Organization.objects.get(key=newOrgKey)
+                modelOrg.following_users.add(request.user)
+                modelOrg.save()
+            except Exception as e:
+                msg = "Invalid organization key. All other changes were saved."
+                pass
 
         # Save the changes
         request.user.save()

@@ -10,8 +10,9 @@
 # Naveen Chithan (@nchithan)
 #
 # File name:
-#
+# urls.py
 # Brief description:
+# Routes the API endpoints to a URL.
 #
 from django.urls import path
 

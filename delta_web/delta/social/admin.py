@@ -10,11 +10,13 @@
 # Naveen Chithan (@nchithan)
 #
 # File name:
-#
+# Admin.py
 # Brief description:
+# Set up the admin page for the social Django app. You can visit the admin page by going to /admin.
 #
 from django.contrib import admin
 
+# import models
 from .models import (Review,NotificationReview,
 Conversation, Message,NotificationMessage,NotificationNews,
 NotificationWhatsHot
@@ -23,7 +25,6 @@ NotificationWhatsHot
 # Register your models here.
 class ReviewAdmin(admin.ModelAdmin):
     fields = ['author','text','title','pub_date','active','rating']
-
 
 class NotificationReviewAdmin(admin.ModelAdmin):
     fields = ['text','read','pub_date','sender','recipient','review','title']
@@ -43,6 +44,7 @@ class NotificationNewsAdmin(admin.ModelAdmin):
 class NotificationWhatsHotAdmin(admin.ModelAdmin):
     fields = ['text','read','pub_date','recipient','title']
 
+# Register admin models and admin settings to the website
 admin.site.register(Review,ReviewAdmin)
 admin.site.register(NotificationReview,NotificationReviewAdmin)
 admin.site.register(Conversation,ConversationAdmin)

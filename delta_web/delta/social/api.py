@@ -37,6 +37,7 @@ User = get_user_model()
 
 # review api 
 class ViewsetReview(viewsets.ModelViewSet):
+    # need to be logged in (ie have an API key) to use this resource
     permission_classes = [
         permissions.IsAuthenticated,
     ]
@@ -46,26 +47,32 @@ class ViewsetReview(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.review_set.all().order_by('-pub_date')
     
+    # create an object
     def perform_create(self,serializer):
         serializer.save(author=self.request.user,file=CSVFile.objects.get(pk=self.request.data['file']))
 
+    # get an instance of an object
     def retrieve(self,request,pk=None):
         return Response(self.serializer_class(Review.objects.get(pk=pk)).data)
 
+    # update an object
     def partial_update(self,request,*args,**kwargs):
         super().partial_update(request,*args,**kwargs)
         return Response(self.serializer_class(Review.objects.get(pk=kwargs['pk'])).data)
 
 # notification API
 class ViewsetNotificationReview(viewsets.ModelViewSet):
+    # need to be logged in (have an API key) to access
     permission_classes = [
         permissions.IsAuthenticated,
     ]
     serializer_class = SerializerNotificationReview
 
+    # get all notifications, order them by publication date
     def get_queryset(self):
         return self.request.user.recipient_notification_post_set.all().order_by('-pub_date')
     
+    # create a notification
     def perform_create(self,serializer):
         serializer.save()
     
@@ -74,6 +81,7 @@ class ViewsetNotificationReview(viewsets.ModelViewSet):
     def get_unread(self,request):
         return Response(SerializerNotificationReview(self.request.user.recipient_notification_post_set.filter(read=False).order_by('-pub_date'),many=True).data)
     
+    # perform the read action on a notification
     @action(methods=['get'],detail=True)
     def perform_read(self,*args,**kwargs):
         instance = self.get_object()

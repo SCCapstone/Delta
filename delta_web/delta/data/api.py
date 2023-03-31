@@ -9,10 +9,11 @@
 # Blake Seekings (@j-blake-s)
 # Naveen Chithan (@nchithan)
 #
-# File name:
+# api.py
 #
-# Brief description:
-#
+# Is the API for the data app. It handles the logic for the data app of Django.
+# This includes the logic for uploading, downloading, deleting csv files, and who can see them.
+
 # import necessary models
 from django.http import FileResponse
 from .models import CSVFile, TagCsvFile
@@ -49,13 +50,17 @@ def getUserFilePath(strFileName,strUser):
     return os.path.join(getUserFolderPath(strUser),strFileName)
 
 #https://stackoverflow.com/questions/38697529/how-to-return-generated-file-download-with-django-rest-framework
+# Passes the generated file to the browser
+# This is used for downloading csv files
 class PassthroughRenderer(renderers.BaseRenderer):
     media_type = 'text/csv'
     format = None
     def render(self,data,accepted_media_type=None,renderer_context=None):
         return data
 
+# Public CSV viewset api
 # For dealing with public viewing of csv files
+#
 class ViewsetPublicCsvFile(viewsets.ModelViewSet):
     queryset = CSVFile.objects.all()
 
@@ -80,8 +85,9 @@ class ViewsetPublicCsvFile(viewsets.ModelViewSet):
                 headers = {"Content-Disposition":'attachment; filename={}'.format(instance.file_name)},
                 content_type="text/csv",
             )
-
-
+# CSV viewset api
+# Has the permission classes for the csv file viewset
+# Makes viewable only if csv files are marked as public.
 class ViewsetCSVFile(viewsets.ModelViewSet):
     queryset = CSVFile.objects.all()
 
@@ -196,6 +202,8 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
 # see https://stackoverflow.com/questions/71278989/how-to-call-a-function-when-you-delete-a-model-object-in-django-admin-page-or
 # 
 ###################
+# CSV Upload api
+# Uploads a csv file
 class UploadCsvApiView(APIView):
     parser_classes = (FileUploadParser,)
     # parser_classes = (MultiPartParser,)
@@ -240,7 +248,8 @@ class UploadCsvApiView(APIView):
 
         else:
             return Response(data={"message":"Error upon uploading file"})
-
+# tagviewset api
+# Sets the view to the tag of a csv file
 class ViewsetTagCsvFile(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated

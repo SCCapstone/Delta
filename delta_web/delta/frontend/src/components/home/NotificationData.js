@@ -21,15 +21,24 @@ const NotificationData = (props) => {
   return (
     <div className="container">
       <div
-        className="row align-items-center border rounded mx-5 my-2 bg-white"
+        className="position-relative border rounded mx-5 my-2 bg-white p-3"
         style={{ height: "37vh" }}
       >
-        <div className="col-10 mr-3 px-5 pt-2">
-          <div className="text-truncate">{props.notif.title}</div>
-          <div className="small">{props.notif.text}</div>
-        </div>
-        <div className="col text-right text-center text-muted pt-1 pr-5">
-          {props.notif.formatted_date}
+        <div>
+          <div className="justify-content-between">
+            <h4>
+              {props.notif.title}
+            </h4>
+            <p>
+              {props.notif.formatted_date}
+            </p>
+          </div>
+          <p className="small">
+            {props.notif.text}
+          </p>
+          <button className="btn btn-outline-success position-absolute bottom-0 mb-3"
+            onClick={props.parentOnClick}>Got it!
+          </button>
         </div>
       </div>
     </div>

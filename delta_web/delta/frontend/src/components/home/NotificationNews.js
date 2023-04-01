@@ -31,10 +31,10 @@ const NotificationNews = (props) => {
 
   return (
     <div>
-      <NotificationData notif={props.notif} />
-      <div>
-        <button onClick={performRead}>Got it!</button>
-      </div>
+      <NotificationData 
+      notif={props.notif} 
+      parentOnClick={performRead}
+      />
     </div>
   );
 };

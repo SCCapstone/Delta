@@ -23,6 +23,7 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
     */
     // pass in token
 
+    // first create the csv data object in Django, then make the file
     return axios.post('/api/csv/',dictData,tokenConfig(getState))
     .then((res)=>{
         // this means that the creation of the csv file model in django sucessful

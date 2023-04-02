@@ -175,9 +175,6 @@ class ViewsetCSVFile(viewsets.ModelViewSet):
     
         # add the file path to the obj
         strUserCsvFolder = 'static/users/{}/csvs'.format(request.user.username)
-        # create dir if doesnt exist
-        if not os.path.exists(strUserCsvFolder):
-            os.makedirs(strUserCsvFolder)
 
 
         return Response(self.get_serializer(obj).data)
@@ -221,6 +218,11 @@ class UploadCsvApiView(APIView):
         if(dataFile):
             fileName = Path(str(dataFile))
 
+            # create dir if doesnt exist
+            if not os.path.exists(getUserFolderPath(request.user.username)):
+                # make it
+                os.makedirs(getUserFolderPath(request.user.username))
+
             strFilePath = getUserFilePath(fileName,request.user.username)
 
             # get the last one
@@ -241,6 +243,7 @@ class UploadCsvApiView(APIView):
             # update the new file path
             csvFileObj.file_path = strFilePath
             csvFileObj.save()
+            print(csvFileObj.file_path)
             
             return Response({
                 "csvFile":SerializerCSVFile(csvFileObj).data

@@ -130,7 +130,7 @@ const ReviewDetail = (props) => {
             id="title"
             name="title"
             onChange={onChange}
-            placeholder={reviewData.title}
+            value={reviewData.title}
           />
           <small id="titleHelp">Add a descriptive title.</small>
         </div>

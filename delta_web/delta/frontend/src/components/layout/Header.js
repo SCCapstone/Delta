@@ -31,31 +31,6 @@ import axios from 'axios'
 // import "./header.css";
 
 const Header = (props) => {
-
-// This is used to toggle the navbar.
-// Does not expect inputs.
-// The output is to either display the navbar or hide it behind an icon.
-  function changeClass() {
-
-    const show = "navbar-collapse collapse show";
-    const hide = "navbar-collapse collapse";
-
-
-    var obj = document.getElementById("navbarToggleExternalContent").className;
-    
-    if (obj == hide) {
-      document.getElementById("navbarToggleExternalContent").className = show;
-    }
-
-    else if (obj == show) {
-      document.getElementById("navbarToggleExternalContent").className = hide;
-    }
-
-    else {
-      document.getElementById("navbarToggleExternalContent").className = show;
-    }
-  }
-
   // proptypes
   const { isAuthenticated, user } = props.auth;
 
@@ -228,14 +203,7 @@ const Header = (props) => {
   return(
       <nav className="navbar navbar-light bg-light">
         <div className="container-fluid">
-          {/* <a className="navbar-brand" href="/">Delta</a> */}
-
-          <a className="navbar-brand" href="/">Delta</a>
-          <button className="btn me-auto" type="button" onClick={function(){changeClass()}}>
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          
-          <div className="navbar-collapse collapse" id="navbarToggleExternalContent">
+          <div className="navbar-collapse" id="navbarToggleExternalContent">
             {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>

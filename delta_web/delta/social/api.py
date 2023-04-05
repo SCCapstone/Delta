@@ -28,7 +28,8 @@ from rest_framework.response import Response
 
 from django.contrib.auth import get_user_model
 
-from .models import Conversation,Message,Review,NotificationMessage
+from .models import (Conversation,Message,Review,
+NotificationMessage,NotificationReview)
 
 # https://stackoverflow.com/questions/739776/how-do-i-do-an-or-filter-in-a-django-query
 from django.db.models import Q
@@ -49,7 +50,16 @@ class ViewsetReview(viewsets.ModelViewSet):
     
     # create an object
     def perform_create(self,serializer):
-        serializer.save(author=self.request.user,file=CSVFile.objects.get(pk=self.request.data['file']))
+        modelCsvFile = CSVFile.objects.get(pk=self.request.data['file'])
+        modelReview = serializer.save(author=self.request.user,file=modelCsvFile)
+        # create Notification
+        #
+        reviewText = self.request.data["text"]
+        csvFileName = modelCsvFile.file_name
+        # prepare notification text
+        notifText = f"Review of file {csvFileName} from user {self.request.user}. \n\"{reviewText}\""
+        modelNotif = NotificationReview(sender = self.request.user,recipient = modelCsvFile.author,review=modelReview,text=notifText)
+        modelNotif.save()
 
     # get an instance of an object
     def retrieve(self,request,pk=None):

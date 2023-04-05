@@ -47,9 +47,17 @@ const NotificationReviewIndex = (props) =>{
             </p>
             <hr/>
             <div>
-              {arrNotifications.map((objNotif,index)=>(
-                <NotificationReview data = {objNotif} key={index}/>
-              ))}
+              {arrNotifications.length != 0 ? 
+              <div>
+                {arrNotifications.map((objNotif,index)=>(
+                  <NotificationReview data = {objNotif} key={index}/>
+                ))}
+              </div> 
+              : 
+              <div>
+                <p>No notifications yet!</p>
+              </div>
+              }
             </div>
         </div>
     )

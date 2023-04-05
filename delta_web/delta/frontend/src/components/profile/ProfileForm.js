@@ -128,7 +128,7 @@ const ProfileForm = (props) => {
                 id="textareaBio"
                 className="form-control"
                 name="bio"
-                placeholder={userInfo.bio}
+                value={userInfo.bio}
                 onChange={onChange}
                 />
                 <div id="textareaBioHelp" class="form-text">

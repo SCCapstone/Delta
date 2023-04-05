@@ -64,9 +64,6 @@ const DataDownload = (props) =>{
             textMinLength = {3}
             refreshCsvs = {getCsvs}
             />
-            <Link to="/data/upload" className="btn btn-secondary btn-sm"> 
-                Upload
-            </Link>
         </div>
     )
 }

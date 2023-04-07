@@ -164,8 +164,7 @@ class DeleteAPI(generics.DestroyAPIView):
         # This was as determined by Dr. Valafar.
         # see: https://stackoverflow.com/questions/44735385/how-can-i-delete-a-user-account-in-django-rest-framework
         
-        request.user.is_active = False
-        request.user.save()
+        request.user.delete()
 
         return Response({
             "message":"Account " + request.user.username + " has successfully been deleted."

@@ -159,7 +159,7 @@ export class Register extends Component {
                 <div className="form-group">
                   <label>Organization Key</label>
                   <input
-                    type=""
+                    type="password"
                     className="form-control border-dark"
                     name="organization_key" // needs to change to organization
                     onChange={this.onChange}

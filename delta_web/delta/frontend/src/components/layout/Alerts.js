@@ -70,6 +70,12 @@ export class Alerts extends Component {
             if(message.updateUserFail){
                 alert.error(message.updateUserFail);
             }
+            if(message.deleteUserSuccess){
+                alert.success(message.deleteUserSuccess)
+            }
+            if(message.deleteUserFail){
+                alert.error(message.deleteUserFail)
+            }
             if(message.registerUser){
                 alert.success(message.registerUser);
             }

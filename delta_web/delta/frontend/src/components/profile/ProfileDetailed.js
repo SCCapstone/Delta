@@ -62,7 +62,7 @@ const ProfileDetailed = (props) => {
                             <div className="card-body">
                                 <ProfileForm />
                                 <br />
-                                <button className="btn btn-danger" onClick={props.onDelete}>
+                                <button className="btn btn-danger" onClick={props.deleteUser}>
                                     Remove account?
                                 </button>
                             </div>

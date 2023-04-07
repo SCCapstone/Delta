@@ -138,12 +138,16 @@ export const deleteUser = () => (dispatch, getState) => {
     // delete a user    
     axios.post('/api/auth/delete', null, tokenConfig(getState))
         .then(res => {
-            dispatch({
-                type: USER_DELETE,
-            });
+            dispatch(createMessage({ deleteUserSuccess: "Successfully deleted user. Redirecting..."}))
+            setTimeout(()=>{
+                dispatch({
+                    type: USER_DELETE,
+                });
+            },2000)
         })
         .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status))
+            dispatch(createMessage({ deleteUserFail: "Error deleting user. Try again later."}))
         })
 }
 // PATCH USER (update fields of user)

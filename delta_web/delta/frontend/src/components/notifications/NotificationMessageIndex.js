@@ -44,6 +44,8 @@ const NotificationMessageIndex = (props) =>{
             <p>
               Here are all your messages. You can view the user who sent you the message by clicking their username, and
               you can see the contents of the message by clicking "See message".
+
+              You can message users by clicking their name and then creating a conversation. On all files or reviews of files there is present the name of the user who uploaded the file or reviewed it; by clicking that name you can begin a conversation.
               
               To remove the notification, click "Got it".
             </p>

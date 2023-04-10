@@ -56,7 +56,7 @@ const DataDownload = (props) =>{
                 <p>
                     <em>Click </em> a file to add it to your download queue. Files in the queue will have a light blue background. 
                     To remove a file from the queue, reclick it.
-                    You must click at least one file to be able to download.
+                    You must click at least one file to be able to download. To download, click the cloud icon when having one or more files in the download queue.
                 </p>
             </div>
             <PublicCsvFileTable 

@@ -138,11 +138,16 @@ Note that when making a behavioral test with Jest the JS file must have a `.test
 
 ## Authors:
 Vince Kolb-Lugo: kolblugo@email.sc.edu
+- LinkedIn: https://www.linkedin.com/in/vincent-kolb-lugo-944222175/
 
 Blake Seekings: seekingj@email.sc.edu
+- LinkedIn: https://www.linkedin.com/in/blake-seekings-8051631b4/
 
 Naveen Chithan: nchithan@email.sc.edu
+- LinkedIn: LINK HERE
 
 Carter Marlowe: marlowc@email.sc.edu
+- LinkedIn: LINK HERE
 
 Lexington Whalen: lawhalen@email.sc.edu
+- LinkedIn: https://www.linkedin.com/in/lxaw/

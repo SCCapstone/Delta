@@ -36,7 +36,7 @@ const initialState = {
     // token stored in local storage
     token: localStorage.getItem('token'),
     // this was originally null
-    isAuthenticated:localStorage.getItem('isAuthenticated'),
+    isAuthenticated: localStorage.getItem('isAuthenticated') != undefined ? true : false,
     isLoading: false,
     // this was originally null
     user: localStorage.getItem('user')

@@ -12,6 +12,8 @@ import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
 import NotFound from './home/NotFound'
+// about page
+import About from './about/About';
 
 // profile
 /*
@@ -76,7 +78,7 @@ class App extends Component{
                             <Header/>
                             <Alerts/>
                                 <Routes>
-                                    <Route exact path ="/" element= {
+                                    <Route exact path ="/dashboard" element= {
                                         <PrivateRoute>
                                             <Dashboard/>
                                         </PrivateRoute>
@@ -165,6 +167,9 @@ class App extends Component{
                                     }/>
                                     <Route exact path ="/login" element={
                                         <Login/>
+                                    }/>
+                                    <Route exact path = "/" element = {
+                                        <About/>
                                     }/>
                                     <Route exact path ="*" element={
                                         <NotFound/>

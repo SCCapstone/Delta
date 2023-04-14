@@ -92,6 +92,16 @@ const ReviewDetail = (props) => {
    */
   const onSubmit = (e) => {
     e.preventDefault();
+    if(reviewData.title.length ==0 && reviewData.text.length==0){
+      alert("Please add text to the title and description.");
+      return;
+    }else if(reviewData.text.length == 0){
+      alert("Please add text to the description.");
+      return;
+    }else if(reviewData.title.length == 0){
+      alert("Please add text to the title.");
+      return;
+    }
     props.updateReview({
       id: reviewData.id,
       title: reviewData.title,

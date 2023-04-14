@@ -9,7 +9,11 @@ export const addReview = (dictData) => (dispatch,getState) =>{
     })
     .catch((err)=>{
         console.log(err);
-        dispatch(createMessage({addReviewFail: "Failed to add review."}));
+        if(err.response){
+            dispatch(returnErrors(err.response.data, err.response.status));
+        }else{
+            dispatch(createMessage({addReviewFail: "Failed to add review. Please check that you have not already added a review."}));
+        }
     })
 }
 

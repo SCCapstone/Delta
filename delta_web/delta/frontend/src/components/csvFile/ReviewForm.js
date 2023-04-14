@@ -68,6 +68,16 @@ const ReviewForm = (props) => {
    */
   const onSubmit = (e) => {
     e.preventDefault();
+    if(reviewState['title'].length ==0 && reviewState['text'].length==0){
+      alert("Please add text to the title and description.");
+      return;
+    }else if(reviewState['text'].length == 0){
+      alert("Please add text to the description.");
+      return;
+    }else if(reviewState['title'].length == 0){
+      alert("Please add text to the title.");
+      return;
+    }
     props.addReview(reviewState);
     setTimeout(() => {
       // refresh reviews

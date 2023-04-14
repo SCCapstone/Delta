@@ -5,10 +5,8 @@ import { createMessage } from "./messages";
 export const addNotificationReview = (notificationData) => (dispatch,getState) => {
     axios.post('/api/notification_review/',notificationData,tokenConfig(getState))
     .then((res)=>{
-        console.log(res);
     })
     .catch((err)=>{
-        console.log(err)
     })
 }
 export const markReadNotificationReview = (notificationId) => (dispatch,getState) => {
@@ -16,44 +14,41 @@ export const markReadNotificationReview = (notificationId) => (dispatch,getState
     .then((res)=>{
         dispatch(createMessage({readNotification:"Notification has been read."}))
     })
-    .catch((err)=>{console.log(err)})
+    .catch((err)=>{})
 }
 
 export const addNotificationMessage = (notificationData) => (dispatch,getState) =>{
     axios.post('/api/notification_message/',notificationData,tokenConfig(getState))
     .then((res)=>{
-        console.log(res)
     })
     .catch((err)=>{
-        console.log(err);
     })
 }
 
 export const markReadNotificationMessage = (notificationId) => (dispatch,getState) => {
     axios.get(`/api/notification_message/${notificationId}/perform_read/`,tokenConfig(getState))
     .then((res)=>{
-        console.log(res)
         dispatch(createMessage({readNotification:"Notification has been read."}))
     })
-    .catch((err)=>{console.log(err)})
+    .catch((err)=>{})
 }
 
 // notification news
 export const markReadNotificationNews = (notificationId) => (dispatch,getState) => {
     axios.get(`/api/notification_news/${notificationId}/perform_read/`,tokenConfig(getState))
     .then((res)=>{
-        console.log(res)
         dispatch(createMessage({readNotification:"Notification has been read."}))
     })
-    .catch((err)=>{console.log(err)})
+    .catch((err)=>{
+
+    })
 }
 
 // notification whats hot
 export const markReadNotificationWhatsHot = (notificationId) => (dispatch,getState) => {
     axios.get(`/api/notification_whats_hot/${notificationId}/perform_read/`,tokenConfig(getState))
     .then((res)=>{
-        console.log(res)
         dispatch(createMessage({readNotification:"Notification has been read."}))
     })
-    .catch((err)=>{console.log(err)})
+    .catch((err)=>{})
 }

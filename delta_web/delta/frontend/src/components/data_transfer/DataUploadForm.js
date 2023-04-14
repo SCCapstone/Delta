@@ -299,6 +299,7 @@ const DataUploadForm = (props) =>{
 
             <div>
               <h5>Tags</h5>
+              <small>To add tags, please type the tag text and then hit enter to save the tag.</small>
               <TagsInput updateParentTags={updateTags} />
             </div>
             <br/>

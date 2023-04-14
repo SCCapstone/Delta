@@ -29,6 +29,14 @@ const ReviewDetail = (props) => {
   const [reviewData, setReviewData] = useState(null);
   const [ratingIndex, setRatingIndex] = useState(null);
 
+  // length restrictions
+  const TITLE_CHAR_LENGTH_MAX = 50;
+  const DESC_CHAR_LENGTH_MAX = 250;
+
+  // text input lengths
+  const [titleLength,setTitleLength] = useState(0);
+  const [descLength,setDescLength] = useState(0);
+
   const { id } = useParams();
 
   /* UTILITY: Retrieves the data of the current review.
@@ -47,6 +55,8 @@ const ReviewDetail = (props) => {
         console.log(res.data);
         setReviewData(res.data);
         setRatingIndex(res.data.rating - 1);
+        setDescLength(res.data.text.length);
+        setTitleLength(res.data.title.length);
       })
       .catch((err) => {
         console.log(err);
@@ -63,6 +73,16 @@ const ReviewDetail = (props) => {
    */
   const onChange = (e) => {
     const newState = { ...reviewData, [e.target.name]: e.target.value };
+    // character limits
+    if(e.target.name == "title"){
+      const curLength = e.target.value.length;
+      setTitleLength(curLength);
+    }
+    else if(e.target.name=="text"){
+      // description
+      const curLength = e.target.value.length;
+      setDescLength(curLength);
+    }
     setReviewData(newState);
   };
 
@@ -92,7 +112,6 @@ const ReviewDetail = (props) => {
    * OUTPUTS: Updated review state with increased rating index.
    */
   const changeRatingIndex = (index) => {
-    console.log(index);
     setRatingIndex(index);
     const newState = { ...reviewData, rating: parseInt(index) + 1 };
     setReviewData(newState);
@@ -131,20 +150,22 @@ const ReviewDetail = (props) => {
             name="title"
             onChange={onChange}
             value={reviewData.title}
+            maxLength={TITLE_CHAR_LENGTH_MAX}
           />
-          <small id="titleHelp">Add a descriptive title.</small>
+          <small id="titleHelp">Add a descriptive title ({TITLE_CHAR_LENGTH_MAX - titleLength} remaining characters).</small>
         </div>
         <div className="form-group">
           <label htmlFor="description">Description</label>
-          <input
+          <textarea
             type="text"
             className="form-control"
             id="description"
             onChange={onChange}
             name="text"
             value={reviewData.text}
+            maxLength={DESC_CHAR_LENGTH_MAX}
           />
-          <small id="descriptionHelp">Add a description.</small>
+          <small id="descriptionHelp">Add a description ({DESC_CHAR_LENGTH_MAX-descLength} remaining characters).</small>
         </div>
         <button type="submit" className="btn btn-outline-success">
           Submit

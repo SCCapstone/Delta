@@ -46,13 +46,13 @@ const Review = (props) => {
 
   return (
     <div className="container border p-3 m-3" data-testid="review-1">
-      <div className="d-flex justify-content-between">
+      <div>
         <div className="d-flex flex-row">
           {arrStars.map((starSvg) => starSvg)}
         </div>
         <h4>{props.reviewData.title}</h4>
       </div>
-      <div className="d-flex justify-content-between">
+      <div>
         <h5>
           Reviewed by{" "}
           <Link to={`/profile/${props.reviewData.author_username}`}>
@@ -62,7 +62,7 @@ const Review = (props) => {
         </h5>
       </div>
       <hr />
-      <div>
+      <div style={{inlineSize:"100%",overflowWrap:"break-word"}}>
         <p>{props.reviewData.text}</p>
       </div>
       {props.auth.user.id == props.reviewData.author && (

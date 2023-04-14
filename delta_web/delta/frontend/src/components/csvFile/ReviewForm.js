@@ -27,7 +27,15 @@ import { addReview } from "../../actions/review";
 const ReviewForm = (props) => {
   const id = props.csvFileId;
 
-  var [reviewState, setReviewState] = useState({
+  // length restrictions
+  const TITLE_CHAR_LENGTH_MAX = 50;
+  const DESC_CHAR_LENGTH_MAX = 250;
+
+  // text input lengths
+  const [titleLength,setTitleLength] = useState(0);
+  const [descLength,setDescLength] = useState(0);
+
+  const [reviewState, setReviewState] = useState({
     title: "",
     text: "",
     rating: 5,
@@ -41,6 +49,16 @@ const ReviewForm = (props) => {
    */
   const onChange = (e) => {
     const newState = { ...reviewState, [e.target.name]: e.target.value };
+    // character limits
+    if(e.target.name == "title"){
+      const curLength = e.target.value.length;
+      setTitleLength(curLength);
+    }
+    else if(e.target.name=="text"){
+      // description
+      const curLength = e.target.value.length;
+      setDescLength(curLength);
+    }
     setReviewState(newState);
   };
 
@@ -104,8 +122,9 @@ const ReviewForm = (props) => {
           id="title"
           name="title"
           onChange={onChange}
+          maxLength={TITLE_CHAR_LENGTH_MAX}
         />
-        <small id="titleHelp">Add a descriptive title.</small>
+        <small id="titleHelp">Add a descriptive title ({TITLE_CHAR_LENGTH_MAX - titleLength} remaining characters).</small>
       </div>
       <div className="form-group">
         <label htmlFor="description">Description</label>
@@ -115,8 +134,9 @@ const ReviewForm = (props) => {
           id="description"
           onChange={onChange}
           name="text"
+          maxLength={DESC_CHAR_LENGTH_MAX}
         />
-        <small id="descriptionHelp">Add a description.</small>
+        <small id="descriptionHelp">Add a description ({DESC_CHAR_LENGTH_MAX-descLength} remaining characters).</small>
       </div>
       <button type="submit" className="btn btn-outline-success">
         Submit

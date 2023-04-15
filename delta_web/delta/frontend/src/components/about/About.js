@@ -23,12 +23,32 @@ const About = (props) => {
       <div>
         <h1>About Delta</h1>
         <p>
-          ENTER TEXT HERE
+          The Delta application is the simple platform for researchers to share data sets,
+          communicate wiht fellow scholars, and rate and provide valuable feedback.
+
+          Register as an individual or an organization and get started immediatly. Delta
+          is designed to make sharing easy so that researchers can focus on what really
+          matters: pushing innovation and knowlege further.
         </p>
       </div>
       <div>
         <h1>Why use Delta?</h1>
-        <p>ENTER TEXT HERE</p>
+        <p>
+          Get instant access to raw data. The data sets uploaded on Delta can be used to train
+          artificial intelligence models for a variety of applications. The sets are uploaded
+          in widely used formats, making or ML program to ingest.
+        </p>
+      </div>
+      <div>
+        <h1>The Team</h1>
+        <p>
+          Delta is brought to you by a motely crew of aspiring software engineers, researchers,
+          entrepreneurs, and hopeless romantics. The leader <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
+          a.k.a. the Full Stack; the Front-Endgamers <a href="https://www.linkedin.com/in/cartermarlowe/">Carter Marlowe</a>,
+          <a href="https://www.linkedin.com/in/naveenchithan/"> Naveen Chithan</a>,
+          and <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/"> Vince Kolb-Lugo</a>; and the Backend Bully
+          <a href="https://www.linkedin.com/in/blake-seekings-8051631b4/"> Blake Seekings</a>.
+        </p>
       </div>
       <div>
         <h1>User Stories</h1>

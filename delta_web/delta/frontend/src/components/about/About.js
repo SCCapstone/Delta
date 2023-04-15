@@ -54,15 +54,33 @@ const About = (props) => {
         <h1>User Stories</h1>
         <div>
           <h5>Register for the first time</h5>
-          <p>REGISTER PAGE IMAGE HERE</p>
+          <img
+            src="/media.Website-Register.png"
+            className="img-fluid"
+            alt="registration-page"
+            height="400"
+            width="600"
+          />
         </div>
         <div>
           <h5>Upload a file</h5>
-          <p>UPLOAD PAGE IMAGE HERE</p>
+          <img
+            src="/media.Website-Upload.png"
+            className="img-fluid"
+            alt="upload-page"
+            height="400"
+            width="600"
+          />
         </div>
         <div>
           <h5>Dowload a file</h5>
-          <p>DOWNLOAD PAGE IMAGE HERE</p>
+          <img
+            src="/media.Website-Download.png"
+            className="img-fluid"
+            alt="download-page"
+            height="400"
+            width="600"
+          />
         </div>
       </div>
     </div>

@@ -22,16 +22,15 @@ defines the layout of that data card and how it can be interacted with.
 
 
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import tag_styles from "./tags.module.css";
 
 const DataCard = (props) => {
 
-    const [toDownload,setToDownload] = useState(false);
-    const [style,setStyle] = useState({width:'25rem'})
-
+    const [toDownload,setToDownload] = useState(props.isDownload);
+    const [style,setStyle] = props.isDownload == true ? useState({width:'25rem',backgroundColor:"#cce6ff"}) : useState({width:"25rem"});
     // UTILITY: Changes the ToDownload attribute of the DataCard when clicked.
     // UTILITY: Initial state is false, every click changes it to true and vice-versa.
     const checkDownload = (e) =>{
@@ -40,11 +39,11 @@ const DataCard = (props) => {
             // uncheck
             setToDownload(false);
             setStyle({...style,backgroundColor:""})
-            props.parentOnCheckChange(props.id)
+            props.parentOnCheckChange(props.data)
         }else{
             setToDownload(true)
             setStyle({...style,backgroundColor:"#cce6ff"})
-            props.parentOnCheckChange(props.id)
+            props.parentOnCheckChange(props.data)
         }
     }
 
@@ -55,23 +54,23 @@ const DataCard = (props) => {
         <div className="card-body">
             <div className="d-flex justify-content-between">
                 <p>
-                    Author: <Link to={`/profile/${props.author}`}>{props.author}</Link>
+                    Author: <Link to={`/profile/${props.data.author_username}`}>{props.data.author_username}</Link>
                 </p>
                 <p>
-                    Published: {props.date}
+                    Published: {props.data.formatted_date}
                 </p>
             </div>
-            <h6>Rating: {props.rating}</h6>
-            <small>Download count: {props.downloadCount}</small>
+            <h6>Rating: {props.data.avg_rating}</h6>
+            <small>Download count: {props.data.download_count}</small>
             <h6 className="card-title">
-                File Name: {props.title}
+                File Name: {props.data.file_name}
             </h6>
             <p className="card-text">
-                {props.text}
+                {props.data.description}
             </p>
             <div>
                 <h6>Tags:</h6>
-                {props.tags.map((tag,index)=>(
+                {props.data.tags.map((tag,index)=>(
                     <div className={tag_styles.tag_item} key = {index}>
                         <span className={tag_styles.text}>
                             {tag.text}

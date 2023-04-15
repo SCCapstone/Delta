@@ -38,7 +38,6 @@ export const addCsvFile= (dictData) => (dispatch,getState) =>{
                 return res;
             })
             .catch(err=>{
-                console.log(err)
                 if(err.response){
                     dispatch(createMessage({addCsvFileError:err.response.data.message}))
                 }
@@ -79,7 +78,6 @@ export const getCsvFile = (id) => (dispatch,getState) =>{
             {
                 dispatch(
                     returnErrors(err.response.data,err.response.status))
-                    console.log(err);
                 }
         )
 }
@@ -103,7 +101,6 @@ export const updateCsvFile = (dictData) => (dispatch,getState)=>{
             })
         })
         .catch((err)=>{
-            console.log(err);
         })
 }
 
@@ -117,7 +114,7 @@ export const deleteCsvFile = (id) => (dispatch,getState) =>{
             payload: id
         });
     })
-    .catch(err=>console.log(err));
+    .catch(err=>{});
 }
 
 // GET PUBLIC FILES
@@ -130,7 +127,6 @@ export const getCsvFilesPublic = () => (dispatch,getState) =>{
         })
     })
     .catch(err=>{
-        console.log(err);
     })
 }
 
@@ -155,6 +151,5 @@ export const downloadCsvFile = (id) => (dispatch, getState) =>{
         document.body.appendChild(downloadLink);
     })
     .catch(err=>{
-        console.log(err);
     })
 }

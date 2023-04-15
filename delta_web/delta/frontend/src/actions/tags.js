@@ -10,9 +10,7 @@ export const addTags = (dictData) => (dispatch,getState) =>{
     */
     axios.post('/api/tags/',dictData,tokenConfig(getState))
     .then((res)=>{
-        console.log(res);
     })
     .catch((err)=>{
-        console.log(err);
     })
 }

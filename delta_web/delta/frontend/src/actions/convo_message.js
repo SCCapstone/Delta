@@ -16,7 +16,6 @@ export const addMessage = (dictData) => (dispatch,getState) => {
     */
    axios.post('/api/message/',dictData,tokenConfig(getState))
    .then((res)=>{
-        console.log(res);
         dispatch(createMessage({addMessageSuccess:"Successfully sent message."}))
         dispatch(addNotificationMessage({
           text:`New message from ${res.data.author_username}.`,
@@ -26,6 +25,5 @@ export const addMessage = (dictData) => (dispatch,getState) => {
         }))
    })
    .catch((err)=>{
-        console.log(err)
    })
 }

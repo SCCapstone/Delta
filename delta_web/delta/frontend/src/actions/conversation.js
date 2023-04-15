@@ -14,6 +14,5 @@ export const addConversation = (dictData) => (dispatch,getState) =>{
         dispatch(createMessage({addConversationSuccess:"Successfully created a conversation."}))
     })
     .catch((err)=>{
-        console.log(err)
     })
 }

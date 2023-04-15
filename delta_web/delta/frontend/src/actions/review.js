@@ -8,8 +8,11 @@ export const addReview = (dictData) => (dispatch,getState) =>{
         dispatch(createMessage({addReviewSuccess:"Your review has been posted."}))
     })
     .catch((err)=>{
-        console.log(err);
-        dispatch(createMessage({addReviewFail: "Failed to add review. User's can only add one review per file."}));
+        if(err.response){
+            dispatch(returnErrors(err.response.data, err.response.status));
+        }else{
+            dispatch(createMessage({addReviewFail: "Failed to add review. Please check that you have not already added a review."}));
+        }
     })
 }
 
@@ -18,7 +21,7 @@ export const deleteReview = (id) => (dispatch,getState) => {
     .then((res)=>{
         dispatch(createMessage({deleteReviewSuccess:"Your review has successfully been deleted."}));
     })
-    .catch((err)=>{console.log(err)});
+    .catch((err)=>{});
 }
 
 export const updateReview = (data) => (dispatch,getState) =>{
@@ -31,10 +34,8 @@ export const updateReview = (data) => (dispatch,getState) =>{
     */
     axios.patch(`api/review/${data.id}/`,data,tokenConfig(getState))
     .then((res)=>{
-        console.log(res);
         dispatch(createMessage({updateReviewSuccess:"Your review has successfully been updated."}))
     })
     .catch((err)=>{
-        console.log(err)
     })
 }

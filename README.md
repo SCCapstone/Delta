@@ -147,7 +147,7 @@ Naveen Chithan: nchithan@email.sc.edu
 - LinkedIn: LINK HERE
 
 Carter Marlowe: marlowc@email.sc.edu
-- LinkedIn: LINK HERE
+- LinkedIn: https://www.linkedin.com/in/cartermarlowe/
 
 Lexington Whalen: lawhalen@email.sc.edu
 - LinkedIn: https://www.linkedin.com/in/lxaw/

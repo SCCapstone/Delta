@@ -53,7 +53,16 @@ const About = (props) => {
       <div>
         <h1>User Stories</h1>
         <div>
-          <p>PUT IMAGES AND USERS HERE</p>
+          <h5>Register for the first time</h5>
+          <p>REGISTER PAGE IMAGE HERE</p>
+        </div>
+        <div>
+          <h5>Upload a file</h5>
+          <p>UPLOAD PAGE IMAGE HERE</p>
+        </div>
+        <div>
+          <h5>Dowload a file</h5>
+          <p>DOWNLOAD PAGE IMAGE HERE</p>
         </div>
       </div>
     </div>

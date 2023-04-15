@@ -23,7 +23,7 @@ const About = (props) => {
       <div>
         <h1>About Delta</h1>
         <p>
-          The Delta application is the simple platform for researchers to share data sets,
+          The <a href="https://github.com/SCCapstone/Delta">Delta</a> application is the simple platform for researchers to share data sets,
           communicate wiht fellow scholars, and rate and provide valuable feedback.
 
           Register as an individual or an organization and get started immediatly. Delta

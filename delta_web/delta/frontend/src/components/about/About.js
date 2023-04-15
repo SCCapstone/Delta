@@ -55,7 +55,7 @@ const About = (props) => {
         <div>
           <h5>Register for the first time</h5>
           <img
-            src="/media.Website-Register.png"
+            src="/media/Website-Register.png"
             className="img-fluid"
             alt="registration-page"
             height="400"
@@ -65,7 +65,7 @@ const About = (props) => {
         <div>
           <h5>Upload a file</h5>
           <img
-            src="/media.Website-Upload.png"
+            src="/media/Website-Upload.png"
             className="img-fluid"
             alt="upload-page"
             height="400"
@@ -75,12 +75,16 @@ const About = (props) => {
         <div>
           <h5>Dowload a file</h5>
           <img
-            src="/media.Website-Download.png"
+            src="/media/Website-Download.png"
             className="img-fluid"
             alt="download-page"
             height="400"
             width="600"
           />
+        </div>
+        <div>
+          <h5>Demo Video</h5>
+          <p>DEMO VIDEO HERE</p>
         </div>
       </div>
     </div>

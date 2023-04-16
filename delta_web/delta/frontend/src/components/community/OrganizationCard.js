@@ -32,7 +32,11 @@ const OrganizationCard = (props) => {
             data-testid="organization_card-1"
             className="border card m-2" style={style} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <Link to={`/community/organizations/${props.orgObj.id}`} style={{ textDecoration: 'none' }}>
-                <img src={props.imgSrc} className="card-img-top" alt={`Image for ${props.orgObj.name}`} />
+                {props.imgSrc != undefined &&
+                    <div>
+                        <img src={props.imgSrc} className="card-img-top" alt={`Image for ${props.orgObj.name}`} />
+                    </div> 
+                }
                 <div className="card-body">
                     <h5 className="card-title">
                         {props.orgObj.name}

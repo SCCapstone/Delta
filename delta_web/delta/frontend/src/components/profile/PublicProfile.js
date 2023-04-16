@@ -23,7 +23,6 @@ import { connect } from 'react-redux'
 import ConversationTable from '../conversations/ConversationTable'
 import axios from 'axios'
 import "./profile.css"
-import ProfileSidebar from './ProfileSidebar';
 
 
 // UTILITY: This is used to render and display the Public Profile Page. 
@@ -73,19 +72,7 @@ const PublicProfile = (props) => {
   return (
     <div className="container" data-testid="public_profile-1">
       <div className='row'>
-        {props.auth.user.username == username ?
-          <ProfileSidebar
-            first_name={props.auth.user.first_name}
-            last_name={props.auth.user.last_name}
-            email={props.auth.user.email}
-            username={props.auth.user.username}
-            pagename={"Public"}
-          />
-          :
-          <div>
-          </div>
-        }
-        <div className= {props.auth.user.username == username ? 'profile-info col-md-9' : 'something'}>
+        <div className= {props.auth.user.username == username ? 'profile-info' : 'something'}>
           <div>
             <h1>
               {username}'s profile

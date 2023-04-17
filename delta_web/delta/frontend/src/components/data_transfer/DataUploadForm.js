@@ -28,7 +28,7 @@ import {useDropzone} from "react-dropzone";
 import {addCsvFile} from '../../actions/file';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import TagsInput from './TagsInput';
 
@@ -153,7 +153,12 @@ const DataUploadForm = (props) =>{
         var isPublicOrgs = $("#flexCheckPublicToOrg").is(":checked");
         var description = $("#fileDescription").val();
         var fileName = $("#fileName").val();
-        console.log(file);
+
+        if(isPublicOrgs && arrOrgs.length == 0){
+          // show error
+          alert("For a file to be public under organizations, you must select an organization. Please either select an organization, or if there are none switch to a different visibility.");
+          return;
+        }
 
         // Take all of the data from the upload form and create a dictionary
         const dictData= {
@@ -250,13 +255,18 @@ const DataUploadForm = (props) =>{
 
               
               <h3>Visibility</h3>
+              <p>
+                File "visibility" is what allows you to control who sees your files. "Private" means that only you can see the file; go to &nbsp;  
+                <Link to="/profile/glance">
+                  this link
+                </Link> to see your private files. "Public" means anyone logged in can see the file. "Public to Orgs" means that all users registered under organizations that you select can see the file.
+              </p>
               <div className= "form-check">
                 <input className ="form-check-input" name="flexCheck" type="radio" value="isPublic" id="flexCheckPublic"/>
                 <label className="form-check-label" htmlFor = "flexCheckPublic">
                     Publically Visible
                 </label>
               </div>
-
 
               <div className= "form-check">
                 <input className ="form-check-input" name="flexCheck" type="radio" value="isPublic" id="flexCheckPublicToOrg"/>

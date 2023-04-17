@@ -20,7 +20,13 @@ export class AboutUsCarousel extends Component {
       <div id='carouselExampleSlidesOnly' className='carousel slide' data-bs-ride='carousel'>
         <div className='carousel-inner'>
           <div className='carousel-item active'>
-            <img />
+            <img
+              src="/media/Website-Register.png"
+              className="img-fluid"
+              alt="registration-page"
+              height="400"
+              width="600"
+            />
           </div>
         </div>
       </div>

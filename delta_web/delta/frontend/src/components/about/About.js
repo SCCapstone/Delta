@@ -15,6 +15,7 @@
  */
 import React from "react";
 import { connect } from "react-redux";
+import AboutUsCarousel from "../carousel/AboutUsCarousel";
 
 const About = (props) => {
 
@@ -85,6 +86,7 @@ const About = (props) => {
         <div>
           <h5>Demo Video</h5>
           <p>DEMO VIDEO HERE</p>
+          <AboutUsCarousel />
         </div>
       </div>
     </div>

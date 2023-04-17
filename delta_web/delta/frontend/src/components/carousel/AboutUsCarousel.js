@@ -28,6 +28,15 @@ export class AboutUsCarousel extends Component {
               width="600"
             />
           </div>
+          <div className='carousel-item'>
+            <img
+              src="/media/Home-page-initial-signup.png"
+              className="img-fluid"
+              alt="registration-page"
+              height="400"
+              width="600"
+            />
+          </div>
         </div>
       </div>
     )

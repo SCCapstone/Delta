@@ -47,47 +47,13 @@ const About = (props) => {
           entrepreneurs. The leader <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
           a.k.a. the Full Stack; the Front-Endgamers <a href="https://www.linkedin.com/in/cartermarlowe/">Carter Marlowe</a>,
           <a href="https://www.linkedin.com/in/naveenchithan/"> Naveen Chithan</a>,
-          and <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/"> Vince Kolb-Lugo</a>; and the Backend Bully
+          and <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/">Vince Kolb-Lugo</a>; and the Backend Bully
           <a href="https://www.linkedin.com/in/blake-seekings-8051631b4/"> Blake Seekings</a>.
         </p>
       </div>
       <div>
-        <h1>User Stories</h1>
-        <div>
-          <h5>Register for the first time</h5>
-          <img
-            src="/media/Website-Register.png"
-            className="img-fluid"
-            alt="registration-page"
-            height="400"
-            width="600"
-          />
-        </div>
-        <div>
-          <h5>Upload a file</h5>
-          <img
-            src="/media/Website-Upload.png"
-            className="img-fluid"
-            alt="upload-page"
-            height="400"
-            width="600"
-          />
-        </div>
-        <div>
-          <h5>Dowload a file</h5>
-          <img
-            src="/media/Website-Download.png"
-            className="img-fluid"
-            alt="download-page"
-            height="400"
-            width="600"
-          />
-        </div>
-        <div>
-          <h5>Demo Video</h5>
-          <p>DEMO VIDEO HERE</p>
-          <AboutUsCarousel />
-        </div>
+        <h1>Delta in Action</h1>
+        <AboutUsCarousel />
       </div>
     </div>
   );

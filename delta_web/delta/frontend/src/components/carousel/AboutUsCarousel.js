@@ -24,8 +24,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Website-Register.png"
               className="img-fluid"
               alt="registration-page"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -33,8 +33,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Home-page-initial-signup.png"
               className="img-fluid"
               alt="home page after initial registration"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -42,8 +42,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Website-Home-Page.png"
               className="img-fluid"
               alt="home page blank"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -51,8 +51,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Profile-Preupdate.png"
               className="img-fluid"
               alt="profiel page before updating information"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -60,8 +60,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Profile-postupdate.png"
               className="img-fluid"
               alt="profile page after updating information"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -69,8 +69,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Website-Upload.png"
               className="img-fluid"
               alt="upload page"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -78,8 +78,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Website-Upload-File-uploaded.png"
               className="img-fluid"
               alt="upload page after uploading file"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -87,8 +87,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Website-Download.png"
               className="img-fluid"
               alt="download page"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -96,8 +96,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Website-Download-Queue.png"
               className="img-fluid"
               alt="download page, queue"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -105,8 +105,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Website-Download-file-downloaded.png"
               className="img-fluid"
               alt="download page after downloading file"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -114,8 +114,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Community-page.png"
               className="img-fluid"
               alt="community page"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
           <div className='carousel-item'>
@@ -123,8 +123,8 @@ export class AboutUsCarousel extends Component {
               src="/media/Community-page-specific-organization.png"
               className="img-fluid"
               alt="registration-page"
-              height="400"
-              width="600"
+              height="1080"
+              width="1920"
             />
           </div>
         </div>

@@ -34,7 +34,7 @@ const About = (props) => {
       <div>
         <h1>Why use Delta?</h1>
         <p>
-          Get instant access to raw data. The data sets uploaded on Delta can be used to train
+          Get instant access to raw data. The data sets uploaded to Delta can be used to train
           artificial intelligence models for a variety of applications. The sets are uploaded
           in widely used formats, making or ML program to ingest.
         </p>
@@ -42,8 +42,8 @@ const About = (props) => {
       <div>
         <h1>The Team</h1>
         <p>
-          Delta is brought to you by a motely crew of aspiring software engineers, researchers,
-          entrepreneurs, and hopeless romantics. The leader <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
+          Delta is brought to you by a motely crew of aspiring software engineers, researchers, and
+          entrepreneurs. The leader <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
           a.k.a. the Full Stack; the Front-Endgamers <a href="https://www.linkedin.com/in/cartermarlowe/">Carter Marlowe</a>,
           <a href="https://www.linkedin.com/in/naveenchithan/"> Naveen Chithan</a>,
           and <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/"> Vince Kolb-Lugo</a>; and the Backend Bully

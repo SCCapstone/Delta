@@ -15,6 +15,7 @@
  */
 import React from "react";
 import { connect } from "react-redux";
+import AboutUsCarousel from "../carousel/AboutUsCarousel";
 
 const About = (props) => {
 
@@ -34,7 +35,7 @@ const About = (props) => {
       <div>
         <h1>Why use Delta?</h1>
         <p>
-          Get instant access to raw data. The data sets uploaded on Delta can be used to train
+          Get instant access to raw data. The data sets uploaded to Delta can be used to train
           artificial intelligence models for a variety of applications. The sets are uploaded
           in widely used formats, making or ML program to ingest.
         </p>
@@ -42,50 +43,17 @@ const About = (props) => {
       <div>
         <h1>The Team</h1>
         <p>
-          Delta is brought to you by a motely crew of aspiring software engineers, researchers,
-          entrepreneurs, and hopeless romantics. The leader <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
+          Delta is brought to you by a motely crew of aspiring software engineers, researchers, and
+          entrepreneurs. The leader <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
           a.k.a. the Full Stack; the Front-Endgamers <a href="https://www.linkedin.com/in/cartermarlowe/">Carter Marlowe</a>,
           <a href="https://www.linkedin.com/in/naveenchithan/"> Naveen Chithan</a>,
-          and <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/"> Vince Kolb-Lugo</a>; and the Backend Bully
+          and <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/">Vince Kolb-Lugo</a>; and the Backend Bully
           <a href="https://www.linkedin.com/in/blake-seekings-8051631b4/"> Blake Seekings</a>.
         </p>
       </div>
       <div>
-        <h1>User Stories</h1>
-        <div>
-          <h5>Register for the first time</h5>
-          <img
-            src="/media/Website-Register.png"
-            className="img-fluid"
-            alt="registration-page"
-            height="400"
-            width="600"
-          />
-        </div>
-        <div>
-          <h5>Upload a file</h5>
-          <img
-            src="/media/Website-Upload.png"
-            className="img-fluid"
-            alt="upload-page"
-            height="400"
-            width="600"
-          />
-        </div>
-        <div>
-          <h5>Dowload a file</h5>
-          <img
-            src="/media/Website-Download.png"
-            className="img-fluid"
-            alt="download-page"
-            height="400"
-            width="600"
-          />
-        </div>
-        <div>
-          <h5>Demo Video</h5>
-          <p>DEMO VIDEO HERE</p>
-        </div>
+        <h1>Delta in Action</h1>
+        <AboutUsCarousel />
       </div>
     </div>
   );

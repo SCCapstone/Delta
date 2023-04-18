@@ -52,6 +52,11 @@ const About = (props) => {
         </p>
       </div>
       <div>
+        <h1>Embedded Video Here</h1>
+        HERE IS WHERE THE EMBEDDED VIDEO WILL GO. WILL NEED TO INSTALL
+        REACT-PLAYER AND CREATE A PLAYER COMPONENT
+      </div>
+      <div>
         <h1>Delta in Action</h1>
         <AboutUsCarousel />
       </div>

@@ -44,6 +44,14 @@ const About = (props) => {
         </p>
       </div>
       <div>
+        <h1>How to use Delta?</h1>
+        <p>First register. You can register as an individual, or under an organization (if you are a part of a lab or other group).
+          Then upload a file. You do that by visiting the file upload page, which is shown in the below carousel. Files can be organized by organization or tags.
+          As others upload files, you can write reviews or direct message the user, creating a conversation related to the file itself. 
+          You can also download files, searching by file name or tags. 
+        </p>
+      </div>
+      <div>
         <h1>The Team</h1>
         <p>
           Delta was designed by a team of aspiring software engineers, researchers, and

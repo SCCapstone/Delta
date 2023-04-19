@@ -24,40 +24,47 @@ const About = (props) => {
       <div>
         <h1>About Delta</h1>
         <p>
-          The <a href="https://github.com/SCCapstone/Delta">Delta</a> application is the simple platform for researchers to share data sets,
-          communicate wiht fellow scholars, and rate and provide valuable feedback.
+          The <a href="https://github.com/SCCapstone/Delta">Delta</a> application is a platform for researchers to share data sets,
+          communicate with fellow scholars, rate and provide valuable feedback, and more.
 
-          Register as an individual or an organization and get started immediatly. Delta
-          is designed to make sharing easy so that researchers can focus on what really
+          Delta was created under the guidance of <a href="https://ifestos.cse.sc.edu/members.php">Dr. Valafar</a>, who noticed that while there are many of
+          file sharing services, these are often not right for the needs of researchers. Most services only allow for transfer of data, not evaluation of it.
+          With Delta, you can do both.
+
+          Register as an individual or under an organization and get started immediatly. Delta
+          is designed to make sharing files and connecting with others easy so that researchers can focus on what really
           matters: pushing innovation and knowlege further.
         </p>
       </div>
       <div>
         <h1>Why use Delta?</h1>
         <p>
-          Get instant access to raw data. The data sets uploaded to Delta can be used to train
-          artificial intelligence models for a variety of applications. The sets are uploaded
-          in widely used formats, making or ML program to ingest.
+          Delta fills the gap between modern file transfer services and what researchers need by taking ideas from social media platforms and integrating them into 
+          the file transfer system. Whereas in the past researchers would only share files, now researchers can share their opinions on the files, allowing for more efficient evaulation of data in a research lab.
         </p>
       </div>
       <div>
         <h1>The Team</h1>
         <p>
-          Delta is brought to you by a motely crew of aspiring software engineers, researchers, and
-          entrepreneurs. The leader <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
-          a.k.a. the Full Stack; the Front-Endgamers <a href="https://www.linkedin.com/in/cartermarlowe/">Carter Marlowe</a>,
+          Delta was designed by a team of aspiring software engineers, researchers, and
+          entrepreneurs. Their names and LinkedIn pages are as follows: <a href="https://www.linkedin.com/in/lxaw/">Lexington Whalen</a>,
+          <a href="https://www.linkedin.com/in/cartermarlowe/">Carter Marlowe</a>,
           <a href="https://www.linkedin.com/in/naveenchithan/"> Naveen Chithan</a>,
-          and <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/">Vince Kolb-Lugo</a>; and the Backend Bully
+          <a href="https://www.linkedin.com/in/vincent-kolb-lugo-944222175/">Vince Kolb-Lugo</a>
           <a href="https://www.linkedin.com/in/blake-seekings-8051631b4/"> Blake Seekings</a>.
         </p>
       </div>
       <div>
         <h1>Embedded Video Here</h1>
         HERE IS WHERE THE EMBEDDED VIDEO WILL GO. WILL NEED TO INSTALL
-        REACT-PLAYER AND CREATE A PLAYER COMPONENT
+        REACT-PLAYER AND CREATE A PLAYER COMPONENT. FOR NOW HERE IS A TEMPORARY VIDEO TO ENJOY.
+        <div className="row">
+          <iframe src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>
+        </div>
       </div>
       <div>
         <h1>Delta in Action</h1>
+        <p>The following is a carousel of images from the app.</p>
         <AboutUsCarousel />
       </div>
     </div>

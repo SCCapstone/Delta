@@ -40,6 +40,7 @@ class SerializerCSVFile(serializers.ModelSerializer):
     # tags
     tags = serializers.SerializerMethodField()
     org_objs = serializers.SerializerMethodField()
+
     class Meta:
         model = CSVFile
         fields = "__all__"
@@ -62,9 +63,10 @@ class SerializerCSVFile(serializers.ModelSerializer):
     
     def get_avg_rating(self,obj):
         # note: probably better to store this int as a sum in the csv file
+        # rounds to 1 decimal
         if obj.review_set.count() == 0:
             return 0
-        return obj.review_set.aggregate(Avg('rating'))['rating__avg']
+        return round(obj.review_set.aggregate(Avg('rating'))['rating__avg'],1)
     
     def get_formatted_date(self,obj):
         return obj.timestamp.strftime('%Y-%m-%d')

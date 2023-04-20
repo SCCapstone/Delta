@@ -29,7 +29,6 @@ import CsvFile from "./CsvFile";
 
 const CsvFileDetail = (props) => {
   const { id } = useParams();
-
   // the csv file itself
   const [csvFile, setCsvFile] = useState(null);
   // the reviews themself

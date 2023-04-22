@@ -63,11 +63,14 @@ const About = (props) => {
         </p>
       </div>
       <div>
-        <h1>Embedded Video Here</h1>
-        HERE IS WHERE THE EMBEDDED VIDEO WILL GO. WILL NEED TO INSTALL
-        REACT-PLAYER AND CREATE A PLAYER COMPONENT. FOR NOW HERE IS A TEMPORARY VIDEO TO ENJOY.
+        <h1>Demo Video</h1>
+        <div>
+          <p>Below is a link to the demo video. Note that it is hosted on YouTube. Depending on browser settings, external videos may not appear. If that is the case, please click the following &nbsp;
+            <a href="https://www.youtube.com/watch?v=MjlnZD8MqHA">link</a>.
+          </p>
+        </div>
         <div className="row">
-          <iframe src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>
+          <iframe src="https://www.youtube.com/watch?v=MjlnZD8MqHA"/>
         </div>
       </div>
       <div>

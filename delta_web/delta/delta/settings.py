@@ -45,7 +45,7 @@ SECRET_KEY = 'django-insecure-8-#*v%6fb-w7qt0%b91po)zp^qbqz$ub%&^3k$ian+&@714lz-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['guarded-journey-12008.herokuapp.com','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['guarded-journey-12008.herokuapp.com','127.0.0.1','localhost','*']
 
 # Application definition
 

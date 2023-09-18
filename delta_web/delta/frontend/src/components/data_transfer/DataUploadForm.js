@@ -74,8 +74,9 @@ const DataUploadForm = (props) =>{
   var navigate = useNavigate();
 
   // max size of file
-  // 5 MB
-  const maxSize = 5*1048576;
+  // MB times 1048576
+  const maxNumMb = 500
+  const maxSize = maxNumMb*1048576;
 
   // available organizations
   const [selectOptions, setSelectOptions] = useState([]);
